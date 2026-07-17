@@ -372,3 +372,20 @@
   font-size: 0.78rem;
   color: var(--s-muted);
 }
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.suiu .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.2rem;
+}
+.suiu .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--s-green);
+  font-size: 0.84rem;
+  letter-spacing: 0.1em;
+  cursor: default;
+}

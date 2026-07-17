@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DemoMap from "@/components/DemoMap";
+import DemoSns from "@/components/DemoSns";
 import { FadeIn, Reveal } from "@/components/motion";
 
 const menu: [string, string][] = [
@@ -172,6 +173,11 @@ export default function SalonDemo() {
                 <p className="s-info-note">
                   ※ この店舗は実在しません。架空店舗のデザインサンプルです。
                 </p>
+                <DemoSns
+                  accounts={[
+                    { kind: "instagram", handle: "@suiu_hairatelier" },
+                  ]}
+                />
               </div>
             </div>
           </Reveal>

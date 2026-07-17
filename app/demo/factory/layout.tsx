@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
+import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
 import "./factory.css";
 
@@ -69,6 +70,7 @@ export default function FactoryLayout({
               <br />
               金属精密部品加工・板金・小ロット量産
             </p>
+            <DemoSns accounts={[{ kind: "x", handle: "@tomoshibi_1973" }]} />
           </div>
           <ul className="t-footer-nav">
             {footerNav.map(([href, label]) => (

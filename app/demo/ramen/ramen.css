@@ -419,3 +419,20 @@
   font-size: 0.78rem;
   color: var(--r-dim);
 }
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.yugeya .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.2rem;
+}
+.yugeya .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--r-gold);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  cursor: default;
+}

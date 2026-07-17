@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DemoMap from "@/components/DemoMap";
+import DemoSns from "@/components/DemoSns";
 import { Reveal } from "@/components/motion";
 
 const kodawari = [
@@ -204,6 +205,9 @@ export default function RamenDemo() {
                 <p className="r-info-note">
                   ※ この店舗は実在しません。架空店舗のデザインサンプルです。
                 </p>
+                <DemoSns
+                  accounts={[{ kind: "x", handle: "@yugeya_soba" }]}
+                />
               </div>
             </div>
           </Reveal>

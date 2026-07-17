@@ -855,3 +855,20 @@ a.t-service-card:hover {
   font-size: 0.78rem;
   color: var(--t-muted);
 }
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.tomoshibi .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.1rem;
+}
+.tomoshibi .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: #f6c063;
+  font-size: 0.82rem;
+  letter-spacing: 0.08em;
+  cursor: default;
+}

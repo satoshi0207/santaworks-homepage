@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DemoMap from "@/components/DemoMap";
+import DemoSns from "@/components/DemoSns";
 import { Reveal } from "@/components/motion";
 
 const menu: { cat: string; items: [string, string][] }[] = [
@@ -185,6 +186,12 @@ export default function IzakayaDemo() {
                 <p className="i-info-note">
                   ※ この店舗は実在しません。架空店舗のデザインサンプルです。
                 </p>
+                <DemoSns
+                  accounts={[
+                    { kind: "x", handle: "@sakaba_hoozuki" },
+                    { kind: "instagram", handle: "@sakaba_hoozuki" },
+                  ]}
+                />
               </div>
             </div>
           </Reveal>

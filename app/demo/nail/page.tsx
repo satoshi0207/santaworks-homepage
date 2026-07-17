@@ -1,5 +1,6 @@
 import Link from "next/link";
 import DemoMap from "@/components/DemoMap";
+import DemoSns from "@/components/DemoSns";
 import { FadeIn, Reveal } from "@/components/motion";
 
 const chips = [
@@ -206,6 +207,12 @@ export default function NailDemo() {
             <p className="n-info-note">
               ※ この店舗は実在しません。架空店舗のデザインサンプルです。
             </p>
+            <DemoSns
+              accounts={[
+                { kind: "instagram", handle: "@konpeito_nail" },
+                { kind: "line", handle: "ご予約・ご相談" },
+              ]}
+            />
           </Reveal>
           <Reveal>
             <DemoMap station="こんぺい坂駅" walk="東口から徒歩2分" shop="こ" />

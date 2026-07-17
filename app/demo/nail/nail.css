@@ -382,3 +382,31 @@
     animation: none;
   }
 }
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.konpeito .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.4rem;
+}
+.konpeito .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--n-rose);
+  font-size: 0.84rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  cursor: default;
+}
+.konpeito .demo-sns .line-badge {
+  background: #06c755; /* LINEブランドカラー */
+  color: #fff;
+  font-family: var(--font-quicksand), sans-serif;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}

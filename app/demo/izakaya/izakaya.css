@@ -396,3 +396,20 @@
   font-size: 0.78rem;
   color: var(--i-dim);
 }
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.hoozuki .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.2rem;
+}
+.hoozuki .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--i-amber);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  cursor: default;
+}
