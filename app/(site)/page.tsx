@@ -3,7 +3,25 @@ import Motes from "@/components/Motes";
 import SectionLabel from "@/components/SectionLabel";
 import { FadeIn, Reveal } from "@/components/motion";
 
-const services = [
+const services: {
+  icon: string;
+  title: string;
+  body: string;
+  href?: string;
+  cta?: string;
+}[] = [
+  {
+    icon: "🎁",
+    title: "自社プロダクト運営",
+    body: "記憶と思い出をテーマにした自社サービスを開発・運営。第一弾はLINEで使える記憶サポート「ポケメモ」。",
+  },
+  {
+    icon: "🌐",
+    title: "Web制作・サイト構築",
+    body: "ホームページやランディングページの制作。モダンで速く、更新しやすいサイトを。実際に触れるデザインサンプルを公開中です。",
+    href: "/works/#samples",
+    cta: "デザインサンプルを見る",
+  },
   {
     icon: "💬",
     title: "LINE Bot・業務ツール開発",
@@ -13,16 +31,6 @@ const services = [
     icon: "🤖",
     title: "AI活用支援・導入サポート",
     body: "AIツールの選定から使いこなしまで。「何から始めればいいか分からない」に、実体験ベースで伴走します。",
-  },
-  {
-    icon: "🎁",
-    title: "自社プロダクト運営",
-    body: "記憶と思い出をテーマにした自社サービスを開発・運営。第一弾はLINEで使える記憶サポート「ポケメモ」。",
-  },
-  {
-    icon: "🌐",
-    title: "Web制作・サイト構築",
-    body: "ホームページやランディングページの制作。モダンで速く、更新しやすいサイトをお作りします。",
   },
 ];
 
@@ -113,7 +121,7 @@ export default function Home() {
             {services.map((s) => (
               <div
                 key={s.title}
-                className="rounded border border-line bg-surface p-7 shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
+                className="flex flex-col rounded border border-line bg-surface p-7 shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
               >
                 <div className="mb-4 grid h-10 w-10 place-items-center rounded bg-accent-soft text-xl">
                   {s.icon}
@@ -122,6 +130,14 @@ export default function Home() {
                 <p className="text-[0.95rem] leading-[1.85] text-muted">
                   {s.body}
                 </p>
+                {s.href && (
+                  <Link
+                    href={s.href}
+                    className="mt-4 inline-block text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
+                  >
+                    {s.cta} →
+                  </Link>
+                )}
               </div>
             ))}
           </div>
