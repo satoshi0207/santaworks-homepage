@@ -1,0 +1,615 @@
+/*
+ * おとのは ぴあの教室 — 架空のピアノ教室（習い事・先生業）のデザインサンプル
+ * 世界観: クラシカルな温かみ。アイボリー × えんじ（葡萄酒色） × 真鍮ゴールド。
+ * 教科書体 Klee One の手書き感 + Playfair Display の楽譜的クラシックさ。
+ * 鍵盤の白黒モチーフをさりげなく効かせる。単一テーマ（ライト固定）。
+ */
+.otonoha {
+  --p-bg: #faf6ee;
+  --p-cream: #fffdf9;
+  --p-ink: #3c332f;
+  --p-muted: #8c7f75;
+  --p-line: #eaddc9;
+  --p-wine: #8f3a48;
+  --p-wine-deep: #6f2b39;
+  --p-wine-soft: #f4e6e5;
+  --p-gold: #b18a54;
+  --p-gold-soft: #efe3cf;
+  --p-key: #2a2623;
+
+  background: var(--p-bg);
+  color: var(--p-ink);
+  font-family: var(--font-klee), "Hiragino Maru Gothic ProN", sans-serif;
+  line-height: 2;
+  letter-spacing: 0.03em;
+  overflow-x: clip;
+}
+.otonoha ::selection {
+  background: var(--p-wine);
+  color: #fff;
+}
+.p-serif {
+  font-family: var(--font-playfair), serif;
+}
+
+/* ---------- 共通 ---------- */
+.p-section {
+  padding: clamp(4rem, 10vw, 7rem) clamp(1.5rem, 6vw, 4rem);
+}
+.p-wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.p-eyebrow {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  color: var(--p-wine);
+  font-size: 1.05rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 0.9rem;
+}
+.p-eyebrow::before {
+  content: "\266A"; /* ♪ */
+  margin-right: 0.5rem;
+  font-style: normal;
+  color: var(--p-gold);
+}
+.p-h2 {
+  font-size: clamp(1.5rem, 3.8vw, 2.2rem);
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1.75;
+  margin: 0 0 1.6rem;
+}
+.p-h2 .accent {
+  color: var(--p-wine);
+}
+.p-lead {
+  color: var(--p-muted);
+  font-size: 0.98rem;
+  max-width: 40rem;
+}
+
+/* 鍵盤モチーフのバンド（装飾） */
+.p-keys {
+  height: 1.9rem;
+  background:
+    repeating-linear-gradient(
+      90deg,
+      transparent 0 1.55rem,
+      var(--p-key) 1.55rem 2.05rem,
+      transparent 2.05rem 2.6rem
+    )
+    top / 100% 62% no-repeat,
+    var(--p-cream);
+  border-bottom: 2px solid var(--p-key);
+}
+
+.p-btn {
+  display: inline-block;
+  background: var(--p-wine);
+  color: #fff;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 0.85rem 2.3rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.25s;
+}
+.p-btn:hover {
+  background: var(--p-wine-deep);
+  transform: translateY(-2px);
+}
+.p-btn.ghost {
+  background: transparent;
+  color: var(--p-wine);
+  border: 1.5px solid var(--p-wine);
+}
+.p-btn.ghost:hover {
+  background: var(--p-wine);
+  color: #fff;
+}
+
+/* ---------- ヘッダー ---------- */
+.p-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem clamp(1.3rem, 5vw, 3rem);
+  background: color-mix(in srgb, var(--p-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.p-logo {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  font-weight: 600;
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  color: var(--p-ink);
+  text-decoration: none;
+}
+.p-logo small {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  color: var(--p-gold);
+}
+.p-reserve {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  color: #fff;
+  background: var(--p-wine);
+  padding: 0.55rem 1.4rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.25s;
+}
+.p-reserve:hover {
+  background: var(--p-wine-deep);
+  transform: translateY(-2px);
+}
+
+/* ---------- ヒーロー ---------- */
+.p-hero {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2rem, 6vw, 4.5rem);
+  align-items: center;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: clamp(6.5rem, 12vw, 8.5rem) clamp(1.5rem, 5vw, 3rem) clamp(3rem, 6vw, 4.5rem);
+}
+@media (max-width: 760px) {
+  .p-hero {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+}
+.p-hero .en {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  color: var(--p-gold);
+  font-size: 1rem;
+  letter-spacing: 0.16em;
+  margin: 0 0 1.2rem;
+}
+.p-hero h1 {
+  font-size: clamp(2rem, 5vw, 3rem);
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  line-height: 1.7;
+  margin: 0 0 1.6rem;
+}
+.p-hero h1 span {
+  display: inline-block; /* フレーズ単位で折り返す */
+}
+.p-hero h1 .accent {
+  color: var(--p-wine);
+}
+.p-hero p {
+  color: var(--p-muted);
+  font-size: 0.98rem;
+  max-width: 26rem;
+  margin: 0 0 2.2rem;
+}
+.p-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+.p-hero-figure {
+  position: relative;
+}
+.p-hero-figure img {
+  width: 100%;
+  aspect-ratio: 4 / 3.4;
+  object-fit: cover;
+  border-radius: 10px 10px 4px 4px;
+  box-shadow: 0 24px 55px rgba(60, 40, 30, 0.18);
+}
+.p-hero-figure .p-keys {
+  border-radius: 0 0 4px 4px;
+  margin-top: -2px;
+  box-shadow: 0 12px 24px rgba(60, 40, 30, 0.12);
+}
+
+/* ---------- コンセプト ---------- */
+.p-concept {
+  background: var(--p-wine);
+  color: var(--p-cream);
+  text-align: center;
+}
+.p-concept .p-eyebrow {
+  color: #f0d9c4;
+}
+.p-concept .p-eyebrow::before {
+  color: #f0d9c4;
+}
+.p-concept p {
+  font-size: clamp(1.15rem, 2.6vw, 1.5rem);
+  line-height: 2.1;
+  letter-spacing: 0.08em;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+.p-concept .note {
+  margin-top: 2rem;
+  font-size: 0.92rem;
+  line-height: 2;
+  color: #f0dcd0;
+  opacity: 0.9;
+}
+
+/* ---------- 教室について ---------- */
+.p-about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.05fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .p-about-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.p-about-grid img {
+  width: 100%;
+  aspect-ratio: 3 / 3.4;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(60, 40, 30, 0.14);
+}
+.p-about-body p {
+  color: var(--p-muted);
+  font-size: 0.96rem;
+  margin: 0 0 1.2rem;
+}
+.p-points {
+  list-style: none;
+  margin: 1.6rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0.8rem;
+}
+.p-points li {
+  display: flex;
+  gap: 0.8rem;
+  align-items: flex-start;
+  font-size: 0.95rem;
+}
+.p-points li::before {
+  content: "\266B"; /* ♫ */
+  color: var(--p-wine);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+/* ---------- コース・料金 ---------- */
+.p-courses {
+  background: var(--p-cream);
+  border-top: 1px solid var(--p-line);
+  border-bottom: 1px solid var(--p-line);
+}
+.p-course-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.3rem;
+}
+@media (max-width: 640px) {
+  .p-course-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.p-course {
+  background: var(--p-bg);
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  padding: 1.7rem 1.7rem 1.5rem;
+  position: relative;
+}
+.p-course .age {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  color: var(--p-gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+}
+.p-course h3 {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  margin: 0.2rem 0 0.6rem;
+}
+.p-course .desc {
+  font-size: 0.86rem;
+  color: var(--p-muted);
+  margin: 0 0 1.1rem;
+  min-height: 3.4em;
+}
+.p-course .fee {
+  display: flex;
+  align-items: baseline;
+  gap: 0.3rem;
+  border-top: 1px dashed var(--p-line);
+  padding-top: 0.9rem;
+}
+.p-course .fee .num {
+  font-family: var(--font-playfair), serif;
+  font-size: 1.7rem;
+  font-weight: 600;
+  color: var(--p-wine);
+  font-variant-numeric: tabular-nums;
+}
+.p-course .fee .unit {
+  font-size: 0.8rem;
+  color: var(--p-muted);
+}
+.p-course.free {
+  background: var(--p-wine-soft);
+  border-color: #e7c9c9;
+}
+.p-course.free .fee .num {
+  color: var(--p-wine-deep);
+}
+.p-fee-note {
+  margin-top: 1.6rem;
+  font-size: 0.82rem;
+  color: var(--p-muted);
+}
+
+/* ---------- 講師 ---------- */
+.p-teacher-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .p-teacher-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.p-teacher-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 16px 40px rgba(60, 40, 30, 0.14);
+}
+.p-teacher-body .quote {
+  font-size: clamp(1.2rem, 2.8vw, 1.55rem);
+  font-weight: 600;
+  line-height: 1.9;
+  letter-spacing: 0.06em;
+  color: var(--p-wine);
+  margin: 0 0 1.3rem;
+}
+.p-teacher-body p {
+  color: var(--p-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1rem;
+}
+.p-teacher-name {
+  margin-top: 1.4rem;
+  font-size: 0.9rem;
+}
+.p-teacher-name .en {
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  color: var(--p-gold);
+  margin-right: 0.7rem;
+}
+.p-teacher-name strong {
+  font-size: 1.2rem;
+  letter-spacing: 0.16em;
+}
+
+/* ---------- 発表会 ---------- */
+.p-recital {
+  position: relative;
+  color: var(--p-cream);
+  text-align: center;
+  padding: clamp(4.5rem, 11vw, 7rem) clamp(1.5rem, 6vw, 4rem);
+  background:
+    linear-gradient(rgba(40, 28, 30, 0.55), rgba(40, 28, 30, 0.72)),
+    url("/demo/piano/grand.jpg") center / cover no-repeat;
+}
+.p-recital .p-eyebrow {
+  color: #f0d9c4;
+}
+.p-recital .p-eyebrow::before {
+  color: #f0d9c4;
+}
+.p-recital h2 {
+  font-size: clamp(1.5rem, 3.8vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  margin: 0 0 1.2rem;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.4);
+}
+.p-recital p {
+  max-width: 34rem;
+  margin: 0 auto;
+  font-size: 0.95rem;
+  line-height: 2;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.5);
+}
+
+/* ---------- FAQ ---------- */
+.p-faq-list {
+  display: grid;
+  gap: 1rem;
+  max-width: 46rem;
+}
+.p-faq {
+  background: var(--p-cream);
+  border: 1px solid var(--p-line);
+  border-radius: 10px;
+  padding: 1.3rem 1.6rem;
+}
+.p-faq dt {
+  font-weight: 600;
+  font-size: 0.98rem;
+  letter-spacing: 0.04em;
+  display: flex;
+  gap: 0.7rem;
+}
+.p-faq dt::before {
+  content: "Q";
+  font-family: var(--font-playfair), serif;
+  color: var(--p-wine);
+  font-weight: 600;
+  font-size: 1.1rem;
+  line-height: 1.5;
+}
+.p-faq dd {
+  margin: 0.6rem 0 0;
+  padding-left: 1.7rem;
+  font-size: 0.9rem;
+  color: var(--p-muted);
+}
+
+/* ---------- 教室情報 ---------- */
+.p-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.93rem;
+}
+.p-info-table th,
+.p-info-table td {
+  text-align: left;
+  padding: 0.85rem 0.4rem;
+  border-bottom: 1px dashed var(--p-line);
+  vertical-align: top;
+  font-weight: 400;
+}
+.p-info-table th {
+  white-space: nowrap;
+  color: var(--p-wine);
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  width: 6.5rem;
+  padding-right: 1.4rem;
+}
+.p-info-note {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--p-wine-deep);
+}
+
+/* ---------- フッター ---------- */
+.p-footer {
+  background: var(--p-key);
+  color: #d8cec4;
+  padding: 0 0 5.5rem;
+}
+.p-footer .p-keys {
+  border-bottom: none;
+  border-top: 2px solid var(--p-key);
+}
+.p-footer-inner {
+  text-align: center;
+  padding: 3rem clamp(1.5rem, 6vw, 4rem) 0;
+  font-size: 0.8rem;
+  line-height: 2;
+}
+.p-footer-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  color: #fff;
+  margin: 0 0 0.4rem;
+}
+.p-footer-name small {
+  display: block;
+  font-family: var(--font-playfair), serif;
+  font-style: italic;
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: var(--p-gold);
+  margin-top: 0.3rem;
+}
+.p-footer a {
+  color: var(--p-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.p-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--p-wine);
+  color: #fff;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(111, 43, 57, 0.4);
+}
+.p-badge:hover {
+  background: var(--p-wine-deep);
+}
+
+/* ---------- SNS（架空・リンク先なし） ---------- */
+.otonoha .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem 1.8rem;
+  margin-top: 1.4rem;
+}
+.otonoha .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  color: var(--p-wine);
+  font-size: 0.84rem;
+  letter-spacing: 0.06em;
+  cursor: default;
+}
+.otonoha .demo-sns .line-badge {
+  background: #06c755; /* LINEブランドカラー */
+  color: #fff;
+  font-family: var(--font-playfair), serif;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.2rem 0.6rem;
+  border-radius: 6px;
+}
+
+/* ---------- 架空地図 ---------- */
+.otonoha {
+  --map-bg: #fffdf9;
+  --map-road: #ede0cd;
+  --map-road-thin: #f5ecdd;
+  --map-rail: #8f3a48;
+  --map-pin: #8f3a48;
+  --map-text: #8c7f75;
+}
+.otonoha .demo-map {
+  margin-top: 2.5rem;
+}
+.otonoha .demo-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--p-line);
+  border-radius: 8px;
+}
+.otonoha .demo-map figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--p-muted);
+}

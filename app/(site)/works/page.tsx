@@ -56,6 +56,14 @@ const samples: {
     name: "有限会社 灯火製作所",
     thumb: "/demo/factory/hero.jpg",
   },
+  {
+    icon: "🎹",
+    label: "ピアノ教室",
+    tone: "アイボリー×えんじ、教科書体のクラシカルな習い事",
+    href: "/demo/piano/",
+    name: "おとのは ぴあの教室",
+    thumb: "/demo/piano/hero.jpg",
+  },
 ];
 
 const chat = [
