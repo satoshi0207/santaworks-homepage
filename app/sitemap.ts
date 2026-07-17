@@ -14,6 +14,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/about/", priority: 0.8 },
     { path: "/works/", priority: 0.8 },
     { path: "/contact/", priority: 0.6 },
+    { path: "/privacy/", priority: 0.3 },
+    { path: "/legal/", priority: 0.3 },
   ];
   const lastModified = new Date();
   return routes.map(({ path, priority }) => ({
