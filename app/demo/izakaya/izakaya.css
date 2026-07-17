@@ -200,15 +200,14 @@
 .i-tanzaku {
   background: linear-gradient(175deg, var(--i-paper), #e9e2d0);
   color: var(--i-ink);
-  writing-mode: vertical-rl;
-  min-height: 11.5rem;
-  padding: 1.1rem 0.85rem 0.9rem;
+  min-height: 12rem;
+  min-width: 3.6rem;
+  padding: 1.1rem 0.7rem 0.7rem;
   border-radius: 2px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.8rem;
   transition: transform 0.3s ease;
 }
 .i-tanzaku:nth-child(odd) {
@@ -221,15 +220,28 @@
   transform: rotate(0deg) translateY(-4px);
 }
 .i-tanzaku .name {
+  /* 品名は縦書き。折り返さず札の丈を伸ばす（札ごとに長さが違うのも味） */
+  writing-mode: vertical-rl;
+  white-space: nowrap;
+  flex: 1;
+  display: flex;
+  align-items: center;
   font-family: var(--font-yuji), serif;
   font-size: 1.12rem;
   letter-spacing: 0.16em;
 }
 .i-tanzaku .price {
-  font-size: 0.78rem;
+  /* 値段は札の下に横書き */
+  margin-top: 0.7rem;
+  padding-top: 0.45rem;
+  border-top: 1px solid rgba(42, 38, 32, 0.25);
+  width: 100%;
+  text-align: center;
+  font-size: 0.76rem;
   color: #6d6353;
   font-variant-numeric: tabular-nums;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
 }
 .i-menu-note {
   margin-top: 2.2rem;
