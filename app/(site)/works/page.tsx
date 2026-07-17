@@ -32,7 +32,14 @@ const samples: {
     name: "hair atelier 翠雨",
     thumb: "/demo/salon/hero.jpg",
   },
-  { icon: "🏮", label: "居酒屋", tone: "あたたかい賑わい" },
+  {
+    icon: "🏮",
+    label: "居酒屋",
+    tone: "藍×提灯の灯、筆文字と短冊の賑わい",
+    href: "/demo/izakaya/",
+    name: "大衆酒場 ほおずき",
+    thumb: "/demo/izakaya/hero.jpg",
+  },
   { icon: "🏭", label: "企業サイト", tone: "堅実さと信頼感" },
 ];
 

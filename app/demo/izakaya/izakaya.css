@@ -1,0 +1,361 @@
+/*
+ * 大衆酒場 ほおずき — 架空居酒屋のデザインサンプル
+ * 世界観: 賑やかな夜。深い藍 × 提灯の茜と灯 × 生成りの短冊。筆文字。
+ * ラーメン屋（静かな夜）との対比で「賑わいの夜」を作る。単一テーマ。
+ */
+.hoozuki {
+  --i-navy: #1c2233;
+  --i-navy2: #242b40;
+  --i-paper: #f4efe3;
+  --i-aka: #d9542e;
+  --i-amber: #f0a63c;
+  --i-ink: #2a2620;
+  --i-dim: #a9abb9;
+  --i-line: rgba(244, 239, 227, 0.16);
+
+  background: var(--i-navy);
+  color: var(--i-paper);
+  font-family: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", sans-serif;
+  line-height: 2.1;
+  overflow-x: clip;
+}
+.hoozuki ::selection {
+  background: var(--i-aka);
+  color: var(--i-paper);
+}
+.i-fude {
+  font-family: var(--font-yuji), "Hiragino Mincho ProN", serif;
+  font-weight: 400;
+}
+
+/* ---------- 共通 ---------- */
+.i-section {
+  padding: clamp(4.5rem, 11vw, 8rem) clamp(1.5rem, 6vw, 4rem);
+  position: relative;
+}
+.i-wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.i-label {
+  display: inline-block;
+  font-family: var(--font-yuji), serif;
+  color: var(--i-amber);
+  font-size: 1.05rem;
+  letter-spacing: 0.3em;
+  margin: 0 0 1.2rem;
+}
+.i-label::after {
+  content: "";
+  display: block;
+  height: 2px;
+  margin-top: 0.3rem;
+  background: linear-gradient(to right, var(--i-aka), transparent);
+}
+.i-h2 {
+  font-family: var(--font-yuji), serif;
+  font-size: clamp(1.7rem, 4.2vw, 2.5rem);
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+
+/* ---------- ヒーロー ---------- */
+.i-hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.i-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/demo/izakaya/hero.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.i-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 58%, rgba(240, 166, 60, 0.18), transparent 70%),
+    linear-gradient(to bottom, rgba(28, 34, 51, 0.55), rgba(28, 34, 51, 0.78) 75%, var(--i-navy));
+}
+.i-hero-inner {
+  position: relative;
+  z-index: 1;
+  padding: 6rem 1.5rem 4rem;
+}
+.i-hero-inner .mark {
+  display: inline-grid;
+  place-items: center;
+  width: 5.6rem;
+  height: 5.6rem;
+  border-radius: 50%;
+  border: 2px solid var(--i-aka);
+  background: radial-gradient(circle at 50% 38%, #e2653e, var(--i-aka));
+  box-shadow: 0 0 42px rgba(217, 84, 46, 0.55);
+  margin-bottom: 2rem;
+}
+.i-hero-inner .mark span {
+  font-family: var(--font-yuji), serif;
+  writing-mode: vertical-rl;
+  font-size: 0.98rem;
+  letter-spacing: 0.14em;
+  color: var(--i-paper);
+}
+.i-hero-inner h1 {
+  font-family: var(--font-yuji), serif;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 7vw, 4.2rem);
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  margin: 0 0 1.4rem;
+  text-shadow: 0 2px 30px rgba(0, 0, 0, 0.6);
+  animation: i-appear 1.6s cubic-bezier(0.16, 0.8, 0.3, 1) 0.3s both;
+}
+.i-hero-inner .sub {
+  color: var(--i-paper);
+  font-size: clamp(0.95rem, 2vw, 1.05rem);
+  letter-spacing: 0.14em;
+  margin: 0 0 2.2rem;
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.7);
+  animation: i-appear 1.6s cubic-bezier(0.16, 0.8, 0.3, 1) 0.8s both;
+}
+.i-hours {
+  display: inline-flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  animation: i-appear 1.6s cubic-bezier(0.16, 0.8, 0.3, 1) 1.2s both;
+}
+.i-hours span {
+  border: 1px solid var(--i-line);
+  background: rgba(28, 34, 51, 0.55);
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+}
+@keyframes i-appear {
+  from { opacity: 0; transform: translateY(22px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* ---------- 名物 ---------- */
+.i-meibutsu {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 740px) {
+  .i-meibutsu {
+    grid-template-columns: 1fr;
+  }
+}
+.i-meibutsu img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.45);
+}
+.i-meibutsu p {
+  margin: 0 0 1rem;
+  color: var(--i-dim);
+  font-size: 0.95rem;
+}
+.i-meibutsu strong {
+  color: var(--i-amber);
+  font-weight: 700;
+}
+
+/* ---------- お品書き（短冊） ---------- */
+.i-menu {
+  background: var(--i-navy2);
+  border-top: 1px solid var(--i-line);
+  border-bottom: 1px solid var(--i-line);
+}
+.i-cat {
+  font-family: var(--font-yuji), serif;
+  color: var(--i-amber);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  margin: 2.8rem 0 1.4rem;
+}
+.i-cat:first-of-type {
+  margin-top: 0;
+}
+.i-tanzaku-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  align-items: flex-start;
+}
+.i-tanzaku {
+  background: linear-gradient(175deg, var(--i-paper), #e9e2d0);
+  color: var(--i-ink);
+  writing-mode: vertical-rl;
+  min-height: 11.5rem;
+  padding: 1.1rem 0.85rem 0.9rem;
+  border-radius: 2px;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  transition: transform 0.3s ease;
+}
+.i-tanzaku:nth-child(odd) {
+  transform: rotate(-1.1deg);
+}
+.i-tanzaku:nth-child(even) {
+  transform: rotate(1deg) translateY(4px);
+}
+.i-tanzaku:hover {
+  transform: rotate(0deg) translateY(-4px);
+}
+.i-tanzaku .name {
+  font-family: var(--font-yuji), serif;
+  font-size: 1.12rem;
+  letter-spacing: 0.16em;
+}
+.i-tanzaku .price {
+  font-size: 0.78rem;
+  color: #6d6353;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.1em;
+}
+.i-menu-note {
+  margin-top: 2.2rem;
+  font-size: 0.8rem;
+  color: var(--i-dim);
+}
+
+/* ---------- 乾杯バンド ---------- */
+.i-kanpai {
+  position: relative;
+  min-height: 46svh;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  text-align: center;
+}
+.i-kanpai .bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/demo/izakaya/kanpai.jpg");
+  background-size: cover;
+  background-position: center;
+}
+.i-kanpai::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(28, 34, 51, 0.62);
+}
+.i-kanpai p {
+  position: relative;
+  z-index: 1;
+  font-family: var(--font-yuji), serif;
+  font-size: clamp(1.8rem, 5vw, 3rem);
+  letter-spacing: 0.18em;
+  margin: 0;
+  text-shadow: 0 2px 26px rgba(0, 0, 0, 0.6);
+}
+
+/* ---------- 店舗案内 ---------- */
+.i-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 740px) {
+  .i-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.i-info-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.i-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.i-info-table th,
+.i-info-table td {
+  text-align: left;
+  padding: 0.9rem 0.4rem;
+  border-bottom: 1px solid var(--i-line);
+  vertical-align: top;
+  font-weight: 400;
+}
+.i-info-table th {
+  white-space: nowrap;
+  font-family: var(--font-yuji), serif;
+  color: var(--i-amber);
+  letter-spacing: 0.3em;
+  padding-right: 1.6rem;
+}
+.i-info-note {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--i-aka);
+  filter: brightness(1.35);
+}
+
+/* ---------- フッター ---------- */
+.i-footer {
+  border-top: 1px solid var(--i-line);
+  padding: 2.5rem clamp(1.5rem, 6vw, 4rem) 6rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--i-dim);
+  letter-spacing: 0.08em;
+}
+.i-footer a {
+  color: var(--i-amber);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.i-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--i-aka);
+  color: var(--i-paper);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+.i-badge:hover {
+  filter: brightness(1.15);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .i-hero-inner h1,
+  .i-hero-inner .sub,
+  .i-hours {
+    animation: none;
+    opacity: 1;
+  }
+  .i-tanzaku,
+  .i-tanzaku:hover {
+    transform: none;
+    transition: none;
+  }
+}
