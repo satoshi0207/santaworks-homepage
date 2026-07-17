@@ -119,6 +119,14 @@ const samples: {
     name: "個別指導塾 あすなろ",
     thumb: "/demo/juku/classroom.jpg",
   },
+  {
+    icon: "✂️",
+    label: "美容室（モード系）",
+    tone: "純白×漆黒×朱赤、極太サンセリフとモノクロ写真のエディトリアル",
+    href: "/demo/salon2/",
+    name: "余白 -YOHAKU-",
+    thumb: "/demo/salon2/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
