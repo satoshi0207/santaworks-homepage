@@ -46,8 +46,12 @@
 }
 
 .hidamari a {
-  color: inherit;
   text-decoration: none;
+}
+
+/* クラス付きのボタン・バッジは各自の色を使う。素のテキストリンクだけ継承 */
+.hidamari a:not([class]) {
+  color: inherit;
 }
 
 .hd-wrap {

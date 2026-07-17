@@ -79,6 +79,14 @@ const samples: {
     name: "ひだまり工務店",
     thumb: "/demo/koumuten/hero.jpg",
   },
+  {
+    icon: "🥃",
+    label: "銀座・会員制クラブ",
+    tone: "漆黒×シャンパンゴールド、明朝の格で魅せるダークラグジュアリー",
+    href: "/demo/club/",
+    name: "銀座 月讀",
+    thumb: "/demo/club/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
