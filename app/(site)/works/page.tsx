@@ -95,6 +95,14 @@ const samples: {
     name: "バーバー ミナト",
     thumb: "/demo/barber/hero.jpg",
   },
+  {
+    icon: "☕",
+    label: "純喫茶（昭和レトロ）",
+    tone: "珈琲ブラウン×クリーム×えんじ、丸みのレトロ書体でノスタルジー",
+    href: "/demo/kissa/",
+    name: "純喫茶 おもかげ",
+    thumb: "/demo/kissa/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
