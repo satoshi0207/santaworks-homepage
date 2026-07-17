@@ -72,14 +72,19 @@ export default function Home() {
       {/* ヒーロー */}
       <section className="relative grid min-h-svh place-items-center overflow-hidden px-6 pb-16 pt-24 text-center">
         <Motes />
-        {/* 記憶の欠片がにじむ、やわらかな光のグロー */}
+        {/* 記憶の欠片が舞う、やわらかな光だまり（暖色×寒色の淡い光で奥行き） */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute left-1/2 top-[42%] -z-0 h-[64vmin] w-[64vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-[90px]"
-        />
+          className="pointer-events-none absolute inset-0 overflow-hidden"
+        >
+          <div className="absolute left-1/2 top-[44%] h-[74vmin] w-[74vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-[80px]" />
+          <div className="absolute left-[14%] top-[22%] h-[42vmin] w-[42vmin] rounded-full bg-[#ffcdb6]/50 blur-[70px]" />
+          <div className="absolute right-[10%] bottom-[20%] h-[46vmin] w-[46vmin] rounded-full bg-accent/[0.07] blur-[80px]" />
+          <div className="absolute left-[58%] top-[15%] h-[26vmin] w-[26vmin] rounded-full bg-[#cfd8ef]/45 blur-[60px]" />
+        </div>
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-surface/70 to-transparent"
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent"
         />
         <div className="relative z-10 max-w-4xl">
           <FadeIn delay={0.2}>
