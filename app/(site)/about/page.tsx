@@ -57,8 +57,9 @@ export default function About() {
             </strong>
             ——
             <br />
-            名前の中に、最初からサンタがいました。思い出を届ける存在の名を借りて、屋号は「Santa
-            Works」に。
+            名前の中に、最初からサンタがいました。
+            <br className="hidden md:block" />
+            思い出を届ける存在の名を借りて、屋号は「Santa Works」に。
           </p>
         </Reveal>
       </section>
