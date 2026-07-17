@@ -71,6 +71,14 @@ const samples: {
     name: "おとのは ぴあの教室",
     thumb: "/demo/piano/hero.jpg",
   },
+  {
+    icon: "🏠",
+    label: "工務店・リフォーム",
+    tone: "生成り×木の茶×安全アンバー、現場の誠実さを伝える多ページ構成",
+    href: "/demo/koumuten/",
+    name: "ひだまり工務店",
+    thumb: "/demo/koumuten/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";

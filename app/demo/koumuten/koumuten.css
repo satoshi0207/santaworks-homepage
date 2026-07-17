@@ -1,0 +1,1110 @@
+/* =========================================================
+   ひだまり工務店 — デザインサンプル専用スタイル
+   スコープ: .hidamari 配下のみ（本体サイトに影響しない）
+   配色: 生成り × 木の茶 × 鉄黒 × 安全色アンバー
+   ========================================================= */
+
+.hidamari {
+  --bg: #f6f1e8;
+  --paper: #fffdf8;
+  --ink: #2a2621;
+  --sub: #6d645a;
+  --wood: #8a5a34;
+  --wood-deep: #6a4322;
+  --accent: #d9791f;
+  --accent-deep: #bd6212;
+  --line: #e4daca;
+  --band: #efe7d6;
+  --dark: #241f1a;
+  --dark-sub: #b7ab99;
+
+  /* DemoMap 用 */
+  --map-bg: #f1ead9;
+  --map-road-thin: #ddd0b8;
+  --map-road: #e9dcc0;
+  --map-rail: #8a5a34;
+  --map-pin: #d9791f;
+  --map-text: #6d645a;
+
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-biz), "BIZ UDPGothic", "Hiragino Sans", "Noto Sans JP",
+    sans-serif;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hidamari *,
+.hidamari *::before,
+.hidamari *::after {
+  box-sizing: border-box;
+}
+
+.hidamari img {
+  display: block;
+  max-width: 100%;
+}
+
+.hidamari a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.hd-wrap {
+  width: min(1080px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1.15rem, 4vw, 2.4rem);
+}
+
+/* ---------- ヘッダー ---------- */
+.hd-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 0.7rem clamp(1.15rem, 4vw, 2.4rem);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.hd-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+}
+
+.hd-logo .mark {
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 8px;
+  background: linear-gradient(145deg, var(--wood), var(--wood-deep));
+  color: #fdf3e4;
+  font-size: 1.35rem;
+  font-weight: 700;
+  box-shadow: inset 0 0 0 2px color-mix(in srgb, #fff 22%, transparent);
+}
+
+.hd-logo .text {
+  display: flex;
+  flex-direction: column;
+  font-weight: 700;
+  font-size: 1.12rem;
+  letter-spacing: 0.03em;
+  line-height: 1.25;
+}
+
+.hd-logo .text small {
+  font-family: var(--font-oswald), sans-serif;
+  font-weight: 500;
+  font-size: 0.6rem;
+  letter-spacing: 0.18em;
+  color: var(--sub);
+}
+
+.hd-nav ul {
+  display: flex;
+  gap: clamp(0.6rem, 2vw, 1.5rem);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.hd-nav a {
+  position: relative;
+  display: inline-block;
+  padding: 0.35rem 0.1rem;
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--sub);
+  transition: color 0.2s;
+}
+
+.hd-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.1rem;
+  width: 100%;
+  height: 2px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transform-origin: left;
+  transition: transform 0.25s;
+}
+
+.hd-nav a:hover,
+.hd-nav a[aria-current="page"] {
+  color: var(--ink);
+}
+
+.hd-nav a[aria-current="page"]::after,
+.hd-nav a:hover::after {
+  transform: scaleX(1);
+}
+
+.hd-header-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font-size: 0.85rem;
+  font-weight: 700;
+  box-shadow: 0 6px 16px -8px var(--accent);
+  transition: transform 0.2s, background 0.2s;
+}
+
+.hd-header-cta:hover {
+  background: var(--accent-deep);
+  transform: translateY(-1px);
+}
+
+/* ---------- ボタン ---------- */
+.hd-btn,
+.hd-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.85rem 1.7rem;
+  border-radius: 6px;
+  font-weight: 700;
+  font-size: 0.95rem;
+  letter-spacing: 0.02em;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s;
+}
+
+.hd-btn {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 12px 26px -14px var(--accent-deep);
+}
+
+.hd-btn:hover {
+  background: var(--accent-deep);
+  transform: translateY(-2px);
+}
+
+.hd-btn-ghost {
+  border: 1.5px solid color-mix(in srgb, #fff 70%, transparent);
+  color: #fff;
+}
+
+.hd-btn-ghost:hover {
+  background: color-mix(in srgb, #fff 15%, transparent);
+}
+
+.hd-btn-wood {
+  background: var(--wood);
+  color: #fff;
+  box-shadow: 0 12px 26px -14px var(--wood-deep);
+}
+
+.hd-btn-wood:hover {
+  background: var(--wood-deep);
+}
+
+/* ---------- ヒーロー ---------- */
+.hd-hero {
+  position: relative;
+  min-height: min(88svh, 720px);
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+}
+
+.hd-hero-media {
+  position: absolute;
+  inset: 0;
+  background-image: url("/demo/koumuten/hero.jpg");
+  background-size: cover;
+  background-position: center;
+  transform: scale(1.03);
+}
+
+.hd-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(20, 16, 12, 0.15) 0%,
+    rgba(20, 16, 12, 0.15) 40%,
+    rgba(20, 16, 12, 0.82) 100%
+  );
+}
+
+.hd-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1080px, 100%);
+  margin-inline: auto;
+  padding: clamp(1.15rem, 4vw, 2.4rem);
+  padding-bottom: clamp(2.4rem, 6vw, 4rem);
+  color: #fff;
+}
+
+.hd-hero-since {
+  display: inline-block;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  padding: 0.35rem 0.9rem;
+  border: 1px solid color-mix(in srgb, #fff 55%, transparent);
+  border-radius: 999px;
+  margin-bottom: 1.3rem;
+}
+
+.hd-hero-title {
+  font-size: clamp(1.9rem, 6.2vw, 3.4rem);
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.02em;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.35);
+  margin: 0 0 1rem;
+}
+
+.hd-hero-title .accent {
+  color: #f4b25e;
+}
+
+.hd-hero-sub {
+  max-width: 34rem;
+  font-size: clamp(0.95rem, 2.2vw, 1.08rem);
+  color: #f3ece2;
+  margin: 0 0 1.9rem;
+}
+
+.hd-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+}
+
+/* ---------- セクション共通 ---------- */
+.hd-section {
+  padding-block: clamp(3.4rem, 8vw, 6rem);
+}
+
+.hd-band {
+  background: var(--band);
+  border-block: 1px solid var(--line);
+}
+
+.hd-dark {
+  background: var(--dark);
+  color: #f2ebe0;
+}
+
+.hd-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--wood);
+  margin-bottom: 0.9rem;
+}
+
+.hd-dark .hd-label {
+  color: var(--accent);
+}
+
+.hd-label::before {
+  content: "";
+  width: 1.8rem;
+  height: 2px;
+  background: var(--accent);
+}
+
+.hd-h2 {
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.hd-h2 .accent {
+  color: var(--wood);
+}
+
+.hd-lead {
+  max-width: 40rem;
+  color: var(--sub);
+  margin: 0 0 2.4rem;
+}
+
+.hd-dark .hd-lead {
+  color: var(--dark-sub);
+}
+
+/* ---------- 選ばれる理由 ---------- */
+.hd-reasons {
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hd-reason {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 1.8rem 1.5rem;
+  box-shadow: 0 18px 40px -34px rgba(60, 40, 20, 0.5);
+}
+
+.hd-reason .bar {
+  width: 2.4rem;
+  height: 4px;
+  border-radius: 2px;
+  background: var(--accent);
+  margin-bottom: 1.1rem;
+}
+
+.hd-reason h3 {
+  font-size: 1.12rem;
+  font-weight: 700;
+  margin: 0 0 0.6rem;
+}
+
+.hd-reason p {
+  font-size: 0.9rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+/* ---------- 私たちの仕事 ---------- */
+.hd-services {
+  display: grid;
+  gap: 1.4rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hd-service {
+  position: relative;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  background: var(--paper);
+}
+
+.hd-service .media {
+  aspect-ratio: 4 / 3;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.hd-service:hover .media {
+  transform: scale(1.05);
+}
+
+.hd-service .body {
+  padding: 1.2rem 1.3rem 1.5rem;
+}
+
+.hd-service .no {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+
+.hd-service h3 {
+  font-size: 1.14rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0.5rem;
+}
+
+.hd-service p {
+  font-size: 0.88rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+/* ---------- 施工事例グリッド ---------- */
+.hd-gallery {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hd-case {
+  display: flex;
+  flex-direction: column;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -36px rgba(60, 40, 20, 0.55);
+  transition: transform 0.25s, box-shadow 0.25s;
+}
+
+.hd-case:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 26px 48px -34px rgba(60, 40, 20, 0.6);
+}
+
+.hd-case .media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+}
+
+.hd-case .media > span {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.6s ease;
+}
+
+.hd-case:hover .media > span {
+  transform: scale(1.06);
+}
+
+.hd-case .body {
+  padding: 1.1rem 1.2rem 1.35rem;
+}
+
+.hd-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-bottom: 0.6rem;
+}
+
+.hd-tag {
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.18rem 0.6rem;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--wood) 12%, transparent);
+  color: var(--wood-deep);
+}
+
+.hd-tag.accent {
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  color: var(--accent-deep);
+}
+
+.hd-case h3 {
+  font-size: 1.04rem;
+  font-weight: 700;
+  margin: 0 0 0.4rem;
+}
+
+.hd-case p {
+  font-size: 0.85rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+.hd-case .meta {
+  margin-top: 0.7rem;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--sub);
+}
+
+/* ---------- 現場の誠実さ（職人） ---------- */
+.hd-craft {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.hd-craft-media {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.7);
+}
+
+.hd-craft-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hd-craft-media .detail {
+  position: absolute;
+  right: -0.6rem;
+  bottom: -0.6rem;
+  width: 42%;
+  aspect-ratio: 1 / 1;
+  border: 5px solid var(--dark);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px -20px rgba(0, 0, 0, 0.7);
+}
+
+.hd-quote {
+  font-size: clamp(1.3rem, 3.4vw, 1.9rem);
+  font-weight: 700;
+  line-height: 1.7;
+  letter-spacing: 0.02em;
+  margin: 0 0 1.2rem;
+}
+
+.hd-quote .accent {
+  color: var(--accent);
+}
+
+/* ---------- 採用バナー ---------- */
+.hd-recruit {
+  position: relative;
+  overflow: hidden;
+}
+
+.hd-recruit-media {
+  position: absolute;
+  inset: 0;
+  background: url("/demo/koumuten/recruit.jpg") center / cover;
+}
+
+.hd-recruit::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    90deg,
+    rgba(20, 16, 12, 0.86) 0%,
+    rgba(20, 16, 12, 0.55) 60%,
+    rgba(20, 16, 12, 0.3) 100%
+  );
+}
+
+.hd-recruit-inner {
+  position: relative;
+  z-index: 2;
+  color: #fff;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+
+.hd-recruit-inner .hd-label {
+  color: var(--accent);
+}
+
+/* ---------- CTA帯 ---------- */
+.hd-cta-band {
+  text-align: center;
+}
+
+.hd-cta-band .tel {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: clamp(1.6rem, 5vw, 2.4rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  margin: 0.4rem 0 0.2rem;
+}
+
+.hd-cta-band .tel small {
+  display: block;
+  font-family: var(--font-biz), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+  color: var(--sub);
+}
+
+/* ---------- ページ見出し（下層ページ） ---------- */
+.hd-pagehead {
+  position: relative;
+  padding-block: clamp(2.6rem, 6vw, 4.2rem);
+  background: var(--dark);
+  color: #fff;
+  overflow: hidden;
+}
+
+.hd-pagehead::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: repeating-linear-gradient(
+    45deg,
+    color-mix(in srgb, #fff 4%, transparent) 0 2px,
+    transparent 2px 14px
+  );
+}
+
+.hd-pagehead .inner {
+  position: relative;
+  z-index: 2;
+}
+
+.hd-pagehead .en {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+}
+
+.hd-pagehead h1 {
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.hd-crumb {
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+}
+
+.hd-crumb .inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.7rem;
+  color: var(--sub);
+}
+
+.hd-crumb a:hover {
+  color: var(--wood);
+}
+
+.hd-crumb span[aria-hidden] {
+  color: var(--line);
+}
+
+/* ---------- 代表あいさつ ---------- */
+.hd-greeting {
+  display: grid;
+  gap: clamp(1.4rem, 4vw, 2.6rem);
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+}
+
+.hd-greeting p {
+  margin: 0 0 1rem;
+}
+
+.hd-sign {
+  margin-top: 1.4rem;
+  font-size: 0.85rem;
+  color: var(--sub);
+}
+
+.hd-sign strong {
+  display: inline-block;
+  font-size: 1.15rem;
+  color: var(--ink);
+  margin-left: 0.4rem;
+}
+
+.hd-greeting-media {
+  border-radius: 10px;
+  overflow: hidden;
+  aspect-ratio: 3 / 4;
+  box-shadow: 0 30px 60px -40px rgba(0, 0, 0, 0.6);
+}
+
+.hd-greeting-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ---------- 価値観 ---------- */
+.hd-values {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hd-value {
+  padding: 1.6rem 1.4rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.hd-value .no {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: var(--accent);
+  line-height: 1;
+}
+
+.hd-value h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.6rem 0 0.5rem;
+}
+
+.hd-value p {
+  font-size: 0.88rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+/* ---------- 職人紹介 ---------- */
+.hd-team {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.hd-member {
+  padding: 1.5rem 1.4rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.hd-member .avatar {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fdf3e4;
+  background: linear-gradient(145deg, var(--wood), var(--wood-deep));
+}
+
+.hd-member .role {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.hd-member h3 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0.5rem;
+}
+
+.hd-member p {
+  font-size: 0.83rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+/* ---------- 会社概要テーブル ---------- */
+.hd-profile {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hd-profile th,
+.hd-profile td {
+  text-align: left;
+  padding: 0.95rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.hd-profile tr:last-child th,
+.hd-profile tr:last-child td {
+  border-bottom: none;
+}
+
+.hd-profile th {
+  width: 32%;
+  background: color-mix(in srgb, var(--band) 60%, transparent);
+  font-weight: 700;
+  color: var(--wood-deep);
+  white-space: nowrap;
+}
+
+/* ---------- フォーム ---------- */
+.hd-form {
+  display: grid;
+  gap: 1.2rem;
+  max-width: 640px;
+}
+
+.hd-field label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: 700;
+  margin-bottom: 0.4rem;
+}
+
+.hd-field .req {
+  margin-left: 0.4rem;
+  font-size: 0.68rem;
+  color: var(--accent-deep);
+}
+
+.hd-field input,
+.hd-field textarea,
+.hd-field select {
+  width: 100%;
+  padding: 0.75rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+}
+
+.hd-field input:focus,
+.hd-field textarea:focus,
+.hd-field select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+  border-color: transparent;
+}
+
+.hd-note {
+  padding: 0.9rem 1.1rem;
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  border: 1px dashed color-mix(in srgb, var(--accent) 45%, transparent);
+  font-size: 0.82rem;
+  color: var(--accent-deep);
+}
+
+/* ---------- 地図・SNS（共通コンポーネントのスコープ装飾） ---------- */
+.hidamari .demo-map {
+  margin: 0;
+}
+
+.hidamari .demo-map svg {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  border: 1px solid var(--line);
+}
+
+.hidamari .demo-map figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: var(--sub);
+}
+
+.hidamari .demo-sns {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.hidamari .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.7rem;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--dark-sub) 40%, transparent);
+  color: #f2ebe0;
+  font-size: 0.78rem;
+  cursor: help;
+  transition: border-color 0.2s, color 0.2s;
+}
+
+.hidamari .demo-sns a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.hidamari .demo-sns .line-badge {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.1rem 0.34rem;
+  border-radius: 4px;
+  background: #06c755;
+  color: #fff;
+}
+
+/* ---------- フッター ---------- */
+.hd-footer {
+  background: var(--dark);
+  color: #ece3d5;
+}
+
+.hd-footer-inner {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1.6fr 1fr;
+  padding-block: clamp(2.6rem, 6vw, 3.6rem);
+}
+
+.hd-footer-name {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hd-footer-name small {
+  display: block;
+  font-size: 0.7rem;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  color: var(--dark-sub);
+  margin-top: 0.2rem;
+}
+
+.hd-footer-addr {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: var(--dark-sub);
+  line-height: 1.9;
+}
+
+.hd-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.hd-footer-nav a {
+  font-size: 0.88rem;
+  color: #ece3d5;
+  transition: color 0.2s;
+}
+
+.hd-footer-nav a:hover {
+  color: var(--accent);
+}
+
+.hd-footer-note {
+  border-top: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  padding-block: 1.1rem;
+  font-size: 0.74rem;
+  color: var(--dark-sub);
+  text-align: center;
+}
+
+.hd-footer-note a {
+  color: var(--accent);
+}
+
+/* ---------- デザインサンプル・バッジ ---------- */
+.hd-badge {
+  position: fixed;
+  right: 0.8rem;
+  bottom: 0.8rem;
+  z-index: 60;
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 0.66rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 0.45rem 0.85rem;
+  border-radius: 999px;
+  background: var(--dark);
+  color: #f4b25e;
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s;
+}
+
+.hd-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 860px) {
+  .hd-reasons,
+  .hd-services,
+  .hd-gallery,
+  .hd-values,
+  .hd-team {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hd-craft,
+  .hd-greeting {
+    grid-template-columns: 1fr;
+  }
+
+  .hd-craft-media {
+    aspect-ratio: 4 / 3;
+    max-width: 460px;
+  }
+
+  .hd-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .hd-header {
+    gap: 0.6rem 0.9rem;
+  }
+
+  .hd-logo {
+    margin-right: 0;
+  }
+
+  .hd-nav {
+    order: 3;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .hd-nav ul {
+    justify-content: space-between;
+  }
+
+  .hd-header-cta {
+    margin-left: auto;
+  }
+
+  .hd-reasons,
+  .hd-services,
+  .hd-gallery,
+  .hd-values,
+  .hd-team {
+    grid-template-columns: 1fr;
+  }
+
+  .hd-profile th {
+    width: 38%;
+    padding: 0.75rem 0.8rem;
+  }
+
+  .hd-profile td {
+    padding: 0.75rem 0.8rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hidamari * {
+    transition: none !important;
+  }
+  .hd-hero-media {
+    transform: none;
+  }
+}
