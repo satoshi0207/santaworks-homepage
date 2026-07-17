@@ -1,0 +1,71 @@
+@import "tailwindcss";
+
+/*
+ * デザイントークン（デザインモック準拠）
+ * ライト = 明るい雪の日 / ダーク = 雪の降る夜
+ */
+:root {
+  --bg: #fbfbf8;
+  --surface: #ffffff;
+  --ink: #24262e;
+  --muted: #474d5b;
+  --line: #e4e6e2;
+  --accent: #c4333e;
+  --accent-strong: #a2242f;
+  --accent-soft: rgba(196, 51, 62, 0.08);
+  --mote: rgba(150, 158, 178, 0.5);
+  --mote-accent: rgba(196, 51, 62, 0.4);
+  --card-shadow: 0 12px 40px rgba(36, 38, 46, 0.07);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #14161d;
+    --surface: #1c1f28;
+    --ink: #ecedf2;
+    --muted: #acb3c2;
+    --line: #2b2f3b;
+    --accent: #e25662;
+    --accent-strong: #ec7680;
+    --accent-soft: rgba(226, 86, 98, 0.12);
+    --mote: rgba(255, 253, 245, 0.6);
+    --mote-accent: rgba(226, 86, 98, 0.5);
+    --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-ink: var(--ink);
+  --color-muted: var(--muted);
+  --color-line: var(--line);
+  --color-accent: var(--accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --shadow-card: var(--card-shadow);
+  --font-sans: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN",
+    "Hiragino Sans", "Yu Gothic", sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
