@@ -1,0 +1,857 @@
+/*
+ * 有限会社 灯火製作所 — 架空のものづくり企業（金属加工の町工場）のデザインサンプル
+ * 世界観: 堅実で信頼感のあるBtoBコーポレート × 「灯」の温かみ。
+ * 鉄紺（スチールネイビー）×温かい紙色×灯のアンバー。単一テーマ（ライト固定）。
+ * 唯一の多ページ構成デモ。共通ヘッダー・フッター・パンくずで「遷移するサイト」を再現する。
+ */
+.tomoshibi {
+  --t-bg: #f7f5f1;
+  --t-ink: #2b2e33;
+  --t-muted: #6b7078;
+  --t-line: #e4e0d6;
+  --t-navy: #24384e;
+  --t-navy-deep: #18273a;
+  --t-amber: #c07a2b;
+  --t-amber-deep: #9c5f1c;
+  --t-amber-soft: #f4e7d3;
+
+  background: var(--t-bg);
+  color: var(--t-ink);
+  font-family: var(--font-zenkaku), "Hiragino Kaku Gothic ProN", sans-serif;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  overflow-x: clip;
+}
+.tomoshibi ::selection {
+  background: var(--t-amber);
+  color: #fff;
+}
+.t-mincho {
+  font-family: var(--font-zenold), "Hiragino Mincho ProN", serif;
+}
+
+/* ---------- 共通 ---------- */
+.t-section {
+  padding: clamp(4rem, 9vw, 6.5rem) clamp(1.5rem, 6vw, 4rem);
+}
+.t-wrap {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+.t-eyebrow {
+  color: var(--t-amber);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  margin: 0 0 1rem;
+}
+.t-h2 {
+  font-family: var(--font-zenold), serif;
+  font-size: clamp(1.45rem, 3.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.8;
+  margin: 0 0 1.8rem;
+}
+.t-h3 {
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.8rem;
+}
+.t-btn {
+  display: inline-block;
+  background: var(--t-amber);
+  color: #fff;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  padding: 0.85rem 2.2rem;
+  border-radius: 3px;
+  text-decoration: none;
+  transition: background 0.25s, transform 0.25s;
+}
+.t-btn:hover {
+  background: var(--t-amber-deep);
+  transform: translateY(-2px);
+}
+.t-btn.ghost {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.55);
+}
+.t-btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.12);
+}
+
+/* ---------- ヘッダー ---------- */
+.t-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.4rem 2rem;
+  padding: 1rem clamp(1.2rem, 4vw, 2.5rem);
+  background: #fff;
+  border-bottom: 1px solid var(--t-line);
+  border-top: 3px solid var(--t-navy);
+}
+.t-logo {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--t-ink);
+  text-decoration: none;
+}
+.t-logo .mark {
+  display: grid;
+  place-items: center;
+  width: 2.6rem;
+  height: 2.6rem;
+  background: var(--t-navy);
+  color: #f6c063;
+  font-family: var(--font-zenold), serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.t-logo .text {
+  font-family: var(--font-zenold), serif;
+  font-size: 1.08rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.4;
+  display: grid;
+}
+.t-logo small {
+  font-family: var(--font-zenkaku), sans-serif;
+  font-size: 0.6rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  color: var(--t-muted);
+}
+.t-nav ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem;
+  margin: 0;
+  padding: 0;
+}
+.t-nav a {
+  display: block;
+  color: var(--t-ink);
+  font-size: 0.86rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+  padding: 0.5rem 0.9rem;
+  border-bottom: 2px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+}
+.t-nav a:hover {
+  color: var(--t-amber-deep);
+}
+.t-nav a[aria-current="page"] {
+  color: var(--t-amber-deep);
+  border-bottom-color: var(--t-amber);
+  font-weight: 700;
+}
+@media (max-width: 740px) {
+  .t-header {
+    justify-content: center;
+    text-align: center;
+    padding-bottom: 0.4rem;
+  }
+  .t-nav ul {
+    justify-content: center;
+  }
+  .t-nav a {
+    font-size: 0.8rem;
+    padding: 0.5rem 0.55rem;
+  }
+}
+
+/* ---------- ヒーロー（トップ） ---------- */
+.t-hero {
+  position: relative;
+  background:
+    linear-gradient(100deg, rgba(20, 31, 44, 0.92) 30%, rgba(24, 39, 58, 0.55)),
+    url("/demo/factory/hero.jpg") center / cover no-repeat;
+  color: #f3f1ec;
+  padding: clamp(5rem, 13vw, 9rem) clamp(1.5rem, 6vw, 4rem);
+}
+.t-hero-inner {
+  max-width: 68rem;
+  margin: 0 auto;
+}
+.t-hero .en {
+  color: #f6c063;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  margin: 0 0 1.4rem;
+}
+.t-hero h1 {
+  font-family: var(--font-zenold), serif;
+  font-size: clamp(1.9rem, 5.2vw, 3.2rem);
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 1.8;
+  margin: 0 0 1.6rem;
+}
+.t-hero h1 span {
+  display: inline-block; /* フレーズ単位で折り返す */
+}
+.t-hero .lead {
+  max-width: 34rem;
+  font-size: 0.95rem;
+  color: rgba(243, 241, 236, 0.85);
+  margin: 0 0 2.4rem;
+}
+.t-hero .actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+/* ---------- 下層ページ見出し ---------- */
+.t-pagehead {
+  background:
+    linear-gradient(100deg, rgba(20, 31, 44, 0.94) 40%, rgba(36, 56, 78, 0.85)),
+    url("/demo/factory/hero.jpg") center 40% / cover no-repeat;
+  color: #f3f1ec;
+  padding: clamp(3.2rem, 7vw, 5rem) clamp(1.5rem, 6vw, 4rem);
+}
+.t-pagehead .en {
+  color: #f6c063;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.32em;
+  text-transform: uppercase;
+  margin: 0 0 0.6rem;
+  max-width: 68rem;
+  margin-inline: auto;
+}
+.t-pagehead h1 {
+  font-family: var(--font-zenold), serif;
+  font-size: clamp(1.6rem, 4vw, 2.3rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin: 0;
+  max-width: 68rem;
+  margin-inline: auto;
+}
+.t-crumb {
+  background: #fff;
+  border-bottom: 1px solid var(--t-line);
+  font-size: 0.78rem;
+  color: var(--t-muted);
+}
+.t-crumb .inner {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding: 0.55rem clamp(1.5rem, 6vw, 4rem);
+  display: flex;
+  gap: 0.7rem;
+}
+.t-crumb a {
+  color: var(--t-amber-deep);
+  text-decoration: none;
+}
+.t-crumb a:hover {
+  text-decoration: underline;
+}
+
+/* ---------- 強み3枚 ---------- */
+.t-strengths {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+@media (max-width: 740px) {
+  .t-strengths {
+    grid-template-columns: 1fr;
+  }
+}
+.t-strength {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-top: 3px solid var(--t-amber);
+  border-radius: 4px;
+  padding: 1.8rem 1.6rem;
+}
+.t-strength .num {
+  font-family: var(--font-zenold), serif;
+  color: var(--t-amber);
+  font-size: 0.85rem;
+  letter-spacing: 0.2em;
+  margin: 0 0 0.6rem;
+}
+.t-strength p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--t-muted);
+}
+
+/* ---------- 事業カード（トップ・事業内容共用） ---------- */
+.t-services {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+@media (max-width: 740px) {
+  .t-services {
+    grid-template-columns: 1fr;
+  }
+}
+.t-service-card {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  overflow: hidden;
+  color: var(--t-ink);
+  text-decoration: none;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+a.t-service-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 26px rgba(24, 39, 58, 0.14);
+}
+.t-service-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  display: block;
+}
+.t-service-card .body {
+  padding: 1.3rem 1.5rem 1.6rem;
+}
+.t-service-card .body p {
+  margin: 0;
+  font-size: 0.88rem;
+  color: var(--t-muted);
+}
+.t-service-card .more {
+  display: inline-block;
+  margin-top: 0.7rem;
+  color: var(--t-amber-deep);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+/* ---------- お知らせ ---------- */
+.t-news {
+  background: #fff;
+  border-top: 1px solid var(--t-line);
+  border-bottom: 1px solid var(--t-line);
+}
+.t-news-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.t-news-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1.2rem;
+  padding: 1rem 0.2rem;
+  border-bottom: 1px dashed var(--t-line);
+  font-size: 0.92rem;
+}
+.t-news-list time {
+  font-variant-numeric: tabular-nums;
+  color: var(--t-muted);
+  font-size: 0.85rem;
+  letter-spacing: 0.06em;
+}
+.t-news-list .tag {
+  background: var(--t-amber-soft);
+  color: var(--t-amber-deep);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  padding: 0.15rem 0.7rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+/* ---------- 誘導バンド（会社案内・採用） ---------- */
+.t-band {
+  position: relative;
+  color: #f3f1ec;
+  padding: clamp(4rem, 10vw, 6.5rem) clamp(1.5rem, 6vw, 4rem);
+  background-size: cover;
+  background-position: center;
+}
+.t-band::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(20, 31, 44, 0.9), rgba(20, 31, 44, 0.55));
+}
+.t-band .inner {
+  position: relative;
+  max-width: 68rem;
+  margin: 0 auto;
+}
+.t-band h2 {
+  font-family: var(--font-zenold), serif;
+  font-size: clamp(1.5rem, 3.6vw, 2.1rem);
+  letter-spacing: 0.14em;
+  margin: 0 0 1rem;
+}
+.t-band p {
+  max-width: 30rem;
+  font-size: 0.92rem;
+  color: rgba(243, 241, 236, 0.85);
+  margin: 0 0 2rem;
+}
+
+/* ---------- 汎用テーブル（会社情報・沿革・募集要項・設備） ---------- */
+.t-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+  background: #fff;
+  border: 1px solid var(--t-line);
+}
+.t-table th,
+.t-table td {
+  text-align: left;
+  vertical-align: top;
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--t-line);
+  font-weight: 400;
+}
+.t-table th {
+  background: var(--t-amber-soft);
+  color: var(--t-navy);
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+  width: 9.5rem;
+}
+@media (max-width: 600px) {
+  .t-table th {
+    width: 6.8rem;
+    padding: 0.9rem 0.8rem;
+  }
+}
+
+/* 沿革 */
+.t-history {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 2px solid var(--t-line);
+}
+.t-history li {
+  position: relative;
+  padding: 0 0 1.6rem 1.8rem;
+}
+.t-history li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 0.85rem;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--t-amber);
+  border: 2px solid var(--t-bg);
+}
+.t-history .era {
+  font-family: var(--font-zenold), serif;
+  font-weight: 700;
+  color: var(--t-navy);
+  letter-spacing: 0.08em;
+  display: block;
+}
+.t-history p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--t-muted);
+}
+
+/* ---------- 代表挨拶 ---------- */
+.t-greeting {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+@media (max-width: 740px) {
+  .t-greeting {
+    grid-template-columns: 1fr;
+  }
+}
+.t-greeting img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.t-greeting .quote {
+  font-family: var(--font-zenold), serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  line-height: 2;
+  color: var(--t-navy);
+  margin: 0 0 1.4rem;
+}
+.t-greeting .sign {
+  margin-top: 1.6rem;
+  text-align: right;
+  font-size: 0.9rem;
+}
+.t-greeting .sign strong {
+  font-family: var(--font-zenold), serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.2em;
+  margin-left: 0.8rem;
+}
+
+/* ---------- 事業内容ページ ---------- */
+.t-service-row {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: clamp(1.8rem, 4.5vw, 3.5rem);
+  align-items: center;
+  padding: 2.2rem 0;
+  border-bottom: 1px solid var(--t-line);
+}
+.t-service-row:last-of-type {
+  border-bottom: none;
+}
+@media (max-width: 740px) {
+  .t-service-row {
+    grid-template-columns: 1fr;
+  }
+}
+.t-service-row img {
+  width: 100%;
+  aspect-ratio: 16 / 11;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.t-service-row .desc p {
+  margin: 0 0 1rem;
+  font-size: 0.93rem;
+  color: var(--t-muted);
+}
+.t-tags {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 1rem 0 0;
+  padding: 0;
+}
+.t-tags li {
+  border: 1px solid var(--t-line);
+  background: #fff;
+  color: var(--t-muted);
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  padding: 0.25rem 0.85rem;
+  border-radius: 999px;
+}
+
+/* ご依頼の流れ */
+.t-flow {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.2rem;
+  counter-reset: flow;
+}
+@media (max-width: 740px) {
+  .t-flow {
+    grid-template-columns: 1fr;
+  }
+}
+.t-flow li {
+  counter-increment: flow;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  padding: 1.4rem 1.3rem;
+  position: relative;
+}
+.t-flow li::before {
+  content: "0" counter(flow);
+  font-family: var(--font-zenold), serif;
+  color: var(--t-amber);
+  font-size: 1.3rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  display: block;
+  margin-bottom: 0.4rem;
+}
+.t-flow h3 {
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 0 0 0.5rem;
+}
+.t-flow p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--t-muted);
+}
+
+/* ---------- 採用 ---------- */
+.t-recruit-lead {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 740px) {
+  .t-recruit-lead {
+    grid-template-columns: 1fr;
+  }
+}
+.t-recruit-lead img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.t-recruit-lead .catch {
+  font-family: var(--font-zenold), serif;
+  font-size: clamp(1.5rem, 3.4vw, 2rem);
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  line-height: 1.9;
+  color: var(--t-navy);
+  margin: 0 0 1.2rem;
+}
+.t-recruit-lead p {
+  font-size: 0.93rem;
+  color: var(--t-muted);
+  margin: 0 0 1rem;
+}
+.t-voice {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-left: 3px solid var(--t-amber);
+  border-radius: 4px;
+  padding: 1.5rem 1.7rem;
+}
+.t-voice p {
+  margin: 0 0 0.8rem;
+  font-size: 0.9rem;
+}
+.t-voice footer {
+  font-size: 0.8rem;
+  color: var(--t-muted);
+  text-align: right;
+}
+.t-voices {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+@media (max-width: 740px) {
+  .t-voices {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------- お問い合わせ ---------- */
+.t-tel-box {
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+  padding: 1.6rem 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.6rem 2.5rem;
+  margin-bottom: 2.5rem;
+}
+.t-tel-box .tel {
+  font-family: var(--font-zenold), serif;
+  font-size: 1.7rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--t-navy);
+  font-variant-numeric: tabular-nums;
+}
+.t-tel-box .note {
+  font-size: 0.82rem;
+  color: var(--t-muted);
+}
+.t-form {
+  display: grid;
+  gap: 1.3rem;
+  max-width: 44rem;
+}
+.t-form label {
+  display: grid;
+  gap: 0.4rem;
+  font-size: 0.88rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.t-form .req {
+  color: var(--t-amber-deep);
+  font-size: 0.72rem;
+  margin-left: 0.5rem;
+}
+.t-form input,
+.t-form select,
+.t-form textarea {
+  font: inherit;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  background: #fff;
+  border: 1px solid var(--t-line);
+  border-radius: 3px;
+  padding: 0.75rem 1rem;
+  color: var(--t-ink);
+}
+.t-form input:focus-visible,
+.t-form select:focus-visible,
+.t-form textarea:focus-visible {
+  outline: 2px solid var(--t-amber);
+  outline-offset: 1px;
+}
+.t-form-note {
+  font-size: 0.82rem;
+  color: var(--t-amber-deep);
+  margin: 0.4rem 0 0;
+}
+.t-form button {
+  justify-self: start;
+  font: inherit;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  background: var(--t-navy);
+  color: #fff;
+  border: none;
+  border-radius: 3px;
+  padding: 0.9rem 2.6rem;
+  cursor: pointer;
+  transition: background 0.25s;
+}
+.t-form button:hover {
+  background: var(--t-navy-deep);
+}
+
+/* ---------- フッター ---------- */
+.t-footer {
+  background: var(--t-navy-deep);
+  color: rgba(243, 241, 236, 0.85);
+  padding: 3rem clamp(1.5rem, 6vw, 4rem) 5.5rem;
+}
+.t-footer-inner {
+  max-width: 68rem;
+  margin: 0 auto 2.5rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 2rem;
+}
+.t-footer-name {
+  font-family: var(--font-zenold), serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  margin: 0 0 0.8rem;
+  display: grid;
+}
+.t-footer-name small {
+  font-family: var(--font-zenkaku), sans-serif;
+  font-size: 0.68rem;
+  font-weight: 400;
+  letter-spacing: 0.3em;
+  color: rgba(243, 241, 236, 0.55);
+}
+.t-footer-addr {
+  margin: 0;
+  font-size: 0.82rem;
+  color: rgba(243, 241, 236, 0.65);
+}
+.t-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2rem 1.6rem;
+  align-items: start;
+}
+.t-footer-nav a {
+  color: rgba(243, 241, 236, 0.85);
+  font-size: 0.84rem;
+  letter-spacing: 0.08em;
+  text-decoration: none;
+}
+.t-footer-nav a:hover {
+  color: #f6c063;
+}
+.t-footer-note {
+  max-width: 68rem;
+  margin: 0 auto;
+  padding-top: 1.6rem;
+  border-top: 1px solid rgba(243, 241, 236, 0.18);
+  font-size: 0.76rem;
+  color: rgba(243, 241, 236, 0.55);
+}
+.t-footer-note a {
+  color: #f6c063;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.t-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--t-navy);
+  color: #f6c063;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(24, 39, 58, 0.4);
+}
+.t-badge:hover {
+  background: var(--t-navy-deep);
+}
+
+/* ---------- 架空地図 ---------- */
+.tomoshibi {
+  --map-bg: #fff;
+  --map-road: #e0dbd0;
+  --map-road-thin: #eeeae1;
+  --map-rail: #24384e;
+  --map-pin: #c07a2b;
+  --map-text: #6b7078;
+}
+.tomoshibi .demo-map {
+  margin-top: 2.5rem;
+}
+.tomoshibi .demo-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--t-line);
+  border-radius: 4px;
+}
+.tomoshibi .demo-map figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--t-muted);
+}

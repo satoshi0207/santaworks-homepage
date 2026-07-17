@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 const links = [
   { href: "/about/", label: "About" },
@@ -14,10 +14,12 @@ export default function Header() {
   const [open, setOpen] = useState(false);
   const pathname = usePathname();
 
-  // ページ遷移したらメニューを閉じる
-  useEffect(() => {
+  // ページ遷移したらメニューを閉じる（レンダー中に状態を揃える。effectだと1フレーム開いたまま描画される）
+  const [prevPath, setPrevPath] = useState(pathname);
+  if (prevPath !== pathname) {
+    setPrevPath(pathname);
     setOpen(false);
-  }, [pathname]);
+  }
 
   return (
     <>

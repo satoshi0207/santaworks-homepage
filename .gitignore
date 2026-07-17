@@ -20,6 +20,9 @@
 # production
 /build
 
+# local notes (not for publishing)
+/notes/
+
 # misc
 .DS_Store
 *.pem

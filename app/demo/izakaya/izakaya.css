@@ -194,15 +194,15 @@
 .i-tanzaku-row {
   display: flex;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.6rem clamp(1rem, 2.6vw, 2.2rem);
   align-items: flex-start;
 }
 .i-tanzaku {
   background: linear-gradient(175deg, var(--i-paper), #e9e2d0);
   color: var(--i-ink);
-  min-height: 12rem;
-  min-width: 3.6rem;
-  padding: 1.1rem 0.7rem 0.7rem;
+  min-height: 13.5rem;
+  min-width: 4.6rem;
+  padding: 1.3rem 0.9rem 0.85rem;
   border-radius: 2px;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.35);
   display: flex;
@@ -227,7 +227,7 @@
   display: flex;
   align-items: center;
   font-family: var(--font-yuji), serif;
-  font-size: 1.12rem;
+  font-size: 1.24rem;
   letter-spacing: 0.16em;
 }
 .i-tanzaku .price {

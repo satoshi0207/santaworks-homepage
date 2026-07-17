@@ -48,7 +48,14 @@ const samples: {
     name: "nail salon こんぺいとう",
     thumb: "/demo/nail/hero.jpg",
   },
-  { icon: "🏭", label: "企業サイト", tone: "堅実さと信頼感" },
+  {
+    icon: "🏭",
+    label: "企業サイト（製造業）",
+    tone: "鉄紺×灯のアンバー、多ページ構成の堅実コーポレート",
+    href: "/demo/factory/",
+    name: "有限会社 灯火製作所",
+    thumb: "/demo/factory/hero.jpg",
+  },
 ];
 
 const chat = [
