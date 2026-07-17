@@ -87,6 +87,14 @@ const samples: {
     name: "銀座 月讀",
     thumb: "/demo/club/hero.jpg",
   },
+  {
+    icon: "💈",
+    label: "メンズ・バーバー",
+    tone: "生成り×濃紺×真鍮、極太コンデンスのヴィンテージ理容室",
+    href: "/demo/barber/",
+    name: "バーバー ミナト",
+    thumb: "/demo/barber/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";

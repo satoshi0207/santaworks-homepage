@@ -1,0 +1,708 @@
+/* =========================================================
+   バーバー ミナト（BARBER MINATO）— デザインサンプル専用スタイル
+   スコープ: .minato 配下のみ（本体サイトに影響しない）
+   配色: 生成りのヴィンテージ紙地 × 濃紺 × オックスブラッド × 真鍮金
+   ========================================================= */
+
+.minato {
+  --paper: #efe7d3;
+  --paper2: #e6dabf;
+  --navy: #1b2942;
+  --navy2: #26375a;
+  --ink: #1e2532;
+  --sub: #6a6355;
+  --oxblood: #7c2230;
+  --oxblood-bright: #9a2f3d;
+  --brass: #a9884a;
+  --brass-bright: #c2a05d;
+  --cream: #f7f0df;
+  --line: #d6c9ab;
+  --dark: #141b29;
+
+  /* DemoMap 用 */
+  --map-bg: #e9dfc6;
+  --map-road-thin: #d6c9ab;
+  --map-road: #ddd0b2;
+  --map-rail: #7c2230;
+  --map-pin: #1b2942;
+  --map-text: #6a6355;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-zkg), "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    sans-serif;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.minato *,
+.minato *::before,
+.minato *::after {
+  box-sizing: border-box;
+}
+
+.minato img {
+  display: block;
+  max-width: 100%;
+}
+
+.minato a {
+  text-decoration: none;
+}
+
+.minato a:not([class]) {
+  color: inherit;
+}
+
+.bm-anton {
+  font-family: var(--font-anton), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.bm-wrap {
+  width: min(1060px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 4.5vw, 2.4rem);
+}
+
+/* ---------- バーバーポールのストライプ帯 ---------- */
+.bm-stripe {
+  height: 8px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--oxblood) 0 11px,
+    var(--cream) 11px 22px,
+    var(--navy) 22px 33px
+  );
+}
+
+/* ---------- ヘッダー ---------- */
+.bm-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem clamp(1.2rem, 4.5vw, 2.4rem);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 2px solid var(--navy);
+}
+
+.bm-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-right: auto;
+}
+
+.bm-brand .mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--navy);
+  border-radius: 50%;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+
+.bm-brand .text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.1;
+}
+
+.bm-brand .en {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 1.15rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--navy);
+}
+
+.bm-brand .ja {
+  font-size: 0.62rem;
+  letter-spacing: 0.22em;
+  color: var(--sub);
+}
+
+.bm-nav {
+  display: flex;
+  gap: 1.3rem;
+}
+
+.bm-nav a {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.bm-nav a:hover {
+  color: var(--oxblood);
+}
+
+.bm-cta {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.1rem;
+  border-radius: 2px;
+  background: var(--oxblood);
+  color: var(--cream);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.bm-cta:hover {
+  background: var(--oxblood-bright);
+  transform: translateY(-1px);
+}
+
+/* ---------- ヒーロー ---------- */
+.bm-hero {
+  position: relative;
+  min-height: min(92svh, 760px);
+  display: grid;
+  align-items: center;
+  overflow: hidden;
+}
+
+.bm-hero-media {
+  position: absolute;
+  inset: 0;
+  background: url("/demo/barber/hero.jpg") center / cover;
+}
+
+.bm-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    100deg,
+    rgba(20, 27, 41, 0.9) 0%,
+    rgba(20, 27, 41, 0.72) 45%,
+    rgba(20, 27, 41, 0.35) 100%
+  );
+}
+
+.bm-hero-inner {
+  position: relative;
+  z-index: 2;
+  width: min(1060px, 100%);
+  margin-inline: auto;
+  padding: clamp(1.2rem, 4.5vw, 2.4rem);
+  color: var(--cream);
+}
+
+.bm-est {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.28em;
+  color: var(--brass-bright);
+  margin-bottom: 1.5rem;
+}
+
+.bm-est::before,
+.bm-est::after {
+  content: "";
+  width: 1.6rem;
+  height: 1px;
+  background: var(--brass);
+}
+
+.bm-hero-title {
+  font-family: var(--font-anton), sans-serif;
+  font-size: clamp(3rem, 13vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0;
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.5);
+}
+
+.bm-hero-jp {
+  font-size: clamp(0.9rem, 2.6vw, 1.1rem);
+  font-weight: 700;
+  letter-spacing: 0.3em;
+  color: var(--cream);
+  margin: 1rem 0 0;
+}
+
+.bm-hero-sub {
+  font-size: clamp(1.05rem, 3vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  margin: 1.8rem 0 0;
+}
+
+.bm-hero-sub .brass {
+  color: var(--brass-bright);
+}
+
+.bm-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  margin-top: 2rem;
+}
+
+/* ---------- ボタン ---------- */
+.bm-btn,
+.bm-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.85rem 1.9rem;
+  border-radius: 2px;
+  font-weight: 700;
+  font-size: 0.92rem;
+  letter-spacing: 0.06em;
+  transition: transform 0.2s, background 0.2s, border-color 0.2s, color 0.2s;
+}
+
+.bm-btn {
+  background: var(--oxblood);
+  color: var(--cream);
+}
+
+.bm-btn:hover {
+  background: var(--oxblood-bright);
+  transform: translateY(-2px);
+}
+
+.bm-btn-ghost {
+  border: 2px solid var(--cream);
+  color: var(--cream);
+}
+
+.bm-btn-ghost:hover {
+  background: var(--cream);
+  color: var(--navy);
+}
+
+.bm-btn-navy {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.bm-btn-navy:hover {
+  background: var(--navy2);
+}
+
+/* ---------- セクション共通 ---------- */
+.bm-section {
+  padding-block: clamp(3.6rem, 9vw, 6.5rem);
+}
+
+.bm-section.paper2 {
+  background: var(--paper2);
+}
+
+.bm-section.navy {
+  background: var(--navy);
+  color: var(--cream);
+}
+
+.bm-label {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin: 0 0 1rem;
+}
+
+.bm-label::before {
+  content: "";
+  width: 2rem;
+  height: 2px;
+  background: var(--brass);
+}
+
+.bm-section.navy .bm-label {
+  color: var(--brass-bright);
+}
+
+.bm-label.center {
+  justify-content: center;
+}
+
+.bm-h2 {
+  font-size: clamp(1.6rem, 4.4vw, 2.5rem);
+  font-weight: 900;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.bm-lead {
+  max-width: 40rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+.bm-section.navy .bm-lead {
+  color: color-mix(in srgb, var(--cream) 72%, transparent);
+}
+
+.bm-center {
+  text-align: center;
+}
+
+.bm-center .bm-label,
+.bm-center .bm-lead {
+  justify-content: center;
+  margin-inline: auto;
+}
+
+/* ---------- こだわり ---------- */
+.bm-about {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+}
+
+.bm-about-media {
+  aspect-ratio: 3 / 2;
+  overflow: hidden;
+  border: 6px solid var(--cream);
+  box-shadow: 0 24px 50px -30px rgba(20, 27, 41, 0.7);
+}
+
+.bm-about-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bm-about p {
+  margin: 0 0 1rem;
+}
+
+.bm-points {
+  display: grid;
+  gap: 0.5rem;
+  margin: 1.4rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.bm-points li {
+  display: flex;
+  gap: 0.7rem;
+  align-items: baseline;
+  font-size: 0.92rem;
+}
+
+.bm-points li::before {
+  content: "✂";
+  color: var(--oxblood);
+  font-size: 0.9rem;
+}
+
+/* ---------- お品書き（メニュー） ---------- */
+.bm-menu {
+  max-width: 620px;
+  margin-top: 2.2rem;
+}
+
+.bm-menu-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding: 1rem 0;
+  border-bottom: 1px dashed color-mix(in srgb, var(--cream) 30%, transparent);
+}
+
+.bm-menu-item .name {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.bm-menu-item .price {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 1.25rem;
+  letter-spacing: 0.02em;
+  color: var(--brass-bright);
+  white-space: nowrap;
+}
+
+.bm-menu-item .desc {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--cream) 65%, transparent);
+  margin: 0;
+}
+
+.bm-menu-note {
+  margin-top: 1.4rem;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--cream) 60%, transparent);
+}
+
+/* ---------- 店内ギャラリー ---------- */
+.bm-gallery {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2.4rem;
+}
+
+.bm-photo {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  aspect-ratio: 3 / 4;
+}
+
+.bm-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.7s ease;
+}
+
+.bm-photo:hover img {
+  transform: scale(1.06);
+}
+
+/* ---------- アクセス ---------- */
+.bm-access {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  margin-top: 2.2rem;
+}
+
+.bm-access-media {
+  overflow: hidden;
+  border: 6px solid var(--cream);
+  aspect-ratio: 3 / 2;
+  box-shadow: 0 24px 50px -30px rgba(20, 27, 41, 0.6);
+}
+
+.bm-access-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.bm-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.4rem;
+}
+
+.bm-info-table th,
+.bm-info-table td {
+  text-align: left;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.bm-info-table th {
+  width: 6.5rem;
+  font-family: var(--font-anton), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--oxblood);
+  font-size: 0.8rem;
+  padding-top: 0.85rem;
+}
+
+.bm-tel {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 1.7rem;
+  letter-spacing: 0.06em;
+  color: var(--navy);
+}
+
+/* ---------- 地図・SNS（共通コンポーネントのスコープ装飾） ---------- */
+.minato .demo-map {
+  margin: 1.4rem 0 0;
+}
+
+.minato .demo-map svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.minato .demo-map figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: var(--sub);
+}
+
+.minato .demo-sns {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.minato .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid color-mix(in srgb, var(--cream) 34%, transparent);
+  border-radius: 2px;
+  color: color-mix(in srgb, var(--cream) 82%, transparent);
+  font-size: 0.78rem;
+  cursor: help;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.minato .demo-sns a:hover {
+  color: var(--brass-bright);
+  border-color: var(--brass);
+}
+
+.minato .demo-sns .line-badge {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.34rem;
+  border-radius: 2px;
+  background: #06c755;
+  color: #fff;
+}
+
+/* ---------- フッター ---------- */
+.bm-footer {
+  background: var(--dark);
+  color: var(--cream);
+}
+
+.bm-footer-inner {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: 1.5fr 1fr;
+  padding-block: clamp(2.6rem, 6vw, 3.6rem);
+}
+
+.bm-footer .en {
+  font-family: var(--font-anton), sans-serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--cream);
+  margin: 0;
+}
+
+.bm-footer .ja {
+  font-size: 0.72rem;
+  letter-spacing: 0.18em;
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+  margin-top: 0.3rem;
+}
+
+.bm-footer .addr {
+  margin: 1rem 0 0;
+  font-size: 0.84rem;
+  color: color-mix(in srgb, var(--cream) 62%, transparent);
+  line-height: 1.9;
+}
+
+.bm-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.bm-footer-nav a {
+  font-size: 0.86rem;
+  color: color-mix(in srgb, var(--cream) 82%, transparent);
+  transition: color 0.2s;
+}
+
+.bm-footer-nav a:hover {
+  color: var(--brass-bright);
+}
+
+.bm-footer-note {
+  border-top: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  padding-block: 1.1rem;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+  text-align: center;
+}
+
+.bm-footer-note a {
+  color: var(--brass-bright);
+}
+
+/* ---------- デザインサンプル・バッジ ---------- */
+.bm-badge {
+  position: fixed;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 60;
+  font-family: var(--font-anton), sans-serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.5rem 0.9rem;
+  border-radius: 2px;
+  background: var(--navy);
+  color: var(--brass-bright);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s;
+}
+
+.bm-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 820px) {
+  .bm-nav {
+    display: none;
+  }
+
+  .bm-about,
+  .bm-access {
+    grid-template-columns: 1fr;
+  }
+
+  .bm-gallery {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .bm-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .bm-gallery {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .minato * {
+    transition: none !important;
+  }
+}
