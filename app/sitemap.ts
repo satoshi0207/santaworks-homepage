@@ -4,8 +4,7 @@ import type { MetadataRoute } from "next";
 export const dynamic = "force-static";
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://santaworks-homepage.syamada125.workers.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://santaworks.net";
 
 // デモ（/demo/*）は noindex のため sitemap に含めない
 export default function sitemap(): MetadataRoute.Sitemap {

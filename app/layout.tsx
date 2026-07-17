@@ -12,8 +12,7 @@ const notoSansJP = Noto_Sans_JP({
 });
 
 const SITE_URL =
-  process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://santaworks-homepage.syamada125.workers.dev";
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://santaworks.net";
 const SITE_NAME = "Santa Works";
 const DEFAULT_TITLE =
   "Santa Works（サンタワークス）｜「忘れたくない」を、かたちに。";
