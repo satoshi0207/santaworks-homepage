@@ -307,11 +307,14 @@
 
 .ht-message .poem {
   font-family: var(--font-antique), serif;
-  font-size: clamp(1.3rem, 3.6vw, 1.9rem);
+  font-size: clamp(1.2rem, 3.2vw, 1.65rem);
   line-height: 2.4;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.1em;
   margin: 0 auto;
-  max-width: 32rem;
+  max-width: 42rem;
+  /* 折り返す場合も語の途中で切らず、読点・句点でのみ改行する */
+  word-break: keep-all;
+  line-break: strict;
 }
 
 .ht-message .poem .seal {
