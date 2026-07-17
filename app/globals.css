@@ -62,6 +62,14 @@ h3 {
   text-wrap: balance;
 }
 
+/* 本体サイトの日本語本文（main内の段落）は、通常は読点・句点で改行し、
+   読点のない長い連なりだけは見切れず折り返す。見出し h1〜h3 は対象外。
+   ※ /demo/ 配下は (site) レイアウト外なので影響しない */
+.site-content p {
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
