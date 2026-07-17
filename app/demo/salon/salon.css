@@ -1,0 +1,350 @@
+/*
+ * hair atelier 翠雨 — 架空美容院のデザインサンプル
+ * 世界観: 雨上がりの光。白磁 × 墨 × 翠。余白と細い罫線のミニマル。
+ * 単一テーマ（ライト固定）。ラーメン屋（夜）との対比で「真昼」を作る。
+ */
+.suiu {
+  --s-bg: #f8f7f4;
+  --s-ink: #33342f;
+  --s-muted: #75786e;
+  --s-line: #e2e1d9;
+  --s-green: #5f7263;
+  --s-green-deep: #48584c;
+  --s-green-soft: #eef0ea;
+
+  background: var(--s-bg);
+  color: var(--s-ink);
+  font-family: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN", sans-serif;
+  font-weight: 400;
+  line-height: 2.2;
+  letter-spacing: 0.04em;
+  overflow-x: clip;
+}
+
+.suiu ::selection {
+  background: var(--s-green);
+  color: var(--s-bg);
+}
+
+.s-serif {
+  font-family: var(--font-noto-serif), "Hiragino Mincho ProN", serif;
+}
+.s-latin {
+  font-family: var(--font-cormorant), serif;
+}
+
+/* ---------- 共通 ---------- */
+.s-section {
+  padding: clamp(5rem, 13vw, 10rem) clamp(1.5rem, 7vw, 5rem);
+}
+.s-wrap {
+  max-width: 66rem;
+  margin: 0 auto;
+}
+.s-eyebrow {
+  font-family: var(--font-cormorant), serif;
+  font-style: italic;
+  font-weight: 400;
+  color: var(--s-green);
+  font-size: 1.15rem;
+  letter-spacing: 0.14em;
+  margin: 0 0 1.4rem;
+}
+.s-h2 {
+  font-family: var(--font-noto-serif), serif;
+  font-size: clamp(1.45rem, 3.2vw, 2rem);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  line-height: 2;
+  margin: 0 0 2.2rem;
+}
+.s-rule {
+  border: none;
+  border-top: 1px solid var(--s-line);
+  max-width: 66rem;
+  margin: 0 auto;
+}
+
+/* ---------- ヘッダー ---------- */
+.s-header {
+  position: fixed;
+  inset-inline: 0;
+  top: 0;
+  z-index: 20;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.3rem clamp(1.5rem, 5vw, 3.5rem);
+  background: color-mix(in srgb, var(--s-bg) 88%, transparent);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+}
+.s-logo {
+  font-family: var(--font-noto-serif), serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.3em;
+  font-weight: 600;
+}
+.s-logo small {
+  font-family: var(--font-cormorant), serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+  color: var(--s-muted);
+  margin-left: 0.8rem;
+}
+.s-reserve {
+  font-size: 0.78rem;
+  letter-spacing: 0.24em;
+  color: var(--s-bg);
+  background: var(--s-green);
+  padding: 0.55rem 1.5rem;
+  border-radius: 999px;
+  text-decoration: none;
+  transition: background 0.25s;
+}
+.s-reserve:hover {
+  background: var(--s-green-deep);
+}
+
+/* ---------- ヒーロー ---------- */
+.s-hero {
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: clamp(2rem, 6vw, 5rem);
+  align-items: center;
+  min-height: 100svh;
+  max-width: 76rem;
+  margin: 0 auto;
+  padding: 7rem clamp(1.5rem, 5vw, 3.5rem) 4rem;
+}
+@media (max-width: 760px) {
+  .s-hero {
+    grid-template-columns: 1fr;
+    padding-top: 6.5rem;
+  }
+}
+.s-hero-copy .en {
+  font-family: var(--font-cormorant), serif;
+  font-style: italic;
+  font-weight: 300;
+  font-size: clamp(1.3rem, 2.6vw, 1.8rem);
+  letter-spacing: 0.18em;
+  color: var(--s-muted);
+  display: block;
+  margin-bottom: 1rem;
+}
+.s-hero-copy h1 {
+  font-family: var(--font-noto-serif), serif;
+  font-weight: 400;
+  font-size: clamp(1.6rem, 3.4vw, 2.3rem);
+  letter-spacing: 0.14em;
+  line-height: 2;
+  margin: 0 0 2rem;
+}
+/* フレーズ単位でだけ折り返す */
+.s-hero-copy h1 span {
+  display: inline-block;
+}
+.s-hero-copy p {
+  color: var(--s-muted);
+  font-size: 0.95rem;
+  max-width: 26rem;
+  margin: 0 0 2.5rem;
+}
+.s-hero-img {
+  position: relative;
+}
+.s-hero-img img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  border-radius: 999px 999px 0 0; /* アーチ窓のかたち */
+}
+.s-hero-img figcaption {
+  margin-top: 1rem;
+  font-family: var(--font-cormorant), serif;
+  font-style: italic;
+  color: var(--s-muted);
+  font-size: 0.95rem;
+  letter-spacing: 0.12em;
+  text-align: right;
+}
+
+/* ---------- コンセプト ---------- */
+.s-concept {
+  text-align: center;
+}
+.s-concept p {
+  font-family: var(--font-noto-serif), serif;
+  font-size: clamp(0.98rem, 2vw, 1.1rem);
+  line-height: 2.6;
+  letter-spacing: 0.12em;
+  max-width: 34em;
+  margin: 0 auto;
+}
+
+/* ---------- メニュー ---------- */
+.s-menu-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .s-menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.s-menu-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.s-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.s-menu-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 1.05rem 0.2rem;
+  border-bottom: 1px solid var(--s-line);
+  font-size: 0.95rem;
+  letter-spacing: 0.08em;
+}
+.s-menu-list .name {
+  flex: 1;
+}
+.s-menu-list .price {
+  font-family: var(--font-cormorant), serif;
+  font-size: 1.15rem;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0.06em;
+}
+.s-menu-note {
+  margin-top: 1.4rem;
+  font-size: 0.8rem;
+  color: var(--s-muted);
+}
+
+/* ---------- こだわり ---------- */
+.s-feature {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .s-feature {
+    grid-template-columns: 1fr;
+  }
+}
+.s-feature img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.s-feature-body p {
+  color: var(--s-muted);
+  font-size: 0.95rem;
+  margin: 0 0 1.2rem;
+}
+.s-feature-body dl {
+  margin: 2rem 0 0;
+  border-top: 1px solid var(--s-line);
+}
+.s-feature-body div {
+  display: flex;
+  gap: 1.5rem;
+  padding: 0.9rem 0.2rem;
+  border-bottom: 1px solid var(--s-line);
+  font-size: 0.9rem;
+}
+.s-feature-body dt {
+  color: var(--s-green);
+  letter-spacing: 0.2em;
+  white-space: nowrap;
+}
+.s-feature-body dd {
+  margin: 0;
+}
+
+/* ---------- 店舗情報 ---------- */
+.s-info {
+  background: var(--s-green-soft);
+}
+.s-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(2.5rem, 6vw, 5rem);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .s-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.s-info-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+.s-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.s-info-table th,
+.s-info-table td {
+  text-align: left;
+  padding: 0.85rem 0.2rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--s-green) 22%, transparent);
+  font-weight: 400;
+  vertical-align: top;
+}
+.s-info-table th {
+  white-space: nowrap;
+  color: var(--s-green);
+  letter-spacing: 0.28em;
+  padding-right: 1.6rem;
+}
+.s-info-note {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--s-green-deep);
+}
+
+/* ---------- フッター ---------- */
+.s-footer {
+  padding: 3rem clamp(1.5rem, 6vw, 4rem) 6.5rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--s-muted);
+  letter-spacing: 0.08em;
+}
+.s-footer a {
+  color: var(--s-green);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.s-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--s-green);
+  color: var(--s-bg);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(51, 52, 47, 0.2);
+}
+.s-badge:hover {
+  background: var(--s-green-deep);
+}

@@ -14,6 +14,7 @@ const samples: {
   tone: string;
   href?: string;
   name?: string;
+  thumb?: string;
 }[] = [
   {
     icon: "🍜",
@@ -21,8 +22,16 @@ const samples: {
     tone: "漆黒×朱、縦書き明朝の力強い和",
     href: "/demo/ramen/",
     name: "麺処 ゆげや",
+    thumb: "/demo/ramen/hero.jpg",
   },
-  { icon: "✂️", label: "美容院", tone: "余白の効いた洗練ミニマル" },
+  {
+    icon: "✂️",
+    label: "美容院",
+    tone: "白磁×翠、余白の効いた洗練ミニマル",
+    href: "/demo/salon/",
+    name: "hair atelier 翠雨",
+    thumb: "/demo/salon/hero.jpg",
+  },
   { icon: "🏮", label: "居酒屋", tone: "あたたかい賑わい" },
   { icon: "🏭", label: "企業サイト", tone: "堅実さと信頼感" },
 ];
@@ -114,7 +123,7 @@ export default function Works() {
                 >
                   <div
                     className="h-36 bg-cover bg-[center_30%] transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: "url(/demo/ramen/hero.jpg)" }}
+                    style={{ backgroundImage: `url(${s.thumb})` }}
                     aria-hidden="true"
                   />
                   <div className="p-6">
