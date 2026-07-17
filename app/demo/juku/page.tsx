@@ -250,7 +250,9 @@ export default function JukuHome() {
             <div>
               <p className="as-label">Classroom</p>
               <h2 className="as-h2" style={{ marginBottom: "1rem" }}>
-                集中できる、居心地のいい教室
+                集中できる、
+                <br />
+                居心地のいい教室
               </h2>
               <p style={{ color: "var(--sub)", margin: "0 0 1.4rem" }}>
                 明るく静かな教室と、いつでも使える自習室。
