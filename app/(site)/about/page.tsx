@@ -55,7 +55,9 @@ export default function About() {
             <strong className="font-bold text-accent">
               山（さん）＋田（た）＝サンタ
             </strong>
-            ——名前の中に、最初からサンタがいました。思い出を届ける存在の名を借りて、屋号は「Santa
+            ——
+            <br />
+            名前の中に、最初からサンタがいました。思い出を届ける存在の名を借りて、屋号は「Santa
             Works」に。
           </p>
         </Reveal>
