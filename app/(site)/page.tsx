@@ -119,7 +119,7 @@ export default function Home() {
           <p className="max-w-2xl text-muted">
             小さく、確実に、役に立つ。個人事業ならではの距離感で伴走します。
           </p>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2">
+          <div className="mt-10 grid gap-5 sm:auto-rows-fr sm:grid-cols-2">
             {services.map((s) => (
               <div
                 key={s.title}
@@ -135,7 +135,7 @@ export default function Home() {
                 {s.href && (
                   <Link
                     href={s.href}
-                    className="mt-4 inline-block text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
+                    className="mt-auto inline-block pt-4 text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
                   >
                     {s.cta} →
                   </Link>
