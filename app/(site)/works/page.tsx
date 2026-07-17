@@ -159,7 +159,7 @@ export default function Works() {
                 <br />
                 それ、ポケメモにお任せ。
               </p>
-              <p className="mb-6 text-[0.95rem] text-muted">
+              <p className="mb-6 text-[0.95rem] text-muted [word-break:keep-all] [overflow-wrap:anywhere]">
                 会った人のことや話した内容を、LINEでそっと記録。次に会う前に見返せば、会話がもっとスムーズに。接客・商談・対人業務のための記憶サポートサービスです。アプリのインストール不要、LINEの友だち追加だけで始められます。
               </p>
               <ul className="mb-7 flex flex-wrap gap-2">

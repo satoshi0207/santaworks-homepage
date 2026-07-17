@@ -90,8 +90,10 @@ export default function Home() {
             <br />
             もうひとりのサンタとして。
           </h2>
-          <p className="max-w-2xl text-[clamp(1rem,2.2vw,1.15rem)] leading-[2.3]">
-            人の記憶は、あたたかくて、あいまいです。会った人の名前、交わした約束、大切な瞬間——忘れたくないのに、こぼれ落ちていくものがたくさんあります。Santa
+          <p className="max-w-2xl text-[clamp(1rem,2.2vw,1.15rem)] leading-[2.3] [word-break:keep-all] [overflow-wrap:anywhere]">
+            人の記憶は、あたたかくて、あいまいです。
+            <br />
+            会った人の名前、交わした約束、大切な瞬間——忘れたくないのに、こぼれ落ちていくものがたくさんあります。Santa
             Works は、
             <strong className="font-bold text-accent">
               テクノロジーで記憶と思い出に寄り添う
@@ -158,7 +160,7 @@ export default function Home() {
             <h3 className="mb-3 text-2xl font-extrabold">
               ポケットメモリー（ポケメモ）
             </h3>
-            <p className="mb-6 max-w-2xl text-[0.95rem] text-muted">
+            <p className="mb-6 max-w-3xl text-[0.95rem] text-muted [word-break:keep-all]">
               会った人のことや話した内容を、LINEでそっと記録。次に会う前に見返せば、会話がもっとスムーズに。
             </p>
             <Link
