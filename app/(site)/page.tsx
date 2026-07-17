@@ -292,8 +292,8 @@ export default function Home() {
       {/* CTA */}
       <section className="border-t border-line bg-surface/55 px-6 py-20 text-center sm:px-10">
         <Reveal className="mx-auto max-w-2xl">
-          <h2 className="mb-4 text-[clamp(1.3rem,3vw,1.8rem)] font-extrabold">
-            開発のご相談、お気軽にどうぞ
+          <h2 className="mb-4 text-[clamp(1.3rem,3vw,1.8rem)] font-extrabold [word-break:keep-all]">
+            Webサイトの作成・開発のご相談、お気軽にどうぞ
           </h2>
           <p className="mb-8 text-muted">
             「こんなことできる？」の段階から歓迎です。
