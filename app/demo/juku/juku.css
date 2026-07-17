@@ -1,0 +1,832 @@
+/* =========================================================
+   個別指導塾 あすなろ — デザインサンプル専用スタイル
+   スコープ: .asunaro 配下のみ（本体サイトに影響しない）
+   配色: 知性のブルー × 白 × 山吹オレンジ（清潔・信頼・情報設計）
+   ========================================================= */
+
+.asunaro {
+  --paper: #f4f8fc;
+  --paper2: #e8f0f8;
+  --blue: #235ba8;
+  --blue-deep: #17457f;
+  --blue-bright: #3f82c9;
+  --ink: #1e2b3d;
+  --sub: #5c6a7d;
+  --accent: #f0a12b;
+  --accent-deep: #d9871a;
+  --sky: #cfe3f3;
+  --cream: #ffffff;
+  --line: #d6e2ee;
+  --dark: #14243f;
+
+  /* DemoMap 用 */
+  --map-bg: #e8f0f8;
+  --map-road-thin: #d6e2ee;
+  --map-road: #dfe9f3;
+  --map-rail: #235ba8;
+  --map-pin: #f0a12b;
+  --map-text: #5c6a7d;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-zkg), "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    sans-serif;
+  line-height: 1.9;
+  -webkit-font-smoothing: antialiased;
+}
+
+.asunaro *,
+.asunaro *::before,
+.asunaro *::after {
+  box-sizing: border-box;
+}
+
+.asunaro img {
+  display: block;
+  max-width: 100%;
+}
+
+.asunaro a {
+  text-decoration: none;
+}
+
+.asunaro a:not([class]) {
+  color: inherit;
+}
+
+.as-poppins {
+  font-family: var(--font-poppins), sans-serif;
+}
+
+.as-wrap {
+  width: min(1080px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 4.5vw, 2.4rem);
+}
+
+/* ---------- ヘッダー ---------- */
+.as-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.7rem clamp(1.2rem, 4.5vw, 2.4rem);
+  background: color-mix(in srgb, var(--cream) 90%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.as-brand {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin-right: auto;
+}
+
+.as-brand .mark {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--blue);
+  color: #fff;
+  font-size: 1.2rem;
+  font-weight: 900;
+}
+
+.as-brand .text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+
+.as-brand .name {
+  font-size: 1.12rem;
+  font-weight: 900;
+  letter-spacing: 0.04em;
+  color: var(--blue-deep);
+}
+
+.as-brand .en {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.56rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+}
+
+.as-nav {
+  display: flex;
+  gap: 1.3rem;
+}
+
+.as-nav a {
+  font-size: 0.86rem;
+  font-weight: 500;
+  color: var(--ink);
+  transition: color 0.2s;
+}
+
+.as-nav a:hover {
+  color: var(--blue);
+}
+
+.as-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.55rem 1.2rem;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #3a2600;
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: 0 8px 18px -10px var(--accent);
+  transition: background 0.2s, transform 0.2s;
+}
+
+.as-cta:hover {
+  background: var(--accent-deep);
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+/* ---------- ボタン ---------- */
+.as-btn,
+.as-btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.9rem 1.9rem;
+  border-radius: 999px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  transition: transform 0.2s, background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.as-btn {
+  background: var(--accent);
+  color: #3a2600;
+  box-shadow: 0 12px 24px -12px var(--accent-deep);
+}
+
+.as-btn:hover {
+  background: var(--accent-deep);
+  color: #fff;
+  transform: translateY(-2px);
+}
+
+.as-btn-ghost {
+  border: 1.5px solid var(--blue);
+  color: var(--blue);
+}
+
+.as-btn-ghost:hover {
+  background: var(--blue);
+  color: #fff;
+}
+
+.as-btn-blue {
+  background: var(--blue);
+  color: #fff;
+}
+
+.as-btn-blue:hover {
+  background: var(--blue-deep);
+}
+
+/* ---------- ヒーロー（スプリット） ---------- */
+.as-hero {
+  background: linear-gradient(180deg, var(--cream), var(--paper2));
+  border-bottom: 1px solid var(--line);
+}
+
+.as-hero-inner {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  align-items: center;
+  padding-block: clamp(2.6rem, 6vw, 4.5rem);
+}
+
+.as-hero-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--accent) 16%, transparent);
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+  margin-bottom: 1.2rem;
+}
+
+.as-hero h1 {
+  font-size: clamp(1.9rem, 5vw, 3rem);
+  font-weight: 900;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  margin: 0 0 1rem;
+}
+
+.as-hero h1 .blue {
+  color: var(--blue);
+}
+
+.as-hero h1 .mark {
+  background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 55%, transparent) 62%);
+}
+
+.as-hero p {
+  color: var(--sub);
+  margin: 0 0 1.8rem;
+  max-width: 30rem;
+}
+
+.as-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+}
+
+.as-hero-media {
+  position: relative;
+}
+
+.as-hero-media img {
+  width: 100%;
+  border-radius: 18px;
+  box-shadow: 0 30px 60px -30px rgba(23, 69, 127, 0.4);
+}
+
+.as-hero-media .chip {
+  position: absolute;
+  bottom: -0.9rem;
+  left: -0.9rem;
+  background: #fff;
+  border-radius: 14px;
+  padding: 0.7rem 1rem;
+  box-shadow: 0 16px 30px -16px rgba(23, 69, 127, 0.5);
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.as-hero-media .chip .n {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--blue);
+  line-height: 1;
+}
+
+.as-hero-media .chip .t {
+  font-size: 0.72rem;
+  color: var(--sub);
+  line-height: 1.4;
+}
+
+/* ---------- 実績（数字バンド） ---------- */
+.as-stats {
+  background: var(--blue);
+  color: #fff;
+}
+
+.as-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  padding-block: clamp(2.2rem, 5vw, 3.2rem);
+  text-align: center;
+}
+
+.as-stat .n {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: clamp(1.9rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+}
+
+.as-stat .n .u {
+  font-size: 0.5em;
+  margin-left: 0.1em;
+  color: var(--accent);
+}
+
+.as-stat .l {
+  font-size: 0.82rem;
+  color: color-mix(in srgb, #fff 78%, transparent);
+  margin-top: 0.5rem;
+}
+
+/* ---------- セクション共通 ---------- */
+.as-section {
+  padding-block: clamp(3.4rem, 8vw, 5.5rem);
+}
+
+.as-section.paper2 {
+  background: var(--paper2);
+}
+
+.as-head {
+  text-align: center;
+  margin-bottom: 2.6rem;
+}
+
+.as-label {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-deep);
+  margin: 0 0 0.5rem;
+}
+
+.as-h2 {
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900;
+  letter-spacing: 0.03em;
+  margin: 0;
+}
+
+.as-h2 .blue {
+  color: var(--blue);
+}
+
+.as-sub {
+  color: var(--sub);
+  margin: 0.8rem auto 0;
+  max-width: 38rem;
+}
+
+/* ---------- 選ばれる理由 ---------- */
+.as-reasons {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.as-reason {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 1.8rem 1.6rem;
+  box-shadow: 0 20px 40px -34px rgba(23, 69, 127, 0.5);
+}
+
+.as-reason .ico {
+  display: grid;
+  place-items: center;
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--blue) 12%, transparent);
+  color: var(--blue);
+  font-size: 1.4rem;
+  margin-bottom: 1rem;
+}
+
+.as-reason h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0 0 0.5rem;
+}
+
+.as-reason p {
+  font-size: 0.9rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+/* ---------- コース ---------- */
+.as-courses {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.4rem;
+}
+
+.as-course {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px -34px rgba(23, 69, 127, 0.5);
+}
+
+.as-course .top {
+  background: var(--blue);
+  color: #fff;
+  padding: 1.1rem 1.4rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+.as-course .top .g {
+  font-size: 1.15rem;
+  font-weight: 700;
+}
+
+.as-course .top .en {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.66rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--sky);
+}
+
+.as-course .body {
+  padding: 1.3rem 1.4rem 1.5rem;
+}
+
+.as-course ul {
+  margin: 0 0 1rem;
+  padding: 0;
+  list-style: none;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.as-course li {
+  display: flex;
+  gap: 0.5rem;
+  font-size: 0.88rem;
+  color: var(--ink);
+}
+
+.as-course li::before {
+  content: "○";
+  color: var(--accent);
+  font-size: 0.7rem;
+  padding-top: 0.35em;
+}
+
+.as-course .fee {
+  border-top: 1px dashed var(--line);
+  padding-top: 0.9rem;
+  font-size: 0.82rem;
+  color: var(--sub);
+}
+
+.as-course .fee b {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.25rem;
+  color: var(--blue);
+  margin: 0 0.15rem;
+}
+
+/* ---------- 料金表 ---------- */
+.as-fee-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.as-fee-table th,
+.as-fee-table td {
+  padding: 0.9rem 1.2rem;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  text-align: left;
+}
+
+.as-fee-table thead th {
+  background: var(--blue);
+  color: #fff;
+  font-weight: 700;
+}
+
+.as-fee-table tbody tr:last-child th,
+.as-fee-table tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.as-fee-table tbody th {
+  font-weight: 700;
+  color: var(--blue-deep);
+  background: color-mix(in srgb, var(--paper2) 60%, transparent);
+  white-space: nowrap;
+}
+
+.as-fee-table .price {
+  font-family: var(--font-poppins), sans-serif;
+  font-weight: 600;
+  color: var(--ink);
+}
+
+.as-fee-note {
+  margin-top: 1rem;
+  font-size: 0.8rem;
+  color: var(--sub);
+}
+
+/* ---------- 合格実績（桜） ---------- */
+.as-results {
+  position: relative;
+  color: #fff;
+  overflow: hidden;
+}
+
+.as-results-media {
+  position: absolute;
+  inset: 0;
+  background: url("/demo/juku/sakura.jpg") center / cover;
+}
+
+.as-results::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    120deg,
+    rgba(23, 69, 127, 0.92),
+    rgba(23, 69, 127, 0.72)
+  );
+}
+
+.as-results-inner {
+  position: relative;
+  z-index: 2;
+  padding-block: clamp(3rem, 7vw, 5rem);
+}
+
+.as-results .as-label {
+  color: var(--accent);
+}
+
+.as-results-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 0.7rem;
+  margin-top: 2rem;
+}
+
+.as-results-list span {
+  background: color-mix(in srgb, #fff 14%, transparent);
+  border: 1px solid color-mix(in srgb, #fff 26%, transparent);
+  border-radius: 10px;
+  padding: 0.6rem 0.9rem;
+  font-size: 0.85rem;
+  text-align: center;
+}
+
+.as-results-note {
+  margin-top: 1.6rem;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, #fff 70%, transparent);
+}
+
+/* ---------- 教室・体験 ---------- */
+.as-rooms {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.4rem, 4vw, 2.6rem);
+  align-items: center;
+}
+
+.as-rooms-photos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.8rem;
+}
+
+.as-rooms-photos img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  aspect-ratio: 4 / 3;
+}
+
+.as-rooms-photos img:first-child {
+  grid-column: span 2;
+  aspect-ratio: 16 / 7;
+}
+
+/* ---------- アクセス ---------- */
+.as-access {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(1.4rem, 4vw, 2.6rem);
+  align-items: start;
+}
+
+.as-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2rem;
+}
+
+.as-info-table th,
+.as-info-table td {
+  text-align: left;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.as-info-table th {
+  width: 6rem;
+  color: var(--blue);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.as-tel {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: var(--blue-deep);
+}
+
+/* ---------- 地図・SNS ---------- */
+.asunaro .demo-map {
+  margin: 1.2rem 0 0;
+}
+
+.asunaro .demo-map svg {
+  width: 100%;
+  height: auto;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+}
+
+.asunaro .demo-map figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: var(--sub);
+}
+
+.asunaro .demo-sns {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.asunaro .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid color-mix(in srgb, #fff 30%, transparent);
+  border-radius: 999px;
+  color: color-mix(in srgb, #fff 85%, transparent);
+  font-size: 0.78rem;
+  cursor: help;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.asunaro .demo-sns a:hover {
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+.asunaro .demo-sns .line-badge {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.6rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.34rem;
+  border-radius: 4px;
+  background: #06c755;
+  color: #fff;
+}
+
+/* ---------- フッター ---------- */
+.as-footer {
+  background: var(--dark);
+  color: #fff;
+}
+
+.as-footer-inner {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: 1.5fr 1fr;
+  padding-block: clamp(2.6rem, 6vw, 3.6rem);
+}
+
+.as-footer .name {
+  font-size: 1.25rem;
+  font-weight: 900;
+  margin: 0;
+}
+
+.as-footer .en {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.6rem;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-top: 0.3rem;
+}
+
+.as-footer .addr {
+  margin: 1rem 0 0;
+  font-size: 0.84rem;
+  color: color-mix(in srgb, #fff 62%, transparent);
+  line-height: 1.9;
+}
+
+.as-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.as-footer-nav a {
+  font-size: 0.86rem;
+  color: color-mix(in srgb, #fff 82%, transparent);
+  transition: color 0.2s;
+}
+
+.as-footer-nav a:hover {
+  color: var(--accent);
+}
+
+.as-footer-note {
+  border-top: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  padding-block: 1.1rem;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, #fff 55%, transparent);
+  text-align: center;
+}
+
+.as-footer-note a {
+  color: var(--accent);
+}
+
+/* ---------- バッジ ---------- */
+.as-badge {
+  position: fixed;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 60;
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.62rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 0.5rem 0.9rem;
+  border-radius: 999px;
+  background: var(--blue-deep);
+  color: #fff;
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+}
+
+.as-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 860px) {
+  .as-nav {
+    display: none;
+  }
+
+  .as-hero-inner {
+    grid-template-columns: 1fr;
+  }
+
+  .as-hero-media {
+    order: -1;
+  }
+
+  .as-stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem 1rem;
+  }
+
+  .as-reasons,
+  .as-courses {
+    grid-template-columns: 1fr;
+  }
+
+  .as-rooms,
+  .as-access {
+    grid-template-columns: 1fr;
+  }
+
+  .as-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .asunaro * {
+    transition: none !important;
+  }
+}

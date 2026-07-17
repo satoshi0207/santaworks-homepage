@@ -111,6 +111,14 @@ const samples: {
     name: "写真館 ひととき",
     thumb: "/demo/photo/hero.jpg",
   },
+  {
+    icon: "✏️",
+    label: "学習塾・個別指導",
+    tone: "知性のブルー×白×山吹、数字と料金表で信頼を伝える情報設計",
+    href: "/demo/juku/",
+    name: "個別指導塾 あすなろ",
+    thumb: "/demo/juku/classroom.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
