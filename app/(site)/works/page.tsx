@@ -73,11 +73,24 @@ const samples: {
   },
 ];
 
-const chat = [
-  { from: "user", text: "田中さんのことを記録したい" },
-  { from: "bot", text: "📝 田中さんの記録を残します。今日の会話や出来事をどうぞ！" },
-  { from: "user", text: "お子さんが小学校に入学したって。来月また商談。" },
-  { from: "bot", text: "✅ 記録しました。次に会う前に見返せますよ。" },
+const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
+
+const features: { img: string; title: string; body: string }[] = [
+  {
+    img: "/pokememo/feat-people.png",
+    title: "会った人を登録",
+    body: "名前とちょっとしたメモで相手を登録。専用アプリは不要、LINEの友だち追加だけで始められます。",
+  },
+  {
+    img: "/pokememo/feat-record.png",
+    title: "会話を記録",
+    body: "その日話したこと・出来事をLINEでそのまま記録。ボタン操作が中心で、書くのは新しい情報のときだけ。",
+  },
+  {
+    img: "/pokememo/feat-search.png",
+    title: "次に会う前に見返す",
+    body: "名前で検索、最後に話した順に一覧。会う前にさっと見返せば、会話がもっとスムーズに。",
+  },
 ];
 
 export default function Works() {
@@ -93,15 +106,23 @@ export default function Works() {
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div>
               <span className="mb-4 inline-block rounded-full bg-accent-soft px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-accent">
-                自社プロダクト
+                看板プロダクト
               </span>
-              <h2 className="mb-4 text-2xl font-extrabold">
+              <h2 className="mb-3 text-2xl font-extrabold">
                 ポケットメモリー（ポケメモ）
               </h2>
+              <p
+                className="mb-5 text-[1.05rem] font-bold leading-snug"
+                style={{ color: "#e86a54" }}
+              >
+                会って、話して、忘れてく。
+                <br />
+                それ、ポケメモにお任せ。
+              </p>
               <p className="mb-6 text-[0.95rem] text-muted">
                 会った人のことや話した内容を、LINEでそっと記録。次に会う前に見返せば、会話がもっとスムーズに。接客・商談・対人業務のための記憶サポートサービスです。アプリのインストール不要、LINEの友だち追加だけで始められます。
               </p>
-              <ul className="flex flex-wrap gap-2">
+              <ul className="mb-7 flex flex-wrap gap-2">
                 {["LINE Messaging API", "Python / FastAPI", "Cloud Run", "Turso"].map(
                   (t) => (
                     <li
@@ -113,29 +134,47 @@ export default function Works() {
                   ),
                 )}
               </ul>
+              <a
+                href={POKEMEMO_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+              >
+                ポケメモの公式サイトを見る →
+              </a>
             </div>
-            <div
-              aria-hidden="true"
-              className="grid gap-3 rounded-md border border-line bg-gradient-to-br from-accent-soft to-transparent p-8 shadow-card"
-            >
-              {chat.map((c, i) =>
-                c.from === "user" ? (
-                  <div
-                    key={i}
-                    className="max-w-[85%] justify-self-end rounded-2xl rounded-br-sm bg-accent px-4 py-3 text-[0.85rem] leading-relaxed text-white"
-                  >
-                    {c.text}
-                  </div>
-                ) : (
-                  <div
-                    key={i}
-                    className="max-w-[85%] justify-self-start rounded-2xl rounded-bl-sm bg-line/60 px-4 py-3 text-[0.85rem] leading-relaxed"
-                  >
-                    {c.text}
-                  </div>
-                ),
-              )}
+            <div className="flex items-center justify-center rounded-md bg-gradient-to-br from-[#ffe9e2] to-[#fff6f2] p-8 shadow-card">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/pokememo/hero.png"
+                alt="ポケットメモリーのイメージ。スマホと会話の吹き出し。"
+                width={684}
+                height={661}
+                className="h-auto w-full max-w-[340px]"
+              />
             </div>
+          </div>
+
+          {/* 3つの特長 */}
+          <div className="mt-12 grid gap-5 sm:grid-cols-3">
+            {features.map((f) => (
+              <div
+                key={f.title}
+                className="rounded-md border border-line bg-surface p-6 text-center shadow-card"
+              >
+                {/* eslint-disable-next-line @next/next/no-img-element */}
+                <img
+                  src={f.img}
+                  alt=""
+                  width={200}
+                  height={200}
+                  aria-hidden="true"
+                  className="mx-auto mb-4 h-20 w-20"
+                />
+                <h3 className="mb-2 text-[1.02rem] font-bold">{f.title}</h3>
+                <p className="text-[0.86rem] leading-relaxed text-muted">{f.body}</p>
+              </div>
+            ))}
           </div>
         </Reveal>
       </section>
