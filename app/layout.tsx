@@ -14,7 +14,7 @@ const SITE_NAME = "Santa Works";
 const DEFAULT_TITLE =
   "Santa Works（サンタワークス）｜「忘れたくない」を、かたちに。";
 const DESCRIPTION =
-  "Santa Works（サンタワークス）は、記憶と思い出をITでサポートする個人事業です。LINE Bot・業務ツールの開発から、AI活用支援、Web制作まで。";
+  "Santa Works（サンタワークス）は、記憶と思い出をITでサポートする個人事業です。Web制作・LINE Bot・業務ツール各種・AI活用支援まで。";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
