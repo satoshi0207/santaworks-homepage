@@ -2,8 +2,9 @@
 
 import { useState } from "react";
 
-// Formspree のフォームID（例: "mnnqkdyz"）。未設定の間は送信ボタンを無効化する。
-const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID;
+// Formspree のフォームID。IDはクライアントから見える公開情報なので直書きでよい。
+// 環境変数 NEXT_PUBLIC_FORMSPREE_ID があればそちらを優先する。
+const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "xkodjjgn";
 
 type Status = "idle" | "sending" | "sent" | "error";
 
