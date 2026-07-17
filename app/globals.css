@@ -13,8 +13,8 @@
   --accent: #c4333e;
   --accent-strong: #a2242f;
   --accent-soft: rgba(196, 51, 62, 0.08);
-  --mote: rgba(150, 158, 178, 0.5);
-  --mote-accent: rgba(196, 51, 62, 0.4);
+  --mote: rgba(190, 148, 138, 0.55);
+  --mote-accent: rgba(196, 51, 62, 0.5);
   --card-shadow: 0 12px 40px rgba(36, 38, 46, 0.07);
 }
 

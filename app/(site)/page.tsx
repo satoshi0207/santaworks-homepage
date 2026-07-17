@@ -77,10 +77,12 @@ export default function Home() {
           aria-hidden="true"
           className="pointer-events-none absolute inset-0 overflow-hidden"
         >
-          <div className="absolute left-1/2 top-[44%] h-[74vmin] w-[74vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.08] blur-[80px]" />
-          <div className="absolute left-[14%] top-[22%] h-[42vmin] w-[42vmin] rounded-full bg-[#ffcdb6]/50 blur-[70px]" />
-          <div className="absolute right-[10%] bottom-[20%] h-[46vmin] w-[46vmin] rounded-full bg-accent/[0.07] blur-[80px]" />
-          <div className="absolute left-[58%] top-[15%] h-[26vmin] w-[26vmin] rounded-full bg-[#cfd8ef]/45 blur-[60px]" />
+          {/* あたたかな光の下地（ライトで効く／ダークは控えめ） */}
+          <div className="absolute left-1/2 top-[38%] h-[100vmin] w-[135vmin] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[#ffe0d0]/70 blur-[90px] dark:bg-transparent" />
+          <div className="absolute left-1/2 top-[44%] h-[76vmin] w-[76vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.13] blur-[80px] dark:bg-accent/[0.08]" />
+          <div className="absolute left-[12%] top-[20%] h-[46vmin] w-[46vmin] rounded-full bg-[#ffc2a4]/70 blur-[70px] dark:bg-[#ffcdb6]/35" />
+          <div className="absolute right-[8%] bottom-[18%] h-[48vmin] w-[48vmin] rounded-full bg-accent/[0.11] blur-[80px] dark:bg-accent/[0.07]" />
+          <div className="absolute left-[58%] top-[14%] h-[30vmin] w-[30vmin] rounded-full bg-[#e7d2ec]/55 blur-[60px] dark:bg-[#cfd8ef]/45" />
         </div>
         <div
           aria-hidden="true"
