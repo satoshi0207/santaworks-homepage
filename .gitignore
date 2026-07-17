@@ -42,3 +42,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# プロジェクト内部ドキュメント（リポジトリには含めない）
+/CLAUDE.md
