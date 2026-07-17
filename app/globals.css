@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* ダーク判定を data-theme 属性ベースにする（手動トグル対応・デフォルトはダーク） */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
  * デザイントークン（デザインモック準拠）
  * ライト = 明るい雪の日 / ダーク = 雪の降る夜
@@ -18,20 +21,18 @@
   --card-shadow: 0 12px 40px rgba(36, 38, 46, 0.07);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #14161d;
-    --surface: #1c1f28;
-    --ink: #ecedf2;
-    --muted: #acb3c2;
-    --line: #2b2f3b;
-    --accent: #e25662;
-    --accent-strong: #ec7680;
-    --accent-soft: rgba(226, 86, 98, 0.12);
-    --mote: rgba(255, 253, 245, 0.6);
-    --mote-accent: rgba(226, 86, 98, 0.5);
-    --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
-  }
+:root[data-theme="dark"] {
+  --bg: #14161d;
+  --surface: #1c1f28;
+  --ink: #ecedf2;
+  --muted: #acb3c2;
+  --line: #2b2f3b;
+  --accent: #e25662;
+  --accent-strong: #ec7680;
+  --accent-soft: rgba(226, 86, 98, 0.12);
+  --mote: rgba(255, 253, 245, 0.6);
+  --mote-accent: rgba(226, 86, 98, 0.5);
+  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
 }
 
 @theme inline {

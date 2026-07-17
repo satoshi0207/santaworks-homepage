@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "/about/", label: "About" },
@@ -30,39 +31,43 @@ export default function Header() {
         >
           Santa Works<span className="text-accent">.</span>
         </Link>
-        <nav aria-label="メイン" className="hidden gap-8 sm:flex">
-          {links.map((l) => (
-            <Link
-              key={l.href}
-              href={l.href}
-              className="text-[0.82rem] uppercase tracking-[0.14em] text-muted transition-colors hover:text-accent"
-            >
-              {l.label}
-            </Link>
-          ))}
-        </nav>
-        <button
-          type="button"
-          aria-label="メニュー"
-          aria-expanded={open}
-          onClick={() => setOpen(!open)}
-          className="relative z-20 h-10 w-10 p-2 sm:hidden"
-        >
-          <span
-            className={`my-[5px] block h-0.5 rounded bg-ink transition-transform ${open ? "translate-y-[7px] rotate-45" : ""}`}
-          />
-          <span
-            className={`my-[5px] block h-0.5 rounded bg-ink transition-opacity ${open ? "opacity-0" : ""}`}
-          />
-          <span
-            className={`my-[5px] block h-0.5 rounded bg-ink transition-transform ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
-          />
-        </button>
+        <div className="flex items-center gap-3 sm:gap-6">
+          <nav aria-label="メイン" className="hidden gap-8 sm:flex">
+            {links.map((l) => (
+              <Link
+                key={l.href}
+                href={l.href}
+                className="text-[0.82rem] uppercase tracking-[0.14em] text-muted transition-colors hover:text-accent"
+              >
+                {l.label}
+              </Link>
+            ))}
+          </nav>
+          <ThemeToggle />
+          <button
+            type="button"
+            aria-label="メニュー"
+            aria-expanded={open}
+            onClick={() => setOpen(!open)}
+            className="relative z-20 h-10 w-10 p-2 sm:hidden"
+          >
+            <span
+              className={`my-[5px] block h-0.5 rounded bg-ink transition-transform ${open ? "translate-y-[7px] rotate-45" : ""}`}
+            />
+            <span
+              className={`my-[5px] block h-0.5 rounded bg-ink transition-opacity ${open ? "opacity-0" : ""}`}
+            />
+            <span
+              className={`my-[5px] block h-0.5 rounded bg-ink transition-transform ${open ? "-translate-y-[7px] -rotate-45" : ""}`}
+            />
+          </button>
+        </div>
       </header>
 
-      {/* モバイル全画面メニュー。Safariはopacity:0でもbackdrop-filterを描画するためvisibilityで完全に消す */}
+      {/* モバイル全画面メニュー。背景は不透明にして後ろのページを完全に隠す。
+          Safariはopacity:0でもbackdrop-filterを描画するためvisibilityで完全に消す */}
       <div
-        className={`fixed inset-0 z-10 grid place-items-center bg-bg/95 backdrop-blur-lg transition-[opacity,visibility] duration-300 sm:hidden ${
+        className={`fixed inset-0 z-10 grid place-items-center bg-bg transition-[opacity,visibility] duration-300 sm:hidden ${
           open ? "visible opacity-100" : "invisible opacity-0"
         }`}
       >

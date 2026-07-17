@@ -69,8 +69,8 @@ const services: {
 export default function Home() {
   return (
     <>
-      {/* ヒーロー */}
-      <section className="relative grid min-h-svh place-items-center overflow-hidden px-6 pb-16 pt-24 text-center">
+      {/* ヒーロー（isolateで内部のz-indexを閉じ込め、モバイルメニューと競合させない） */}
+      <section className="relative isolate grid min-h-svh place-items-center overflow-hidden px-6 pb-16 pt-24 text-center">
         <Motes />
         {/* 記憶の欠片が舞う、やわらかな光だまり（暖色×寒色の淡い光で奥行き） */}
         <div

@@ -109,8 +109,20 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="ja" className={`${notoSansJP.variable} h-full antialiased`}>
+    <html
+      lang="ja"
+      data-theme="dark"
+      suppressHydrationWarning
+      className={`${notoSansJP.variable} h-full antialiased`}
+    >
       <body className="min-h-full">
+        {/* チラつき防止: 保存済みの好みがあれば描画前に反映（既定はダーク） */}
+        <script
+          dangerouslySetInnerHTML={{
+            __html:
+              "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}",
+          }}
+        />
         {children}
         <script
           type="application/ld+json"
