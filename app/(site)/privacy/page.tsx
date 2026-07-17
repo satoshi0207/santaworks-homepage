@@ -81,11 +81,36 @@ const sections: { h: string; body: React.ReactNode }[] = [
     ),
   },
   {
-    h: "6. Cookie・アクセス解析",
+    h: "6. Cookie・アクセス解析（Google Analytics）",
     body: (
-      <p>
-        現在、本サイトではアクセス解析やCookieによる個人の追跡は行っていません。今後導入する場合は、本ポリシーを更新のうえお知らせします。
-      </p>
+      <>
+        <p>
+          本サイトでは、サイトの利用状況を把握し、より良い運営に役立てるため、Googleが提供するアクセス解析ツール「Google
+          Analytics（GA4）」を利用しています。Google
+          Analytics はCookieを用いてアクセス情報を収集しますが、これらは匿名で収集され、個人を特定するものではありません。
+        </p>
+        <p className="mt-2">
+          収集されたデータは、Google社のプライバシーポリシーに基づいて管理されます。詳細は{" "}
+          <a
+            href="https://policies.google.com/privacy"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-accent hover:text-accent-strong"
+          >
+            Google のプライバシーポリシー
+          </a>
+          {" "}をご確認ください。ブラウザの設定でCookieを無効にする、または{" "}
+          <a
+            href="https://tools.google.com/dlpage/gaoptout"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="font-bold text-accent hover:text-accent-strong"
+          >
+            Google アナリティクス オプトアウト アドオン
+          </a>
+          {" "}をご利用いただくことで、データの収集を無効にできます。
+        </p>
+      </>
     ),
   },
   {

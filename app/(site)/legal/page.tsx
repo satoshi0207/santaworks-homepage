@@ -71,7 +71,14 @@ export default function Legal() {
             特定商取引法に基づく表記
           </h1>
           <p className="mb-10 text-[0.95rem] text-muted">
-            所在地および電話番号は、消費者からのご請求があった場合に遅滞なく開示します。ご希望の方は、お問い合わせフォームよりご連絡ください。
+            所在地および電話番号は、消費者からのご請求があった場合に遅滞なく開示します。ご希望の方は、
+            <Link
+              href="/contact/"
+              className="font-bold text-accent hover:text-accent-strong"
+            >
+              お問い合わせフォーム
+            </Link>
+            よりご連絡ください。
           </p>
 
           <div className="overflow-hidden rounded-lg border border-line">
