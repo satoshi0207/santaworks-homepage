@@ -1,0 +1,11 @@
+{
+  // Cloudflare Workers（静的アセット配信）の設定
+  // ビルド: npm run build → out/ を配信するだけの構成（Workerスクリプトなし）
+  "name": "santaworks-homepage",
+  "compatibility_date": "2026-07-17",
+  "assets": {
+    "directory": "./out",
+    "html_handling": "auto-trailing-slash",
+    "not_found_handling": "404-page"
+  }
+}
