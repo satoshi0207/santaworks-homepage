@@ -40,6 +40,14 @@ const samples: {
     name: "大衆酒場 ほおずき",
     thumb: "/demo/izakaya/hero.jpg",
   },
+  {
+    icon: "💅",
+    label: "ネイルサロン",
+    tone: "クリーム×ラズベリー、丸ゴシックのキャンディポップ",
+    href: "/demo/nail/",
+    name: "nail salon こんぺいとう",
+    thumb: "/demo/nail/hero.jpg",
+  },
   { icon: "🏭", label: "企業サイト", tone: "堅実さと信頼感" },
 ];
 
