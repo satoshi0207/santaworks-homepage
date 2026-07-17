@@ -6,6 +6,13 @@ export const metadata: Metadata = {
   title: "Works",
   description:
     "Santa Works の実績・プロダクト。LINEで使える記憶サポートサービス「ポケメモ」など。",
+  alternates: { canonical: "/works/" },
+  openGraph: {
+    title: "Works｜Santa Works",
+    description:
+      "Santa Works の実績・プロダクト。LINEで使える記憶サポートサービス「ポケメモ」など。",
+    url: "/works/",
+  },
 };
 
 const samples: {

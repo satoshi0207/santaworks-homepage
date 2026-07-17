@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: "About",
   description:
     "Santa Works（サンタワークス）について。屋号の由来、コンセプト、代表プロフィール。",
+  alternates: { canonical: "/about/" },
+  openGraph: {
+    title: "About｜Santa Works",
+    description:
+      "Santa Works（サンタワークス）について。屋号の由来、コンセプト、代表プロフィール。",
+    url: "/about/",
+  },
 };
 
 export default function About() {

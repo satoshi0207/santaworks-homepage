@@ -7,6 +7,13 @@ export const metadata: Metadata = {
   title: "Contact",
   description:
     "Santa Works へのお問い合わせ。開発のご相談・お見積もりなど、お気軽にどうぞ。",
+  alternates: { canonical: "/contact/" },
+  openGraph: {
+    title: "Contact｜Santa Works",
+    description:
+      "Santa Works へのお問い合わせ。開発のご相談・お見積もりなど、お気軽にどうぞ。",
+    url: "/contact/",
+  },
 };
 
 export default function Contact() {
