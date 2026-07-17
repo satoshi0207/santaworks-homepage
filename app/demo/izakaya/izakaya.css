@@ -371,3 +371,28 @@
     transition: none;
   }
 }
+
+/* ---------- 架空地図 ---------- */
+.hoozuki {
+  --map-bg: #242b40;
+  --map-road: rgba(244, 239, 227, 0.3);
+  --map-road-thin: rgba(244, 239, 227, 0.12);
+  --map-rail: #f0a63c;
+  --map-pin: #d9542e;
+  --map-text: #a9abb9;
+}
+.hoozuki .demo-map {
+  margin-top: 2.5rem;
+}
+.hoozuki .demo-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--i-line);
+  border-radius: 6px;
+}
+.hoozuki .demo-map figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--i-dim);
+}

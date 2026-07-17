@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoMap from "@/components/DemoMap";
 import { Reveal } from "@/components/motion";
 
 const menu: { cat: string; items: [string, string][] }[] = [
@@ -179,6 +180,9 @@ export default function IzakayaDemo() {
                 </p>
               </div>
             </div>
+          </Reveal>
+          <Reveal>
+            <DemoMap station="赤提灯駅" walk="東口から徒歩1分" shop="ほ" />
           </Reveal>
         </div>
       </section>

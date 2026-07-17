@@ -394,3 +394,28 @@
     opacity: 1;
   }
 }
+
+/* ---------- 架空地図 ---------- */
+.yugeya {
+  --map-bg: #1f1a13;
+  --map-road: rgba(242, 233, 216, 0.3);
+  --map-road-thin: rgba(242, 233, 216, 0.12);
+  --map-rail: #c9a24b;
+  --map-pin: #c73e2d;
+  --map-text: #b3a88f;
+}
+.yugeya .demo-map {
+  margin-top: 2.5rem;
+}
+.yugeya .demo-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid var(--r-line);
+  border-radius: 4px;
+}
+.yugeya .demo-map figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--r-dim);
+}

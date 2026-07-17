@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoMap from "@/components/DemoMap";
 import { FadeIn, Reveal } from "@/components/motion";
 
 const menu: [string, string][] = [
@@ -173,6 +174,9 @@ export default function SalonDemo() {
                 </p>
               </div>
             </div>
+          </Reveal>
+          <Reveal>
+            <DemoMap station="翠ヶ丘駅" walk="北口から徒歩5分" shop="翠" />
           </Reveal>
         </div>
       </section>

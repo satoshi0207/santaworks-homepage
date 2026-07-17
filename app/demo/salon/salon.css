@@ -348,3 +348,27 @@
 .s-badge:hover {
   background: var(--s-green-deep);
 }
+
+/* ---------- 架空地図 ---------- */
+.suiu {
+  --map-bg: #f1f3ec;
+  --map-road: #c3c8b7;
+  --map-road-thin: #dde0d4;
+  --map-rail: #48584c;
+  --map-pin: #5f7263;
+  --map-text: #75786e;
+}
+.suiu .demo-map {
+  margin-top: 2.5rem;
+}
+.suiu .demo-map svg {
+  width: 100%;
+  height: auto;
+  display: block;
+  border: 1px solid color-mix(in srgb, var(--s-green) 22%, transparent);
+}
+.suiu .demo-map figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.78rem;
+  color: var(--s-muted);
+}

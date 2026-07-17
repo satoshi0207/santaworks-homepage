@@ -1,4 +1,5 @@
 import Link from "next/link";
+import DemoMap from "@/components/DemoMap";
 import { Reveal } from "@/components/motion";
 
 const kodawari = [
@@ -205,6 +206,9 @@ export default function RamenDemo() {
                 </p>
               </div>
             </div>
+          </Reveal>
+          <Reveal>
+            <DemoMap station="湯気町駅" walk="南口から徒歩3分" shop="ゆ" />
           </Reveal>
         </div>
       </section>
