@@ -8,8 +8,20 @@ export const metadata: Metadata = {
     "Santa Works の実績・プロダクト。LINEで使える記憶サポートサービス「ポケメモ」など。",
 };
 
-const samples = [
-  { icon: "🍜", label: "ラーメン店", tone: "力強い和の世界観" },
+const samples: {
+  icon: string;
+  label: string;
+  tone: string;
+  href?: string;
+  name?: string;
+}[] = [
+  {
+    icon: "🍜",
+    label: "ラーメン店",
+    tone: "漆黒×朱、縦書き明朝の力強い和",
+    href: "/demo/ramen/",
+    name: "麺処 ゆげや",
+  },
   { icon: "✂️", label: "美容院", tone: "余白の効いた洗練ミニマル" },
   { icon: "🏮", label: "居酒屋", tone: "あたたかい賑わい" },
   { icon: "🏭", label: "企業サイト", tone: "堅実さと信頼感" },
@@ -93,21 +105,44 @@ export default function Works() {
             架空のお店・企業を想定したデモサイト集。「頼んだらこうなる」を実際に触って確かめられます。順次公開予定です。
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            {samples.map((s) => (
-              <div
-                key={s.label}
-                className="rounded border border-dashed border-line bg-surface/60 p-7"
-              >
-                <div className="mb-3 text-2xl" aria-hidden="true">
-                  {s.icon}
+            {samples.map((s) =>
+              s.href ? (
+                <a
+                  key={s.label}
+                  href={s.href}
+                  className="group overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
+                >
+                  <div
+                    className="h-36 bg-cover bg-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                    style={{ backgroundImage: "url(/demo/ramen/hero.jpg)" }}
+                    aria-hidden="true"
+                  />
+                  <div className="p-6">
+                    <h3 className="mb-1 text-[1.05rem] font-bold">
+                      {s.icon} {s.label}「{s.name}」
+                    </h3>
+                    <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
+                    <span className="text-[0.85rem] font-bold text-accent">
+                      デモを見る →
+                    </span>
+                  </div>
+                </a>
+              ) : (
+                <div
+                  key={s.label}
+                  className="rounded border border-dashed border-line bg-surface/60 p-7"
+                >
+                  <div className="mb-3 text-2xl" aria-hidden="true">
+                    {s.icon}
+                  </div>
+                  <h3 className="mb-1 text-[1.05rem] font-bold">{s.label}</h3>
+                  <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
+                  <span className="inline-block rounded-full bg-line/50 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-muted">
+                    準備中
+                  </span>
                 </div>
-                <h3 className="mb-1 text-[1.05rem] font-bold">{s.label}</h3>
-                <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
-                <span className="inline-block rounded-full bg-line/50 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-muted">
-                  準備中
-                </span>
-              </div>
-            ))}
+              ),
+            )}
           </div>
         </Reveal>
       </section>

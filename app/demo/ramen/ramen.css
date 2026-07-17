@@ -1,0 +1,396 @@
+/*
+ * 麺処 ゆげや — 架空ラーメン店のデザインサンプル
+ * 世界観: 夜の店構え。漆黒 × 朱 × 金、縦書きの明朝。
+ * 本体サイトとは独立した単一テーマ（ダーク固定）で作る。
+ */
+.yugeya {
+  --r-black: #16130f;
+  --r-black2: #1f1a13;
+  --r-paper: #f2e9d8;
+  --r-dim: #b3a88f;
+  --r-shu: #c73e2d;
+  --r-shu-bright: #e05340;
+  --r-gold: #c9a24b;
+  --r-line: rgba(242, 233, 216, 0.16);
+
+  background: var(--r-black);
+  color: var(--r-paper);
+  font-family: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
+  line-height: 2.1;
+  overflow-x: clip;
+}
+
+.yugeya ::selection {
+  background: var(--r-shu);
+  color: var(--r-paper);
+}
+
+/* ---------- 共通 ---------- */
+.r-section {
+  padding: clamp(5rem, 12vw, 9rem) clamp(1.5rem, 6vw, 4rem);
+}
+.r-wrap {
+  max-width: 64rem;
+  margin: 0 auto;
+}
+.r-label {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--r-gold);
+  font-size: 0.8rem;
+  letter-spacing: 0.5em;
+  margin-bottom: 1.6rem;
+}
+.r-label::before {
+  content: "";
+  width: 2.2rem;
+  height: 1px;
+  background: var(--r-gold);
+}
+.r-h2 {
+  font-size: clamp(1.7rem, 4vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.7;
+  margin: 0 0 2rem;
+}
+
+/* ---------- ヒーロー ---------- */
+.r-hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+}
+.r-hero-bg {
+  position: absolute;
+  inset: 0;
+  background-image: url("/demo/ramen/hero.jpg");
+  background-size: cover;
+  background-position: center 30%;
+  animation: r-kenburns 24s ease-in-out infinite alternate;
+}
+@keyframes r-kenburns {
+  from { transform: scale(1); }
+  to { transform: scale(1.08); }
+}
+.r-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    linear-gradient(to top, var(--r-black) 6%, transparent 55%),
+    linear-gradient(to right, rgba(22, 19, 15, 0.85) 0%, rgba(22, 19, 15, 0.3) 55%, rgba(22, 19, 15, 0.62) 100%);
+}
+.r-hero-inner {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 72rem;
+  margin: 0 auto;
+  padding: 7rem clamp(1.5rem, 6vw, 4rem) clamp(3rem, 8vh, 5rem);
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 2rem;
+}
+.r-hero-copy {
+  writing-mode: vertical-rl;
+  font-size: clamp(2.6rem, 7vw, 4.6rem);
+  font-weight: 800;
+  letter-spacing: 0.22em;
+  line-height: 1.4;
+  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.55);
+  margin: 0;
+  max-height: 78svh;
+  order: 2;
+  animation: r-appear 1.8s cubic-bezier(0.16, 0.8, 0.3, 1) 0.3s both;
+}
+.r-hero-copy .shu {
+  color: var(--r-shu-bright);
+}
+.r-hero-lead {
+  order: 1;
+  max-width: 26rem;
+  animation: r-appear 1.8s cubic-bezier(0.16, 0.8, 0.3, 1) 0.9s both;
+}
+.r-hero-lead p {
+  margin: 0 0 1.6rem;
+  font-size: 0.98rem;
+  color: var(--r-paper);
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.6);
+}
+.r-hours {
+  display: inline-flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+}
+.r-hours span {
+  border: 1px solid var(--r-line);
+  background: rgba(22, 19, 15, 0.55);
+  padding: 0.3rem 0.9rem;
+  border-radius: 999px;
+}
+@keyframes r-appear {
+  from { opacity: 0; transform: translateY(24px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* 店名ロゴ（丸に縦書き） */
+.r-mark {
+  position: absolute;
+  top: 1.6rem;
+  left: clamp(1.5rem, 6vw, 4rem);
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  width: 5.4rem;
+  height: 5.4rem;
+  border: 1.5px solid var(--r-paper);
+  border-radius: 50%;
+  background: rgba(22, 19, 15, 0.5);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+}
+.r-mark span {
+  writing-mode: vertical-rl;
+  font-size: 1.02rem;
+  font-weight: 800;
+  letter-spacing: 0.24em;
+  line-height: 1;
+}
+
+/* ---------- こだわり ---------- */
+.r-kodawari-grid {
+  display: grid;
+  gap: clamp(2.5rem, 6vw, 4rem);
+}
+.r-kodawari {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: clamp(1.5rem, 4vw, 3rem);
+  align-items: center;
+}
+.r-kodawari:nth-child(even) .r-kodawari-img {
+  order: 2;
+}
+.r-kodawari-img {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+}
+.r-kodawari-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: sepia(0.12) contrast(1.04) brightness(0.94);
+  transition: transform 0.8s ease;
+}
+.r-kodawari:hover .r-kodawari-img img {
+  transform: scale(1.04);
+}
+.r-num {
+  color: var(--r-gold);
+  font-size: 0.85rem;
+  letter-spacing: 0.4em;
+  display: block;
+  margin-bottom: 0.8rem;
+}
+.r-kodawari h3 {
+  font-size: clamp(1.25rem, 2.6vw, 1.6rem);
+  font-weight: 800;
+  letter-spacing: 0.14em;
+  margin: 0 0 1rem;
+  line-height: 1.8;
+}
+.r-kodawari p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--r-dim);
+}
+@media (max-width: 700px) {
+  .r-kodawari {
+    grid-template-columns: 1fr;
+  }
+  .r-kodawari:nth-child(even) .r-kodawari-img {
+    order: 0;
+  }
+}
+
+/* ---------- お品書き ---------- */
+.r-menu-section {
+  background: var(--r-black2);
+  border-top: 1px solid var(--r-line);
+  border-bottom: 1px solid var(--r-line);
+}
+.r-menu-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: start;
+}
+@media (max-width: 760px) {
+  .r-menu-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.r-menu-cat {
+  color: var(--r-gold);
+  font-size: 0.82rem;
+  letter-spacing: 0.4em;
+  margin: 2.4rem 0 1rem;
+}
+.r-menu-cat:first-child {
+  margin-top: 0;
+}
+.r-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.r-menu-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 0.8rem;
+  padding: 0.55rem 0;
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
+}
+.r-menu-list li::after {
+  content: "";
+  order: 2;
+  flex: 1;
+  border-bottom: 1px dotted rgba(242, 233, 216, 0.35);
+  transform: translateY(-0.3em);
+}
+.r-menu-list .name { order: 1; }
+.r-menu-list .price {
+  order: 3;
+  font-variant-numeric: tabular-nums;
+  color: var(--r-paper);
+}
+.r-menu-note {
+  margin-top: 1.6rem;
+  font-size: 0.8rem;
+  color: var(--r-dim);
+}
+.r-menu-photo {
+  position: sticky;
+  top: 2rem;
+}
+.r-menu-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: sepia(0.1) brightness(0.95);
+}
+.r-menu-photo figcaption {
+  margin-top: 0.8rem;
+  font-size: 0.8rem;
+  color: var(--r-dim);
+  letter-spacing: 0.14em;
+}
+
+/* ---------- 店舗案内 ---------- */
+.r-info-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.1fr;
+  gap: clamp(2rem, 5vw, 4rem);
+  align-items: center;
+}
+@media (max-width: 760px) {
+  .r-info-grid {
+    grid-template-columns: 1fr;
+  }
+}
+.r-info-grid img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  filter: sepia(0.08) brightness(0.96);
+}
+.r-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+}
+.r-info-table th,
+.r-info-table td {
+  text-align: left;
+  padding: 0.9rem 0.4rem;
+  border-bottom: 1px solid var(--r-line);
+  vertical-align: top;
+  font-weight: 400;
+}
+.r-info-table th {
+  white-space: nowrap;
+  color: var(--r-gold);
+  letter-spacing: 0.3em;
+  padding-right: 1.6rem;
+}
+.r-info-note {
+  margin-top: 1.2rem;
+  font-size: 0.8rem;
+  color: var(--r-shu-bright);
+}
+
+/* ---------- 締め ---------- */
+.r-close {
+  text-align: center;
+  padding: clamp(6rem, 14vw, 10rem) 1.5rem;
+}
+.r-close p {
+  writing-mode: vertical-rl;
+  margin: 0 auto;
+  font-size: clamp(1.6rem, 4vw, 2.4rem);
+  font-weight: 800;
+  letter-spacing: 0.3em;
+  line-height: 2;
+}
+
+/* ---------- フッター・サンプル表記 ---------- */
+.r-footer {
+  border-top: 1px solid var(--r-line);
+  padding: 2.5rem clamp(1.5rem, 6vw, 4rem) 6rem;
+  text-align: center;
+  font-size: 0.8rem;
+  color: var(--r-dim);
+  letter-spacing: 0.1em;
+}
+.r-footer a {
+  color: var(--r-gold);
+  text-decoration: underline;
+  text-underline-offset: 4px;
+}
+.r-badge {
+  position: fixed;
+  bottom: 1rem;
+  right: 1rem;
+  z-index: 10;
+  background: var(--r-shu);
+  color: var(--r-paper);
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+}
+.r-badge:hover {
+  background: var(--r-shu-bright);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .r-hero-bg {
+    animation: none;
+  }
+  .r-hero-copy,
+  .r-hero-lead {
+    animation: none;
+    opacity: 1;
+  }
+}
