@@ -225,7 +225,9 @@ export default function Works() {
             デザインサンプル
           </h2>
           <p className="max-w-2xl text-muted">
-            架空のお店・企業を想定したデモサイト集。「頼んだらこうなる」を実際に触って確かめられます。順次公開予定です。
+            架空のお店・企業を想定したデモサイト集。
+            <br />
+            「頼んだらこうなる」を実際に触って確かめられます。順次公開予定です。
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {samples.map((s) =>
