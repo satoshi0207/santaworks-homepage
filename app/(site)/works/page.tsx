@@ -134,14 +134,33 @@ export default function Works() {
                   ),
                 )}
               </ul>
-              <a
-                href={POKEMEMO_URL}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
-              >
-                ポケメモの公式サイトを見る →
-              </a>
+              <div className="flex flex-wrap items-center gap-5">
+                <a
+                  href={POKEMEMO_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                >
+                  ポケメモの公式サイトを見る →
+                </a>
+                <div className="flex items-center gap-3">
+                  <div className="rounded-md border border-line bg-white p-1.5 shadow-card">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/pokememo/line-qr.png"
+                      alt="ポケメモのLINE友だち追加用QRコード"
+                      width={680}
+                      height={680}
+                      className="h-24 w-24"
+                    />
+                  </div>
+                  <p className="text-[0.78rem] leading-snug text-muted">
+                    カメラで読み取ると
+                    <br />
+                    LINEで友だち追加
+                  </p>
+                </div>
+              </div>
             </div>
             <div className="flex items-center justify-center rounded-md bg-gradient-to-br from-[#ffe9e2] to-[#fff6f2] p-8 shadow-card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
