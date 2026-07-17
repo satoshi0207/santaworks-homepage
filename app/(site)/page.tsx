@@ -62,7 +62,7 @@ export default function Home() {
             <p className="mx-auto mb-10 max-w-xl text-[clamp(0.95rem,2vw,1.05rem)] text-muted">
               Santa Works は、記憶と思い出をITでサポートする個人事業です。
               <br />
-              Web制作・LINE Bot・業務ツール各種・AI活用支援まで。
+              Web制作・LINE Bot・業務ツール各種・AI活用支援まで親身になって伴走致します。
             </p>
           </FadeIn>
           <FadeIn delay={1.4}>
