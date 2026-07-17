@@ -1,0 +1,664 @@
+/* =========================================================
+   写真館 ひととき — デザインサンプル専用スタイル
+   スコープ: .hitotoki 配下のみ（本体サイトに影響しない）
+   配色: 温かいアイボリー × 墨（チャコール）× 洗朱の印
+   モチーフ: アルバム／写真の四隅コーナー／落款印
+   ========================================================= */
+
+.hitotoki {
+  --paper: #f3ede1;
+  --paper2: #eae0cf;
+  --sumi: #29251f;
+  --ink: #322e27;
+  --sub: #7a7163;
+  --seal: #a4402f;
+  --seal-bright: #bb4d38;
+  --gold: #a98b52;
+  --cream: #faf5ea;
+  --line: #d8cab3;
+  --dark: #211d18;
+
+  /* DemoMap 用 */
+  --map-bg: #eae0cf;
+  --map-road-thin: #d8cab3;
+  --map-road: #ddd0b8;
+  --map-rail: #29251f;
+  --map-pin: #a4402f;
+  --map-text: #7a7163;
+
+  color: var(--ink);
+  background: var(--paper);
+  font-family: var(--font-zkg), "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    sans-serif;
+  line-height: 1.95;
+  -webkit-font-smoothing: antialiased;
+}
+
+.hitotoki *,
+.hitotoki *::before,
+.hitotoki *::after {
+  box-sizing: border-box;
+}
+
+.hitotoki img {
+  display: block;
+  max-width: 100%;
+}
+
+.hitotoki a {
+  text-decoration: none;
+}
+
+.hitotoki a:not([class]) {
+  color: inherit;
+}
+
+.ht-antique {
+  font-family: var(--font-antique), serif;
+  font-weight: 400;
+}
+
+.ht-wrap {
+  width: min(1060px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 4.5vw, 2.6rem);
+}
+
+/* ---------- ヘッダー ---------- */
+.ht-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.8rem clamp(1.2rem, 4.5vw, 2.6rem);
+  background: color-mix(in srgb, var(--paper) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--line);
+}
+
+.ht-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  margin-right: auto;
+}
+
+.ht-brand .name {
+  font-family: var(--font-antique), serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.14em;
+  color: var(--sumi);
+}
+
+.ht-brand .en {
+  font-size: 0.56rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.ht-nav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.ht-nav a {
+  font-size: 0.85rem;
+  color: var(--sub);
+  transition: color 0.2s;
+}
+
+.ht-nav a:hover {
+  color: var(--seal);
+}
+
+.ht-reserve {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.15rem;
+  border: 1px solid var(--sumi);
+  border-radius: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  color: var(--sumi);
+  transition: background 0.2s, color 0.2s;
+}
+
+.ht-reserve:hover {
+  background: var(--sumi);
+  color: var(--cream);
+}
+
+/* ---------- ヒーロー ---------- */
+.ht-hero {
+  position: relative;
+  min-height: min(90svh, 720px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.ht-hero-media {
+  position: absolute;
+  inset: 0;
+  background: url("/demo/photo/hero.jpg") center / cover;
+}
+
+.ht-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(24, 20, 16, 0.55),
+    rgba(24, 20, 16, 0.66)
+  );
+}
+
+.ht-hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2.4rem, 6vw, 4rem);
+  color: var(--cream);
+}
+
+/* アルバムの写真コーナー風の四隅 */
+.ht-frame {
+  position: relative;
+  padding: clamp(2.2rem, 6vw, 3.8rem) clamp(1.6rem, 6vw, 3.4rem);
+}
+
+.ht-frame::before,
+.ht-frame::after {
+  content: "";
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  border: 1.5px solid color-mix(in srgb, var(--cream) 75%, transparent);
+}
+
+.ht-frame::before {
+  top: 0;
+  left: 0;
+  border-right: none;
+  border-bottom: none;
+}
+
+.ht-frame::after {
+  bottom: 0;
+  right: 0;
+  border-left: none;
+  border-top: none;
+}
+
+.ht-since {
+  display: inline-block;
+  font-size: 0.7rem;
+  letter-spacing: 0.3em;
+  color: color-mix(in srgb, var(--cream) 78%, transparent);
+  margin-bottom: 1.3rem;
+}
+
+.ht-hero-kind {
+  font-size: clamp(0.78rem, 2.4vw, 0.95rem);
+  letter-spacing: 0.5em;
+  margin: 0 0 0.6rem;
+  padding-left: 0.5em;
+}
+
+.ht-hero-title {
+  font-family: var(--font-antique), serif;
+  font-size: clamp(2.6rem, 9vw, 4.4rem);
+  letter-spacing: 0.16em;
+  line-height: 1.25;
+  margin: 0;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.4);
+}
+
+.ht-hero-en {
+  font-size: 0.66rem;
+  letter-spacing: 0.4em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cream) 74%, transparent);
+  margin-top: 1rem;
+}
+
+.ht-hero-tag {
+  font-size: clamp(0.95rem, 2.6vw, 1.15rem);
+  letter-spacing: 0.14em;
+  margin: 1.9rem 0 0;
+}
+
+/* ---------- セクション共通 ---------- */
+.ht-section {
+  padding-block: clamp(3.8rem, 9vw, 6.5rem);
+}
+
+.ht-section.paper2 {
+  background: var(--paper2);
+}
+
+.ht-section.sumi {
+  background: var(--sumi);
+  color: var(--cream);
+}
+
+.ht-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--sub);
+  margin: 0 0 1.1rem;
+}
+
+.ht-label::before {
+  content: "";
+  width: 0.65rem;
+  height: 0.65rem;
+  border-radius: 1px;
+  background: var(--seal);
+}
+
+.ht-section.sumi .ht-label {
+  color: color-mix(in srgb, var(--cream) 62%, transparent);
+}
+
+.ht-h2 {
+  font-family: var(--font-antique), serif;
+  font-size: clamp(1.6rem, 4.4vw, 2.4rem);
+  letter-spacing: 0.1em;
+  line-height: 1.5;
+  margin: 0 0 1rem;
+  text-wrap: balance;
+}
+
+.ht-lead {
+  max-width: 40rem;
+  color: var(--sub);
+  margin: 0;
+}
+
+.ht-section.sumi .ht-lead {
+  color: color-mix(in srgb, var(--cream) 70%, transparent);
+}
+
+.ht-center {
+  text-align: center;
+}
+
+.ht-center .ht-label {
+  justify-content: center;
+}
+
+.ht-center .ht-lead {
+  margin-inline: auto;
+}
+
+/* ---------- ごあいさつ（想い） ---------- */
+.ht-message {
+  text-align: center;
+}
+
+.ht-message .poem {
+  font-family: var(--font-antique), serif;
+  font-size: clamp(1.3rem, 3.6vw, 1.9rem);
+  line-height: 2.4;
+  letter-spacing: 0.14em;
+  margin: 0 auto;
+  max-width: 32rem;
+}
+
+.ht-message .poem .seal {
+  color: var(--seal);
+}
+
+.ht-message .sign {
+  margin-top: 1.8rem;
+  font-size: 0.86rem;
+  color: var(--sub);
+  letter-spacing: 0.1em;
+}
+
+/* ---------- 撮影シーン ---------- */
+.ht-scenes {
+  display: grid;
+  gap: 1px;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 2.4rem;
+  background: var(--line);
+  border: 1px solid var(--line);
+}
+
+.ht-scene {
+  background: var(--cream);
+  padding: 1.8rem 1.5rem;
+}
+
+.ht-scene .no {
+  font-family: var(--font-antique), serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  color: var(--seal);
+}
+
+.ht-scene h3 {
+  font-family: var(--font-antique), serif;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+  margin: 0.3rem 0 0.5rem;
+}
+
+.ht-scene p {
+  font-size: 0.85rem;
+  color: var(--sub);
+  margin: 0;
+  line-height: 1.85;
+}
+
+/* ---------- アルバムより（ギャラリー） ---------- */
+.ht-gallery {
+  display: grid;
+  gap: 0.9rem;
+  grid-template-columns: repeat(4, 1fr);
+  grid-auto-rows: 190px;
+  grid-auto-flow: dense;
+  margin-top: 2.4rem;
+}
+
+.ht-gallery figure {
+  margin: 0;
+  overflow: hidden;
+  background: var(--cream);
+  padding: 8px;
+  border: 1px solid var(--line);
+}
+
+.ht-gallery figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s ease;
+}
+
+.ht-gallery figure:hover img {
+  transform: scale(1.05);
+}
+
+.ht-gallery .tall {
+  grid-row: span 2;
+}
+
+.ht-gallery .wide {
+  grid-column: span 2;
+}
+
+/* ---------- ご料金（プラン） ---------- */
+.ht-plans {
+  display: grid;
+  gap: 1.2rem;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 2.2rem;
+}
+
+.ht-plan {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  padding: 1.2rem 1.4rem;
+  border: 1px solid color-mix(in srgb, var(--cream) 26%, transparent);
+  border-radius: 2px;
+}
+
+.ht-plan .nm {
+  font-family: var(--font-antique), serif;
+  font-size: 1.1rem;
+  letter-spacing: 0.05em;
+}
+
+.ht-plan .pr {
+  font-family: var(--font-antique), serif;
+  font-size: 1.15rem;
+  color: color-mix(in srgb, var(--cream) 88%, transparent);
+  white-space: nowrap;
+}
+
+.ht-plan .ds {
+  grid-column: 1 / -1;
+  font-size: 0.82rem;
+  color: color-mix(in srgb, var(--cream) 62%, transparent);
+  margin: 0.3rem 0 0;
+}
+
+.ht-plans-note {
+  margin: 1.4rem 0 0;
+  font-size: 0.8rem;
+  color: color-mix(in srgb, var(--cream) 58%, transparent);
+}
+
+/* ---------- アクセス ---------- */
+.ht-access {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  margin-top: 2.2rem;
+}
+
+.ht-info-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1.2rem;
+}
+
+.ht-info-table th,
+.ht-info-table td {
+  text-align: left;
+  padding: 0.7rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.ht-info-table th {
+  width: 6rem;
+  color: var(--seal);
+  font-weight: normal;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+.ht-tel {
+  font-family: var(--font-antique), serif;
+  font-size: 1.5rem;
+  letter-spacing: 0.05em;
+  color: var(--sumi);
+}
+
+/* ---------- 地図・SNS（共通コンポーネントのスコープ装飾） ---------- */
+.hitotoki .demo-map {
+  margin: 1.2rem 0 0;
+}
+
+.hitotoki .demo-map svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--line);
+}
+
+.hitotoki .demo-map figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.76rem;
+  color: var(--sub);
+}
+
+.hitotoki .demo-sns {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1rem;
+}
+
+.hitotoki .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.8rem;
+  border: 1px solid var(--line);
+  border-radius: 1px;
+  color: var(--sub);
+  font-size: 0.78rem;
+  cursor: help;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.hitotoki .demo-sns a:hover {
+  color: var(--seal);
+  border-color: var(--seal);
+}
+
+.hitotoki .demo-sns .line-badge {
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.34rem;
+  border-radius: 2px;
+  background: #06c755;
+  color: #fff;
+}
+
+/* ---------- フッター ---------- */
+.ht-footer {
+  background: var(--dark);
+  color: var(--cream);
+}
+
+.ht-footer-inner {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: 1.5fr 1fr;
+  padding-block: clamp(2.6rem, 6vw, 3.6rem);
+}
+
+.ht-footer .name {
+  font-family: var(--font-antique), serif;
+  font-size: 1.3rem;
+  letter-spacing: 0.12em;
+  margin: 0;
+}
+
+.ht-footer .en {
+  font-size: 0.6rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--cream) 55%, transparent);
+  margin-top: 0.4rem;
+}
+
+.ht-footer .addr {
+  margin: 1rem 0 0;
+  font-size: 0.84rem;
+  color: color-mix(in srgb, var(--cream) 60%, transparent);
+  line-height: 1.9;
+}
+
+.ht-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.ht-footer-nav a {
+  font-size: 0.86rem;
+  color: color-mix(in srgb, var(--cream) 80%, transparent);
+  transition: color 0.2s;
+}
+
+.ht-footer-nav a:hover {
+  color: var(--seal-bright);
+}
+
+.ht-footer-note {
+  border-top: 1px solid color-mix(in srgb, #fff 12%, transparent);
+  padding-block: 1.1rem;
+  font-size: 0.72rem;
+  color: color-mix(in srgb, var(--cream) 52%, transparent);
+  text-align: center;
+}
+
+.ht-footer-note a {
+  color: var(--seal-bright);
+}
+
+/* ---------- デザインサンプル・バッジ ---------- */
+.ht-badge {
+  position: fixed;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 60;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.9rem;
+  border-radius: 1px;
+  background: var(--sumi);
+  color: var(--cream);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.5);
+  transition: transform 0.2s;
+}
+
+.ht-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 860px) {
+  .ht-nav {
+    display: none;
+  }
+
+  .ht-scenes {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .ht-gallery {
+    grid-template-columns: repeat(2, 1fr);
+    grid-auto-rows: 170px;
+  }
+
+  .ht-plans,
+  .ht-access {
+    grid-template-columns: 1fr;
+  }
+
+  .ht-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 520px) {
+  .ht-scenes {
+    grid-template-columns: 1fr;
+  }
+
+  .ht-gallery {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: 150px;
+  }
+
+  .ht-gallery .wide {
+    grid-column: span 2;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hitotoki * {
+    transition: none !important;
+  }
+}

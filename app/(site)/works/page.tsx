@@ -103,6 +103,14 @@ const samples: {
     name: "純喫茶 おもかげ",
     thumb: "/demo/kissa/hero.jpg",
   },
+  {
+    icon: "📷",
+    label: "写真館・フォトスタジオ",
+    tone: "アイボリー×墨×洗朱の印、明朝のエディトリアルで思い出を残す",
+    href: "/demo/photo/",
+    name: "写真館 ひととき",
+    thumb: "/demo/photo/hero.jpg",
+  },
 ];
 
 const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
