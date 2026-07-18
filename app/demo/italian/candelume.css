@@ -1,0 +1,612 @@
+/* ============================================================
+   Osteria Candelume — 架空のイタリアン居酒屋デモ
+   エスプレッソ黒 × ボルドー × 金 / Playfair Display × しっぽり明朝
+   スコープ: .candelume / prefix: cd-
+   ============================================================ */
+
+.candelume {
+  --cd-espresso: #241b16;
+  --cd-espresso-deep: #1a1310;
+  --cd-espresso-soft: #2e231c;
+  --cd-bordeaux: #6e1f2b;
+  --cd-bordeaux-deep: #571823;
+  --cd-gold: #c9a24a;
+  --cd-gold-soft: #d9bc7a;
+  --cd-cream: #f2e9dc;
+  --cd-muted: #b3a48e;
+  --cd-line: rgba(201, 162, 74, 0.28);
+
+  /* 架空地図（DemoMap）の配色 */
+  --map-bg: #2b211a;
+  --map-road: #4d3c2f;
+  --map-road-thin: #3a2d24;
+  --map-rail: #8a745a;
+  --map-pin: #c9a24a;
+  --map-text: #cdbfa8;
+
+  background: var(--cd-espresso);
+  color: var(--cd-cream);
+  font-family: var(--font-shippori), "Hiragino Mincho ProN", serif;
+  font-size: 16px;
+  line-height: 2;
+  letter-spacing: 0.04em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.candelume ::selection {
+  background: var(--cd-bordeaux);
+  color: var(--cd-cream);
+}
+
+/* リンク既定（badge等のclass付きは各自で色を持つ） */
+.candelume a {
+  text-decoration: none;
+}
+.candelume a:not([class]) {
+  color: inherit;
+}
+
+.candelume img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.cd-wrap {
+  max-width: 1080px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.cd-en {
+  font-family: var(--font-playfair), Georgia, serif;
+}
+
+/* ---------- ヘッダー ---------- */
+.cd-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  background: rgba(26, 19, 16, 0.86);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--cd-line);
+}
+
+.cd-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-right: auto;
+  color: var(--cd-cream);
+}
+.cd-brand .name {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-weight: 600;
+  font-size: 1.35rem;
+  color: var(--cd-gold-soft);
+  letter-spacing: 0.02em;
+}
+.cd-brand .sub {
+  font-size: 0.68rem;
+  letter-spacing: 0.28em;
+  color: var(--cd-muted);
+}
+
+.cd-nav {
+  display: none;
+  gap: 26px;
+  font-size: 0.85rem;
+  letter-spacing: 0.12em;
+}
+.cd-nav a {
+  color: var(--cd-cream);
+  opacity: 0.85;
+  transition: color 0.25s, opacity 0.25s;
+}
+.cd-nav a:hover {
+  color: var(--cd-gold-soft);
+  opacity: 1;
+}
+
+.cd-header-cta {
+  font-size: 0.8rem;
+  letter-spacing: 0.14em;
+  color: var(--cd-gold-soft);
+  border: 1px solid var(--cd-gold);
+  padding: 8px 18px;
+  border-radius: 999px;
+  transition: background 0.25s, color 0.25s;
+}
+.cd-header-cta:hover {
+  background: var(--cd-gold);
+  color: var(--cd-espresso-deep);
+}
+
+@media (min-width: 820px) {
+  .cd-nav {
+    display: flex;
+  }
+}
+
+/* ---------- ヒーロー ---------- */
+.cd-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 92svh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+  padding: 96px 24px;
+}
+.cd-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/demo/italian/hero.jpg") center 38% / cover no-repeat;
+}
+.cd-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 46%, rgba(26, 19, 16, 0) 0%, rgba(26, 19, 16, 0.55) 68%, rgba(26, 19, 16, 0.92) 100%),
+    linear-gradient(to bottom, rgba(26, 19, 16, 0.55), rgba(26, 19, 16, 0.35) 40%, var(--cd-espresso) 96%);
+}
+/* 蝋燭のゆらぎ——中央にほのかな灯のグロー */
+.cd-hero-glow {
+  position: absolute;
+  z-index: -1;
+  width: 520px;
+  height: 520px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(217, 172, 90, 0.16) 0%, rgba(217, 172, 90, 0) 62%);
+  animation: cd-flicker 5.2s ease-in-out infinite;
+  pointer-events: none;
+}
+@keyframes cd-flicker {
+  0%, 100% { opacity: 0.85; transform: scale(1); }
+  22% { opacity: 1; transform: scale(1.05); }
+  47% { opacity: 0.7; transform: scale(0.97); }
+  71% { opacity: 0.95; transform: scale(1.03); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cd-hero-glow {
+    animation: none;
+  }
+}
+
+.cd-hero-eyebrow {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.42em;
+  text-transform: uppercase;
+  color: var(--cd-gold-soft);
+  margin-bottom: 22px;
+}
+.cd-hero-title {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-weight: 500;
+  font-size: clamp(3.2rem, 11vw, 6.8rem);
+  line-height: 1.08;
+  color: var(--cd-cream);
+  margin: 0 0 8px;
+  text-shadow: 0 2px 40px rgba(0, 0, 0, 0.6);
+}
+.cd-hero-kind {
+  font-size: 0.85rem;
+  letter-spacing: 0.5em;
+  text-indent: 0.5em;
+  color: var(--cd-muted);
+  margin-bottom: 34px;
+}
+.cd-hero-rule {
+  width: 64px;
+  height: 1px;
+  margin: 0 auto 34px;
+  background: var(--cd-gold);
+  position: relative;
+}
+.cd-hero-rule::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 7px;
+  height: 7px;
+  background: var(--cd-gold);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.cd-hero-copy {
+  font-size: clamp(1.1rem, 3.4vw, 1.5rem);
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  margin-bottom: 12px;
+}
+.cd-hero-sub {
+  font-size: 0.92rem;
+  color: var(--cd-muted);
+  letter-spacing: 0.1em;
+}
+
+/* ---------- セクション共通 ---------- */
+.cd-section {
+  padding: 96px 0;
+}
+.cd-label {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-size: 0.9rem;
+  letter-spacing: 0.3em;
+  color: var(--cd-gold);
+  margin-bottom: 10px;
+}
+.cd-heading {
+  font-size: clamp(1.5rem, 4.5vw, 2.1rem);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+  margin-bottom: 28px;
+}
+
+/* ---------- 店主のことば ---------- */
+.cd-intro-grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .cd-intro-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 72px;
+  }
+}
+.cd-intro-photo {
+  position: relative;
+}
+.cd-intro-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+.cd-intro-photo::after {
+  content: "";
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border: 1px solid var(--cd-line);
+  z-index: -1;
+}
+.cd-intro-text p {
+  color: var(--cd-cream);
+  opacity: 0.92;
+  margin-bottom: 1.4em;
+  font-size: 0.95rem;
+}
+.cd-intro-sign {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  color: var(--cd-gold-soft);
+  font-size: 1rem;
+  margin-top: 30px;
+}
+
+/* ---------- お品書き ---------- */
+.cd-menu {
+  background: linear-gradient(160deg, var(--cd-bordeaux) 0%, var(--cd-bordeaux-deep) 100%);
+  padding: 96px 0;
+}
+.cd-menu .cd-label {
+  color: var(--cd-gold-soft);
+}
+.cd-menu-note {
+  font-size: 0.88rem;
+  color: rgba(242, 233, 220, 0.75);
+  margin-bottom: 56px;
+}
+.cd-menu-grid {
+  display: grid;
+  gap: 56px;
+}
+@media (min-width: 820px) {
+  .cd-menu-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 64px 88px;
+  }
+}
+.cd-menu-cat {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-size: 1.6rem;
+  color: var(--cd-gold-soft);
+  margin-bottom: 6px;
+}
+.cd-menu-cat-jp {
+  font-size: 0.78rem;
+  letter-spacing: 0.3em;
+  color: rgba(242, 233, 220, 0.6);
+  margin-bottom: 22px;
+}
+.cd-menu-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.cd-menu-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px dashed rgba(201, 162, 74, 0.25);
+}
+.cd-menu-list .dish {
+  font-size: 0.95rem;
+}
+.cd-menu-list .dish small {
+  display: block;
+  font-size: 0.78rem;
+  color: rgba(242, 233, 220, 0.62);
+  letter-spacing: 0.06em;
+}
+.cd-menu-list .leader {
+  flex: 1;
+}
+.cd-menu-list .price {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-size: 1.02rem;
+  color: var(--cd-gold-soft);
+  white-space: nowrap;
+}
+.cd-menu-black {
+  margin-top: 56px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: rgba(242, 233, 220, 0.85);
+}
+.cd-menu-black strong {
+  color: var(--cd-gold-soft);
+  font-weight: 600;
+}
+
+/* ---------- ヴィーノ（バナー） ---------- */
+.cd-vino {
+  position: relative;
+  isolation: isolate;
+  padding: 120px 0;
+  overflow: hidden;
+}
+.cd-vino-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/demo/italian/cantina.jpg") center / cover no-repeat;
+}
+.cd-vino-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to right, rgba(26, 19, 16, 0.93) 0%, rgba(26, 19, 16, 0.72) 55%, rgba(26, 19, 16, 0.45) 100%);
+}
+.cd-vino-inner {
+  max-width: 560px;
+}
+.cd-vino p {
+  font-size: 0.95rem;
+  color: var(--cd-cream);
+  opacity: 0.9;
+  margin-bottom: 30px;
+}
+.cd-vino-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--cd-line);
+}
+.cd-vino-list li {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--cd-line);
+  font-size: 0.92rem;
+}
+.cd-vino-list .leader {
+  flex: 1;
+}
+.cd-vino-list .price {
+  font-family: var(--font-playfair), Georgia, serif;
+  color: var(--cd-gold-soft);
+  white-space: nowrap;
+}
+
+/* ---------- ギャラリー ---------- */
+.cd-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+}
+@media (min-width: 720px) {
+  .cd-gallery-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+  }
+}
+.cd-gallery-grid figure {
+  margin: 0;
+  overflow: hidden;
+}
+.cd-gallery-grid img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  filter: brightness(0.92);
+  transition: filter 0.5s, transform 0.7s;
+}
+.cd-gallery-grid figure:hover img {
+  filter: brightness(1.05);
+  transform: scale(1.04);
+}
+
+/* ---------- ご案内 ---------- */
+.cd-access-grid {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 880px) {
+  .cd-access-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 64px;
+  }
+}
+.cd-info {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.cd-info th {
+  width: 7.5em;
+  text-align: left;
+  vertical-align: top;
+  padding: 12px 8px 12px 0;
+  color: var(--cd-gold-soft);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  border-bottom: 1px solid var(--cd-line);
+}
+.cd-info td {
+  padding: 12px 0;
+  color: var(--cd-cream);
+  opacity: 0.9;
+  border-bottom: 1px solid var(--cd-line);
+}
+.cd-info small {
+  color: var(--cd-muted);
+}
+
+.candelume .demo-map svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--cd-line);
+}
+.candelume .demo-map figcaption {
+  font-size: 0.78rem;
+  color: var(--cd-muted);
+  margin-top: 8px;
+}
+
+/* ---------- フッター ---------- */
+.cd-footer {
+  border-top: 1px solid var(--cd-line);
+  background: var(--cd-espresso-deep);
+  padding: 64px 0 96px;
+}
+.cd-footer-inner {
+  display: grid;
+  gap: 40px;
+}
+@media (min-width: 720px) {
+  .cd-footer-inner {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+.cd-footer .name {
+  font-family: var(--font-playfair), Georgia, serif;
+  font-style: italic;
+  font-size: 1.4rem;
+  color: var(--cd-gold-soft);
+  margin-bottom: 4px;
+}
+.cd-footer .sub {
+  font-size: 0.72rem;
+  letter-spacing: 0.26em;
+  color: var(--cd-muted);
+  margin-bottom: 18px;
+}
+.cd-footer .addr {
+  font-size: 0.85rem;
+  color: var(--cd-muted);
+  line-height: 1.9;
+}
+.cd-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.cd-footer-nav a {
+  color: var(--cd-cream);
+  opacity: 0.8;
+}
+.cd-footer-nav a:hover {
+  color: var(--cd-gold-soft);
+  opacity: 1;
+}
+
+.candelume .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 20px;
+  margin-top: 18px;
+}
+.candelume .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: var(--cd-muted);
+  cursor: help;
+  transition: color 0.25s;
+}
+.candelume .demo-sns a:hover {
+  color: var(--cd-gold-soft);
+}
+.candelume .demo-sns .line-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+
+.cd-footer-note {
+  margin-top: 48px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(201, 162, 74, 0.15);
+  font-size: 0.78rem;
+  color: var(--cd-muted);
+  line-height: 1.9;
+}
+.cd-footer-note a {
+  color: var(--cd-gold-soft);
+}
+
+/* Santa Works バッジ */
+.cd-badge {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  font-size: 0.72rem;
+  letter-spacing: 0.08em;
+  color: var(--cd-espresso-deep);
+  background: var(--cd-gold);
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45);
+  transition: background 0.25s;
+}
+.cd-badge:hover {
+  background: var(--cd-gold-soft);
+}

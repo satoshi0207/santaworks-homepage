@@ -114,4 +114,12 @@ export const samples: Sample[] = [
     name: "余白 -YOHAKU-",
     thumb: "/demo/salon2/hero.jpg",
   },
+  {
+    icon: "🍷",
+    label: "イタリアン居酒屋",
+    tone: "エスプレッソ黒×ボルドー×金、蝋燭の灯りで魅せる夜のエノテカ",
+    href: "/demo/italian/",
+    name: "Osteria Candelume",
+    thumb: "/demo/italian/vino.jpg",
+  },
 ];
