@@ -20,17 +20,17 @@ const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
 
 const features: { img: string; title: string; body: string }[] = [
   {
-    img: "/pokememo/feat-people.png",
+    img: "/pokememo/feat-people.webp",
     title: "会った人を登録",
     body: "名前とちょっとしたメモで相手を登録。専用アプリは不要、LINEの友だち追加だけで始められます。",
   },
   {
-    img: "/pokememo/feat-record.png",
+    img: "/pokememo/feat-record.webp",
     title: "会話を記録",
     body: "その日話したこと・出来事をLINEでそのまま記録。ボタン操作が中心で、書くのは新しい情報のときだけ。",
   },
   {
-    img: "/pokememo/feat-search.png",
+    img: "/pokememo/feat-search.webp",
     title: "次に会う前に見返す",
     body: "名前で検索、最後に話した順に一覧。会う前にさっと見返せば、会話がもっとスムーズに。",
   },
@@ -108,7 +108,7 @@ export default function Works() {
             <div className="flex items-center justify-center rounded-md bg-gradient-to-br from-[#ffe9e2] to-[#fff6f2] p-8 shadow-card">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/pokememo/hero.png"
+                src="/pokememo/hero.webp"
                 alt="ポケットメモリーのイメージ。スマホと会話の吹き出し。"
                 width={684}
                 height={661}

@@ -238,7 +238,7 @@ export default function Home() {
             <div className="flex items-center justify-center rounded-xl bg-gradient-to-br from-[#ffe9e2] to-[#fff6f2] p-6">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
-                src="/pokememo/hero.png"
+                src="/pokememo/hero.webp"
                 alt="ポケットメモリーのイメージ。スマホと会話の吹き出し。"
                 width={684}
                 height={661}

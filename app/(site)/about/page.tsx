@@ -73,7 +73,7 @@ export default function About() {
           </h2>
           <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
             <img
-              src="/profile-illust.png"
+              src="/profile-illust.webp"
               alt="山田 悟司（イラスト）"
               width={1000}
               height={1250}
