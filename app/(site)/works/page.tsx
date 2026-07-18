@@ -163,6 +163,10 @@ export default function Works() {
             <br />
             順次公開予定です。
           </p>
+          <p className="jp-flow mt-4 max-w-2xl text-[0.8rem] text-muted/80">
+            ※
+            写真はすべて商用利用可のフリー素材です。肖像権・プライバシー保護の観点から、人物の顔が写る素材は使用していません。店名・住所等はすべて架空です。
+          </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {samples.map((s) =>
               s.href ? (

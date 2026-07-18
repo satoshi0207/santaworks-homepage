@@ -1,0 +1,679 @@
+/* =========================================================
+   CLUB Diamantine — デザインサンプル専用スタイル
+   スコープ: .diamantine 配下のみ（本体サイトに影響しない）
+   配色: 漆黒 × ホワイトゴールド × 氷の白（ダイヤの煌めき）
+   方針: 描画重視の軽量設計 —— 画像は絞りWebP、演出は
+         transform/opacity のみのCSS（JS・canvas不使用）
+   ========================================================= */
+
+.diamantine {
+  --dm-black: #0a0a0d;
+  --dm-black2: #121218;
+  --dm-black3: #1a1a21;
+  --dm-ice: #f1efe8;
+  --dm-gold: #d3c39a;
+  --dm-gold-bright: #e6d9b5;
+  --dm-gold-dim: #96866a;
+  --dm-sub: #9a948a;
+  --dm-line: rgba(211, 195, 154, 0.22);
+  --dm-line-soft: rgba(211, 195, 154, 0.1);
+
+  /* DemoMap 用 */
+  --map-bg: #121218;
+  --map-road-thin: #23232b;
+  --map-road: #2c2c36;
+  --map-rail: #96866a;
+  --map-pin: #d3c39a;
+  --map-text: #9a948a;
+
+  color: var(--dm-ice);
+  background: var(--dm-black);
+  font-family: var(--font-zkg), "Hiragino Kaku Gothic ProN", "Noto Sans JP",
+    sans-serif;
+  font-weight: 300;
+  line-height: 2;
+  letter-spacing: 0.05em;
+  -webkit-font-smoothing: antialiased;
+  /* 横オーバースクロールで下地の白が覗くのを防止（sticky維持のためclip） */
+  overflow-x: clip;
+}
+
+.diamantine *,
+.diamantine *::before,
+.diamantine *::after {
+  box-sizing: border-box;
+}
+
+.diamantine img {
+  display: block;
+  max-width: 100%;
+}
+
+.diamantine a {
+  text-decoration: none;
+}
+
+.diamantine a:not([class]) {
+  color: inherit;
+}
+
+.dm-serif {
+  font-family: var(--font-bodoni), "Didot", serif;
+}
+
+.dm-wrap {
+  width: min(1040px, 100%);
+  margin-inline: auto;
+  padding-inline: clamp(1.2rem, 4.5vw, 2.4rem);
+}
+
+/* ---------- ヘッダー ---------- */
+.dm-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  padding: 0.85rem clamp(1.2rem, 4.5vw, 2.4rem);
+  /* 軽量重視: backdrop-filterは使わず不透明寄りの黒で */
+  background: rgba(10, 10, 13, 0.92);
+  border-bottom: 1px solid var(--dm-line-soft);
+}
+
+.dm-brand {
+  display: flex;
+  align-items: baseline;
+  gap: 0.55rem;
+  margin-right: auto;
+  color: var(--dm-ice);
+}
+
+.dm-brand .club {
+  font-family: var(--font-bodoni), serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.42em;
+  color: var(--dm-gold);
+}
+
+.dm-brand .name {
+  font-family: var(--font-bodoni), serif;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+}
+
+.dm-nav {
+  display: flex;
+  gap: 1.4rem;
+}
+
+.dm-nav a {
+  font-size: 0.82rem;
+  color: var(--dm-sub);
+  transition: color 0.2s;
+}
+
+.dm-nav a:hover {
+  color: var(--dm-gold-bright);
+}
+
+.dm-reserve {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1.2rem;
+  border: 1px solid var(--dm-gold);
+  border-radius: 1px;
+  font-size: 0.8rem;
+  letter-spacing: 0.16em;
+  color: var(--dm-gold);
+  transition: background 0.2s, color 0.2s;
+  white-space: nowrap;
+}
+
+.dm-reserve:hover {
+  background: var(--dm-gold);
+  color: var(--dm-black);
+}
+
+/* ---------- ヒーロー ---------- */
+.dm-hero {
+  position: relative;
+  min-height: min(92svh, 760px);
+  display: grid;
+  place-items: center;
+  text-align: center;
+  overflow: hidden;
+}
+
+.dm-hero-media {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 40%;
+  opacity: 0.5;
+}
+
+.dm-hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(10, 10, 13, 0.55),
+    rgba(10, 10, 13, 0.35) 45%,
+    rgba(10, 10, 13, 0.92)
+  );
+}
+
+/* ダイヤの粉塵 —— box-shadowの点描×opacityの明滅のみ（軽量） */
+.dm-dust,
+.dm-dust::before,
+.dm-dust::after {
+  content: "";
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: transparent;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.dm-dust {
+  top: 18%;
+  left: 12%;
+  box-shadow:
+    4vw 6vh 0 0 rgba(230, 217, 181, 0.8),
+    22vw 14vh 1px 0 rgba(241, 239, 232, 0.55),
+    48vw 4vh 0 0 rgba(230, 217, 181, 0.7),
+    66vw 18vh 1px 0 rgba(241, 239, 232, 0.45),
+    78vw 8vh 0 0 rgba(230, 217, 181, 0.65);
+  animation: dm-twinkle 3.6s ease-in-out infinite alternate;
+}
+
+.dm-dust::before {
+  box-shadow:
+    12vw 30vh 1px 0 rgba(241, 239, 232, 0.5),
+    34vw 24vh 0 0 rgba(230, 217, 181, 0.75),
+    58vw 34vh 1px 0 rgba(241, 239, 232, 0.4),
+    72vw 28vh 0 0 rgba(230, 217, 181, 0.6);
+  animation: dm-twinkle 4.4s ease-in-out 1.2s infinite alternate;
+}
+
+.dm-dust::after {
+  box-shadow:
+    8vw 48vh 0 0 rgba(230, 217, 181, 0.55),
+    28vw 44vh 1px 0 rgba(241, 239, 232, 0.35),
+    52vw 52vh 0 0 rgba(230, 217, 181, 0.6),
+    70vw 46vh 1px 0 rgba(241, 239, 232, 0.45);
+  animation: dm-twinkle 5.2s ease-in-out 2.1s infinite alternate;
+}
+
+@keyframes dm-twinkle {
+  from {
+    opacity: 0.25;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.dm-hero-inner {
+  position: relative;
+  z-index: 2;
+  padding: clamp(2.5rem, 7vw, 4rem) 1.4rem;
+}
+
+.dm-hero-kicker {
+  font-size: 0.68rem;
+  letter-spacing: 0.42em;
+  color: var(--dm-gold);
+  margin: 0 0 1.6rem;
+  padding-left: 0.42em;
+}
+
+.dm-hero-club {
+  font-family: var(--font-bodoni), serif;
+  font-size: clamp(0.8rem, 2.4vw, 1rem);
+  letter-spacing: 0.6em;
+  padding-left: 0.6em;
+  color: var(--dm-ice);
+  margin: 0 0 0.4rem;
+}
+
+.dm-hero-title {
+  font-family: var(--font-bodoni), serif;
+  font-size: clamp(2.7rem, 11vw, 5.4rem);
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  line-height: 1.1;
+  margin: 0;
+  color: var(--dm-ice);
+  text-shadow: 0 4px 30px rgba(0, 0, 0, 0.55);
+}
+
+.dm-hero-kana {
+  font-size: 0.72rem;
+  letter-spacing: 0.5em;
+  padding-left: 0.5em;
+  color: var(--dm-sub);
+  margin: 1rem 0 0;
+}
+
+.dm-hero-tag {
+  font-size: clamp(1rem, 2.8vw, 1.2rem);
+  font-weight: 400;
+  letter-spacing: 0.2em;
+  margin: 2.2rem 0 0;
+  color: var(--dm-gold-bright);
+}
+
+.dm-hero-note {
+  font-size: 0.68rem;
+  letter-spacing: 0.12em;
+  color: var(--dm-sub);
+  margin: 2.4rem 0 0;
+}
+
+/* ---------- セクション共通 ---------- */
+.dm-section {
+  padding-block: clamp(4rem, 9vw, 6.5rem);
+}
+
+.dm-section.tone {
+  background: var(--dm-black2);
+}
+
+.dm-label {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  font-family: var(--font-bodoni), serif;
+  font-size: 0.72rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--dm-gold);
+  margin: 0 0 1.2rem;
+}
+
+.dm-label::before {
+  content: "◆";
+  font-size: 0.5rem;
+}
+
+.dm-h2 {
+  font-size: clamp(1.5rem, 4vw, 2.1rem);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  line-height: 1.6;
+  margin: 0 0 1.2rem;
+  text-wrap: balance;
+}
+
+.dm-lead {
+  max-width: 38rem;
+  color: var(--dm-sub);
+  margin: 0;
+}
+
+.dm-center {
+  text-align: center;
+}
+
+.dm-center .dm-label {
+  justify-content: center;
+}
+
+.dm-center .dm-lead {
+  margin-inline: auto;
+}
+
+/* ---------- コンセプト ---------- */
+.dm-concept-poem {
+  font-size: clamp(1.15rem, 3.2vw, 1.55rem);
+  font-weight: 300;
+  letter-spacing: 0.22em;
+  line-height: 2.6;
+  margin: 0 auto;
+  word-break: keep-all;
+}
+
+.dm-concept-poem .gold {
+  color: var(--dm-gold-bright);
+}
+
+.dm-gems-band {
+  margin-top: clamp(2.5rem, 6vw, 4rem);
+  position: relative;
+}
+
+.dm-gems-band img {
+  width: 100%;
+  height: clamp(180px, 30vw, 280px);
+  object-fit: cover;
+  opacity: 0.8;
+}
+
+.dm-gems-band::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  box-shadow: inset 0 0 60px 30px var(--dm-black2);
+}
+
+/* ---------- フロア ---------- */
+.dm-rooms {
+  display: grid;
+  gap: clamp(1.4rem, 3.5vw, 2.4rem);
+  grid-template-columns: 1fr 1fr;
+  margin-top: 2.6rem;
+}
+
+.dm-room {
+  background: var(--dm-black3);
+  border: 1px solid var(--dm-line-soft);
+}
+
+.dm-room img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  opacity: 0.9;
+}
+
+.dm-room .body {
+  padding: 1.5rem 1.6rem 1.7rem;
+}
+
+.dm-room h3 {
+  font-family: var(--font-bodoni), serif;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.24em;
+  color: var(--dm-gold-bright);
+  margin: 0 0 0.2rem;
+}
+
+.dm-room .jp {
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  color: var(--dm-sub);
+  margin: 0 0 0.8rem;
+}
+
+.dm-room p {
+  font-size: 0.88rem;
+  color: var(--dm-sub);
+  margin: 0;
+  line-height: 1.95;
+}
+
+/* ---------- 料金システム ---------- */
+.dm-system-card {
+  max-width: 640px;
+  margin: 2.4rem auto 0;
+  border: 1px solid var(--dm-line);
+  background: var(--dm-black);
+  padding: clamp(1.8rem, 5vw, 2.8rem);
+}
+
+.dm-system-card dl {
+  margin: 0;
+}
+
+.dm-system-row {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--dm-line-soft);
+}
+
+.dm-system-row:last-of-type {
+  border-bottom: none;
+}
+
+.dm-system-row dt {
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+}
+
+.dm-system-row dt small {
+  display: block;
+  font-size: 0.68rem;
+  color: var(--dm-sub);
+  letter-spacing: 0.08em;
+}
+
+.dm-system-row dd {
+  margin-left: auto;
+  font-family: var(--font-bodoni), serif;
+  font-size: 1.05rem;
+  letter-spacing: 0.06em;
+  color: var(--dm-gold-bright);
+  white-space: nowrap;
+}
+
+.dm-system-note {
+  margin: 1.6rem 0 0;
+  font-size: 0.74rem;
+  line-height: 1.9;
+  color: var(--dm-sub);
+}
+
+/* ---------- アクセス ---------- */
+.dm-access {
+  display: grid;
+  gap: clamp(1.6rem, 4vw, 3rem);
+  grid-template-columns: 1fr 1fr;
+  align-items: start;
+  margin-top: 2.4rem;
+}
+
+.dm-info-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.dm-info-table th,
+.dm-info-table td {
+  text-align: left;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--dm-line-soft);
+  font-size: 0.9rem;
+  vertical-align: top;
+}
+
+.dm-info-table th {
+  width: 6.5rem;
+  color: var(--dm-gold);
+  font-weight: 400;
+  letter-spacing: 0.14em;
+  white-space: nowrap;
+}
+
+.dm-info-table td {
+  color: var(--dm-sub);
+}
+
+/* ---------- 地図・SNS（共通コンポーネントのスコープ装飾） ---------- */
+.diamantine .demo-map {
+  margin: 1.4rem 0 0;
+}
+
+.diamantine .demo-map svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--dm-line-soft);
+}
+
+.diamantine .demo-map figcaption {
+  margin-top: 0.6rem;
+  font-size: 0.74rem;
+  color: var(--dm-sub);
+}
+
+.diamantine .demo-sns {
+  display: flex;
+  gap: 0.6rem;
+  margin-top: 1.2rem;
+}
+
+.diamantine .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.4rem 0.85rem;
+  border: 1px solid var(--dm-line-soft);
+  border-radius: 1px;
+  color: var(--dm-sub);
+  font-size: 0.76rem;
+  cursor: help;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.diamantine .demo-sns a:hover {
+  color: var(--dm-gold-bright);
+  border-color: var(--dm-gold);
+}
+
+.diamantine .demo-sns .line-badge {
+  font-size: 0.62rem;
+  letter-spacing: 0.04em;
+  padding: 0.12rem 0.34rem;
+  border-radius: 2px;
+  background: #06c755;
+  color: #fff;
+}
+
+/* ---------- フッター ---------- */
+.dm-footer {
+  background: #08080a;
+  border-top: 1px solid var(--dm-line-soft);
+}
+
+.dm-footer-inner {
+  display: grid;
+  gap: 1.8rem;
+  grid-template-columns: 1.5fr 1fr;
+  padding-block: clamp(2.6rem, 6vw, 3.6rem);
+}
+
+.dm-footer .name {
+  font-family: var(--font-bodoni), serif;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  margin: 0;
+}
+
+.dm-footer .en {
+  font-size: 0.66rem;
+  letter-spacing: 0.3em;
+  color: var(--dm-sub);
+  margin-top: 0.5rem;
+}
+
+.dm-footer .addr {
+  margin: 1.1rem 0 0;
+  font-size: 0.82rem;
+  color: var(--dm-sub);
+  line-height: 2;
+}
+
+.dm-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 0.6rem;
+  align-content: start;
+}
+
+.dm-footer-nav a {
+  font-size: 0.84rem;
+  color: var(--dm-sub);
+  transition: color 0.2s;
+}
+
+.dm-footer-nav a:hover {
+  color: var(--dm-gold-bright);
+}
+
+.dm-footer-note {
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.1rem clamp(1.2rem, 4.5vw, 2.4rem);
+  margin: 0;
+  font-size: 0.72rem;
+  color: var(--dm-sub);
+  text-align: center;
+  line-height: 2;
+}
+
+.dm-footer-note a {
+  color: var(--dm-gold);
+}
+
+/* ---------- デザインサンプル・バッジ ---------- */
+.dm-badge {
+  position: fixed;
+  right: 0.85rem;
+  bottom: 0.85rem;
+  z-index: 60;
+  font-size: 0.64rem;
+  letter-spacing: 0.1em;
+  padding: 0.5rem 0.9rem;
+  border-radius: 1px;
+  background: var(--dm-gold);
+  color: var(--dm-black);
+  box-shadow: 0 10px 24px -12px rgba(0, 0, 0, 0.6);
+  transition: transform 0.2s;
+}
+
+.dm-badge:hover {
+  transform: translateY(-2px);
+}
+
+/* ---------- レスポンシブ ---------- */
+@media (max-width: 860px) {
+  .dm-nav {
+    display: none;
+  }
+
+  .dm-rooms,
+  .dm-access,
+  .dm-footer-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .dm-brand .name {
+    font-size: 1.05rem;
+  }
+
+  .dm-reserve {
+    padding: 0.45rem 0.9rem;
+  }
+
+  .dm-system-row {
+    flex-wrap: wrap;
+    gap: 0.2rem 1rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .diamantine * {
+    transition: none !important;
+    animation: none !important;
+  }
+
+  .dm-dust,
+  .dm-dust::before,
+  .dm-dust::after {
+    opacity: 0.6;
+  }
+}

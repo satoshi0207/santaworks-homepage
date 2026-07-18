@@ -130,4 +130,12 @@ export const samples: Sample[] = [
     name: "そらいろ牧場",
     thumb: "/demo/farm/thumb.webp",
   },
+  {
+    icon: "💎",
+    label: "高級キャバクラ",
+    tone: "漆黒×ホワイトゴールド、ダイヤの煌めきで魅せるナイトラウンジ",
+    href: "/demo/cabaret/",
+    name: "CLUB Diamantine",
+    thumb: "/demo/cabaret/thumb.webp",
+  },
 ];
