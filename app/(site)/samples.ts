@@ -16,7 +16,7 @@ export const samples: Sample[] = [
     tone: "漆黒×朱、縦書き明朝の力強い和",
     href: "/demo/ramen/",
     name: "麺処 ゆげや",
-    thumb: "/demo/ramen/hero.jpg",
+    thumb: "/demo/ramen/thumb.webp",
   },
   {
     icon: "✂️",
@@ -24,7 +24,7 @@ export const samples: Sample[] = [
     tone: "白磁×翠、余白の効いた洗練ミニマル",
     href: "/demo/salon/",
     name: "hair atelier 翠雨",
-    thumb: "/demo/salon/hero.jpg",
+    thumb: "/demo/salon/thumb.webp",
   },
   {
     icon: "🏮",
@@ -32,7 +32,7 @@ export const samples: Sample[] = [
     tone: "藍×提灯の灯、筆文字と短冊の賑わい",
     href: "/demo/izakaya/",
     name: "大衆酒場 ほおずき",
-    thumb: "/demo/izakaya/hero.jpg",
+    thumb: "/demo/izakaya/thumb.webp",
   },
   {
     icon: "💅",
@@ -40,7 +40,7 @@ export const samples: Sample[] = [
     tone: "クリーム×ラズベリー、丸ゴシックのキャンディポップ",
     href: "/demo/nail/",
     name: "nail salon こんぺいとう",
-    thumb: "/demo/nail/hero.jpg",
+    thumb: "/demo/nail/thumb.webp",
   },
   {
     icon: "🏭",
@@ -48,7 +48,7 @@ export const samples: Sample[] = [
     tone: "鉄紺×灯のアンバー、多ページ構成の堅実コーポレート",
     href: "/demo/factory/",
     name: "有限会社 灯火製作所",
-    thumb: "/demo/factory/hero.jpg",
+    thumb: "/demo/factory/thumb.webp",
   },
   {
     icon: "🎹",
@@ -56,7 +56,7 @@ export const samples: Sample[] = [
     tone: "アイボリー×えんじ、教科書体のクラシカルな習い事",
     href: "/demo/piano/",
     name: "おとのは ぴあの教室",
-    thumb: "/demo/piano/hero.jpg",
+    thumb: "/demo/piano/thumb.webp",
   },
   {
     icon: "🏠",
@@ -64,7 +64,7 @@ export const samples: Sample[] = [
     tone: "生成り×木の茶×安全アンバー、現場の誠実さを伝える多ページ構成",
     href: "/demo/koumuten/",
     name: "ひだまり工務店",
-    thumb: "/demo/koumuten/hero.jpg",
+    thumb: "/demo/koumuten/thumb.webp",
   },
   {
     icon: "🥃",
@@ -72,7 +72,7 @@ export const samples: Sample[] = [
     tone: "漆黒×シャンパンゴールド、明朝の格で魅せるダークラグジュアリー",
     href: "/demo/club/",
     name: "銀座 月讀",
-    thumb: "/demo/club/hero.jpg",
+    thumb: "/demo/club/thumb.webp",
   },
   {
     icon: "💈",
@@ -80,7 +80,7 @@ export const samples: Sample[] = [
     tone: "生成り×濃紺×真鍮、極太コンデンスのヴィンテージ理容室",
     href: "/demo/barber/",
     name: "バーバー ミナト",
-    thumb: "/demo/barber/hero.jpg",
+    thumb: "/demo/barber/thumb.webp",
   },
   {
     icon: "☕",
@@ -88,7 +88,7 @@ export const samples: Sample[] = [
     tone: "珈琲ブラウン×クリーム×えんじ、丸みのレトロ書体でノスタルジー",
     href: "/demo/kissa/",
     name: "純喫茶 おもかげ",
-    thumb: "/demo/kissa/hero.jpg",
+    thumb: "/demo/kissa/thumb.webp",
   },
   {
     icon: "📷",
@@ -96,7 +96,7 @@ export const samples: Sample[] = [
     tone: "アイボリー×墨×洗朱の印、明朝のエディトリアルで思い出を残す",
     href: "/demo/photo/",
     name: "写真館 ひととき",
-    thumb: "/demo/photo/hero.jpg",
+    thumb: "/demo/photo/thumb.webp",
   },
   {
     icon: "✏️",
@@ -104,7 +104,7 @@ export const samples: Sample[] = [
     tone: "知性のブルー×白×山吹、数字と料金表で信頼を伝える情報設計",
     href: "/demo/juku/",
     name: "個別指導塾 あすなろ",
-    thumb: "/demo/juku/classroom.jpg",
+    thumb: "/demo/juku/thumb.webp",
   },
   {
     icon: "✂️",
@@ -112,7 +112,7 @@ export const samples: Sample[] = [
     tone: "純白×漆黒×朱赤、極太サンセリフとモノクロ写真のエディトリアル",
     href: "/demo/salon2/",
     name: "余白 -YOHAKU-",
-    thumb: "/demo/salon2/hero.jpg",
+    thumb: "/demo/salon2/thumb.webp",
   },
   {
     icon: "🍷",
@@ -120,7 +120,7 @@ export const samples: Sample[] = [
     tone: "エスプレッソ黒×ボルドー×金、蝋燭の灯りで魅せる夜のエノテカ",
     href: "/demo/italian/",
     name: "Osteria Candelume",
-    thumb: "/demo/italian/vino.jpg",
+    thumb: "/demo/italian/thumb.webp",
   },
   {
     icon: "🐄",
@@ -128,6 +128,6 @@ export const samples: Sample[] = [
     tone: "空色×牧草グリーン×生成り、大自然を主役にした明るい6次産業サイト",
     href: "/demo/farm/",
     name: "そらいろ牧場",
-    thumb: "/demo/farm/hero.jpg",
+    thumb: "/demo/farm/thumb.webp",
   },
 ];

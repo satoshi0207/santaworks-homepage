@@ -171,10 +171,15 @@ export default function Works() {
                   href={s.href}
                   className="group overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
-                  <div
-                    className="h-36 bg-cover bg-[center_30%] transition-transform duration-700 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${s.thumb})` }}
+                  <img
+                    src={s.thumb}
+                    alt=""
                     aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={450}
+                    className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="p-6">
                     <h3 className="mb-1 text-[1.05rem] font-bold">

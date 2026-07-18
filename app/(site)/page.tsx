@@ -275,10 +275,15 @@ export default function Home() {
                   href={s.href}
                   className="group relative overflow-hidden rounded-lg border border-line shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
-                  <div
-                    className="aspect-[4/3] bg-cover bg-center transition-transform duration-500 group-hover:scale-105"
-                    style={{ backgroundImage: `url(${s.thumb})` }}
+                  <img
+                    src={s.thumb}
+                    alt=""
                     aria-hidden="true"
+                    loading="lazy"
+                    decoding="async"
+                    width={600}
+                    height={450}
+                    className="aspect-[4/3] w-full object-cover transition-transform duration-500 group-hover:scale-105"
                   />
                   <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/80 via-black/35 to-transparent px-3 pb-2.5 pt-8">
                     <span className="block text-[0.82rem] font-bold leading-tight text-white">
