@@ -185,10 +185,10 @@ export default function KoumutenHome() {
           <div className="hd-craft">
             <div className="hd-craft-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/koumuten/craft.jpg" alt="現場で作業する大工" />
+              <img loading="lazy" decoding="async" src="/demo/koumuten/craft.jpg" alt="現場で作業する大工" />
               <div className="detail">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img
+                <img loading="lazy" decoding="async"
                   src="/demo/koumuten/craft-detail.jpg"
                   alt="木材を加工する手元"
                 />

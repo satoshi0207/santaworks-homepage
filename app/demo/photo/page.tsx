@@ -139,7 +139,7 @@ export default function PhotoHome() {
             {album.map((a) => (
               <figure key={a.src} className={a.cls}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={a.src} alt={a.alt} />
+                <img loading="lazy" decoding="async" src={a.src} alt={a.alt} />
               </figure>
             ))}
           </div>

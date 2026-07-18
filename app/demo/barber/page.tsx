@@ -99,7 +99,7 @@ export default function BarberHome() {
             </div>
             <div className="bm-about-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/barber/razor.jpg" alt="一枚刃の剃刀とシェービングブラシ" />
+              <img loading="lazy" decoding="async" src="/demo/barber/razor.jpg" alt="一枚刃の剃刀とシェービングブラシ" />
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function BarberHome() {
             {gallery.map((g) => (
               <figure key={g.src} className="bm-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={g.src} alt={g.alt} />
+                <img loading="lazy" decoding="async" src={g.src} alt={g.alt} />
               </figure>
             ))}
           </div>
@@ -190,7 +190,7 @@ export default function BarberHome() {
             </div>
             <div className="bm-access-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/barber/storefront.jpg" alt="バーバー ミナトの店構え" />
+              <img loading="lazy" decoding="async" src="/demo/barber/storefront.jpg" alt="バーバー ミナトの店構え" />
             </div>
           </div>
         </div>

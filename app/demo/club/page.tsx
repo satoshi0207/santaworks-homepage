@@ -126,7 +126,7 @@ export default function ClubHome() {
             </div>
             <div className="gz-message-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/club/candle.jpg" alt="灯りのともる店内の様子" />
+              <img loading="lazy" decoding="async" src="/demo/club/candle.jpg" alt="灯りのともる店内の様子" />
             </div>
           </div>
         </div>
@@ -137,7 +137,7 @@ export default function ClubHome() {
         <div className="gz-concept-media" aria-hidden="true" />
         <div className="gz-wrap inner">
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img
+          <img loading="lazy" decoding="async"
             src="/demo/club/orchid.jpg"
             alt=""
             aria-hidden="true"
@@ -170,7 +170,7 @@ export default function ClubHome() {
             {interiors.map((it) => (
               <figure key={it.en} className="gz-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={it.src} alt={it.ja} />
+                <img loading="lazy" decoding="async" src={it.src} alt={it.ja} />
                 <figcaption>
                   {it.ja}
                   <span className="en">{it.en}</span>
@@ -231,7 +231,7 @@ export default function ClubHome() {
           <div className="gz-access">
             <div className="gz-access-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/club/ginza-night.jpg" alt="夜の銀座の街並み" />
+              <img loading="lazy" decoding="async" src="/demo/club/ginza-night.jpg" alt="夜の銀座の街並み" />
             </div>
             <div className="addr">
               東京都中央区銀座某丁目0-0

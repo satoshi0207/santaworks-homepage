@@ -53,7 +53,7 @@ export default function Salon2Home() {
             </div>
             <div className="yh-concept-media">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/salon2/motion.jpg" alt="風になびく髪" />
+              <img loading="lazy" decoding="async" src="/demo/salon2/motion.jpg" alt="風になびく髪" />
             </div>
           </div>
         </div>
@@ -65,9 +65,9 @@ export default function Salon2Home() {
           <div className="yh-craft">
             <div className="yh-craft-photos">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/salon2/hands.jpg" alt="スタイリングの手元" />
+              <img loading="lazy" decoding="async" src="/demo/salon2/hands.jpg" alt="スタイリングの手元" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/salon2/scissors.jpg" alt="シザーワーク" />
+              <img loading="lazy" decoding="async" src="/demo/salon2/scissors.jpg" alt="シザーワーク" />
             </div>
             <div>
               <p className="yh-label">
@@ -129,7 +129,7 @@ export default function Salon2Home() {
             {works.map((w) => (
               <figure key={w.src} className={w.cls}>
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={w.src} alt={w.alt} />
+                <img loading="lazy" decoding="async" src={w.src} alt={w.alt} />
               </figure>
             ))}
           </div>

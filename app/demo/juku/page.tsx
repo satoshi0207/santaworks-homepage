@@ -265,11 +265,11 @@ export default function JukuHome() {
             </div>
             <div className="as-rooms-photos">
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/juku/classroom.jpg" alt="明るい教室" />
+              <img loading="lazy" decoding="async" src="/demo/juku/classroom.jpg" alt="明るい教室" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/juku/writing.jpg" alt="自習の様子" />
+              <img loading="lazy" decoding="async" src="/demo/juku/writing.jpg" alt="自習の様子" />
               {/* eslint-disable-next-line @next/next/no-img-element */}
-              <img src="/demo/juku/chalk.jpg" alt="板書のイメージ" />
+              <img loading="lazy" decoding="async" src="/demo/juku/chalk.jpg" alt="板書のイメージ" />
             </div>
           </div>
         </div>

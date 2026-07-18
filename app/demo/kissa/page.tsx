@@ -107,7 +107,7 @@ export default function KissaHome() {
               <article key={d.name} className="ok-dish">
                 <div className="media">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={d.src} alt={d.name} />
+                  <img loading="lazy" decoding="async" src={d.src} alt={d.name} />
                 </div>
                 <div className="body">
                   <h3>{d.name}</h3>
@@ -163,7 +163,7 @@ export default function KissaHome() {
             {gallery.map((g) => (
               <figure key={g.src} className="ok-photo">
                 {/* eslint-disable-next-line @next/next/no-img-element */}
-                <img src={g.src} alt={g.alt} />
+                <img loading="lazy" decoding="async" src={g.src} alt={g.alt} />
               </figure>
             ))}
           </div>
