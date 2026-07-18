@@ -71,13 +71,14 @@ export default function About() {
           <h2 className="mb-10 text-[clamp(1.4rem,3.2vw,2rem)] font-extrabold">
             プロフィール
           </h2>
-          <div className="flex flex-col gap-8 sm:flex-row sm:items-start">
-            <div
-              aria-hidden="true"
-              className="grid h-28 w-28 shrink-0 place-items-center rounded-full border-2 border-accent bg-accent-soft text-4xl"
-            >
-              🎅
-            </div>
+          <div className="flex flex-col gap-8 sm:flex-row sm:items-start sm:gap-10">
+            <img
+              src="/profile-illust.png"
+              alt="山田 悟司（イラスト）"
+              width={1000}
+              height={1250}
+              className="mx-auto w-60 shrink-0 rounded-xl border border-line object-cover shadow-card sm:mx-0 sm:w-72"
+            />
             <div>
               <h3 className="text-xl font-extrabold">山田 悟司</h3>
               <p className="mb-4 text-[0.8rem] tracking-[0.14em] text-muted">
