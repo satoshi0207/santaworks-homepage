@@ -202,7 +202,7 @@ export default function Home() {
 
       {/* Works: 自社プロダクト + デザインサンプル */}
       <section className="px-6 py-20 sm:px-10 md:py-28">
-        <Reveal className="mx-auto max-w-5xl">
+        <Reveal plain className="mx-auto max-w-5xl">
           <SectionLabel>Works</SectionLabel>
           <h2 className="mb-8 text-[clamp(1.5rem,3.4vw,2.1rem)] font-extrabold">
             実績・プロダクト
@@ -303,8 +303,10 @@ export default function Home() {
       {/* CTA */}
       <section className="border-t border-line bg-surface/55 px-6 py-20 text-center sm:px-10">
         <Reveal className="mx-auto max-w-2xl">
-          <h2 className="mb-4 text-[clamp(1.3rem,3vw,1.8rem)] font-extrabold [word-break:keep-all]">
-            Webサイトの作成・開発のご相談、お気軽にどうぞ
+          <h2 className="mb-4 text-[clamp(1.3rem,3vw,1.8rem)] font-extrabold [word-break:keep-all] [overflow-wrap:anywhere]">
+            Webサイトの作成・開発のご相談、
+            <wbr />
+            お気軽にどうぞ
           </h2>
           <p className="mb-8 text-muted">
             「こんなことできる？」の段階から歓迎です。

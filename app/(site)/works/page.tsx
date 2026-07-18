@@ -41,7 +41,7 @@ export default function Works() {
     <div className="pt-16">
       {/* 自社プロダクト */}
       <section className="px-6 py-20 sm:px-10 md:py-28">
-        <Reveal className="mx-auto max-w-5xl">
+        <Reveal plain className="mx-auto max-w-5xl">
           <SectionLabel>Products</SectionLabel>
           <h1 className="mb-10 text-[clamp(1.6rem,3.8vw,2.4rem)] font-extrabold">
             自社プロダクト
@@ -146,7 +146,7 @@ export default function Works() {
         id="samples"
         className="scroll-mt-24 border-t border-line bg-surface/55 px-6 py-20 sm:px-10 md:py-28"
       >
-        <Reveal className="mx-auto max-w-5xl">
+        <Reveal plain className="mx-auto max-w-5xl">
           <SectionLabel>Design Samples</SectionLabel>
           <h2 className="mb-4 text-[clamp(1.4rem,3.2vw,2rem)] font-extrabold">
             デザインサンプル
