@@ -106,9 +106,15 @@ export default function Home() {
           </FadeIn>
           <FadeIn delay={1.0}>
             <p className="mx-auto mb-10 max-w-xl text-[clamp(0.95rem,2vw,1.05rem)] text-muted">
-              Santa Works は、記憶と思い出をITでサポートする個人事業です。
+              {/* フレーズ単位のinline-blockで、狭い画面でも「。」が孤立しない位置で折り返す */}
+              <span className="inline-block">Santa Works は、</span>
+              <span className="inline-block">記憶と思い出を</span>
+              <span className="inline-block">ITでサポートする個人事業です。</span>
               <br />
-              Web制作・LINE Bot・業務ツール各種・AI活用支援まで親身になって伴走致します。
+              <span className="inline-block">Web制作・LINE Bot・</span>
+              <span className="inline-block">業務ツール各種・</span>
+              <span className="inline-block">AI活用支援まで</span>
+              <span className="inline-block">親身になって伴走致します。</span>
             </p>
           </FadeIn>
           <FadeIn delay={1.4}>
