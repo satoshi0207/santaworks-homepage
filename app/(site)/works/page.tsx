@@ -175,7 +175,6 @@ export default function Works() {
                     src={s.thumb}
                     alt=""
                     aria-hidden="true"
-                    loading="lazy"
                     decoding="async"
                     width={600}
                     height={450}
