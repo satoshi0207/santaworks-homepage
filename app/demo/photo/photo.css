@@ -32,6 +32,9 @@
     sans-serif;
   line-height: 1.95;
   -webkit-font-smoothing: antialiased;
+  /* iOS Safari の横方向オーバースクロールで下地の白が覗くのを防ぐ。
+     clip は hidden と違いスクロールコンテナを作らないので sticky ヘッダーは維持される */
+  overflow-x: clip;
 }
 
 .hitotoki *,
@@ -642,6 +645,38 @@
 
   .ht-footer-inner {
     grid-template-columns: 1fr;
+  }
+}
+
+/* スマホではブランド名（縦組みの英字併記）が横並びだと
+   「写真館 ひととき」が語中で折り返して崩れるため、名前を1行で固定し
+   英字を下段に落として整える */
+@media (max-width: 600px) {
+  .ht-header {
+    gap: 0.6rem;
+    padding-inline: clamp(1rem, 4vw, 1.4rem);
+  }
+
+  .ht-brand {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.15rem;
+  }
+
+  .ht-brand .name {
+    font-size: 1.05rem;
+    letter-spacing: 0.1em;
+    white-space: nowrap;
+  }
+
+  .ht-brand .en {
+    font-size: 0.5rem;
+    letter-spacing: 0.24em;
+  }
+
+  .ht-reserve {
+    padding: 0.5rem 0.9rem;
+    white-space: nowrap;
   }
 }
 
