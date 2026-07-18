@@ -9,7 +9,9 @@ const FORMSPREE_ID = process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "xkodjjgn";
 type Status = "idle" | "sending" | "sent" | "error";
 
 const inputClass =
-  "rounded border border-line bg-surface px-4 py-3 text-[0.95rem] text-ink transition-colors focus:border-accent focus:outline-none";
+  // w-full min-w-0: グリッド子のinputは min-width:auto の既定固有幅（size由来）で
+  // 親トラックを押し広げ横あふれを起こすため、縮小可にして親幅に収める
+  "w-full min-w-0 rounded border border-line bg-surface px-4 py-3 text-[0.95rem] text-ink transition-colors focus:border-accent focus:outline-none";
 
 export default function ContactForm() {
   const [status, setStatus] = useState<Status>("idle");
