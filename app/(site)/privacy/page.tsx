@@ -143,7 +143,7 @@ export default function Privacy() {
   return (
     <div className="pt-16">
       <section className="px-6 py-20 sm:px-10 md:py-28">
-        <Reveal className="mx-auto max-w-3xl">
+        <Reveal className="doc-flow mx-auto max-w-3xl">
           <SectionLabel>Privacy</SectionLabel>
           <h1 className="mb-4 text-[clamp(1.6rem,3.8vw,2.4rem)] font-extrabold">
             プライバシーポリシー

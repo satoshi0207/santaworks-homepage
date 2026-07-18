@@ -129,6 +129,15 @@ h3 {
   word-break: normal;
 }
 
+/* 規約・ポリシー等の長文ドキュメント（.doc-flow配下）。
+   本文段落は自然な折り返し、見出しは語の途中で割れないよう句読点・記号でのみ折る。 */
+.site-content .doc-flow p {
+  word-break: normal;
+}
+.site-content .doc-flow h2 {
+  word-break: keep-all;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

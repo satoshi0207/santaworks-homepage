@@ -65,7 +65,7 @@ export default function Legal() {
   return (
     <div className="pt-16">
       <section className="px-6 py-20 sm:px-10 md:py-28">
-        <Reveal className="mx-auto max-w-3xl">
+        <Reveal className="doc-flow mx-auto max-w-3xl">
           <SectionLabel>Legal</SectionLabel>
           <h1 className="mb-4 text-[clamp(1.6rem,3.8vw,2.4rem)] font-extrabold">
             特定商取引法に基づく表記
@@ -85,14 +85,18 @@ export default function Legal() {
             <table className="w-full border-collapse text-[0.92rem]">
               <tbody>
                 {rows.map((r) => (
-                  <tr key={r.k} className="border-b border-line last:border-b-0">
+                  <tr
+                    key={r.k}
+                    className="block border-b border-line last:border-b-0 sm:table-row"
+                  >
+                    {/* スマホはラベル→値の縦積み（狭い列での文字孤立を防ぐ）、sm以上は2カラム表 */}
                     <th
                       scope="row"
-                      className="w-[38%] bg-surface/60 px-4 py-4 text-left align-top font-bold sm:w-[32%] sm:px-5"
+                      className="block px-4 pb-1 pt-4 text-left font-bold sm:table-cell sm:w-[32%] sm:bg-surface/60 sm:px-5 sm:py-4 sm:align-top"
                     >
                       {r.k}
                     </th>
-                    <td className="px-4 py-4 align-top leading-[1.85] text-muted sm:px-5">
+                    <td className="block px-4 pb-4 pt-0 leading-[1.85] text-muted sm:table-cell sm:px-5 sm:py-4 sm:align-top">
                       {r.v}
                     </td>
                   </tr>
