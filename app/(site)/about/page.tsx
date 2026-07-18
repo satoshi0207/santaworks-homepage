@@ -87,7 +87,7 @@ export default function About() {
               <div className="max-w-2xl space-y-4 text-[0.95rem] text-muted">
                 <p className="jp-flow">
                   2026年、屋号「Santa
-                  Works」で開業。AIを相棒にしたものづくりで、LINEサービス「ポケメモ」などを開発・運営しています。
+                  Works」で開業。新しい技術やAIも積極的に取り入れながら、LINEサービス「ポケメモ」などを開発・運営しています。
                 </p>
                 <p className="jp-flow">
                   ガジェットとキャンプが好きで、テクノロジーとアナログな体験の両方を大切にしています。「人の記憶や思い出を支える道具」をテーマに、小さくても確実に役に立つサービスをつくり続けます。
