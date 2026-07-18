@@ -43,5 +43,8 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
+# wrangler dev のローカル状態
+/.wrangler/
+
 # プロジェクト内部ドキュメント（リポジトリには含めない）
 /CLAUDE.md
