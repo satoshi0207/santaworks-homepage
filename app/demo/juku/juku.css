@@ -33,6 +33,8 @@
     sans-serif;
   line-height: 1.9;
   -webkit-font-smoothing: antialiased;
+  /* 横オーバースクロールで下地の白が覗くのを防止（sticky維持のためclip） */
+  overflow-x: clip;
 }
 
 .asunaro *,

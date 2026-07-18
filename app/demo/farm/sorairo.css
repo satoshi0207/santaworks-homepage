@@ -34,6 +34,8 @@
   letter-spacing: 0.02em;
   word-break: keep-all;
   overflow-wrap: anywhere;
+  /* 横オーバースクロールで下地の白が覗くのを防止（sticky維持のためclip） */
+  overflow-x: clip;
 }
 
 .sorairo ::selection {

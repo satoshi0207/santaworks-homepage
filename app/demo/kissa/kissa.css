@@ -33,6 +33,8 @@
   font-family: var(--font-shippori), "Hiragino Mincho ProN", "Yu Mincho", serif;
   line-height: 1.95;
   -webkit-font-smoothing: antialiased;
+  /* 横オーバースクロールで下地の白が覗くのを防止（sticky維持のためclip） */
+  overflow-x: clip;
 }
 
 .omokage *,
