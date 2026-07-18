@@ -122,6 +122,13 @@ h3 {
   overflow-wrap: anywhere;
 }
 
+/* 長めの流し込み本文は、短句制御（keep-all）ではなく自然な日本語折り返しにする。
+   keep-all だと読点のない長い連なりが overflow-wrap で語中割れ・行末孤立を起こすため、
+   本文段落は normal に戻して禁則処理まかせで行を詰める（スマホで特に効く）。 */
+.site-content p.jp-flow {
+  word-break: normal;
+}
+
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,

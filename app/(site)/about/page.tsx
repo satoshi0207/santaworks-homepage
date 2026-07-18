@@ -29,10 +29,10 @@ export default function About() {
             もうひとりのサンタとして。
           </h1>
           <div className="max-w-2xl space-y-6 text-[clamp(1rem,2.2vw,1.1rem)] leading-[2.3]">
-            <p>
+            <p className="jp-flow">
               人の記憶は、あたたかくて、あいまいです。会った人の名前、交わした約束、大切な瞬間——忘れたくないのに、こぼれ落ちていくものがたくさんあります。
             </p>
-            <p>
+            <p className="jp-flow">
               Santa Works は、
               <strong className="font-bold text-accent">
                 テクノロジーで記憶と思い出に寄り添う
@@ -50,13 +50,13 @@ export default function About() {
           <h2 className="mb-6 text-[clamp(1.4rem,3.2vw,2rem)] font-extrabold">
             なぜ、サンタ？
           </h2>
-          <p className="max-w-2xl text-[clamp(1rem,2.2vw,1.1rem)] leading-[2.3]">
+          <p className="jp-flow max-w-2xl text-[clamp(1rem,2.2vw,1.1rem)] leading-[2.3]">
             代表の姓は「山田」。
             <strong className="font-bold text-accent">
               山（さん）＋田（た）＝サンタ
             </strong>
             ——
-            <br />
+            <br className="hidden md:block" />
             名前の中に、最初からサンタがいました。
             <br className="hidden md:block" />
             思い出を届ける存在の名を借りて、屋号は「Santa Works」に。
@@ -85,11 +85,11 @@ export default function About() {
                 YAMADA SATOSHI ／ Santa Works 代表
               </p>
               <div className="max-w-2xl space-y-4 text-[0.95rem] text-muted">
-                <p>
+                <p className="jp-flow">
                   2026年、屋号「Santa
                   Works」で開業。AIを相棒にしたものづくりで、LINEサービス「ポケメモ」などを開発・運営しています。
                 </p>
-                <p>
+                <p className="jp-flow">
                   ガジェットとキャンプが好きで、テクノロジーとアナログな体験の両方を大切にしています。「人の記憶や思い出を支える道具」をテーマに、小さくても確実に役に立つサービスをつくり続けます。
                 </p>
               </div>
