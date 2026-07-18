@@ -42,6 +42,8 @@ export function Reveal({ children, delay = 0, className = "", plain = false }: P
       setShown(true);
       return;
     }
+    // 画面内なら即表示に倒す（縦に長い要素だと threshold で発火せず不可視になるため、
+    // 「少しでも入ったら／少し手前で」発火。rootMarginで下端の手前でトリガー）
     const io = new IntersectionObserver(
       (entries) => {
         if (entries[0].isIntersecting) {
@@ -49,7 +51,7 @@ export function Reveal({ children, delay = 0, className = "", plain = false }: P
           io.disconnect();
         }
       },
-      { threshold: 0.15 },
+      { threshold: 0, rootMargin: "0px 0px -10% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();
