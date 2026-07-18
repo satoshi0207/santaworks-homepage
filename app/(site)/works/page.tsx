@@ -152,9 +152,16 @@ export default function Works() {
             デザインサンプル
           </h2>
           <p className="max-w-2xl text-muted">
+            {/* PCは読点なしで文単位に改行。スマホは長文の文中で折り返して「。」の孤立を防ぐ */}
             架空のお店・企業を想定したデモサイト集。
             <br />
-            「頼んだらこうなる」を実際に触って確かめられます。順次公開予定です。
+            「頼んだらこうなる」を<br className="md:hidden" />実際に触って確かめられます。
+            <br />
+            本デザインはテンプレートではなく、
+            <br className="md:hidden" />
+            もちろん細かな要望にも対応致します。
+            <br />
+            順次公開予定です。
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {samples.map((s) =>
