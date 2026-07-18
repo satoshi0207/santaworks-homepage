@@ -65,6 +65,55 @@ h3 {
   text-wrap: balance;
 }
 
+/* 「ふわぁ」出現アニメ（framer-motion廃止・CSSで実装）
+   FadeIn=読み込み時 / Reveal=スクロール到達時（JS側で .is-visible を付与） */
+@keyframes sw-fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+    filter: blur(9px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+.sw-fadein {
+  animation: sw-fade-in 1.6s cubic-bezier(0.16, 0.8, 0.3, 1) both;
+}
+.sw-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  filter: blur(9px);
+  transition:
+    opacity 1.1s cubic-bezier(0.16, 0.8, 0.3, 1),
+    transform 1.1s cubic-bezier(0.16, 0.8, 0.3, 1),
+    filter 1.1s cubic-bezier(0.16, 0.8, 0.3, 1);
+  will-change: opacity, transform;
+}
+.sw-reveal.sw-plain {
+  filter: none;
+  transition:
+    opacity 0.7s cubic-bezier(0.16, 0.8, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+.sw-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+  filter: blur(0);
+}
+@media (prefers-reduced-motion: reduce) {
+  .sw-fadein,
+  .sw-reveal {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
 /* 本体サイトの日本語本文（main内の段落）は、通常は読点・句点で改行し、
    読点のない長い連なりだけは見切れず折り返す。見出し h1〜h3 は対象外。
    ※ /demo/ 配下は (site) レイアウト外なので影響しない */
