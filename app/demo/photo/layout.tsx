@@ -8,12 +8,16 @@ const antique = Zen_Antique({
   variable: "--font-antique",
   weight: ["400"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const zkg = Zen_Kaku_Gothic_New({
   variable: "--font-zkg",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

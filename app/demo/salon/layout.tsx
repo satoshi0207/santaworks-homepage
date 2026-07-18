@@ -7,12 +7,16 @@ const cormorant = Cormorant_Garamond({
   weight: ["300", "400", "500"],
   style: ["normal", "italic"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const notoSerif = Noto_Serif_JP({
   variable: "--font-noto-serif",
   weight: ["300", "400", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

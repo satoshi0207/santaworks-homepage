@@ -9,12 +9,16 @@ const zenKaku = Zen_Kaku_Gothic_New({
   variable: "--font-zenkaku",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const zenOld = Zen_Old_Mincho({
   variable: "--font-zenold",
   weight: ["400", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

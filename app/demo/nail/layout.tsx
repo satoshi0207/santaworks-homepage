@@ -6,12 +6,16 @@ const zenMaru = Zen_Maru_Gothic({
   variable: "--font-zenmaru",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const quicksand = Quicksand({
   variable: "--font-quicksand",
   weight: ["400", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

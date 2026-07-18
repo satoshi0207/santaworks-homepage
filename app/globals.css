@@ -45,8 +45,10 @@
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
   --shadow-card: var(--card-shadow);
-  --font-sans: var(--font-noto-sans-jp), "Hiragino Kaku Gothic ProN",
-    "Hiragino Sans", "Yu Gothic", sans-serif;
+  /* 日本語はシステムフォント（iOS/mac: ヒラギノ、Win: Yu Gothic/Meiryo、
+     Android: システム標準）。Webフォント非依存で即描画・DL負荷ゼロ */
+  --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
+    "YuGothic", Meiryo, system-ui, -apple-system, sans-serif;
 }
 
 body {

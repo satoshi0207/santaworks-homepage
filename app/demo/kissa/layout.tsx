@@ -8,12 +8,16 @@ const decol = Kaisei_Decol({
   variable: "--font-decol",
   weight: ["400", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const shippori = Shippori_Mincho({
   variable: "--font-shippori",
   weight: ["400", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

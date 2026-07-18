@@ -6,6 +6,8 @@ const klee = Klee_One({
   variable: "--font-klee",
   weight: ["400", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const playfair = Playfair_Display({
@@ -13,6 +15,8 @@ const playfair = Playfair_Display({
   weight: ["400", "500", "600"],
   style: ["normal", "italic"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

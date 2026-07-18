@@ -8,12 +8,16 @@ const zkg = Zen_Kaku_Gothic_New({
   variable: "--font-zkg",
   weight: ["500", "700", "900"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["500", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

@@ -8,12 +8,16 @@ const mincho = Shippori_Mincho({
   variable: "--font-mincho",
   weight: ["400", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const cinzel = Cinzel({
   variable: "--font-cinzel",
   weight: ["400", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

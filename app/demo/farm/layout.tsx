@@ -8,6 +8,8 @@ const zenmaru = Zen_Maru_Gothic({
   variable: "--font-zenmaru",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const fraunces = Fraunces({
@@ -15,6 +17,8 @@ const fraunces = Fraunces({
   style: ["normal", "italic"],
   weight: ["400", "500", "600"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

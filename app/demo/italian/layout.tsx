@@ -9,12 +9,16 @@ const playfair = Playfair_Display({
   style: ["normal", "italic"],
   weight: ["400", "500", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const shippori = Shippori_Mincho({
   variable: "--font-shippori",
   weight: ["400", "500", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

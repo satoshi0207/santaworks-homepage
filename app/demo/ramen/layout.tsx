@@ -6,6 +6,8 @@ const shippori = Shippori_Mincho_B1({
   variable: "--font-shippori",
   weight: ["400", "600", "800"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

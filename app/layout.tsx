@@ -1,15 +1,9 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Noto_Sans_JP } from "next/font/google";
 import "./globals.css";
 
 // Google Analytics 4。NEXT_PUBLIC_GA_ID（例: G-XXXXXXXXXX）が設定されたときだけ有効化。
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
-
-const notoSansJP = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
-  subsets: ["latin"],
-});
 
 const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://santaworks.net";
@@ -116,7 +110,7 @@ export default function RootLayout({
       lang="ja"
       data-theme="dark"
       suppressHydrationWarning
-      className={`${notoSansJP.variable} h-full antialiased`}
+      className="h-full antialiased"
     >
       <body className="min-h-full">
         {/* チラつき防止: 保存済みの好みがあれば描画前に反映（既定はダーク） */}

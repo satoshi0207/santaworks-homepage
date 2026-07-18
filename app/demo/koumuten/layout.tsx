@@ -9,12 +9,16 @@ const biz = BIZ_UDPGothic({
   variable: "--font-biz",
   weight: ["400", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 const oswald = Oswald({
   variable: "--font-oswald",
   weight: ["500", "600", "700"],
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {

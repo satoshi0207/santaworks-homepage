@@ -6,6 +6,8 @@ const yuji = Yuji_Syuku({
   variable: "--font-yuji",
   weight: "400",
   subsets: ["latin"],
+  display: "swap",
+  preload: false,
 });
 
 export const metadata: Metadata = {
