@@ -75,7 +75,7 @@ export default function NailDemo() {
         <FadeIn delay={0.7}>
           <div className="n-hero-img">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/demo/nail/hero.jpg" alt="パステルカラーのネイル" />
+            <img src="/demo/nail/hero.webp" alt="パステルカラーのネイル" />
           </div>
         </FadeIn>
       </section>

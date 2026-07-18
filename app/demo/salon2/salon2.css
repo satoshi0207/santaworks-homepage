@@ -139,7 +139,7 @@
 .yh-hero-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/salon2/hero.jpg") center / cover;
+  background: url("/demo/salon2/hero.webp") center / cover;
   filter: grayscale(1) contrast(1.05);
 }
 

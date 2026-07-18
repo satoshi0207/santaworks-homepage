@@ -144,7 +144,7 @@
 .ht-hero-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/photo/hero.jpg") center / cover;
+  background: url("/demo/photo/hero.webp") center / cover;
 }
 
 .ht-hero::after {

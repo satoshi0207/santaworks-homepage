@@ -178,7 +178,7 @@
   position: relative;
   background:
     linear-gradient(100deg, rgba(20, 31, 44, 0.92) 30%, rgba(24, 39, 58, 0.55)),
-    url("/demo/factory/hero.jpg") center / cover no-repeat;
+    url("/demo/factory/hero.webp") center / cover no-repeat;
   color: #f3f1ec;
   padding: clamp(5rem, 13vw, 9rem) clamp(1.5rem, 6vw, 4rem);
 }
@@ -220,7 +220,7 @@
 .t-pagehead {
   background:
     linear-gradient(100deg, rgba(20, 31, 44, 0.94) 40%, rgba(36, 56, 78, 0.85)),
-    url("/demo/factory/hero.jpg") center 40% / cover no-repeat;
+    url("/demo/factory/hero.webp") center 40% / cover no-repeat;
   color: #f3f1ec;
   padding: clamp(3.2rem, 7vw, 5rem) clamp(1.5rem, 6vw, 4rem);
 }

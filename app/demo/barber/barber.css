@@ -176,7 +176,7 @@
 .bm-hero-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/barber/hero.jpg") center / cover;
+  background: url("/demo/barber/hero.webp") center / cover;
 }
 
 .bm-hero::after {

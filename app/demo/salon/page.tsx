@@ -40,7 +40,7 @@ export default function SalonDemo() {
         <FadeIn delay={0.7}>
           <figure className="s-hero-img">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/demo/salon/hero.jpg" alt="緑を背にした後ろ姿" />
+            <img src="/demo/salon/hero.webp" alt="緑を背にした後ろ姿" />
             <figcaption>hair atelier SUI-U</figcaption>
           </figure>
         </FadeIn>

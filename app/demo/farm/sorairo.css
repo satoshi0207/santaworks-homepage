@@ -151,7 +151,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("/demo/farm/hero.jpg") center 42% / cover no-repeat;
+  background: url("/demo/farm/hero.webp") center 42% / cover no-repeat;
 }
 .sr-hero-media::after {
   content: "";
@@ -352,7 +352,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("/demo/farm/pasture.jpg") center / cover no-repeat;
+  background: url("/demo/farm/pasture.webp") center / cover no-repeat;
 }
 .sr-exp-media::after {
   content: "";

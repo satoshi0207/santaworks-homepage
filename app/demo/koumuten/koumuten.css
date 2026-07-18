@@ -228,7 +228,7 @@
 .hd-hero-media {
   position: absolute;
   inset: 0;
-  background-image: url("/demo/koumuten/hero.jpg");
+  background-image: url("/demo/koumuten/hero.webp");
   background-size: cover;
   background-position: center;
   transform: scale(1.03);
@@ -583,7 +583,7 @@
 .hd-recruit-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/koumuten/recruit.jpg") center / cover;
+  background: url("/demo/koumuten/recruit.webp") center / cover;
 }
 
 .hd-recruit::after {

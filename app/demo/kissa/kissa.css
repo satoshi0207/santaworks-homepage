@@ -161,7 +161,7 @@
 .ok-hero-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/kissa/hero.jpg") center / cover;
+  background: url("/demo/kissa/hero.webp") center / cover;
 }
 
 .ok-hero::after {

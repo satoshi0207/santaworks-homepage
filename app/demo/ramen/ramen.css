@@ -67,7 +67,7 @@
 .r-hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url("/demo/ramen/hero.jpg");
+  background-image: url("/demo/ramen/hero.webp");
   background-size: cover;
   background-position: center 30%;
   animation: r-kenburns 24s ease-in-out infinite alternate;

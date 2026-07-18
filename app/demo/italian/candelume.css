@@ -149,7 +149,7 @@
   position: absolute;
   inset: 0;
   z-index: -2;
-  background: url("/demo/italian/hero.jpg") center 38% / cover no-repeat;
+  background: url("/demo/italian/hero.webp") center 38% / cover no-repeat;
 }
 .cd-hero-media::after {
   content: "";
@@ -385,7 +385,7 @@
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: url("/demo/italian/cantina.jpg") center / cover no-repeat;
+  background: url("/demo/italian/cantina.webp") center / cover no-repeat;
 }
 .cd-vino-media::after {
   content: "";

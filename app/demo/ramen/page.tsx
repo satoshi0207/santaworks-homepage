@@ -8,7 +8,7 @@ const kodawari = [
     num: "壱 ── 出汁",
     title: "鶏と煮干しの、重ね出汁。",
     body: "丸鶏をじっくり炊いた清湯に、瀬戸内の煮干しを重ねる。澄んでいるのに、深い。最後の一滴まで飲み干せる、体にしみる一杯です。",
-    img: "/demo/ramen/hero.jpg",
+    img: "/demo/ramen/hero.webp",
     alt: "澄んだ醤油スープの中華そば",
   },
   {

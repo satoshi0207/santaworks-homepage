@@ -104,7 +104,7 @@ export default function PianoDemo() {
         <FadeIn delay={0.5}>
           <figure className="p-hero-figure">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/demo/piano/hero.jpg" alt="やわらかな光の中のピアノの鍵盤" />
+            <img src="/demo/piano/hero.webp" alt="やわらかな光の中のピアノの鍵盤" />
             <div className="p-keys" aria-hidden="true" />
           </figure>
         </FadeIn>

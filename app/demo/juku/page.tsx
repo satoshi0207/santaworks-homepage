@@ -87,7 +87,7 @@ export default function JukuHome() {
           </div>
           <div className="as-hero-media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/demo/juku/hero.jpg" alt="あすなろの学習のイメージ" />
+            <img src="/demo/juku/hero.webp" alt="あすなろの学習のイメージ" />
             <div className="chip">
               <span className="n as-poppins">20</span>
               <span className="t">

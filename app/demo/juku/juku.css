@@ -540,7 +540,7 @@
 .as-results-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/juku/sakura.jpg") center / cover;
+  background: url("/demo/juku/sakura.webp") center / cover;
 }
 
 .as-results::after {

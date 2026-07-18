@@ -147,7 +147,7 @@
 .gz-hero-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/club/hero.jpg") center / cover;
+  background: url("/demo/club/hero.webp") center / cover;
   transform: scale(1.05);
   animation: gz-kenburns 24s ease-out forwards;
 }
@@ -368,7 +368,7 @@
 .gz-concept-media {
   position: absolute;
   inset: 0;
-  background: url("/demo/club/jewel.jpg") center / cover;
+  background: url("/demo/club/jewel.webp") center / cover;
   opacity: 0.28;
 }
 
