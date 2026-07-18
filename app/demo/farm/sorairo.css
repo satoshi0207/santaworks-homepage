@@ -1,0 +1,592 @@
+/* ============================================================
+   そらいろ牧場 — 架空の北海道・酪農牧場デモ
+   空色 × 牧草グリーン × 生成り × 大地のブラウン / 明るい大自然
+   Zen Maru Gothic × Fraunces
+   スコープ: .sorairo / prefix: sr-
+   ============================================================ */
+
+.sorairo {
+  --sr-sky: #7ec0e0;
+  --sr-sky-deep: #4d97c4;
+  --sr-grass: #7aa03f;
+  --sr-grass-deep: #4f7a35;
+  --sr-cream: #faf6ec;
+  --sr-cream-deep: #f0e8d6;
+  --sr-soil: #8a6a45;
+  --sr-ink: #3a4230;
+  --sr-ink-soft: #6b7358;
+  --sr-sun: #f0b53f;
+  --sr-line: #dcd2bd;
+
+  /* 架空地図（DemoMap）の配色 */
+  --map-bg: #eef3e2;
+  --map-road: #cbbf9f;
+  --map-road-thin: #ddd6bf;
+  --map-rail: #a9b58a;
+  --map-pin: #7aa03f;
+  --map-text: #5f6b4a;
+
+  background: var(--sr-cream);
+  color: var(--sr-ink);
+  font-family: var(--font-zenmaru), "Hiragino Maru Gothic ProN", sans-serif;
+  font-size: 16px;
+  line-height: 1.95;
+  letter-spacing: 0.02em;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
+}
+
+.sorairo ::selection {
+  background: var(--sr-grass);
+  color: var(--sr-cream);
+}
+
+.sorairo a {
+  text-decoration: none;
+}
+.sorairo a:not([class]) {
+  color: inherit;
+}
+
+.sorairo img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.sr-wrap {
+  max-width: 1120px;
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+.sr-en {
+  font-family: var(--font-fraunces), Georgia, serif;
+}
+
+/* ---------- ヘッダー ---------- */
+.sr-header {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  padding: 14px 24px;
+  background: rgba(250, 246, 236, 0.9);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--sr-line);
+}
+.sr-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-right: auto;
+  color: var(--sr-ink);
+}
+.sr-brand .mark {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  background: var(--sr-sky);
+  color: var(--sr-cream);
+  font-size: 1.1rem;
+}
+.sr-brand .name {
+  font-weight: 700;
+  font-size: 1.2rem;
+  letter-spacing: 0.06em;
+}
+.sr-brand .en {
+  display: block;
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 0.62rem;
+  letter-spacing: 0.24em;
+  color: var(--sr-ink-soft);
+}
+.sr-nav {
+  display: none;
+  gap: 26px;
+  font-size: 0.88rem;
+  letter-spacing: 0.06em;
+}
+.sr-nav a {
+  color: var(--sr-ink);
+  transition: color 0.25s;
+}
+.sr-nav a:hover {
+  color: var(--sr-grass-deep);
+}
+.sr-header-cta {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--sr-cream);
+  background: var(--sr-grass);
+  padding: 9px 18px;
+  border-radius: 999px;
+  transition: background 0.25s;
+}
+.sr-header-cta:hover {
+  background: var(--sr-grass-deep);
+}
+@media (min-width: 860px) {
+  .sr-nav {
+    display: flex;
+  }
+}
+
+/* ---------- ヒーロー ---------- */
+.sr-hero {
+  position: relative;
+  isolation: isolate;
+  min-height: 88svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+}
+.sr-hero-media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background: url("/demo/farm/hero.jpg") center 42% / cover no-repeat;
+}
+.sr-hero-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to bottom, rgba(58, 66, 48, 0.05) 0%, rgba(58, 66, 48, 0) 40%, rgba(58, 66, 48, 0.42) 100%);
+}
+.sr-hero-inner {
+  position: relative;
+  padding: 0 24px 72px;
+  max-width: 1120px;
+  margin-inline: auto;
+  width: 100%;
+  color: var(--sr-cream);
+}
+.sr-hero-eyebrow {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 0.82rem;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.4);
+}
+.sr-hero-title {
+  font-size: clamp(2.6rem, 8.5vw, 5.4rem);
+  font-weight: 700;
+  line-height: 1.15;
+  letter-spacing: 0.04em;
+  margin: 0 0 20px;
+  text-shadow: 0 2px 28px rgba(0, 0, 0, 0.45);
+}
+.sr-hero-copy {
+  font-size: clamp(1.05rem, 3vw, 1.4rem);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-shadow: 0 1px 16px rgba(0, 0, 0, 0.5);
+  max-width: 30em;
+}
+
+/* ゆるやかな雲の流れ（控えめ） */
+.sr-hero-cloud {
+  position: absolute;
+  top: 14%;
+  z-index: -1;
+  width: 220px;
+  height: 70px;
+  background: radial-gradient(closest-side, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0));
+  filter: blur(6px);
+  animation: sr-drift 34s linear infinite;
+  pointer-events: none;
+}
+.sr-hero-cloud.c2 {
+  top: 26%;
+  width: 160px;
+  opacity: 0.7;
+  animation-duration: 48s;
+  animation-delay: -12s;
+}
+@keyframes sr-drift {
+  from { transform: translateX(-260px); }
+  to { transform: translateX(105vw); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sr-hero-cloud {
+    animation: none;
+    opacity: 0.4;
+  }
+}
+
+/* ---------- セクション共通 ---------- */
+.sr-section {
+  padding: 90px 0;
+}
+.sr-label {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 0.86rem;
+  font-style: italic;
+  letter-spacing: 0.2em;
+  color: var(--sr-grass-deep);
+  margin-bottom: 8px;
+}
+.sr-heading {
+  font-size: clamp(1.5rem, 4.4vw, 2.15rem);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+  margin-bottom: 24px;
+}
+
+/* ---------- 牧場のこと ---------- */
+.sr-about {
+  background: linear-gradient(to bottom, var(--sr-cream), var(--sr-cream-deep));
+}
+.sr-about-grid {
+  display: grid;
+  gap: 48px;
+  align-items: center;
+}
+@media (min-width: 880px) {
+  .sr-about-grid {
+    grid-template-columns: 6fr 5fr;
+    gap: 72px;
+  }
+}
+.sr-about-text p {
+  margin-bottom: 1.3em;
+  color: var(--sr-ink);
+}
+.sr-about-sign {
+  font-weight: 700;
+  color: var(--sr-grass-deep);
+  margin-top: 24px;
+}
+.sr-about-photo {
+  position: relative;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 18px 40px rgba(58, 66, 48, 0.14);
+}
+.sr-about-photo img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+}
+
+/* ---------- 直売所（プロダクト） ---------- */
+.sr-shop-head {
+  text-align: center;
+  margin-bottom: 48px;
+}
+.sr-shop-head p {
+  color: var(--sr-ink-soft);
+}
+.sr-products {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 18px;
+}
+@media (min-width: 780px) {
+  .sr-products {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+}
+.sr-product {
+  background: var(--sr-cream);
+  border: 1px solid var(--sr-line);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 0.4s, box-shadow 0.4s;
+}
+.sr-product:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 16px 32px rgba(58, 66, 48, 0.12);
+}
+.sr-product-media {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+}
+.sr-product-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+.sr-product:hover .sr-product-media img {
+  transform: scale(1.06);
+}
+.sr-product-body {
+  padding: 16px 16px 20px;
+}
+.sr-product-body h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.sr-product-body .desc {
+  font-size: 0.82rem;
+  color: var(--sr-ink-soft);
+  line-height: 1.7;
+  margin-bottom: 10px;
+}
+.sr-product-body .price {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 1.05rem;
+  color: var(--sr-grass-deep);
+}
+
+/* ---------- 牧場体験（バンド） ---------- */
+.sr-exp {
+  position: relative;
+  isolation: isolate;
+  padding: 100px 0;
+  overflow: hidden;
+  color: var(--sr-cream);
+}
+.sr-exp-media {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: url("/demo/farm/pasture.jpg") center / cover no-repeat;
+}
+.sr-exp-media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, rgba(79, 122, 53, 0.86), rgba(58, 66, 48, 0.66));
+}
+.sr-exp .sr-label {
+  color: var(--sr-cream);
+  opacity: 0.9;
+}
+.sr-exp-lead {
+  max-width: 34em;
+  margin-bottom: 36px;
+  opacity: 0.95;
+}
+.sr-exp-list {
+  display: grid;
+  gap: 16px;
+}
+@media (min-width: 720px) {
+  .sr-exp-list {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+}
+.sr-exp-item {
+  background: rgba(250, 246, 236, 0.12);
+  border: 1px solid rgba(250, 246, 236, 0.28);
+  border-radius: 14px;
+  padding: 22px;
+  backdrop-filter: blur(2px);
+}
+.sr-exp-item .num {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  opacity: 0.8;
+}
+.sr-exp-item h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 6px 0 8px;
+}
+.sr-exp-item p {
+  font-size: 0.85rem;
+  opacity: 0.92;
+  line-height: 1.75;
+}
+
+/* ---------- ギャラリー ---------- */
+.sr-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+}
+@media (min-width: 720px) {
+  .sr-gallery-grid {
+    grid-template-columns: repeat(4, 1fr);
+    grid-auto-rows: 1fr;
+  }
+  .sr-gallery-grid figure.wide {
+    grid-column: span 2;
+    grid-row: span 2;
+  }
+}
+.sr-gallery-grid figure {
+  margin: 0;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.sr-gallery-grid img {
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  transition: transform 0.6s;
+}
+.sr-gallery-grid figure.wide img {
+  aspect-ratio: 1 / 1;
+}
+.sr-gallery-grid figure:hover img {
+  transform: scale(1.05);
+}
+
+/* ---------- アクセス ---------- */
+.sr-access-grid {
+  display: grid;
+  gap: 48px;
+}
+@media (min-width: 880px) {
+  .sr-access-grid {
+    grid-template-columns: 5fr 6fr;
+    gap: 56px;
+  }
+}
+.sr-info {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.92rem;
+}
+.sr-info th {
+  width: 7em;
+  text-align: left;
+  vertical-align: top;
+  padding: 13px 8px 13px 0;
+  color: var(--sr-grass-deep);
+  font-weight: 700;
+  border-bottom: 1px solid var(--sr-line);
+}
+.sr-info td {
+  padding: 13px 0;
+  color: var(--sr-ink);
+  border-bottom: 1px solid var(--sr-line);
+}
+.sr-info small {
+  color: var(--sr-ink-soft);
+}
+.sorairo .demo-map svg {
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--sr-line);
+  border-radius: 14px;
+}
+.sorairo .demo-map figcaption {
+  font-size: 0.78rem;
+  color: var(--sr-ink-soft);
+  margin-top: 8px;
+}
+
+/* ---------- フッター ---------- */
+.sr-footer {
+  background: var(--sr-grass-deep);
+  color: var(--sr-cream);
+  padding: 60px 0 90px;
+}
+.sr-footer-inner {
+  display: grid;
+  gap: 36px;
+}
+@media (min-width: 720px) {
+  .sr-footer-inner {
+    grid-template-columns: 1fr auto;
+    align-items: start;
+  }
+}
+.sr-footer .name {
+  font-size: 1.3rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+.sr-footer .en {
+  font-family: var(--font-fraunces), Georgia, serif;
+  font-size: 0.68rem;
+  letter-spacing: 0.22em;
+  opacity: 0.85;
+  margin-bottom: 16px;
+}
+.sr-footer .addr {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.9;
+}
+.sr-footer-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  font-size: 0.86rem;
+}
+.sr-footer-nav a {
+  color: var(--sr-cream);
+  opacity: 0.9;
+}
+.sr-footer-nav a:hover {
+  opacity: 1;
+  text-decoration: underline;
+}
+.sorairo .demo-sns {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 18px;
+  margin-top: 16px;
+}
+.sorairo .demo-sns a {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.82rem;
+  color: var(--sr-cream);
+  opacity: 0.85;
+  cursor: help;
+}
+.sorairo .demo-sns a:hover {
+  opacity: 1;
+}
+.sorairo .demo-sns .line-badge {
+  font-size: 0.62rem;
+  font-weight: 700;
+  border: 1px solid currentColor;
+  border-radius: 4px;
+  padding: 1px 5px;
+}
+.sr-footer-note {
+  margin-top: 44px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(250, 246, 236, 0.22);
+  font-size: 0.78rem;
+  opacity: 0.85;
+  line-height: 1.9;
+}
+.sr-footer-note a {
+  color: var(--sr-cream);
+  text-decoration: underline;
+}
+
+/* Santa Works バッジ */
+.sr-badge {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 60;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--sr-cream);
+  background: var(--sr-sky-deep);
+  padding: 8px 14px;
+  border-radius: 999px;
+  box-shadow: 0 6px 18px rgba(58, 66, 48, 0.28);
+  transition: background 0.25s;
+}
+.sr-badge:hover {
+  background: var(--sr-grass);
+}

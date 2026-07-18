@@ -122,4 +122,12 @@ export const samples: Sample[] = [
     name: "Osteria Candelume",
     thumb: "/demo/italian/vino.jpg",
   },
+  {
+    icon: "🐄",
+    label: "酪農牧場",
+    tone: "空色×牧草グリーン×生成り、大自然を主役にした明るい6次産業サイト",
+    href: "/demo/farm/",
+    name: "そらいろ牧場",
+    thumb: "/demo/farm/hero.jpg",
+  },
 ];
