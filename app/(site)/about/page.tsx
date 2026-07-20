@@ -75,8 +75,8 @@ export default function About() {
             <img
               src="/profile-illust.webp"
               alt="山田 悟司（イラスト）"
-              width={1000}
-              height={1250}
+              width={1100}
+              height={1467}
               className="mx-auto w-60 shrink-0 rounded-xl border border-line object-cover shadow-card sm:mx-0 sm:w-72"
             />
             <div>
