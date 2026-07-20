@@ -27,9 +27,31 @@ export default function Header() {
       <header className="fixed inset-x-0 top-0 z-20 flex items-center justify-between border-b border-line/60 bg-bg/80 px-5 py-4 backdrop-blur-md sm:px-8 lg:px-12">
         <Link
           href="/"
-          className="text-[1.05rem] font-extrabold tracking-wide text-ink"
+          aria-label="Santa Works"
+          className="flex items-center gap-2 text-[1.05rem] font-extrabold tracking-wide text-ink"
         >
-          Santa Works<span className="text-accent">.</span>
+          {/* ロゴマーク：山（稜線）＋星（記憶の欠片）。currentColor=accentで着色 */}
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 40 40"
+            aria-hidden="true"
+            className="shrink-0 text-accent"
+          >
+            <path
+              fill="currentColor"
+              d="M20 4c.5 4 2 5.5 6 6-4 .5-5.5 2-6 6-.5-4-2-5.5-6-6 4-.5 5.5-2 6-6Z"
+            />
+            <path
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="3.2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M5 34 L20 21 L35 34"
+            />
+          </svg>
+          <span>Santa Works<span className="text-accent">.</span></span>
         </Link>
         <div className="flex items-center gap-3 sm:gap-6">
           <nav aria-label="メイン" className="hidden gap-8 sm:flex">
