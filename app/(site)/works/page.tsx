@@ -39,12 +39,12 @@ const features: { img: string; title: string; body: string }[] = [
 export default function Works() {
   return (
     <div className="pt-16">
-      {/* 自社プロダクト */}
+      {/* プロダクト */}
       <section className="px-6 py-20 sm:px-10 md:py-28">
         <Reveal plain className="mx-auto max-w-5xl">
           <SectionLabel>Products</SectionLabel>
           <h1 className="mb-10 text-[clamp(1.6rem,3.8vw,2.4rem)] font-extrabold">
-            自社プロダクト
+            プロダクト
           </h1>
           <div className="grid items-center gap-10 md:grid-cols-2">
             <div>
