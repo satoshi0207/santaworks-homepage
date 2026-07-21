@@ -183,6 +183,14 @@ export default function Works() {
                       {s.badge}
                     </span>
                   ) : null}
+                  {s.password ? (
+                    <span className="absolute left-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-white shadow-card backdrop-blur-sm">
+                      🔒 閲覧パス
+                      <code className="font-mono text-[0.66rem] font-bold text-white">
+                        {s.password}
+                      </code>
+                    </span>
+                  ) : null}
                   <img
                     src={s.thumb}
                     alt=""
@@ -193,18 +201,12 @@ export default function Works() {
                     className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
                   />
                   <div className="flex flex-1 flex-col p-6">
-                    <h3 className="mb-1 text-[1.05rem] font-bold">
+                    <h3 className="mb-1 line-clamp-2 min-h-[2.75em] text-[1.05rem] font-bold leading-snug">
                       {s.icon} {s.label}「{s.name}」
                     </h3>
-                    <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
-                    {s.password ? (
-                      <p className="mb-3 text-[0.78rem] text-muted [word-break:keep-all]">
-                        🔒 閲覧パスワード
-                        <code className="mx-1 rounded bg-line/50 px-1.5 py-0.5 font-mono text-[0.8rem] font-bold text-ink">
-                          {s.password}
-                        </code>
-                      </p>
-                    ) : null}
+                    <p className="mb-4 line-clamp-2 min-h-[2.7em] text-[0.9rem] leading-snug text-muted">
+                      {s.tone}
+                    </p>
                     <span className="mt-auto block text-[0.85rem] font-bold text-accent">
                       {s.external ? "デモを見る（別タブ）→" : "デモを見る →"}
                     </span>
