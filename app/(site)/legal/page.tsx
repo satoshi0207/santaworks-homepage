@@ -18,8 +18,8 @@ export const metadata: Metadata = {
 const rows: { k: string; v: React.ReactNode }[] = [
   { k: "事業者名（販売業者）", v: "山田 悟司（屋号：Santa Works）" },
   { k: "運営統括責任者", v: "山田 悟司" },
-  { k: "所在地", v: "ご請求があれば遅滞なく開示いたします。" },
-  { k: "電話番号", v: "ご請求があれば遅滞なく開示いたします。" },
+  { k: "所在地", v: "〒152-0035 東京都目黒区自由が丘2-16-12 RJ3" },
+  { k: "電話番号", v: "050-5343-7214" },
   {
     k: "お問い合わせ",
     v: (
@@ -71,14 +71,14 @@ export default function Legal() {
             特定商取引法に基づく表記
           </h1>
           <p className="mb-10 text-[0.95rem] text-muted">
-            所在地および電話番号は、消費者からのご請求があった場合に遅滞なく開示します。ご希望の方は、
+            特定商取引法（特定商取引に関する法律）に基づき、以下のとおり表示します。ご不明な点は、
             <Link
               href="/contact/"
               className="font-bold text-accent hover:text-accent-strong"
             >
               お問い合わせフォーム
             </Link>
-            よりご連絡ください。
+            よりお気軽にご連絡ください。
           </p>
 
           <div className="overflow-hidden rounded-lg border border-line">
