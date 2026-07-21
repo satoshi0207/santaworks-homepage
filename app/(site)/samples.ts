@@ -7,9 +7,23 @@ export type Sample = {
   href?: string;
   name?: string;
   thumb?: string;
+  external?: boolean; // 外部サイトへのリンク（別タブで開く）。Shopify デモ等
+  badge?: string; // カードに出す技術バッジ（例: "Shopify"）
+  password?: string; // 外部ストアのストアフロントパスワード（開発ストアのため併記）
 };
 
 export const samples: Sample[] = [
+  {
+    icon: "☕",
+    label: "コーヒー通販（Shopify）",
+    tone: "生成り×焙煎茶、セリフ見出しのミニマル・スペシャルティEC。定期便・絞り込み対応の本物のShopifyテーマ",
+    href: "https://santaworks-demo.myshopify.com/",
+    name: "TOKINOWA COFFEE",
+    thumb: "/demo/tokinowa/thumb.webp",
+    external: true,
+    badge: "Shopify",
+    password: "eumein", // 開発ストアのストアフロントパスワード
+  },
   {
     icon: "🍜",
     label: "ラーメン店",

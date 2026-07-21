@@ -273,8 +273,16 @@ export default function Home() {
                 <a
                   key={s.label}
                   href={s.href}
+                  {...(s.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
                   className="group relative overflow-hidden rounded-lg border border-line shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
+                  {s.badge ? (
+                    <span className="absolute right-2 top-2 z-10 rounded-full bg-accent px-2 py-0.5 text-[0.6rem] font-bold tracking-[0.08em] text-white shadow-card">
+                      {s.badge}
+                    </span>
+                  ) : null}
                   <img
                     src={s.thumb}
                     alt=""
@@ -292,6 +300,14 @@ export default function Home() {
                     <span className="mt-0.5 block text-[0.64rem] text-white/75">
                       {s.icon} {s.label}
                     </span>
+                    {s.password ? (
+                      <span className="mt-1 block text-[0.6rem] leading-tight text-white/70">
+                        🔒 ストアパス:{" "}
+                        <span className="font-mono font-bold text-white/90">
+                          {s.password}
+                        </span>
+                      </span>
+                    ) : null}
                   </div>
                 </a>
               ))}

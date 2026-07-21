@@ -173,8 +173,16 @@ export default function Works() {
                 <a
                   key={s.label}
                   href={s.href}
-                  className="group overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
+                  {...(s.external
+                    ? { target: "_blank", rel: "noopener noreferrer" }
+                    : {})}
+                  className="group relative overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
+                  {s.badge ? (
+                    <span className="absolute right-3 top-3 z-10 rounded-full bg-accent px-2.5 py-1 text-[0.66rem] font-bold tracking-[0.1em] text-white shadow-card">
+                      {s.badge}
+                    </span>
+                  ) : null}
                   <img
                     src={s.thumb}
                     alt=""
@@ -189,8 +197,17 @@ export default function Works() {
                       {s.icon} {s.label}「{s.name}」
                     </h3>
                     <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
+                    {s.password ? (
+                      <p className="mb-3 text-[0.78rem] text-muted [word-break:keep-all]">
+                        🔒 開発ストアのため、ストアパスワード
+                        <code className="mx-1 rounded bg-line/50 px-1.5 py-0.5 font-mono text-[0.8rem] font-bold text-ink">
+                          {s.password}
+                        </code>
+                        でご覧いただけます。
+                      </p>
+                    ) : null}
                     <span className="text-[0.85rem] font-bold text-accent">
-                      デモを見る →
+                      {s.external ? "デモを見る（別タブ）→" : "デモを見る →"}
                     </span>
                   </div>
                 </a>
