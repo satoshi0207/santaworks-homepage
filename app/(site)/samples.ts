@@ -16,7 +16,7 @@ export const samples: Sample[] = [
   {
     icon: "☕",
     label: "コーヒー通販（Shopify）",
-    tone: "生成り×焙煎茶、セリフ見出しのミニマル・スペシャルティEC。定期便・絞り込み対応の本物のShopifyテーマ",
+    tone: "生成り×焙煎茶、セリフ見出しのミニマルなコーヒーEC",
     href: "https://santaworks-demo.myshopify.com/",
     name: "TOKINOWA COFFEE",
     thumb: "/demo/tokinowa/thumb.webp",

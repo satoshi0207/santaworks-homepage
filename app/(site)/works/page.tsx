@@ -176,7 +176,7 @@ export default function Works() {
                   {...(s.external
                     ? { target: "_blank", rel: "noopener noreferrer" }
                     : {})}
-                  className="group relative overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
+                  className="group relative flex flex-col overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
                   {s.badge ? (
                     <span className="absolute right-3 top-3 z-10 rounded-full bg-accent px-2.5 py-1 text-[0.66rem] font-bold tracking-[0.1em] text-white shadow-card">
@@ -192,21 +192,20 @@ export default function Works() {
                     height={450}
                     className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
                   />
-                  <div className="p-6">
+                  <div className="flex flex-1 flex-col p-6">
                     <h3 className="mb-1 text-[1.05rem] font-bold">
                       {s.icon} {s.label}「{s.name}」
                     </h3>
                     <p className="mb-3 text-[0.9rem] text-muted">{s.tone}</p>
                     {s.password ? (
                       <p className="mb-3 text-[0.78rem] text-muted [word-break:keep-all]">
-                        🔒 開発ストアのため、ストアパスワード
+                        🔒 閲覧パスワード
                         <code className="mx-1 rounded bg-line/50 px-1.5 py-0.5 font-mono text-[0.8rem] font-bold text-ink">
                           {s.password}
                         </code>
-                        でご覧いただけます。
                       </p>
                     ) : null}
-                    <span className="text-[0.85rem] font-bold text-accent">
+                    <span className="mt-auto block text-[0.85rem] font-bold text-accent">
                       {s.external ? "デモを見る（別タブ）→" : "デモを見る →"}
                     </span>
                   </div>
