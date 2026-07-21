@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import SectionLabel from "@/components/SectionLabel";
 import { Reveal } from "@/components/motion";
+import CopyPassword from "@/components/CopyPassword";
 import { samples } from "../samples";
 
 export const metadata: Metadata = {
@@ -170,48 +171,46 @@ export default function Works() {
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
             {samples.map((s) =>
               s.href ? (
-                <a
+                <div
                   key={s.label}
-                  href={s.href}
-                  {...(s.external
-                    ? { target: "_blank", rel: "noopener noreferrer" }
-                    : {})}
                   className="group relative flex flex-col overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45"
                 >
                   {s.badge ? (
-                    <span className="absolute right-3 top-3 z-10 rounded-full bg-accent px-2.5 py-1 text-[0.66rem] font-bold tracking-[0.1em] text-white shadow-card">
+                    <span className="absolute right-3 top-3 z-20 rounded-full bg-accent px-2.5 py-1 text-[0.66rem] font-bold tracking-[0.1em] text-white shadow-card">
                       {s.badge}
                     </span>
                   ) : null}
-                  {s.password ? (
-                    <span className="absolute left-3 top-3 z-10 inline-flex items-center gap-1 rounded-full bg-black/55 px-2.5 py-1 text-[0.62rem] font-bold tracking-wide text-white shadow-card backdrop-blur-sm">
-                      🔒 閲覧パス
-                      <code className="font-mono text-[0.66rem] font-bold text-white">
-                        {s.password}
-                      </code>
-                    </span>
-                  ) : null}
-                  <img
-                    src={s.thumb}
-                    alt=""
-                    aria-hidden="true"
-                    decoding="async"
-                    width={600}
-                    height={450}
-                    className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <div className="flex flex-1 flex-col p-6">
-                    <h3 className="mb-1 line-clamp-2 min-h-[2.75em] text-[1.05rem] font-bold leading-snug">
-                      {s.icon} {s.label}「{s.name}」
-                    </h3>
-                    <p className="mb-4 line-clamp-2 min-h-[2.7em] text-[0.9rem] leading-snug text-muted">
-                      {s.tone}
-                    </p>
-                    <span className="mt-auto block text-[0.85rem] font-bold text-accent">
-                      {s.external ? "デモを見る（別タブ）→" : "デモを見る →"}
-                    </span>
-                  </div>
-                </a>
+                  {s.password ? <CopyPassword password={s.password} /> : null}
+                  {/* カード全面をリンクに（stretched link）。コピーボタンは前面(z-20)で遷移しない */}
+                  <a
+                    href={s.href}
+                    {...(s.external
+                      ? { target: "_blank", rel: "noopener noreferrer" }
+                      : {})}
+                    className="flex flex-1 flex-col after:absolute after:inset-0 after:z-0"
+                  >
+                    <img
+                      src={s.thumb}
+                      alt=""
+                      aria-hidden="true"
+                      decoding="async"
+                      width={600}
+                      height={450}
+                      className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="flex flex-1 flex-col p-6">
+                      <h3 className="mb-1 line-clamp-2 min-h-[2.75em] text-[1.05rem] font-bold leading-snug">
+                        {s.icon} {s.label}「{s.name}」
+                      </h3>
+                      <p className="mb-4 line-clamp-2 min-h-[2.7em] text-[0.9rem] leading-snug text-muted">
+                        {s.tone}
+                      </p>
+                      <span className="mt-auto block text-[0.85rem] font-bold text-accent">
+                        {s.external ? "デモを見る（別タブ）→" : "デモを見る →"}
+                      </span>
+                    </div>
+                  </a>
+                </div>
               ) : (
                 <div
                   key={s.label}
