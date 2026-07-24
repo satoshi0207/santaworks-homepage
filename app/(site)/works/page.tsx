@@ -17,7 +17,7 @@ export const metadata: Metadata = {
   },
 };
 
-const POKEMEMO_URL = "https://pocket-memory-501921.web.app";
+const POKEMEMO_URL = "https://pokememo.santaworks.net";
 
 const features: { img: string; title: string; body: string }[] = [
   {
@@ -66,19 +66,7 @@ export default function Works() {
               <p className="mb-6 text-[0.95rem] text-muted [word-break:keep-all] [overflow-wrap:anywhere]">
                 会った人のことや話した内容を、LINEでそっと記録。次に会う前に見返せば、会話がもっとスムーズに。接客・商談・対人業務のための記憶サポートサービスです。アプリのインストール不要、LINEの友だち追加だけで始められます。
               </p>
-              <ul className="mb-7 flex flex-wrap gap-2">
-                {["LINE Messaging API", "Python / FastAPI", "Cloud Run", "Turso"].map(
-                  (t) => (
-                    <li
-                      key={t}
-                      className="rounded-full border border-line px-3 py-1 text-[0.78rem] tracking-wide text-muted"
-                    >
-                      {t}
-                    </li>
-                  ),
-                )}
-              </ul>
-              <div className="flex flex-wrap items-center gap-5">
+              <div className="mt-7 flex flex-wrap items-center gap-5">
                 <a
                   href={POKEMEMO_URL}
                   target="_blank"
