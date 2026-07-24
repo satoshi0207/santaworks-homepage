@@ -21,6 +21,13 @@ const SHORTLINKS = {
   "/youtube": "youtube",
 };
 
+// 個別の宛先を持つ短縮（プロダクト直行など）。宛先は絶対URLで指定。
+// 面別UTMは宛先URL側に含めておく（プロダクトLPで /px ビーコンが拾う）。
+const SHORTLINKS_TO = {
+  // X固定ツイート → ポケメモLP（campaign=pin で固定経由の追加を計測）
+  "/pm": "https://pokememo.santaworks.net/?utm_source=x&utm_campaign=pin",
+};
+
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
@@ -33,8 +40,10 @@ export default {
       return Response.redirect(url.toString(), 301);
     }
 
-    // 短縮パス（/x・/note・/youtube。末尾スラッシュ有無どちらも）→ 面別UTM付きでトップへ 302
-    const src = SHORTLINKS[url.pathname.replace(/\/+$/, "")];
+    const path = url.pathname.replace(/\/+$/, ""); // 末尾スラッシュ有無を吸収
+
+    // 短縮パス（/x・/note・/youtube）→ 面別UTM付きでトップ（屋号＝全事業の入口）へ 302
+    const src = SHORTLINKS[path];
     if (src) {
       const dest = new URL(url.toString());
       dest.hostname = CANONICAL_HOST;
@@ -43,6 +52,12 @@ export default {
       dest.pathname = "/";
       dest.search = `?utm_source=${src}&utm_campaign=profile`;
       return Response.redirect(dest.toString(), 302);
+    }
+
+    // 個別宛先の短縮（/pm＝ポケメモLP直行 など）→ 宛先URLへ 302
+    const to = SHORTLINKS_TO[path];
+    if (to) {
+      return Response.redirect(to, 302);
     }
 
     // 通常は静的アセットをそのまま配信
