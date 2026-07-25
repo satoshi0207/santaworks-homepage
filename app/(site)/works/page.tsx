@@ -157,7 +157,7 @@ export default function Works() {
             写真はすべて商用利用可のフリー素材です。肖像権・プライバシー保護の観点から、人物の顔が写る素材は使用していません。店名・住所等はすべて架空です。
           </p>
           <div className="mt-10 grid gap-5 sm:grid-cols-2">
-            {samples.map((s) =>
+            {samples.map((s, i) =>
               s.href ? (
                 <div
                   key={s.label}
@@ -177,10 +177,13 @@ export default function Works() {
                       : {})}
                     className="flex flex-1 flex-col after:absolute after:inset-0 after:z-0"
                   >
+                    {/* サンプルは増え続けるので、最初の2枚以外は遅延読み込みにする
+                        （一覧を開いた時点で全サムネを取りに行かせない） */}
                     <img
                       src={s.thumb}
                       alt=""
                       aria-hidden="true"
+                      loading={i < 2 ? "eager" : "lazy"}
                       decoding="async"
                       width={600}
                       height={450}
