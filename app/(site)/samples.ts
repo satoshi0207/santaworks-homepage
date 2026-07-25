@@ -14,6 +14,14 @@ export type Sample = {
 
 export const samples: Sample[] = [
   {
+    icon: "🩺",
+    label: "内科クリニック",
+    tone: "白×セージグリーン、UD書体と大きな文字で「読みやすさ」を主役にした多ページ構成",
+    href: "/demo/naika/",
+    name: "そよぎ内科クリニック",
+    thumb: "/demo/naika/thumb.webp",
+  },
+  {
     icon: "☕",
     label: "コーヒー通販（Shopify）",
     tone: "生成り×焙煎茶、セリフ見出しのミニマルなコーヒーEC",
