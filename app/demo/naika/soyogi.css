@@ -35,6 +35,11 @@
   --map-pin: #47664f;
   --map-text: #58635b;
 
+  /* 本文の左端をそろえる軸。PCでは 見出し列(19rem) + 本文列 の2カラムにする */
+  --wrap: 1140px;
+  --rail: 19rem;
+  --gutter: clamp(1.15rem, 4vw, 2.4rem);
+
   color: var(--ink);
   background: var(--paper);
   font-family: var(--font-biz), "BIZ UDPGothic", "Hiragino Sans", "Noto Sans JP",
@@ -107,9 +112,9 @@
 }
 
 .sy-wrap {
-  width: min(1060px, 100%);
+  width: min(var(--wrap), 100%);
   margin-inline: auto;
-  padding-inline: clamp(1.15rem, 4vw, 2.4rem);
+  padding-inline: var(--gutter);
 }
 
 .sy-vh {
@@ -367,7 +372,7 @@
 }
 
 .sy-hero-media {
-  border-radius: 18px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 20px 40px -28px rgba(47, 72, 55, 0.55);
 }
@@ -439,14 +444,15 @@
   text-underline-offset: 0.2em;
 }
 
-/* ---------- セクション共通 ---------- */
+/* ---------- セクション共通 ----------
+   帯で塗り分けるのをやめ、罫線と余白で区切る。
+   色を敷くのはヒーロー・「初めての方へ」・最後のCTAだけに絞る */
 .sy-section {
-  padding-block: clamp(2.8rem, 7vw, 4.6rem);
+  padding-block: clamp(2.8rem, 7vw, 4.8rem);
 }
 
-.sy-band {
-  background: var(--sage-soft);
-  border-block: 1px solid var(--sage-line);
+.sy-section + .sy-section {
+  border-top: 1px solid var(--line);
 }
 
 .sy-beige {
@@ -458,27 +464,38 @@
   margin-bottom: clamp(1.4rem, 4vw, 2.2rem);
 }
 
-.sy-shead .en {
-  margin: 0 0 0.35rem;
-  font-family: var(--font-barlow), sans-serif;
-  font-size: 0.76rem;
-  font-weight: 600;
-  letter-spacing: 0.2em;
-  text-transform: uppercase;
-  color: var(--sage-deep);
-}
-
 .sy-shead h2 {
   margin: 0;
-  font-size: clamp(1.4rem, 4.4vw, 1.9rem);
+  font-size: clamp(1.45rem, 4.4vw, 2rem);
   font-weight: 700;
-  line-height: 1.5;
+  line-height: 1.45;
+  letter-spacing: 0.02em;
 }
 
 .sy-shead h2 + p {
-  margin: 0.8rem 0 0;
-  max-width: 40rem;
+  margin: 0.9rem 0 0;
+  max-width: 34rem;
+  font-size: 0.98rem;
   color: var(--sub);
+}
+
+/* 見出し列＋本文列。左端の軸を全セクションでそろえるのが肝 */
+.sy-rail {
+  display: grid;
+  gap: clamp(1.4rem, 4vw, 2.2rem);
+}
+
+.sy-rail > .sy-shead {
+  margin-bottom: 0;
+}
+
+.sy-rail-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  margin-top: 1.4rem;
+  border-radius: 4px;
 }
 
 /* ---------- お知らせ ---------- */
@@ -490,14 +507,15 @@
   gap: 0.9rem;
 }
 
+.sy-news {
+  border-top: 1px solid var(--line);
+}
+
 .sy-news li {
   display: grid;
-  gap: 0.3rem 1rem;
-  padding: 1.1rem 1.3rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-left: 5px solid var(--sage);
-  border-radius: 10px;
+  gap: 0.35rem 1rem;
+  padding-block: 1.5rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .sy-news .meta {
@@ -505,6 +523,10 @@
   align-items: center;
   gap: 0.7rem;
   flex-wrap: wrap;
+}
+
+.sy-news h3 {
+  line-height: 1.55;
 }
 
 .sy-news time {
@@ -546,10 +568,7 @@
 .sy-hours {
   width: 100%;
   border-collapse: collapse;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
+  border-top: 2px solid var(--sage-deep);
 }
 
 .sy-hours caption {
@@ -569,7 +588,6 @@
 }
 
 .sy-hours thead th {
-  background: var(--sage-soft);
   color: var(--sage-dark);
   font-weight: 700;
   font-size: 0.94rem;
@@ -643,42 +661,45 @@
   margin-top: 0.3rem;
 }
 
-/* ---------- カード ---------- */
+/* ---------- 診療内容の一覧（カードをやめて罫線で区切る） ---------- */
 .sy-cards {
   display: grid;
-  gap: 1rem;
+  border-top: 1px solid var(--line);
 }
 
 .sy-card {
-  display: flex;
-  flex-direction: column;
-  padding: 1.5rem 1.5rem 1.6rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--line);
 }
 
 .sy-card h3 {
-  margin: 0 0 0.6rem;
-  font-size: 1.1rem;
+  margin: 0 0 0.5rem;
+  font-size: 1.12rem;
   font-weight: 700;
   line-height: 1.5;
 }
 
-.sy-card h3 .ico {
+/* アイコンは箱に入れず、線画のまま行の外にぶら下げる */
+.sy-card-ico {
   display: grid;
-  place-items: center;
-  width: 40px;
-  height: 40px;
-  margin-bottom: 0.7rem;
-  border-radius: 10px;
-  background: var(--sage-soft);
-  color: var(--sage-deep);
+  grid-template-columns: 2.3rem minmax(0, 1fr);
+  gap: 0 0.9rem;
 }
 
-.sy-card h3 .ico svg {
-  width: 22px;
-  height: 22px;
+.sy-card-ico > * {
+  grid-column: 2;
+}
+
+.sy-card-ico > .ico {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  padding-top: 0.25rem;
+  color: var(--sage);
+}
+
+.sy-card-ico > .ico svg {
+  width: 24px;
+  height: 24px;
 }
 
 .sy-card p {
@@ -698,6 +719,10 @@
   margin-top: 0.2rem;
 }
 
+.sy-card ul + .sy-note {
+  margin-top: 0.8rem;
+}
+
 /* ---------- 初診の流れ（番号付きの手順） ---------- */
 .sy-steps {
   counter-reset: step;
@@ -705,33 +730,30 @@
   margin: 0;
   padding: 0;
   display: grid;
-  gap: 1rem;
+  border-top: 1px solid var(--beige-deep);
 }
 
+/* 番号は飾りではなく本当に順番なので、数字そのものを見せる */
 .sy-steps li {
-  position: relative;
   counter-increment: step;
-  padding: 1.4rem 1.5rem 1.5rem 4.2rem;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 14px;
+  display: grid;
+  grid-template-columns: 3.4rem minmax(0, 1fr);
+  padding-block: 1.6rem;
+  border-bottom: 1px solid var(--beige-deep);
+}
+
+.sy-steps li > * {
+  grid-column: 2;
 }
 
 .sy-steps li::before {
-  content: counter(step);
-  position: absolute;
-  left: 1.3rem;
-  top: 1.35rem;
-  display: grid;
-  place-items: center;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  background: var(--sage-deep);
-  color: #fff;
+  content: counter(step, decimal-leading-zero);
   font-family: var(--font-barlow), sans-serif;
-  font-size: 1.02rem;
-  font-weight: 700;
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.45;
+  color: var(--sage);
 }
 
 .sy-steps h3 {
@@ -749,10 +771,10 @@
 /* ---------- 写真 ---------- */
 .sy-figure {
   margin: 0;
-  border-radius: 14px;
-  overflow: hidden;
-  background: var(--white);
-  border: 1px solid var(--line);
+}
+
+.sy-figure img {
+  border-radius: 4px;
 }
 
 .sy-figure img {
@@ -762,30 +784,15 @@
 }
 
 .sy-figure figcaption {
-  padding: 0.8rem 1.1rem 1rem;
-  font-size: 0.9rem;
+  padding: 0.75rem 0 0;
+  font-size: 0.88rem;
+  line-height: 1.6;
   color: var(--sub);
 }
 
 .sy-gallery {
   display: grid;
   gap: 1rem;
-}
-
-/* 見出しの横に写真を1枚（文章だけの区間が続かないように） */
-.sy-shead-media {
-  display: grid;
-  gap: clamp(1.2rem, 3vw, 2rem);
-  align-items: center;
-}
-
-.sy-shead-photo {
-  display: block;
-  width: 100%;
-  aspect-ratio: 3 / 2;
-  object-fit: cover;
-  border-radius: 14px;
-  border: 1px solid var(--sage-line);
 }
 
 /* ---------- 2カラム（文章＋写真） ---------- */
@@ -985,25 +992,18 @@
 /* ---------- 施設情報の定義リスト ---------- */
 .sy-info {
   margin: 0;
-  background: var(--white);
-  border: 1px solid var(--line);
-  border-radius: 12px;
-  overflow: hidden;
+  border-top: 1px solid var(--line);
 }
 
 .sy-info > div {
   display: grid;
-  grid-template-columns: 7.5rem 1fr;
+  grid-template-columns: 7rem 1fr;
+  gap: 0 1.2rem;
   border-bottom: 1px solid var(--line);
 }
 
-.sy-info > div:last-child {
-  border-bottom: none;
-}
-
 .sy-info dt {
-  padding: 0.9rem 1rem;
-  background: var(--sage-soft);
+  padding: 0.95rem 0;
   color: var(--sage-dark);
   font-size: 0.92rem;
   font-weight: 700;
@@ -1011,8 +1011,27 @@
 
 .sy-info dd {
   margin: 0;
-  padding: 0.9rem 1.2rem;
+  padding: 0.95rem 0;
   font-size: 0.98rem;
+}
+
+/* 箱で見せたほうがよいものだけ、明示的に箱にする（持ち物リストなど） */
+.sy-panel {
+  padding: clamp(1.2rem, 3vw, 1.7rem);
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+}
+
+.sy-panel ul {
+  list-style: disc;
+  padding-left: 1.2rem;
+  font-size: 0.96rem;
+  color: var(--sub);
+}
+
+.sy-panel ul li::marker {
+  color: var(--sage);
 }
 
 /* ---------- ダミーフォーム ---------- */
@@ -1078,20 +1097,21 @@
 }
 
 .sy-cta-inner {
-  padding-block: clamp(2.4rem, 6vw, 3.6rem);
-  text-align: center;
+  display: grid;
+  gap: 1.8rem;
+  padding-block: clamp(2.6rem, 6vw, 4rem);
 }
 
 .sy-cta h2 {
   margin: 0 0 0.7rem;
-  font-size: clamp(1.3rem, 4vw, 1.7rem);
+  font-size: clamp(1.35rem, 4vw, 1.85rem);
   font-weight: 700;
-  line-height: 1.55;
+  line-height: 1.5;
 }
 
 .sy-cta p {
-  margin: 0 auto 1.8rem;
-  max-width: 34rem;
+  margin: 0;
+  max-width: 30rem;
   color: #dbe6dd;
   font-size: 0.98rem;
 }
@@ -1099,10 +1119,9 @@
 .sy-cta-tel {
   display: inline-flex;
   flex-direction: column;
-  align-items: center;
   gap: 0.2rem;
   min-height: 44px;
-  margin-bottom: 1.4rem;
+  margin-bottom: 1.3rem;
   color: #fff;
 }
 
@@ -1127,7 +1146,6 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.8rem;
-  justify-content: center;
 }
 
 .sy-cta .sy-btn-outline {
@@ -1345,10 +1363,6 @@
 
 /* ---------- 画面幅ごとの調整（モバイルを基準に拡張） ---------- */
 @media (min-width: 700px) {
-  .sy-cards {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   .sy-honest {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1378,12 +1392,12 @@
 
 @media (min-width: 900px) {
   /* ヒーローの写真だけは右端まで抜く（左は本文と同じ位置に揃えたまま）。
-     幅の内訳＝左マージン:(画面幅-1060px)/2 ＋ 本文と同じ内側余白、右は0 */
+     幅の内訳＝左マージン:(画面幅-本文幅)/2 ＋ 本文と同じ内側余白、右は0 */
   .sy-hero-inner {
     width: auto;
     max-width: none;
-    margin-inline: calc(max(0px, 100% - 1060px) / 2) 0;
-    padding-inline: clamp(1.15rem, 4vw, 2.4rem) 0;
+    margin-inline: calc(max(0px, 100% - var(--wrap)) / 2) 0;
+    padding-inline: var(--gutter) 0;
     grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
     column-gap: clamp(1.8rem, 4vw, 3.2rem);
     row-gap: 1.5rem;
@@ -1414,7 +1428,7 @@
     grid-column: 2;
     grid-row: 1 / span 2;
     align-self: center;
-    border-radius: 18px 0 0 18px;
+    border-radius: 4px 0 0 4px;
   }
 
   .sy-split {
@@ -1426,12 +1440,49 @@
     aspect-ratio: 4 / 5;
   }
 
-  .sy-shead-media {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
-  }
-
   .sy-steps {
     gap: 1.1rem;
+  }
+}
+
+/* PCは「左に見出し・右に本文」の非対称2カラム。
+   本文の行長が自然に40字前後に収まり、見出しの左端が全セクションでそろう */
+@media (min-width: 1000px) {
+  .sy-rail,
+  .sy-whead {
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.4rem);
+  }
+
+  .sy-whead {
+    display: grid;
+    align-items: end;
+  }
+
+  .sy-whead h2 + p {
+    margin-top: 0;
+  }
+
+  /* 見出しは読んでいる間ずっと視界に残す */
+  .sy-rail > .sy-shead {
+    position: sticky;
+    top: 5.6rem;
+    align-self: start;
+  }
+
+  .sy-shead h2 {
+    font-size: 1.95rem;
+  }
+
+  /* 最後のCTAも同じ軸に。左に呼びかけ、右に電話番号と予約 */
+  .sy-cta-inner {
+    grid-template-columns: var(--rail) minmax(0, 1fr);
+    gap: clamp(2rem, 4vw, 3.4rem);
+    align-items: center;
+  }
+
+  .sy-cta h2 {
+    font-size: 1.6rem;
   }
 }
 

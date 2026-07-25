@@ -84,10 +84,10 @@ const vaccines = [
 export default function Shinryo() {
   return (
     <>
-      <PageHead en="Medical" title="診療案内" />
+      <PageHead title="診療案内" />
 
       <section className="sy-section">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
             <h2>かかりつけ医として診ていること</h2>
             <p>
@@ -115,10 +115,9 @@ export default function Shinryo() {
       </section>
 
       {/* 正直に線を引く。ここが患者さんの無駄足を防ぐ */}
-      <section className="sy-section sy-band" aria-labelledby="honest-h">
+      <section className="sy-section" aria-labelledby="honest-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Scope</p>
+          <div className="sy-shead sy-whead">
             <h2 id="honest-h">当院で診られること・診られないこと</h2>
             <p>
               先にお伝えしておくほうが、患者さんの時間を無駄にしません。
@@ -166,8 +165,7 @@ export default function Shinryo() {
       {/* 自費項目：費用・内容・主な副反応をそろえて書く */}
       <section className="sy-section" aria-labelledby="price-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Fee</p>
+          <div className="sy-shead sy-whead">
             <h2 id="price-h">保険が使えない項目の費用</h2>
             <p>
               下記は自費（保険適用外）の項目です。費用・内容・起こりうる副反応をあらかじめご確認ください。
@@ -202,37 +200,43 @@ export default function Shinryo() {
       </section>
 
       <section className="sy-section sy-beige" aria-labelledby="h-hours">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Hours</p>
             <h2 id="h-hours">診療時間</h2>
+            <p>受付は診療終了の30分前まで。予約がなくても受診できます。</p>
           </div>
-          <Hours />
+          <div>
+            <Hours />
+          </div>
         </div>
       </section>
 
       <section className="sy-cta">
         <div className="sy-wrap sy-cta-inner">
-          <h2>受診してよいか迷うときも、お電話ください</h2>
-          <p>症状のご相談だけでも構いません。受付時間内はスタッフが応対します。</p>
-          <a className="sy-cta-tel" href={CLINIC.telHref}>
-            <span className="num">{CLINIC.tel}</span>
-            <small>
-              午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
-            </small>
-          </a>
-          <div className="sy-cta-actions">
-            <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
-              Web予約
-            </Link>
-            <Link className="sy-btn-outline" href="/demo/naika/access/">
-              初診の流れを見る
-            </Link>
+          <div>
+            <h2>受診してよいか迷うときも、お電話ください</h2>
+            <p>症状のご相談だけでも構いません。受付時間内はスタッフが応対します。</p>
           </div>
-          <p className="sy-note">
-            <IconPhone />
-            ※ デザインサンプルのため、電話・予約はいずれも架空です。
-          </p>
+          <div>
+            <a className="sy-cta-tel" href={CLINIC.telHref}>
+              <span className="num">{CLINIC.tel}</span>
+              <small>
+                午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
+              </small>
+            </a>
+            <div className="sy-cta-actions">
+              <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
+                Web予約
+              </Link>
+              <Link className="sy-btn-outline" href="/demo/naika/access/">
+                初診の流れを見る
+              </Link>
+            </div>
+            <p className="sy-note">
+              <IconPhone />
+              ※ デザインサンプルのため、電話・予約はいずれも架空です。
+            </p>
+          </div>
         </div>
       </section>
     </>

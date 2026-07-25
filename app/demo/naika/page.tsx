@@ -147,10 +147,10 @@ export default function SoyogiTop() {
 
       {/* お知らせ：制度の変更は患者さんがいちばん知りたい情報 */}
       <section className="sy-section" aria-labelledby="news-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">News</p>
             <h2 id="news-h">お知らせ</h2>
+            <p>診療時間の変更や、制度の切り替わりをここに載せます。</p>
           </div>
           <ul className="sy-news">
             {news.map((n) => (
@@ -170,21 +170,17 @@ export default function SoyogiTop() {
       </section>
 
       {/* 診療案内ダイジェスト */}
-      <section className="sy-section sy-band" aria-labelledby="menu-h">
-        <div className="sy-wrap">
-          {/* 表・カード・文章が続く区間なので、ここに写真を1枚入れて視線を休ませる */}
-          <div className="sy-shead sy-shead-media">
-            <div>
-              <p className="en">Medical</p>
-              <h2 id="menu-h">診ているもの</h2>
-              <p>
-                内科のかかりつけ医として、日常の体調不良と生活習慣病の管理を中心に診ています。
-                専門的な治療が必要なときは、連携している病院へご紹介します。
-              </p>
-            </div>
+      <section className="sy-section" aria-labelledby="menu-h">
+        <div className="sy-wrap sy-rail">
+          <div className="sy-shead">
+            <h2 id="menu-h">診ているもの</h2>
+            <p>
+              内科のかかりつけ医として、日常の体調不良と生活習慣病の管理を中心に診ています。
+              専門的な治療が必要なときは、連携している病院へご紹介します。
+            </p>
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              className="sy-shead-photo"
+              className="sy-rail-photo"
               src="/demo/naika/stetho.webp"
               alt="白い机の上に置かれた聴診器。"
               width={1000}
@@ -192,82 +188,84 @@ export default function SoyogiTop() {
               loading="lazy"
             />
           </div>
-          <div className="sy-cards">
-            {menus.map((m) => (
-              <div className="sy-card" key={m.title}>
-                <h3>
+          <div>
+            <div className="sy-cards">
+              {menus.map((m) => (
+                <div className="sy-card sy-card-ico" key={m.title}>
                   <span className="ico">{m.icon}</span>
-                  {m.title}
-                </h3>
-                <p>{m.body}</p>
-              </div>
-            ))}
+                  <h3>{m.title}</h3>
+                  <p>{m.body}</p>
+                </div>
+              ))}
+            </div>
+            <p style={{ marginTop: "1.6rem" }}>
+              <Link className="sy-btn-outline" href="/demo/naika/shinryo/">
+                診療案内をくわしく見る
+              </Link>
+            </p>
           </div>
-          <p style={{ marginTop: "1.6rem" }}>
-            <Link className="sy-btn-outline" href="/demo/naika/shinryo/">
-              診療案内をくわしく見る
-            </Link>
-          </p>
         </div>
       </section>
 
       {/* 診療時間表 */}
       <section className="sy-section" aria-labelledby="hours-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Hours</p>
             <h2 id="hours-h">診療時間</h2>
+            <p>受付は診療終了の30分前まで。予約がなくても受診できます。</p>
           </div>
-          <Hours />
+          <div>
+            <Hours />
+          </div>
         </div>
       </section>
 
       {/* 初めての方へ（詳細は初診・アクセスのページ） */}
       <section className="sy-section sy-beige" aria-labelledby="first-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">First Visit</p>
             <h2 id="first-h">初めての方へ</h2>
             <p>
               受付から会計まで、だいたい30〜60分です（検査の内容によって前後します）。
             </p>
           </div>
-          <ol className="sy-steps">
-            <li>
-              <h3>ご予約（なくても受診できます）</h3>
-              <p>
-                お電話・Web・LINEで承ります。ご予約は日時・お名前・連絡先・初診か再診かだけで結構です。
-                症状は受付と診察室で伺います。
-              </p>
-            </li>
-            <li>
-              <h3>受付でお出しいただくもの</h3>
-              <p>
-                マイナ保険証（または資格確認書）、お持ちの方はお薬手帳・健診の結果・紹介状。
-                受付の機械の操作はスタッフがお手伝いします。
-              </p>
-            </li>
-            <li>
-              <h3>診察・検査・お会計</h3>
-              <p>
-                お困りのことを伺い、必要な検査をご相談してから進めます。
-                次回いつ来ればよいかを、必ずお伝えします。
-              </p>
-            </li>
-          </ol>
-          <p style={{ marginTop: "1.6rem" }}>
-            <Link className="sy-btn-outline" href="/demo/naika/access/">
-              初診の流れ・持ち物を見る
-            </Link>
-          </p>
+          <div>
+            <ol className="sy-steps">
+              <li>
+                <h3>ご予約（なくても受診できます）</h3>
+                <p>
+                  お電話・Web・LINEで承ります。ご予約は日時・お名前・連絡先・初診か再診かだけで結構です。
+                  症状は受付と診察室で伺います。
+                </p>
+              </li>
+              <li>
+                <h3>受付でお出しいただくもの</h3>
+                <p>
+                  マイナ保険証（または資格確認書）、お持ちの方はお薬手帳・健診の結果・紹介状。
+                  受付の機械の操作はスタッフがお手伝いします。
+                </p>
+              </li>
+              <li>
+                <h3>診察・検査・お会計</h3>
+                <p>
+                  お困りのことを伺い、必要な検査をご相談してから進めます。
+                  次回いつ来ればよいかを、必ずお伝えします。
+                </p>
+              </li>
+            </ol>
+            <p style={{ marginTop: "1.6rem" }}>
+              <Link className="sy-btn-outline" href="/demo/naika/access/">
+                初診の流れ・持ち物を見る
+              </Link>
+            </p>
+          </div>
         </div>
       </section>
 
       {/* 院内の様子 */}
       <section className="sy-section" aria-labelledby="inside-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Clinic</p>
+          <div className="sy-shead sy-whead">
             <h2 id="inside-h">院内の様子</h2>
             <p>
               待合は席の間隔をひろく取り、通路は車いす・ベビーカーでも通れる幅にしています。
@@ -318,11 +316,11 @@ export default function SoyogiTop() {
       </section>
 
       {/* アクセス */}
-      <section className="sy-section sy-band" aria-labelledby="access-h">
+      <section className="sy-section" aria-labelledby="access-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Access</p>
+          <div className="sy-shead sy-whead">
             <h2 id="access-h">アクセス</h2>
+            <p>{CLINIC.station}{CLINIC.walk}。駐車場は建物北側に3台あります。</p>
           </div>
           <div className="sy-split">
             <dl className="sy-info">
@@ -356,28 +354,32 @@ export default function SoyogiTop() {
       {/* CTA */}
       <section className="sy-cta">
         <div className="sy-wrap sy-cta-inner">
-          <h2>気になることがあれば、まずお電話ください</h2>
-          <p>
-            受診したほうがよいか迷うとき、症状のご相談だけでも構いません。
-            受付時間内はスタッフが応対します。
-          </p>
-          <a className="sy-cta-tel" href={CLINIC.telHref}>
-            <span className="num">{CLINIC.tel}</span>
-            <small>
-              午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
-            </small>
-          </a>
-          <div className="sy-cta-actions">
-            <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
-              Web予約
-            </Link>
-            <Link className="sy-btn-line" href="/demo/naika/access/#line">
-              LINEで予約・お知らせ
-            </Link>
+          <div>
+            <h2>気になることがあれば、まずお電話ください</h2>
+            <p>
+              受診したほうがよいか迷うとき、症状のご相談だけでも構いません。
+              受付時間内はスタッフが応対します。
+            </p>
           </div>
-          <p className="sy-note">
-            ※ デザインサンプルのため、予約・お問い合わせは送信されません。
-          </p>
+          <div>
+            <a className="sy-cta-tel" href={CLINIC.telHref}>
+              <span className="num">{CLINIC.tel}</span>
+              <small>
+                午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
+              </small>
+            </a>
+            <div className="sy-cta-actions">
+              <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
+                Web予約
+              </Link>
+              <Link className="sy-btn-line" href="/demo/naika/access/#line">
+                LINEで予約・お知らせ
+              </Link>
+            </div>
+            <p className="sy-note">
+              ※ デザインサンプルのため、予約・お問い合わせは送信されません。
+            </p>
+          </div>
         </div>
       </section>
     </>

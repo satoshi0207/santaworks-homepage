@@ -51,14 +51,13 @@ const facility = [
 export default function Clinic() {
   return (
     <>
-      <PageHead en="Our Clinic" title="院内・院長紹介" />
+      <PageHead title="院内・院長紹介" />
 
       {/* 院長のことば：顔写真ではなく文章で人柄を伝える */}
       <section className="sy-section">
         <div className="sy-wrap sy-split">
           <div className="sy-prose">
             <div className="sy-shead">
-              <p className="en">Message</p>
               <h2>「変わりありませんか」から始めたい</h2>
             </div>
             <p>
@@ -107,10 +106,9 @@ export default function Clinic() {
       </section>
 
       {/* 院内紹介 */}
-      <section className="sy-section sy-band" aria-labelledby="rooms-h">
+      <section className="sy-section" aria-labelledby="rooms-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Inside</p>
+          <div className="sy-shead sy-whead">
             <h2 id="rooms-h">院内のご案内</h2>
             <p>
               初めての方が入口で迷わないよう、受付までまっすぐ進める配置にしています。
@@ -136,10 +134,10 @@ export default function Clinic() {
 
       {/* 設備・院内の配慮 */}
       <section className="sy-section" aria-labelledby="equip-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Equipment</p>
             <h2 id="equip-h">備えている検査機器</h2>
+            <p>院内でできる検査と、通いやすさのための設備をまとめています。</p>
           </div>
           <div className="sy-cards">
             <div className="sy-card">
@@ -169,12 +167,12 @@ export default function Clinic() {
 
       {/* 概要 */}
       <section className="sy-section sy-beige" aria-labelledby="outline-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Outline</p>
             <h2 id="outline-h">クリニックの概要</h2>
           </div>
-          <dl className="sy-info">
+          <div>
+            <dl className="sy-info">
             <div>
               <dt>名称</dt>
               <dd>
@@ -215,34 +213,39 @@ export default function Clinic() {
                 休診：{CLINIC.closed}
               </dd>
             </div>
-          </dl>
-          <p className="sy-note">
-            ※
-            上記はすべて架空の設定です。医師の氏名・経歴・所在地・電話番号は実在しません。
-          </p>
+            </dl>
+            <p className="sy-note">
+              ※
+              上記はすべて架空の設定です。医師の氏名・経歴・所在地・電話番号は実在しません。
+            </p>
+          </div>
         </div>
       </section>
 
       <section className="sy-cta">
         <div className="sy-wrap sy-cta-inner">
-          <h2>はじめての受診も、どうぞ気軽に</h2>
-          <p>
-            持ち物や初診の流れは「初診・アクセス」のページにまとめています。
-            分からないことはお電話でお尋ねください。
-          </p>
-          <a className="sy-cta-tel" href={CLINIC.telHref}>
-            <span className="num">{CLINIC.tel}</span>
-            <small>
-              午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
-            </small>
-          </a>
-          <div className="sy-cta-actions">
-            <Link className="sy-btn-outline" href="/demo/naika/access/">
-              初診の流れ・アクセス
-            </Link>
-            <Link className="sy-btn-outline" href="/demo/naika/shinryo/">
-              診療案内
-            </Link>
+          <div>
+            <h2>はじめての受診も、どうぞ気軽に</h2>
+            <p>
+              持ち物や初診の流れは「初診・アクセス」のページにまとめています。
+              分からないことはお電話でお尋ねください。
+            </p>
+          </div>
+          <div>
+            <a className="sy-cta-tel" href={CLINIC.telHref}>
+              <span className="num">{CLINIC.tel}</span>
+              <small>
+                午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
+              </small>
+            </a>
+            <div className="sy-cta-actions">
+              <Link className="sy-btn-outline" href="/demo/naika/access/">
+                初診の流れ・アクセス
+              </Link>
+              <Link className="sy-btn-outline" href="/demo/naika/shinryo/">
+                診療案内
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -48,20 +48,20 @@ const faq = [
 export default function Access() {
   return (
     <>
-      <PageHead en="First Visit & Access" title="初診・アクセス" />
+      <PageHead title="初診・アクセス" />
 
       {/* 初診の流れ */}
       <section className="sy-section" aria-labelledby="flow-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Flow</p>
             <h2 id="flow-h">初診の流れ</h2>
             <p>
               受付から会計まで、だいたい30〜60分です（検査の内容によって前後します）。
               待ち時間が長くなりそうなときは、受付で目安をお伝えします。
             </p>
           </div>
-          <ol className="sy-steps">
+          <div>
+            <ol className="sy-steps">
             <li>
               <h3>ご予約（なくても受診できます）</h3>
               <p>
@@ -97,32 +97,32 @@ export default function Access() {
                 次はいつ来ればよいか、何かあればどうすればよいかを必ずお伝えします。
               </p>
             </li>
-          </ol>
+            </ol>
 
-          <div style={{ marginTop: "1.8rem" }}>
-            <h3 style={{ fontSize: "1.1rem", margin: "0 0 0.7rem" }}>
-              初診のときにお持ちいただくもの
-            </h3>
-            <div className="sy-card">
-              <ul style={{ margin: 0 }}>
-                {bring.map((b) => (
-                  <li key={b}>{b}</li>
-                ))}
-              </ul>
-              <p className="sy-note">
-                2026年8月1日以降、これまでの健康保険証は使えません。マイナ保険証をお持ちでない方は、
-                加入している保険者から交付される「資格確認書」をお持ちください。
-              </p>
+            <div style={{ marginTop: "2rem" }}>
+              <h3 style={{ fontSize: "1.1rem", margin: "0 0 0.7rem" }}>
+                初診のときにお持ちいただくもの
+              </h3>
+              <div className="sy-panel">
+                <ul style={{ margin: 0 }}>
+                  {bring.map((b) => (
+                    <li key={b}>{b}</li>
+                  ))}
+                </ul>
+                <p className="sy-note">
+                  2026年8月1日以降、これまでの健康保険証は使えません。マイナ保険証をお持ちでない方は、
+                  加入している保険者から交付される「資格確認書」をお持ちください。
+                </p>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
       {/* Web予約（ダミー） */}
-      <section className="sy-section sy-band" id="reserve" aria-labelledby="reserve-h">
-        <div className="sy-wrap">
+      <section className="sy-section" id="reserve" aria-labelledby="reserve-h">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">Reservation</p>
             <h2 id="reserve-h">Web予約</h2>
             <p>
               ご希望の日時・お名前・連絡先だけで承ります。
@@ -192,54 +192,55 @@ export default function Access() {
 
       {/* LINE導線 */}
       <section className="sy-section" id="line" aria-labelledby="line-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">LINE</p>
             <h2 id="line-h">LINEで予約・お知らせ</h2>
             <p>
               友だち追加をしていただくと、予約と当院からのお知らせをLINEで受け取れます。
               アプリのインストールは要りません。
             </p>
           </div>
-          <div className="sy-cards">
-            <div className="sy-card">
-              <h3>LINEでできること</h3>
-              <ul>
-                <li>ご予約・変更・キャンセル</li>
-                <li>前日のご予約のお知らせ</li>
-                <li>順番が近づいたときのお知らせ</li>
-                <li>休診・診療時間の変更のお知らせ</li>
-              </ul>
+          <div>
+            <div className="sy-cards">
+              <div className="sy-card">
+                <h3>LINEでできること</h3>
+                <ul>
+                  <li>ご予約・変更・キャンセル</li>
+                  <li>前日のご予約のお知らせ</li>
+                  <li>順番が近づいたときのお知らせ</li>
+                  <li>休診・診療時間の変更のお知らせ</li>
+                </ul>
+              </div>
+              <div className="sy-card">
+                <h3>LINEではしないこと</h3>
+                <ul>
+                  <li>症状のご相談・診断（診察が必要です）</li>
+                  <li>検査結果のご連絡</li>
+                  <li>お薬の処方</li>
+                </ul>
+                <p className="sy-note">
+                  やり取りの内容は予約に関することに限っています。お困りの症状は診察室で伺います。
+                </p>
+              </div>
             </div>
-            <div className="sy-card">
-              <h3>LINEではしないこと</h3>
-              <ul>
-                <li>症状のご相談・診断（診察が必要です）</li>
-                <li>検査結果のご連絡</li>
-                <li>お薬の処方</li>
-              </ul>
-              <p className="sy-note">
-                やり取りの内容は予約に関することに限っています。お困りの症状は診察室で伺います。
-              </p>
-            </div>
+            <p style={{ marginTop: "1.6rem" }}>
+              <button className="sy-btn-line" type="button">
+                LINEで友だち追加（サンプル）
+              </button>
+            </p>
+            <p className="sy-note">
+              ※ デザインサンプルのため、このボタンからは追加できません。
+            </p>
           </div>
-          <p style={{ marginTop: "1.6rem" }}>
-            <button className="sy-btn-line" type="button">
-              LINEで友だち追加（サンプル）
-            </button>
-          </p>
-          <p className="sy-note">
-            ※ デザインサンプルのため、このボタンからは追加できません。
-          </p>
         </div>
       </section>
 
       {/* アクセス */}
       <section className="sy-section sy-beige" aria-labelledby="access-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Access</p>
+          <div className="sy-shead sy-whead">
             <h2 id="access-h">アクセス</h2>
+            <p>{CLINIC.station}{CLINIC.walk}。駐車場は建物北側に{CLINIC.parking}あります。</p>
           </div>
           <div className="sy-split">
             <dl className="sy-info">
@@ -287,10 +288,10 @@ export default function Access() {
 
       {/* よくあるご質問 */}
       <section className="sy-section" aria-labelledby="faq-h">
-        <div className="sy-wrap">
+        <div className="sy-wrap sy-rail">
           <div className="sy-shead">
-            <p className="en">FAQ</p>
             <h2 id="faq-h">よくあるご質問</h2>
+            <p>ここに載っていないことも、受付でお気軽にお尋ねください。</p>
           </div>
           <div className="sy-faq">
             {faq.map((f) => (
@@ -305,20 +306,24 @@ export default function Access() {
 
       <section className="sy-cta">
         <div className="sy-wrap sy-cta-inner">
-          <h2>ご不明なことは、お電話でお尋ねください</h2>
-          <p>
-            持ち物や受診の時間帯など、迷うことがあればお気軽にどうぞ。受付時間内はスタッフが応対します。
-          </p>
-          <a className="sy-cta-tel" href={CLINIC.telHref}>
-            <span className="num">{CLINIC.tel}</span>
-            <small>
-              午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
-            </small>
-          </a>
-          <p className="sy-note">
-            <IconPhone />
-            ※ デザインサンプルのため、電話・予約はいずれも架空です。
-          </p>
+          <div>
+            <h2>ご不明なことは、お電話でお尋ねください</h2>
+            <p>
+              持ち物や受診の時間帯など、迷うことがあればお気軽にどうぞ。受付時間内はスタッフが応対します。
+            </p>
+          </div>
+          <div>
+            <a className="sy-cta-tel" href={CLINIC.telHref}>
+              <span className="num">{CLINIC.tel}</span>
+              <small>
+                午前 {CLINIC.am}／午後 {CLINIC.pm}（架空の番号です）
+              </small>
+            </a>
+            <p className="sy-note">
+              <IconPhone />
+              ※ デザインサンプルのため、電話・予約はいずれも架空です。
+            </p>
+          </div>
         </div>
       </section>
     </>
