@@ -28,13 +28,19 @@ export default function Page() {
       <div className="wrap">
         <article>
           <div className="hero">
-            {/* TODO: ヒーロー写真を public/blog/gourmet-site-dependency/hero.webp に配置して差し替え */}
+            {/* ヒーロー写真: public/blog/gourmet-site-dependency/hero.webp を置くと自動表示。
+                無い間は下のブランドグラデが出る（壊れ画像にならない）。推奨: 商用可フリー素材・顔が主役でない・横1600px程度 */}
             <figure className="herofig rv">
               <div className="ph">
+                <div
+                  className="ph-photo"
+                  aria-hidden="true"
+                  style={{
+                    backgroundImage:
+                      "url(/blog/gourmet-site-dependency/hero.webp)",
+                  }}
+                />
                 <span className="chip">SANTA WORKS JOURNAL</span>
-                <span className="ph-ic" aria-hidden="true">
-                  🍽️
-                </span>
                 <span className="ph-t">データで読み解く、飲食店の集客</span>
               </div>
             </figure>

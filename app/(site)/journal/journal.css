@@ -36,17 +36,12 @@
     linear-gradient(135deg, #e0a24d 0%, #c86b3c 52%, #a2242f 100%);
   color: #fff; box-shadow: var(--card-shadow);
 }
-.journal .herofig .ph::after {
-  content: ""; position: absolute; inset: 0; pointer-events: none; opacity: .22;
-  background-image: radial-gradient(rgba(255,255,255,.9) 1.4px, transparent 1.5px);
-  background-size: 26px 26px;
-}
-.journal .herofig .ph > * { position: relative; }
-.journal .herofig .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-.journal .herofig .chip { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.38); font-size: .6rem; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 999px; }
-.journal .herofig .ph-ic { font-size: 1.9rem; }
-.journal .herofig .ph-t { font-weight: 800; font-size: .96rem; letter-spacing: .02em; }
-.journal .herofig .ph-s { font-size: .73rem; opacity: .92; padding: 0 16px; }
+/* 写真レイヤー。/blog/.../hero.webp を置けば表示され、無ければ下のグラデが見える（壊れ画像にならない） */
+.journal .herofig .ph-photo { position: absolute; inset: 0; z-index: 0; background: center/cover no-repeat; }
+.journal .herofig .ph-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.42)); }
+.journal .herofig .ph > *:not(.ph-photo) { position: relative; z-index: 1; }
+.journal .herofig .chip { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.42); font-size: .6rem; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 999px; }
+.journal .herofig .ph-t { font-weight: 800; font-size: 1rem; letter-spacing: .02em; text-shadow: 0 1px 12px rgba(0,0,0,.35); padding: 0 16px; }
 
 .journal .eyebrow {
   display: inline-flex; align-items: center; gap: 8px; margin-bottom: 22px;
