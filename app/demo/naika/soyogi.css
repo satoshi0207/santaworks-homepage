@@ -343,7 +343,7 @@
 
 .sy-hero-title {
   margin: 0 0 1.1rem;
-  font-size: clamp(1.85rem, 6vw, 2.9rem);
+  font-size: clamp(1.85rem, 6vw, 2.8rem);
   font-weight: 700;
   line-height: 1.5;
   letter-spacing: 0.01em;
@@ -373,10 +373,20 @@
 }
 
 .sy-hero-media img {
+  display: block;
   width: 100%;
   height: 100%;
   object-fit: cover;
   aspect-ratio: 5 / 4;
+}
+
+.sy-hero-cta {
+  display: grid;
+  gap: 0.9rem;
+}
+
+.sy-hero-cta .sy-note {
+  margin: 0;
 }
 
 /* 診療時間の要約バー（ヒーロー直下・ここで用は足りるように） */
@@ -760,6 +770,22 @@
 .sy-gallery {
   display: grid;
   gap: 1rem;
+}
+
+/* 見出しの横に写真を1枚（文章だけの区間が続かないように） */
+.sy-shead-media {
+  display: grid;
+  gap: clamp(1.2rem, 3vw, 2rem);
+  align-items: center;
+}
+
+.sy-shead-photo {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 14px;
+  border: 1px solid var(--sage-line);
 }
 
 /* ---------- 2カラム（文章＋写真） ---------- */
@@ -1331,6 +1357,16 @@
     grid-template-columns: repeat(2, 1fr);
   }
 
+  /* 1枚目は横いっぱいの主役、残り2枚を並べる */
+  .sy-gallery-lead > :first-child {
+    grid-column: 1 / -1;
+  }
+
+  .sy-gallery-lead > :first-child img {
+    aspect-ratio: 16 / 9;
+  }
+
+
   .sy-quick-inner {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
@@ -1341,16 +1377,73 @@
 }
 
 @media (min-width: 900px) {
+  /* ヒーローの写真だけは右端まで抜く（左は本文と同じ位置に揃えたまま）。
+     幅の内訳＝左マージン:(画面幅-1060px)/2 ＋ 本文と同じ内側余白、右は0 */
   .sy-hero-inner {
-    grid-template-columns: 1.05fr 0.95fr;
+    width: auto;
+    max-width: none;
+    margin-inline: calc(max(0px, 100% - 1060px) / 2) 0;
+    padding-inline: clamp(1.15rem, 4vw, 2.4rem) 0;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: clamp(1.8rem, 4vw, 3.2rem);
+    row-gap: 1.5rem;
+  }
+
+  .sy-hero-title {
+    font-size: clamp(1.85rem, 3.4vw, 2.8rem);
+  }
+
+  .sy-hero-copy {
+    grid-column: 1;
+    grid-row: 1;
+    align-self: end;
+  }
+
+  .sy-hero-cta {
+    grid-column: 1;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  /* 行間の余白は grid の row-gap に任せる */
+  .sy-hero-copy > :last-child {
+    margin-bottom: 0;
+  }
+
+  .sy-hero-media {
+    grid-column: 2;
+    grid-row: 1 / span 2;
+    align-self: center;
+    border-radius: 18px 0 0 18px;
   }
 
   .sy-split {
     grid-template-columns: 1.1fr 0.9fr;
   }
 
+  /* 長い文章の横に置く写真は縦位置に（下に余白が空くのを防ぐ） */
+  .sy-figure-tall img {
+    aspect-ratio: 4 / 5;
+  }
+
+  .sy-shead-media {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 21rem);
+  }
+
   .sy-steps {
     gap: 1.1rem;
+  }
+}
+
+/* 本文の折り返しが安定する幅まで来たら、余った分はすべて写真に回す */
+@media (min-width: 1180px) {
+  .sy-hero-inner {
+    grid-template-columns: minmax(0, 32rem) minmax(0, 1fr);
+  }
+
+  /* 幅が出たぶん、写真は横長にして大きく見せる */
+  .sy-hero-media img {
+    aspect-ratio: 3 / 2;
   }
 }
 
@@ -1463,8 +1556,20 @@
     display: none;
   }
 
+  /* 狭い画面では写真を画面幅いっぱいに（内側余白ぶんだけ外へ出す） */
+  .sy-hero-media {
+    margin-inline: calc(-1 * clamp(1.15rem, 4vw, 2.4rem));
+    border-radius: 0;
+    box-shadow: none;
+  }
+
   .sy-hero-media img {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 4 / 3;
+  }
+
+  /* LINEは下部固定バーに常設されているので、ヒーローでは繰り返さない */
+  .sy-hero-actions .sy-btn-line {
+    display: none;
   }
 
   /* 下部固定バー：電話と予約は、どこを読んでいても届く場所に置く */
@@ -1478,6 +1583,13 @@
 
   .sy-badge {
     bottom: calc(72px + env(safe-area-inset-bottom, 0px));
+  }
+}
+
+/* タブレット幅では縦に伸びすぎるので、ヒーロー写真は横長にする */
+@media (min-width: 620px) and (max-width: 899px) {
+  .sy-hero-media img {
+    aspect-ratio: 16 / 9;
   }
 }
 

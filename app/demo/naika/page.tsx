@@ -64,10 +64,11 @@ const news = [
 export default function SoyogiTop() {
   return (
     <>
-      {/* ヒーロー：写真の上に文字を重ねず、左に文章・右に写真（可読性を優先） */}
+      {/* ヒーロー：写真の上に文字を重ねず、左に文章・右に写真（可読性を優先）。
+          写真は文章とボタンの間に置く＝狭い画面でもボタンの下に埋もれず、院内の空気が先に伝わる */}
       <section className="sy-hero">
         <div className="sy-wrap sy-hero-inner">
-          <div>
+          <div className="sy-hero-copy">
             <p className="sy-hero-eyebrow">
               山ノ手県港見市 若葉台／{CLINIC.departments}
             </p>
@@ -80,22 +81,6 @@ export default function SoyogiTop() {
               風邪や発熱から、血圧・血糖のご相談、健診・予防接種まで。
               前回どんな話をしたかを覚えている、地域のかかりつけ医です。
             </p>
-            <div className="sy-hero-actions">
-              <a className="sy-btn" href={CLINIC.telHref}>
-                <IconPhone />
-                電話する（{CLINIC.tel}）
-              </a>
-              <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
-                Web予約
-              </Link>
-              <Link className="sy-btn-line" href="/demo/naika/access/#line">
-                LINEで予約・お知らせ
-              </Link>
-            </div>
-            <p className="sy-note">
-              ※ これは架空のクリニックのデザインサンプルです。電話番号・予約はすべて架空で、
-              予約フォームからの送信もできません。
-            </p>
           </div>
           <div className="sy-hero-media">
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -106,6 +91,25 @@ export default function SoyogiTop() {
               height={909}
               fetchPriority="high"
             />
+          </div>
+          <div className="sy-hero-cta">
+            <div className="sy-hero-actions">
+              <a className="sy-btn" href={CLINIC.telHref}>
+                <IconPhone />
+                電話する（{CLINIC.tel}）
+              </a>
+              <Link className="sy-btn-outline" href="/demo/naika/access/#reserve">
+                Web予約
+              </Link>
+              {/* 狭い画面ではCSSで隠す（同じ導線が下部固定バーに常設されているため） */}
+              <Link className="sy-btn-line" href="/demo/naika/access/#line">
+                LINEで予約・お知らせ
+              </Link>
+            </div>
+            <p className="sy-note">
+              ※ これは架空のクリニックのデザインサンプルです。電話番号・予約はすべて架空で、
+              予約フォームからの送信もできません。
+            </p>
           </div>
         </div>
       </section>
@@ -168,13 +172,25 @@ export default function SoyogiTop() {
       {/* 診療案内ダイジェスト */}
       <section className="sy-section sy-band" aria-labelledby="menu-h">
         <div className="sy-wrap">
-          <div className="sy-shead">
-            <p className="en">Medical</p>
-            <h2 id="menu-h">診ているもの</h2>
-            <p>
-              内科のかかりつけ医として、日常の体調不良と生活習慣病の管理を中心に診ています。
-              専門的な治療が必要なときは、連携している病院へご紹介します。
-            </p>
+          {/* 表・カード・文章が続く区間なので、ここに写真を1枚入れて視線を休ませる */}
+          <div className="sy-shead sy-shead-media">
+            <div>
+              <p className="en">Medical</p>
+              <h2 id="menu-h">診ているもの</h2>
+              <p>
+                内科のかかりつけ医として、日常の体調不良と生活習慣病の管理を中心に診ています。
+                専門的な治療が必要なときは、連携している病院へご紹介します。
+              </p>
+            </div>
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              className="sy-shead-photo"
+              src="/demo/naika/stetho.webp"
+              alt="白い机の上に置かれた聴診器。"
+              width={1000}
+              height={665}
+              loading="lazy"
+            />
           </div>
           <div className="sy-cards">
             {menus.map((m) => (
@@ -257,7 +273,8 @@ export default function SoyogiTop() {
               待合は席の間隔をひろく取り、通路は車いす・ベビーカーでも通れる幅にしています。
             </p>
           </div>
-          <div className="sy-gallery">
+          {/* 1枚目を横いっぱいの主役にして、残り2枚を並べる */}
+          <div className="sy-gallery sy-gallery-lead">
             <figure className="sy-figure">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
@@ -268,6 +285,17 @@ export default function SoyogiTop() {
                 loading="lazy"
               />
               <figcaption>待合室（8席・キッズスペースあり）</figcaption>
+            </figure>
+            <figure className="sy-figure">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src="/demo/naika/room.webp"
+                alt="モニターと診察机が置かれた明るい診察室。"
+                width={1200}
+                height={800}
+                loading="lazy"
+              />
+              <figcaption>診察室（検査の画像は画面でご説明します）</figcaption>
             </figure>
             <figure className="sy-figure">
               {/* eslint-disable-next-line @next/next/no-img-element */}

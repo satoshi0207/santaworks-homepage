@@ -89,7 +89,8 @@ export default function Clinic() {
               </strong>
             </p>
           </div>
-          <figure className="sy-figure">
+          {/* 文章が長いので、写真は縦位置にして高さを合わせる */}
+          <figure className="sy-figure sy-figure-tall">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src="/demo/naika/leaf.webp"
