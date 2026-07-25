@@ -14,6 +14,21 @@ export const metadata: Metadata = {
     description:
       "グルメサイト依存と自社ホームページの役割を公開データ（2020〜2026）で整理。手数料・表示順位・口コミ・予約経路を可視化。",
     url: "/journal/gourmet-site-dependency/",
+    images: [
+      {
+        url: "/blog/gourmet-site-dependency/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: "飲食店の集客、グルメサイトだけに委ねてよいか｜Santa Works Journal",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "飲食店の集客、グルメサイトだけに委ねてよいか｜Santa Works Journal",
+    description:
+      "グルメサイト依存と自社ホームページの役割を公開データ（2020〜2026）で整理。",
+    images: ["/blog/gourmet-site-dependency/ogp.png"],
   },
 };
 
@@ -285,7 +300,7 @@ export default function Page() {
               <b>運営企業側が逆転勝訴</b>
               <sup>※10</sup>。
               <b>
-                2026年、最高裁判所が店舗側の上告を退け、運営企業側の勝訴が確定
+                2026年3月、最高裁判所が店舗側の上告を退け、運営企業側の勝訴が確定
               </b>
               しました<sup>※11</sup>
               。結果として賠償は認められませんでしたが、いずれの審級でも前提とされたのは、
@@ -729,9 +744,9 @@ export default function Page() {
                 </a>
               </li>
               <li>
-                ※11 飲食店ドットコム ジャーナル／各種報道「食べログ訴訟、最高裁が店舗側の上告を退け運営会社の勝訴が確定」（2026年）{" "}
-                <a href="https://www.inshokuten.com/foodist/article/7349/">
-                  inshokuten.com/foodist/article/7349/
+                ※11 時事ドットコム「『食べログ』側の勝訴確定 焼き肉チェーン側上告退ける―最高裁」（2026年3月5日・最高裁第一小法廷）{" "}
+                <a href="https://www.jiji.com/jc/article?k=2026030601031&g=soc">
+                  jiji.com/jc/article?k=2026030601031
                 </a>
               </li>
               <li>
