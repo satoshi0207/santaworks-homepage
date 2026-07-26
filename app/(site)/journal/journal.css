@@ -39,6 +39,9 @@
 /* 写真レイヤー。/blog/.../hero.webp を置けば表示され、無ければ下のグラデが見える（壊れ画像にならない） */
 .journal .herofig .ph-photo { position: absolute; inset: 0; z-index: 0; background: center/cover no-repeat; }
 .journal .herofig .ph-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.42)); }
+/* 写真ではなく図版（グラフ等）をヒーローに使う場合は暗幕を外す。
+   写真の上の白文字を読ませるための暗幕なので、図版にかけると数字と目盛りが濁る。 */
+.journal .herofig.chart .ph-photo::after { display: none; }
 .journal .herofig .ph > *:not(.ph-photo) { position: relative; z-index: 1; }
 .journal .herofig .chip { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.42); font-size: .6rem; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 999px; }
 .journal .herofig .ph-t { font-weight: 800; font-size: 1rem; letter-spacing: .02em; text-shadow: 0 1px 12px rgba(0,0,0,.35); padding: 0 16px; }

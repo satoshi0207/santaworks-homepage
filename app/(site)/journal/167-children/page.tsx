@@ -39,9 +39,23 @@ export default function Page() {
       <div className="wrap">
         <article>
           <div className="hero">
-            {/* ⚠️ この記事にはヒーローの図版を置かない（意図的）。
-                写真は情緒が先に立つし、ブランドのグラデーション板は色が明るすぎて、
-                被害の話の入口に合わない。見出しから直接始める。 */}
+            {/* ⚠️ ヒーローに写真は使わない。子どもを被写体にしないため、
+                そして悲しさを演出しないため。記事の主役である数字そのものを図版にする。
+                `chart` クラスで写真用の暗幕を外している（journal.css）。
+                図版の生成は hero.webp と同名のスクリプトで管理（出典は本文※1）。 */}
+            <figure className="herofig chart rv">
+              <div className="ph">
+                <div
+                  className="ph-photo"
+                  aria-hidden="true"
+                  style={{
+                    backgroundImage: "url(/blog/167-children/hero.webp)",
+                  }}
+                />
+                {/* chip は置かない。`.ph` が中身を中央寄せする作りなので、
+                    グラフの真ん中に重なってしまう。図版側に見出しを持たせてある。 */}
+              </div>
+            </figure>
             <span className="eyebrow">親として / 公開データの整理</span>
             <h1 className="title">
               小学生167人。
