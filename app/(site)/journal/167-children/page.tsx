@@ -43,14 +43,18 @@ export default function Page() {
                 そして悲しさを演出しないため。記事の主役である数字そのものを図版にする。
                 `chart` クラスで写真用の暗幕を外している（journal.css）。
                 図版の生成は hero.webp と同名のスクリプトで管理（出典は本文※1）。 */}
-            <figure className="herofig chart rv">
+            <figure className="herofig nodim rv">
               <div className="ph">
+                {/* 画像は CSS変数で渡す。モバイル（16/10）では --hero-sp に差し替わる */}
                 <div
                   className="ph-photo"
                   aria-hidden="true"
-                  style={{
-                    backgroundImage: "url(/blog/167-children/hero.webp)",
-                  }}
+                  style={
+                    {
+                      "--hero-pc": "url(/blog/167-children/hero.webp)",
+                      "--hero-sp": "url(/blog/167-children/hero-sp.webp)",
+                    } as React.CSSProperties
+                  }
                 />
                 {/* chip は置かない。`.ph` が中身を中央寄せする作りなので、
                     グラフの真ん中に重なってしまう。図版側に見出しを持たせてある。 */}

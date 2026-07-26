@@ -19,6 +19,13 @@
 .journal .num { font-variant-numeric: tabular-nums; }
 .journal a { color: var(--accent); }
 .journal h1, .journal h2, .journal h3 { text-wrap: balance; }
+/* ⚠️ 日本語は原則どこでも改行できるため、狭い画面でカタカナ語が途中で割れる
+   （実例：「飲食店の集客、グ／ルメサイト」「娘が欲しがったのはス／マホで」）。
+   文節単位で折らせる。未対応のブラウザでは単に無視される（従来の折り返しに戻るだけ）。 */
+.journal .title, .journal .h2 .tt, .journal .lede,
+.journal .pull .q, .journal .closing .q, .journal .toc .tx {
+  word-break: auto-phrase;
+}
 
 /* スクロール進捗バー */
 .journal .jprog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 30; transition: width .1s linear; }
@@ -39,9 +46,13 @@
 /* 写真レイヤー。/blog/.../hero.webp を置けば表示され、無ければ下のグラデが見える（壊れ画像にならない） */
 .journal .herofig .ph-photo { position: absolute; inset: 0; z-index: 0; background: center/cover no-repeat; }
 .journal .herofig .ph-photo::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.42)); }
-/* 写真ではなく図版（グラフ等）をヒーローに使う場合は暗幕を外す。
-   写真の上の白文字を読ませるための暗幕なので、図版にかけると数字と目盛りが濁る。 */
-.journal .herofig.chart .ph-photo::after { display: none; }
+/* 写真ではなく図版（グラフ等）をヒーローに使う場合。
+   ⚠️ クラス名は `nodim`。`chart` は記事内の横棒グラフ部品で既に使われている。
+   - 暗幕（写真の上の白文字を読ませるための黒）を外す。図版にかけると数字と目盛りが濁る
+   - 画像は inline style ではなく CSS変数で渡す。モバイルでは枠が 21/9 → 16/10 に
+     変わるので、cover のままだと左右が切れて**グラフが破綻する**。専用画像に差し替える */
+.journal .herofig.nodim .ph-photo::after { display: none; }
+.journal .herofig.nodim .ph-photo { background-image: var(--hero-pc); }
 .journal .herofig .ph > *:not(.ph-photo) { position: relative; z-index: 1; }
 .journal .herofig .chip { position: absolute; top: 12px; left: 12px; background: rgba(0,0,0,.42); font-size: .6rem; font-weight: 800; letter-spacing: .12em; padding: 4px 10px; border-radius: 999px; }
 .journal .herofig .ph-t { font-weight: 800; font-size: 1rem; letter-spacing: .02em; text-shadow: 0 1px 12px rgba(0,0,0,.35); padding: 0 16px; }
@@ -220,6 +231,13 @@
   .journal .closing .q { font-size: 1.05rem; }
   .journal .herofig .ph { aspect-ratio: 16 / 10; }
   .journal .herofig { margin-bottom: 22px; }
+  /* 図版ヒーローは 16/10 の専用画像に差し替える（未指定ならPC用のまま） */
+  .journal .herofig.nodim .ph-photo { background-image: var(--hero-sp, var(--hero-pc)); }
+  /* ⚠️ 見出しの手動 <br> は狭い画面では外す。
+     段の区切りを固定すると、その中でさらに折り返して語の途中で切れる
+     （実例：「飲食店の集客、グ／ルメサイト…」「…ありませんでし／た。」）。
+     br を消せば text-wrap: balance が全体に効いて、意味の切れ目で折れる。 */
+  .journal .title br { display: none; }
   .journal .stats { grid-template-columns: 1fr; }
   .journal .vsgrid { grid-template-columns: 1fr; }
   .journal .duel { grid-template-columns: 1fr; }
