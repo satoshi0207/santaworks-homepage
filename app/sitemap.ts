@@ -15,6 +15,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/journal/", priority: 0.6 },
     { path: "/journal/gourmet-site-dependency/", priority: 0.6 },
     { path: "/journal/why-we-built-pokememo/", priority: 0.6 },
+    { path: "/journal/tools-that-make/", priority: 0.6 },
     { path: "/contact/", priority: 0.6 },
     { path: "/privacy/", priority: 0.3 },
     { path: "/legal/", priority: 0.3 },
