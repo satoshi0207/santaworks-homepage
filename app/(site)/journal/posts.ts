@@ -9,6 +9,14 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "why-we-built-pokememo",
+    title: "覚えていることは、才能ではなく仕組みでした——ポケメモをつくった理由",
+    excerpt:
+      "人の話を覚えていなくて損をした。逆に、覚えていてもらえて嬉しかった。その差を根性で埋めるのをやめて、道具にしました。記憶の加齢変化とLINEの普及データから、つくった理由を書いています。",
+    date: "2026-07-26",
+    category: "プロダクト / ポケメモ",
+  },
+  {
     slug: "gourmet-site-dependency",
     title: "飲食店の集客、グルメサイトだけに委ねてよいのでしょうか——公開データから考える",
     excerpt:
