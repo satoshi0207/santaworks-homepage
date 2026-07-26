@@ -66,7 +66,7 @@ export default function Page() {
               <strong>&ldquo;だけ&rdquo;</strong>
               ではありませんでした。
               <strong>覚えていられる量には、そもそも限界がある</strong>
-              からです。それなら、根性ではなく道具で埋めればいい。ポケメモは、その考えからつくりました。
+              からです。それなら、根性ではなく仕組みで埋めればいい。ポケメモは、その考えからつくりました。
             </p>
             <div className="meta">
               <span className="who">Santa Works</span>
@@ -183,10 +183,19 @@ export default function Page() {
                 </div>
               </div>
               <figcaption>
-                損は静かに起き、喜びははっきり残る。この
-                <strong>非対称</strong>が、道具をつくる価値になりました。
+                同じ出来事でも、片側では損が静かに積もり、もう片側には喜びがはっきり残ります。
               </figcaption>
             </figure>
+
+            {/* 記事の芯。figcaption（小さく淡い書式）では弱いので callout に出して立てる。 */}
+            <div className="callout rv">
+              <div className="big">≠</div>
+              <div className="tx">
+                <b>損は静かに起き、喜びははっきり残る。</b>
+                <br />
+                この<b>非対称</b>が、道具をつくる価値になりました。
+              </div>
+            </div>
           </section>
 
           {/* 02 前提 */}
