@@ -187,14 +187,17 @@ export default function Page() {
               </figcaption>
             </figure>
 
-            {/* 記事の芯。figcaption（小さく淡い書式）では弱いので callout に出して立てる。 */}
-            <div className="callout rv">
-              <div className="big">≠</div>
-              <div className="tx">
-                <b>損は静かに起き、喜びははっきり残る。</b>
+            {/* 記事の芯。callout は数値を主役にする器なので、言葉そのものを立てる pull を使う。 */}
+            <div className="pull rv">
+              <p className="q">
+                損は静かに起き、
                 <br />
-                この<b>非対称</b>が、道具をつくる価値になりました。
-              </div>
+                喜びは<em>はっきり残る</em>。
+              </p>
+              <div className="rule" />
+              <p className="sub">
+                この<b>非対称</b>が、仕組みをつくる価値になりました。
+              </p>
             </div>
           </section>
 

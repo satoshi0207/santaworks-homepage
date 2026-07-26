@@ -164,6 +164,16 @@
 .journal .vscol.hp li .ic { color: var(--accent); }
 .journal .vscol.plat li .ic { color: var(--muted); }
 
+/* pull quote — 記事の芯を1行で立てる。callout は数値を主役にする器なので、
+   "言葉そのもの"を見せたいときはこちらを使う。明朝＋大サイズ＋центрで、
+   本文の流れを一度止める。文字は clamp でスマホから広い画面まで連続的に効かせる。 */
+.journal .pull { margin: 54px 0; text-align: center; }
+.journal .pull .q { font-family: var(--font-serif); font-weight: 700; font-size: clamp(1.45rem, 4.6vw, 2.25rem); line-height: 1.62; letter-spacing: .01em; margin: 0; text-wrap: balance; }
+.journal .pull .q em { font-style: normal; color: var(--accent); }
+.journal .pull .rule { width: 44px; height: 3px; border-radius: 999px; margin: 24px auto 0; background: linear-gradient(90deg, var(--accent-strong), var(--accent)); }
+.journal .pull .sub { margin: 18px 0 0; font-size: .88rem; color: var(--muted); line-height: 1.9; }
+.journal .pull .sub b { color: var(--ink); font-weight: 800; }
+
 /* closing */
 .journal .closing { margin-top: 40px; padding: 28px 26px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); }
 .journal .closing .q { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; margin: 0 0 12px; }
