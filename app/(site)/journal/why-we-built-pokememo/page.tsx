@@ -62,7 +62,9 @@ export default function Page() {
               才能ではなく仕組みでした。
             </h1>
             <p className="lede">
-              人の話を覚えていなくて、損をしたことがあります。前に聞いたはずの話を、もう一度聞いてしまう。相手の顔が、少しだけ曇る。あれは、こちらの誠意が足りなかったからではありませんでした。
+              人の話を覚えていなくて、損をしたことがあります。前に聞いたはずの話を、もう一度聞いてしまう。相手の顔が、少しだけ曇る。あれは、こちらの誠意が足りなかったから
+              <strong>&ldquo;だけ&rdquo;</strong>
+              ではありませんでした。
               <strong>覚えていられる量には、そもそも限界がある</strong>
               からです。それなら、根性ではなく道具で埋めればいい。ポケメモは、その考えからつくりました。
             </p>
@@ -85,27 +87,28 @@ export default function Page() {
                 <span className="tx">
                   忘れることは意志の問題ではない。
                   <strong>エピソード記憶は成人期から徐々に低下する</strong>
-                  ——加齢研究がそう示している。
+                  ——加齢研究がそう示しています。
                 </span>
               </li>
               <li>
                 <span className="n">02</span>
                 <span className="tx">
-                  一方で「覚えていてもらえた」という体験は、
-                  <strong>誰にとっても嬉しい</strong>。この非対称が、道具のつけ入る隙になる。
+                  一方で「覚えていてもらえた」体験は、
+                  <strong>誰にとっても嬉しい</strong>
+                  。この非対称が、道具をつくる価値になります。
                 </span>
               </li>
               <li>
                 <span className="n">03</span>
                 <span className="tx">
-                  だから<strong>LINEにした</strong>。国内の月間利用者数は1億。
-                  インストールという一段を、最初から無くすため。
+                  だから<strong>LINEにしました</strong>
+                  。国内の月間利用者数は1億。インストールという一段を、最初から無くすために。
                 </span>
               </li>
             </ol>
           </div>
 
-          {/* 01 */}
+          {/* 01 きっかけ */}
           <section className="blk">
             <span className="kicker">きっかけ</span>
             <div className="h2">
@@ -115,25 +118,78 @@ export default function Page() {
             <p>
               仕事でも、ふだんの会話でも、「前に話したこと」を覚えていられずに損をした経験があります。相手はちゃんと話してくれていたのに、こちらが持ち帰れていない。次に会ったときに、その話題に触れられない。
               <strong>関係が、そこで一段だけ浅くなる。</strong>
-              致命傷ではないぶん、あとから気づきにくい種類の損でした。
+              致命傷ではありません。だからこそ、あとから気づきにくい種類の損でした。
             </p>
             <p>
               逆の側も知っています。何ヶ月かぶりに行った店で、前回こぼした愚痴の続きを聞かれたことがあります。美容師さんでも、担当の営業さんでも構いません。
               <strong>覚えていてもらえて、嫌だった人はいないと思います。</strong>
               あれは特別なサービスというより、「あなたのことを、ちゃんと持ち帰りました」という合図でした。
             </p>
-            <div className="callout rv">
-              <div className="big">
-                <span>?</span>
+
+            <figure className="rv">
+              <div className="fh">同じ出来事の、両側で起きていること</div>
+              <div className="vsgrid">
+                <div className="vscol plat">
+                  <div className="cap">✕ 覚えていなかった側</div>
+                  <ul>
+                    <li>
+                      <span className="ic">✕</span>
+                      <span>
+                        <span className="k">その場</span>
+                        同じ話を、もう一度たずねてしまう
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">✕</span>
+                      <span>
+                        <span className="k">相手の受けとり</span>
+                        「興味がなかったのだろう」と伝わる
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">✕</span>
+                      <span>
+                        <span className="k">あとに残るもの</span>
+                        関係が一段だけ浅くなる。本人は気づかない
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="vscol hp">
+                  <div className="cap">◎ 覚えていてもらえた側</div>
+                  <ul>
+                    <li>
+                      <span className="ic">◎</span>
+                      <span>
+                        <span className="k">その場</span>
+                        前回の続きから、会話がはじまる
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">◎</span>
+                      <span>
+                        <span className="k">相手の受けとり</span>
+                        「ちゃんと持ち帰ってくれた」と伝わる
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">◎</span>
+                      <span>
+                        <span className="k">あとに残るもの</span>
+                        次に会う理由が、ひとつ増える
+                      </span>
+                    </li>
+                  </ul>
+                </div>
               </div>
-              <div className="tx">
-                <b>覚えている人と、覚えていない人。</b>
-                差がついているのは、たぶん誠実さではありません。持ち帰る仕組みを持っているかどうかです。
-              </div>
-            </div>
+              <figcaption>
+                損は静かに起き、喜びははっきり残る。この
+                <strong>非対称</strong>が、道具をつくる価値になりました。
+              </figcaption>
+            </figure>
           </section>
 
-          {/* 02 */}
+          {/* 02 前提 */}
           <section className="blk">
             <span className="kicker">前提</span>
             <div className="h2">
@@ -147,29 +203,36 @@ export default function Page() {
               <strong>いわゆる高齢期に入る前、成人期の段階からゆるやかに低下していく</strong>
               ことが知られています<sup>※1</sup>。
             </p>
+
+            <div className="callout rv">
+              <div className="big">
+                65<span>歳より前から</span>
+              </div>
+              <div className="tx">
+                <b>エピソード記憶の低下は、高齢期を待たずに始まっている。</b>
+                一方で、言葉の意味や知識にあたる<b>意味記憶は、加齢の影響をほとんど受けにくい</b>
+                とされています<sup>※1</sup>
+                <sup>※2</sup>。
+              </div>
+            </div>
+
             <p>
-              興味深いのは、すべてが同じように衰えるわけではないことです。言葉の意味や知識にあたる
-              <strong>意味記憶は、加齢の影響をほとんど受けにくい</strong>
-              とされています<sup>※1</sup>
-              <sup>※2</sup>
-              。つまり「知識は残るのに、あの日の会話だけが抜けていく」というのは、実感であると同時に、記憶の構造としても筋が通っている話でした。
-            </p>
-            <p>
-              これを知ったとき、少し救われた気がしました。同時に、はっきりしたこともあります。
+              「知識は残るのに、あの日の会話だけが抜けていく」——実感としてよくある話ですが、記憶の構造としても筋が通っていました。これを知ったとき、少し救われた気がします。同時に、はっきりしたこともありました。
               <strong>年々忘れやすくなるのが既定路線なら、気合いでは解決しない。</strong>
               仕組みの側を用意するしかありません。
             </p>
+
             <div className="note rv">
-              <div className="nh">補足</div>
+              <span className="nh">補足：加齢による変化と、病気は別のものです</span>
               <p>
-                加齢による変化と、病気による記憶障害はまったく別のものです。本記事は前者、
+                本記事が触れているのは
                 <b>健康な範囲での自然な変化</b>
-                についてのみ触れています。心配な症状がある場合は、専門の医療機関にご相談ください。
+                のみで、病気による記憶障害とはまったく別の話です。ご心配な症状がある場合は、専門の医療機関にご相談ください。
               </p>
             </div>
           </section>
 
-          {/* 03 */}
+          {/* 03 設計 */}
           <section className="blk">
             <span className="kicker">設計</span>
             <div className="h2">
@@ -177,29 +240,31 @@ export default function Page() {
               <h2 className="tt">なぜ「写真」ではなく「人」だったのか</h2>
             </div>
             <p>
-              {/* ExifSort Pro はまだ /works/ に掲載されていないため、意図的にリンクを張らない
-                  （載っていないページへ送ると記事の信用が落ちる）。掲載後にリンク化する
-                  → hq/ORG.md §5-1「exifsort → homepage」 */}
+              {/* ExifSort Pro は /works/ に未掲載のため、意図的にリンクを張らない
+                  （載っていないページへ送ると記事の信用が落ちる）→ hq/ORG.md §5-1 */}
               Santa Works では、写真を撮影日ごとに自動で仕分けする
               <strong>ExifSort Pro</strong>
-              というデスクトップアプリもつくっています。同じ「記録を扱う道具」ですが、こちらは
+              <span style={{ fontSize: ".82em" }}>（※近日公開予定）</span>
+              というデスクトップアプリも準備しています。同じ「記録を扱う道具」ですが、こちらは
               <strong>すでに残っているもの</strong>を整えるための道具です。
             </p>
             <p>
               人の記憶は、そうはいきません。
               <strong>その場で書き留めなければ、そもそもデータが存在しない。</strong>
-              写真は勝手に残りますが、「今日どんな話をしたか」は誰も自動で残してくれない。だから、人の側を先につくることにしました。取りこぼしが起きているのは、明らかにこちらだったからです。
+              写真は勝手に残りますが、「今日どんな話をしたか」は誰も自動で残してくれません。だから、人の側を先につくることにしました。取りこぼしが起きているのは、明らかにこちらだったからです。
             </p>
-            <p>
-              もうひとつ、決めたことがあります。
-              <strong>相手を「管理」する道具にはしない</strong>
-              、ということです。集めたいのは属性や個人情報ではなく、
-              <strong>その人が話してくれたこと</strong>
-              のほうです。この線を越えると、便利ではあっても、たぶん温かくはなくなります。
-            </p>
+
+            <div className="note rv">
+              <span className="nh">決めたこと：相手を「管理」する道具にはしない</span>
+              <p>
+                残したいのは属性や個人情報ではなく、
+                <b>その人が話してくれたこと</b>
+                のほうです。この線を越えると、便利ではあっても、たぶん温かくはなくなります。だからポケメモには、売上分析も、顧客ランク付けも、一斉配信も入れていません。
+              </p>
+            </div>
           </section>
 
-          {/* 04 */}
+          {/* 04 選択 */}
           <section className="blk">
             <span className="kicker">選択</span>
             <div className="h2">
@@ -213,56 +278,93 @@ export default function Page() {
               <strong>すでに全員が持っているから</strong>です。
             </p>
 
-            <div className="duel rv">
-              <div className="side a">
-                <div className="big num">
-                  1<small>億</small>
-                </div>
-                <div className="lab">
-                  <b>LINEの国内月間利用者数</b>
-                  （2025年12月末時点）
-                </div>
+            <div className="callout rv">
+              <div className="big">
+                1<span>億ユーザー</span>
               </div>
-              <div className="vs">vs</div>
-              <div className="side b">
-                <div className="big">
-                  <span style={{ fontSize: "0.42em", lineHeight: 1.5 }}>
-                    インストール
-                    <br />
-                    という一段
-                  </span>
-                </div>
-                <div className="lab">
-                  <b>専用アプリに必ずついてくる関門</b>
-                </div>
+              <div className="tx">
+                <b>LINEの国内月間利用者数</b>（2025年12月末時点）
+                <sup>※3</sup>
+                。同時期の日本の総人口は約1億2,285万人
+                <sup>※4</sup>
+                。「1か月に一度でも起動したアカウント数」という定義を踏まえても、
+                <b>ほぼ全員が日常的に開いている場所</b>だと言えます。
               </div>
             </div>
-            <p className="duel-cap">出典 ※3（LINEヤフー 2026年1月発表）／ ※4</p>
 
-            <p>
-              LINEの国内月間利用者数は、2025年12月末時点で
-              <strong>1億ユーザー</strong>を超えたと発表されています<sup>※3</sup>
-              。ここでいう月間利用者数は「1か月の間に一度でもLINEを起動したアカウント数」で、日本の人口を考えれば、
-              <strong>ほぼ全員が日常的に開いている</strong>
-              と言っていい水準です。
-            </p>
-            <p>
-              一方、専用アプリには
-              <strong>ストアを開き、ダウンロードし、初回設定を済ませる</strong>
-              という一段が必ずついてきます。アプリの継続率に関する各種ベンチマークでは、
-              <strong>離脱がもっとも集中するのはインストール直後</strong>
-              だと繰り返し指摘されています<sup>※4</sup>。
-            </p>
+            <figure className="rv">
+              <div className="fh">同じ機能を、どこに置くか</div>
+              <div className="vsgrid">
+                <div className="vscol plat">
+                  <div className="cap">専用アプリにした場合</div>
+                  <ul>
+                    <li>
+                      <span className="ic">△</span>
+                      <span>
+                        <span className="k">使い始めるまで</span>
+                        ストアを開き、ダウンロードし、初回設定をする
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">✕</span>
+                      <span>
+                        <span className="k">いちばんの離脱点</span>
+                        アンインストールはインストール当日に最も集中する
+                        <sup>※5</sup>
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">○</span>
+                      <span>
+                        <span className="k">できること</span>
+                        自由度は高い（画面も操作も自前で設計できる）
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+                <div className="vscol hp">
+                  <div className="cap">LINEのボットにした場合</div>
+                  <ul>
+                    <li>
+                      <span className="ic">◎</span>
+                      <span>
+                        <span className="k">使い始めるまで</span>
+                        友だち追加のみ。インストールが要らない
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">◎</span>
+                      <span>
+                        <span className="k">置き場所</span>
+                        毎日開くアプリの中。思い出したその場で書ける
+                      </span>
+                    </li>
+                    <li>
+                      <span className="ic">△</span>
+                      <span>
+                        <span className="k">できること</span>
+                        LINEの画面の作法に従う（自由度は下がる）
+                      </span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+              <figcaption>
+                自由度を手放すかわりに、
+                <strong>入口の一段を丸ごと無くす</strong>
+                ——ポケメモはそちらを選びました。
+              </figcaption>
+            </figure>
+
             <p>
               覚えておきたい相手ができるのは、たいてい
               <strong>会った直後の、ほんの数十秒</strong>
               です。その瞬間に「まずアプリを入れてください」と言う道具は、たぶん使われません。
-              <strong>いつも開いているところに置く</strong>
-              ——それがLINEを選んだ理由のすべてです。
+              <strong>いつも開いているところに置く</strong>——それが結論でした。
             </p>
           </section>
 
-          {/* 05 */}
+          {/* 05 いま */}
           <section className="blk">
             <span className="kicker">いま</span>
             <div className="h2">
@@ -316,7 +418,13 @@ export default function Page() {
                 </a>
               </li>
               <li>
-                ※4 AppsFlyer「アプリアンインストールレポート」（アンインストールはインストール当日に最も集中すると報告）{" "}
+                ※4 総務省統計局「人口推計」（2026年6月1日現在・概算値／総人口1億2,285万人）{" "}
+                <a href="https://www.stat.go.jp/data/jinsui/pdf/202606.pdf">
+                  stat.go.jp/data/jinsui/pdf/202606.pdf
+                </a>
+              </li>
+              <li>
+                ※5 AppsFlyer「アプリアンインストールレポート」（アンインストールはインストール当日に最も集中すると報告）{" "}
                 <a href="https://www.appsflyer.com/ja/resources/guides/app-uninstall-benchmarks/">
                   appsflyer.com/ja/resources/guides/app-uninstall-benchmarks/
                 </a>
@@ -326,7 +434,7 @@ export default function Page() {
 
           <p className="disclaimer">
             ※
-            本記事は公開されている調査・報道をもとに構成しています。各数値は出典元の調査時点のものです。記憶に関する記述は健康な範囲での加齢変化について一般に知られている知見を紹介したもので、医学的な診断・助言を目的とするものではありません。
+            本記事は公開されている調査・報道をもとに構成しています。各数値は出典元の調査時点のものであり、調査ごとに対象・母数・時期が異なります。記憶に関する記述は健康な範囲での加齢変化について一般に知られている知見を紹介したもので、医学的な診断・助言を目的とするものではありません。
           </p>
 
           <Link href="/journal/" className="backlink">
