@@ -229,7 +229,7 @@ export default function Page() {
                 <b>「彼らは使っていない」</b>と答えた、というものです<sup>※6</sup>。
               </p>
               <p>
-                ただ、その会話は<b>2010年、iPadが出た直後</b>のものでした。
+                ただ、その会話は<b>2010年、iPadが出た年</b>のものでした。
                 <b>iPhoneの話ではありませんし、15年以上前の道具の話です。</b>
                 私の考えを補強してくれそうな逸話ですが、そのまま持ってくるのはやめておきます。
               </p>
@@ -249,12 +249,12 @@ export default function Page() {
 
             <div className="callout rv">
               <div className="big">
-                90.5<span>％ と 66.4％</span>
+                91.8<span>％ と 64.4％</span>
               </div>
               <div className="tx">
-                <b>スマートフォンを持つ世帯は 90.5％、パソコンを持つ世帯は 66.4％</b>
-                （令和6年）<sup>※1</sup>。5年前の令和2年はスマホ 86.8％、パソコン
-                70.1％でした。差は少しずつ開いています。
+                <b>スマートフォンを持つ世帯は 91.8％、パソコンを持つ世帯は 64.4％</b>
+                （令和7年）<sup>※1</sup>。4年前の令和3年はスマホ 88.6％、パソコン
+                69.8％でした。差は少しずつ開いています。
               </div>
             </div>
 
@@ -262,7 +262,8 @@ export default function Page() {
               <span className="nh">補足：パソコンは、一直線に減ってはいません</span>
               <p>
                 同じ調査で、パソコンの保有率は令和5年に <b>65.3％</b>{" "}
-                まで下がったあと、令和6年は 1.1ポイント戻しています。
+                まで下がったあと、令和6年はいったん 66.4％まで戻り、令和7年に
+                64.4％へ。<b>行ったり来たりしながら、ゆるやかに下がっています。</b>
                 「パソコンが消えていく」という話ではありません。
               </p>
             </div>
@@ -273,40 +274,40 @@ export default function Page() {
 
             <figure className="rv">
               <div className="fh">
-                青少年がインターネットに使っている機器（令和6年度・n=3,129）
+                青少年がインターネットに使っている機器（令和7年度・n=3,060）
               </div>
               <div className="stats">
                 <div className="stat ac">
                   <div className="big">
-                    75.4<small>％</small>
+                    78.5<small>％</small>
                   </div>
                   <div className="cap">スマートフォン</div>
-                  <div className="src">こども家庭庁（令和6年度）</div>
+                  <div className="src">こども家庭庁（令和7年度）</div>
                 </div>
                 <div className="stat ac">
                   <div className="big">
-                    72.6<small>％</small>
+                    72.7<small>％</small>
                   </div>
                   <div className="cap">学校から配られた端末（GIGA端末）</div>
                   <div className="src">同上</div>
                 </div>
                 <div className="stat">
                   <div className="big">
-                    44.9<small>％</small>
+                    42.5<small>％</small>
                   </div>
                   <div className="cap">自宅用のパソコンやタブレット等</div>
                   <div className="src">同上</div>
                 </div>
               </div>
               <figcaption>
-                小学生（10歳以上）のインターネット利用率は 97.2％
+                小学生（10歳以上）のインターネット利用率は 98.5％
                 <sup>※2</sup>。使っていない子は、ほとんどいません。
               </figcaption>
             </figure>
 
             <p>
-              自宅のパソコンは 44.9％。ここまでは、思っていたとおりでした。ただ、その隣に私が見落としていた数字がありました。
-              <strong>学校から配られた端末が 72.6％。</strong>
+              自宅のパソコンは 42.5％。ここまでは、思っていたとおりでした。ただ、その隣に私が見落としていた数字がありました。
+              <strong>学校から配られた端末が 72.7％。</strong>
             </p>
 
             <p>
@@ -315,7 +316,7 @@ export default function Page() {
 
             <div className="callout rv">
               <div className="big">
-                72.6<span>％ が触っている</span>
+                72.7<span>％ が触っている</span>
               </div>
               <div className="tx">
                 私が感じていた引っかかりは、
@@ -416,15 +417,15 @@ export default function Page() {
             <h3>参考文献・出典</h3>
             <ol>
               <li>
-                ※1 総務省「令和6年 通信利用動向調査報告書（世帯編）」（n=15,304。スマートフォン
-                90.5％／パソコン 66.4％）{" "}
-                <a href="https://www.soumu.go.jp/johotsusintokei/statistics/pdf/HR202400_001.pdf">
-                  soumu.go.jp/johotsusintokei/statistics/pdf/HR202400_001.pdf
+                ※1 総務省「令和7年 通信利用動向調査報告書（世帯編）」（令和7年8月時点・n=17,916。スマートフォン
+                91.8％／パソコン 64.4％。2026年5月29日公表）{" "}
+                <a href="https://www.soumu.go.jp/johotsusintokei/statistics/pdf/HR202500_001.pdf">
+                  soumu.go.jp/johotsusintokei/statistics/pdf/HR202500_001.pdf
                 </a>
               </li>
               <li>
-                ※2 こども家庭庁「令和6年度 青少年のインターネット利用環境実態調査
-                調査結果（概要）」（青少年 n=3,129）{" "}
+                ※2 こども家庭庁「令和7年度 青少年のインターネット利用環境実態調査
+                調査結果（速報）」（2026年2月・青少年 n=3,060）{" "}
                 <a href="https://www.cfa.go.jp/policies/youth-kankyou/internet_research/results-etc">
                   cfa.go.jp/policies/youth-kankyou/internet_research/results-etc
                 </a>
@@ -454,7 +455,7 @@ export default function Page() {
               <li>
                 ※6 Nick Bilton「Steve Jobs Was a Low-Tech Parent」The New York
                 Times（2014年9月11日）。会話は2010年、iPad
-                の発売直後のもの。※有料記事のため、リンクは張っていません
+                が発売された年のもの。※有料記事のため、リンクは張っていません
               </li>
             </ol>
           </div>
