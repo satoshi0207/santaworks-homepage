@@ -461,7 +461,12 @@ export default function Page() {
           </div>
 
           <p className="disclaimer">
-            ※
+            ヒーロー画像：{" "}
+            <a href="https://www.pexels.com/photo/white-laptop-and-monitor-on-table-5155218/">
+              Pexels
+            </a>
+            （商用利用可・帰属表示は任意ですが、出典として記載しています）。
+            <br />※
             本記事は公開されている調査をもとに構成しています。各数値は出典元の調査時点のものであり、調査ごとに対象・母数・時期が異なります。子育てや教育について一般的な助言をするものではなく、私個人が迷っていることをそのまま書いたものです。
           </p>
 
