@@ -20,7 +20,8 @@ years = [("R2",84),("R3",83),("R4",114),("R5",139),("R6",136),("R7",167)]
 bw, gap, mx, base = 76, 34, 167, 760   # 合計626px。240x290の中央トリミング(744px)に余白を残す
 total = len(years)*bw + (len(years)-1)*gap
 x0 = (W - total)/2
-sf = ImageFont.truetype(MED, 26)
+# 一覧は 744px幅の中央トリミングを240pxで表示＝0.32倍。26ptだと画面で約8pxで読めない
+sf = ImageFont.truetype(MED, 34)
 for i,(lb,v) in enumerate(years):
     bx = x0 + i*(bw+gap); h = int(300*v/mx); last = i == len(years)-1
     d.rounded_rectangle([bx, base-h, bx+bw, base], radius=12, fill=CORAL if last else DIM)
