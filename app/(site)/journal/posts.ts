@@ -18,7 +18,7 @@ export const posts: Post[] = [
     date: "2026-07-29",
     category: "公開データ / 記憶",
     // ⚠️ 写真ではなくグラフ。一覧のトリミングで横長ヒーローは見出しが切れるため、
-    // 中央寄せの thumb を別に用意（167・nine-of-eleven と同じ方式）。
+    // 中央寄せの thumb を別に用意（167-children と同じ方式）。
     hero: "/blog/summer-50years/thumb.webp",
   },
   {
