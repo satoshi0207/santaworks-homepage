@@ -93,10 +93,15 @@ export default function JournalFx() {
             caps.push({ p, bar, to, i, dec });
           });
           // チャート図の数字は 0 から
+          // 単位は既定 "%"。日数など別単位の図は .vl に data-suffix を付ける
           if (!reduced)
             fig
               .querySelectorAll<HTMLElement>(".chart .vl")
-              .forEach((v) => (v.textContent = "0.0%"));
+              .forEach(
+                (v) =>
+                  (v.textContent =
+                    "0.0" + (v.getAttribute("data-suffix") ?? "%")),
+              );
 
           void fig.offsetWidth;
           requestAnimationFrame(() => {
@@ -118,7 +123,7 @@ export default function JournalFx() {
                   1050,
                   delay,
                   1,
-                  "%",
+                  vl.getAttribute("data-suffix") ?? "%",
                 );
             });
             // チャート外の .fl（保険）

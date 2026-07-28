@@ -201,6 +201,24 @@
 .journal .sources li a { word-break: break-all; }
 .journal .disclaimer { margin-top: 28px; font-size: .72rem; color: var(--muted); opacity: .85; line-height: 1.8; }
 
+/* お見舞い・お知らせ。記事本文ではないので、アクセント色も強調も使わず静かに置く。
+   ⚠️ 目立たせない器であることが役目。ここに販促や誘導を入れない。 */
+.journal .condolence { margin: 8px 0 34px; padding: 20px 22px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); }
+.journal .condolence p { margin: 0; font-size: .82rem; line-height: 1.95; color: var(--muted); }
+.journal .condolence p + p { margin-top: 10px; }
+
+/* 図版の画面幅による出し分け。
+   ⚠️ 横長の図を縮小すると軸ラベルが読めず、横スクロールに任せると
+   初期表示で図の要点（新しい年の側）が見えない。向きを変えた図を別に用意して差し替える。
+   ヒーローの hero.webp / hero-sp.webp と同じ考え方。 */
+.journal .figbox { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+.journal .figbox svg { display: block; width: 100%; height: auto; }
+.journal .sponly { display: none; }
+@media (max-width: 820px) {
+  .journal .pconly { display: none; }
+  .journal .sponly { display: block; }
+}
+
 /* back link */
 .journal .backlink { display: inline-flex; align-items: center; gap: 6px; margin-top: 40px; font-size: .82rem; font-weight: 700; color: var(--accent); }
 
