@@ -3,6 +3,8 @@ import Script from "next/script";
 import "./globals.css";
 
 // Google Analytics 4。NEXT_PUBLIC_GA_ID（例: G-XXXXXXXXXX）が設定されたときだけ有効化。
+// 自分の端末は ?internal=1 で一度アクセスしておくと traffic_type=internal で送信され、
+// GA4側のデータフィルタで除外される（解除は ?internal=0）。
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
 const SITE_URL =
@@ -127,12 +129,15 @@ export default function RootLayout({
         />
         {GA_ID && (
           <>
+            <Script id="ga4-internal" strategy="afterInteractive">
+              {`try{var p=new URLSearchParams(location.search);if(p.has('internal')){if(p.get('internal')==='0')localStorage.removeItem('sw_internal');else localStorage.setItem('sw_internal','1');}window.__swInternal=localStorage.getItem('sw_internal')==='1';}catch(e){}`}
+            </Script>
             <Script
               src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
               strategy="afterInteractive"
             />
             <Script id="ga4" strategy="afterInteractive">
-              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}');`}
+              {`window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','${GA_ID}',window.__swInternal?{traffic_type:'internal'}:{});`}
             </Script>
           </>
         )}
