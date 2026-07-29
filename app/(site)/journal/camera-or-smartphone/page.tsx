@@ -5,13 +5,13 @@ import { IndexPc, IndexSp, TypesPc, TypesSp, HomePc, HomeSp } from "./figures";
 import "../journal.css";
 
 export const metadata: Metadata = {
-  title: "台数は9割減って、金額は横ばいでした",
+  title: "カメラは9割売れなくなって、金額は残りました",
   description:
     "デジタルカメラの出荷台数は2010年のピークから92.2%減りました。ところが金額は直近10年でほとんど動いていません。消えたのは「カメラ」ではなく「みんなのカメラ」でした。CIPAの出荷統計23年ぶんを一次資料から整理しています。",
   alternates: { canonical: "/journal/camera-or-smartphone/" },
   openGraph: {
     type: "article",
-    title: "台数は9割減って、金額は横ばいでした｜Santa Works Journal",
+    title: "カメラは9割売れなくなって、金額は残りました｜Santa Works Journal",
     description:
       "デジタルカメラの出荷台数は2010年から92.2%減。ところが金額は直近10年でほぼ横ばいでした。消えたのは「カメラ」ではなく「みんなのカメラ」だった、という話です。",
     url: "/journal/camera-or-smartphone/",
@@ -21,13 +21,13 @@ export const metadata: Metadata = {
         url: "/blog/camera-or-smartphone/ogp.png",
         width: 1200,
         height: 630,
-        alt: "台数は9割減って、金額は横ばいでした｜Santa Works Journal",
+        alt: "カメラは9割売れなくなって、金額は残りました｜Santa Works Journal",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "台数は9割減って、金額は横ばいでした｜Santa Works Journal",
+    title: "カメラは9割売れなくなって、金額は残りました｜Santa Works Journal",
     description:
       "デジタルカメラの出荷台数は2010年から92.2%減。金額は直近10年でほぼ横ばい。数え方を変えると結論が反対になります。",
     images: ["/blog/camera-or-smartphone/ogp.png"],
@@ -65,9 +65,9 @@ export default function Page() {
             </figure>
             <span className="eyebrow">写真 / 公開データの整理</span>
             <h1 className="title">
-              台数は9割減って、
+              カメラは9割売れなくなって、
               <br />
-              金額は横ばいでした。
+              金額は残りました。
             </h1>
             <p className="lede">
               「カメラが売れなくなった」という話は、何度も聞いたことがあります。
