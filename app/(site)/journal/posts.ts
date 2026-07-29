@@ -11,6 +11,17 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "camera-or-smartphone",
+    title: "台数は9割減って、金額は横ばいでした",
+    excerpt:
+      "デジタルカメラの出荷台数は2010年のピークから92.2%減りました。ところが金額は直近10年でほとんど動いていません。消えたのは「カメラ」ではなく「みんなのカメラ」でした。CIPAの出荷統計23年ぶんを、一次資料から数えています。",
+    date: "2026-07-30",
+    category: "写真 / 公開データの整理",
+    // ⚠️ 一覧では 16/9 と約4/3 の両方に cover でトリミングされる。
+    // 横長のヒーローだと数字が切れるので、中央寄せの thumb を別に用意している。
+    hero: "/blog/camera-or-smartphone/thumb.webp",
+  },
+  {
     slug: "summer-50years",
     title: "昔の夏は涼しかった、を50年分の記録で確かめました",
     excerpt:

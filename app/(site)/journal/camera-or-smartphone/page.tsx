@@ -15,12 +15,22 @@ export const metadata: Metadata = {
     description:
       "デジタルカメラの出荷台数は2010年から92.2%減。ところが金額は直近10年でほぼ横ばいでした。消えたのは「カメラ」ではなく「みんなのカメラ」だった、という話です。",
     url: "/journal/camera-or-smartphone/",
+    // ⚠️ OGP は webp ではなく png（LINE / X の互換）。生成は make_camera_figs.py。
+    images: [
+      {
+        url: "/blog/camera-or-smartphone/ogp.png",
+        width: 1200,
+        height: 630,
+        alt: "台数は9割減って、金額は横ばいでした｜Santa Works Journal",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "台数は9割減って、金額は横ばいでした｜Santa Works Journal",
     description:
       "デジタルカメラの出荷台数は2010年から92.2%減。金額は直近10年でほぼ横ばい。数え方を変えると結論が反対になります。",
+    images: ["/blog/camera-or-smartphone/ogp.png"],
   },
 };
 
@@ -68,7 +78,7 @@ export default function Page() {
             <div className="meta">
               <span className="who">Santa Works</span>
               <span className="dot" />
-              <span>2026.08.XX</span>
+              <span>2026.07.30</span>
               <span className="dot" />
               <span>読了 約6分</span>
               <span className="dot" />
@@ -344,7 +354,10 @@ export default function Page() {
               その残ったほうの中でも、入れ替わりが起きています。2025年のレンズ交換式の内訳は、
               <strong>ミラーレスが 6,311,054台（前年比112.5%）</strong>に対して、
               <strong>一眼レフは 690,911台（前年比69.3%）</strong>。
-              一眼レフはいま、年に3割ずつ減っています<sup>※2</sup>。
+              {/* ⚠️「年に3割ずつ」と書かない。原典にあるのは2024→2025の1年ぶんだけで、
+                  毎年その率で減っている根拠は無い。 */}
+              一眼レフは<strong>1年で3割減りました</strong>
+              <sup>※2</sup>。
             </p>
             <p>
               もうひとつ、同じ資料に交換レンズの数字があります。2025年の出荷は
@@ -427,7 +440,8 @@ export default function Page() {
                 <br />
                 <b>台数の底は2023年</b>でした。2020年に41.6%落ちたあとも、
                 5.9%、4.2%、3.6%と<b>3年続けて落ちています</b>。
-                そもそも台数はコロナの前から、毎年2割ずつ減っていました。
+                そもそも台数は<b>コロナの直前2年</b>も、毎年2割ずつ減っていました
+                （2018年 −22.2%、2019年 −21.7%）。
                 <br />
                 <b>同じひとつの出来事なら、同じように戻るはずです。</b>
                 戻り方が違うということは、たぶん別のことが起きています。

@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/journal/tools-that-make/", priority: 0.6 },
     { path: "/journal/167-children/", priority: 0.6 },
     { path: "/journal/summer-50years/", priority: 0.6 },
+    { path: "/journal/camera-or-smartphone/", priority: 0.6 },
     { path: "/contact/", priority: 0.6 },
     { path: "/privacy/", priority: 0.3 },
     { path: "/legal/", priority: 0.3 },
