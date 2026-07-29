@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Zen_Antique, Zen_Kaku_Gothic_New } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./photo.css";
 
 const antique = Zen_Antique({
@@ -20,12 +22,22 @@ const zkg = Zen_Kaku_Gothic_New({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "photo",
+  schemaType: "LocalBusiness",
+  name: "写真館 ひととき",
+  description: "架空の写真館「ひととき」を想定した、節目の思い出を残すフォトスタジオサイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "山ノ手県 港見市 本町4-6 ひとときビル2F",
+  openingHours: ["Th-Tu 10:00-18:00"],
+};
+
 export const metadata: Metadata = {
   title: "写真館 ひととき｜デザインサンプル",
-  description:
-    "架空の写真館「ひととき」を想定した、節目の思い出を残すフォトスタジオサイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "写真館 ひととき｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -40,6 +52,7 @@ export default function PhotoLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`hitotoki ${antique.variable} ${zkg.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="ht-header">
         <Link href="/demo/photo/" className="ht-brand">
           <span className="name">写真館 ひととき</span>

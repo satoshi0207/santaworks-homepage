@@ -5,6 +5,8 @@ import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
 import { LeafMark, IconPhone } from "./icons";
 import { CLINIC, NAV } from "./data";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./soyogi.css";
 
 /* UD書体＝判読性のために設計された書体。「高齢の患者が読む」前提に理屈が通る */
@@ -25,15 +27,25 @@ const barlow = Barlow({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "naika",
+  schemaType: "MedicalClinic",
+  name: "そよぎ内科クリニック",
+  description: "架空の内科クリニック「そよぎ内科クリニック」を想定した、かかりつけ医のサイトのデザインサンプルです。読みやすさ・使いやすさを主役に設計しています。制作: Santa Works",
+  telephone: "0000-00-0000",
+  streetAddress: "山ノ手県港見市 若葉台2-8-1 そよぎメディカルビル1F",
+  openingHours: ["Mo,Tu,Th,Fr 09:00-12:30", "Mo,Tu,Th,Fr 15:00-18:30", "We,Sa 09:00-12:30"],
+};
+
 export const metadata: Metadata = {
   title: {
     default: "そよぎ内科クリニック｜デザインサンプル",
     template: `%s｜${CLINIC.name}`,
   },
-  description:
-    "架空の内科クリニック「そよぎ内科クリニック」を想定した、かかりつけ医のサイトのデザインサンプルです。読みやすさ・使いやすさを主役に設計しています。制作: Santa Works",
+  description: BIZ.description,
   // 架空のクリニックのため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "そよぎ内科クリニック｜デザインサンプル"),
 };
 
 export default function NaikaLayout({
@@ -41,6 +53,7 @@ export default function NaikaLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`soyogi ${biz.variable} ${barlow.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <a className="sy-skip" href="#main">
         本文へスキップ
       </a>

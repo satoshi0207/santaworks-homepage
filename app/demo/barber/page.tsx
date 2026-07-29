@@ -163,7 +163,9 @@ export default function BarberHome() {
                   <tr>
                     <th scope="row">Tel</th>
                     <td>
-                      <span className="bm-tel">03-0000-0000</span>
+                      <a className="bm-tel" href="tel:0300000000">
+                        03-0000-0000
+                      </a>
                       <br />
                       （架空の番号です／お電話でのご予約優先）
                     </td>

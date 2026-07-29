@@ -237,7 +237,9 @@ export default function ClubHome() {
               東京都中央区銀座某丁目0-0
               <br />
               月讀ビル7F（架空の住所です）
-              <span className="tel">03-0000-0000</span>
+              <a className="tel" href="tel:0300000000">
+                03-0000-0000
+              </a>
               20:00–翌1:00／日曜・祝日休
               <br />
               完全会員制・ご紹介制です。はじめての方は、

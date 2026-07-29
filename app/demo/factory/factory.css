@@ -685,6 +685,8 @@ a.t-service-card:hover {
   letter-spacing: 0.08em;
   color: var(--t-navy);
   font-variant-numeric: tabular-nums;
+  /* スマホからタップ発信できるようリンク化しているので、下線は消す */
+  text-decoration: none;
 }
 .t-tel-box .note {
   font-size: 0.82rem;

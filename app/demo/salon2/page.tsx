@@ -152,7 +152,9 @@ export default function Salon2Home() {
                   <tr>
                     <th scope="row">Tel</th>
                     <td>
-                      <span className="yh-tel">03-0000-0000</span>
+                      <a className="yh-tel" href="tel:0300000000">
+                        03-0000-0000
+                      </a>
                       <br />
                       （架空の番号です／完全予約制）
                     </td>

@@ -164,7 +164,7 @@ export default function CabaretHome() {
                   <tr>
                     <th scope="row">ご予約</th>
                     <td>
-                      03-0000-0000
+                      <a href="tel:0300000000">03-0000-0000</a>
                       <br />
                       （架空の番号です／ご予約なしでもご入店いただけます）
                     </td>

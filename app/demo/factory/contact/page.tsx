@@ -24,7 +24,9 @@ export default function FactoryContact() {
           <Reveal>
             <div className="t-tel-box">
               <div>
-                <span className="tel">03-0000-0000</span>
+                <a className="tel" href="tel:0300000000">
+                  03-0000-0000
+                </a>
               </div>
               <p className="note">
                 受付時間 平日 8:30 — 17:30

@@ -116,7 +116,7 @@ export default function KoumutenContact() {
                     margin: "0 0 0.2rem",
                   }}
                 >
-                  0120-00-0000
+                  <a href="tel:0120000000">0120-00-0000</a>
                 </p>
                 <p style={{ fontSize: "0.82rem", color: "var(--sub)", margin: 0 }}>
                   受付 9:00–18:00（日曜・祝日休）

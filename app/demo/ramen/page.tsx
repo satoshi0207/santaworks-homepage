@@ -193,6 +193,13 @@ export default function RamenDemo() {
                       <td>水曜日</td>
                     </tr>
                     <tr>
+                      <th>電話</th>
+                      <td>
+                        <a href="tel:0300000000">03-0000-0000</a>
+                        （架空の番号です）
+                      </td>
+                    </tr>
+                    <tr>
                       <th>席数</th>
                       <td>カウンター 8席</td>
                     </tr>

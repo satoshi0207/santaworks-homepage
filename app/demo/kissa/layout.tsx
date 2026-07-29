@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Kaisei_Decol, Shippori_Mincho } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./kissa.css";
 
 const decol = Kaisei_Decol({
@@ -20,12 +22,22 @@ const shippori = Shippori_Mincho({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "kissa",
+  schemaType: "CafeOrCoffeeShop",
+  name: "純喫茶 おもかげ",
+  description: "架空の昭和レトロな純喫茶「おもかげ」を想定した、ノスタルジックな喫茶店サイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "山ノ手県 港見市 栄町2-3 おもかげビル1F",
+  openingHours: ["Fr-We 08:00-19:00"],
+};
+
 export const metadata: Metadata = {
   title: "純喫茶 おもかげ｜デザインサンプル",
-  description:
-    "架空の昭和レトロな純喫茶「おもかげ」を想定した、ノスタルジックな喫茶店サイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "純喫茶 おもかげ｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -40,6 +52,7 @@ export default function KissaLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`omokage ${decol.variable} ${shippori.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="ok-header">
         <Link href="/demo/kissa/" className="ok-brand">
           <span className="mark" aria-hidden="true">

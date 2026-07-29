@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Zen_Kaku_Gothic_New, Poppins } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./juku.css";
 
 const zkg = Zen_Kaku_Gothic_New({
@@ -20,12 +22,22 @@ const poppins = Poppins({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "juku",
+  schemaType: "EducationalOrganization",
+  name: "個別指導塾 あすなろ",
+  description: "架空の学習塾「個別指導塾 あすなろ」を想定した、清潔で信頼感のある学習塾サイトのデザインサンプルです。制作: Santa Works",
+  telephone: "0120-000-000",
+  streetAddress: "山ノ手県 港見市 本町5-2 あすなろビル3F",
+  openingHours: ["Mo-Sa 15:00-22:00"],
+};
+
 export const metadata: Metadata = {
   title: "個別指導塾 あすなろ｜デザインサンプル",
-  description:
-    "架空の学習塾「個別指導塾 あすなろ」を想定した、清潔で信頼感のある学習塾サイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "個別指導塾 あすなろ｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -40,6 +52,7 @@ export default function JukuLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`asunaro ${zkg.variable} ${poppins.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="as-header">
         <Link href="/demo/juku/" className="as-brand">
           <span className="mark" aria-hidden="true">

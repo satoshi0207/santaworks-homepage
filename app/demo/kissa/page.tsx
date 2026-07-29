@@ -182,7 +182,9 @@ export default function KissaHome() {
                   <tr>
                     <th scope="row">お電話</th>
                     <td>
-                      <span className="ok-tel">03-0000-0000</span>
+                      <a className="ok-tel" href="tel:0300000000">
+                        03-0000-0000
+                      </a>
                       <br />
                       （架空の番号です）
                     </td>

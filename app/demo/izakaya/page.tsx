@@ -178,6 +178,13 @@ export default function IzakayaDemo() {
                       <td>カウンター6席・テーブル12席</td>
                     </tr>
                     <tr>
+                      <th>電話</th>
+                      <td>
+                        <a href="tel:0300000000">03-0000-0000</a>
+                        （架空の番号です）
+                      </td>
+                    </tr>
+                    <tr>
                       <th>予約</th>
                       <td>お電話にて（4名様まで）</td>
                     </tr>

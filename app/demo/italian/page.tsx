@@ -212,7 +212,7 @@ export default function ItalianHome() {
                 <tr>
                   <th scope="row">お電話</th>
                   <td>
-                    050-0000-0000
+                    <a href="tel:05000000000">050-0000-0000</a>
                     <br />
                     <small>※ 架空の番号です。お掛けにならないでください</small>
                   </td>

@@ -161,6 +161,13 @@ export default function SalonDemo() {
                       <td>月曜・第2火曜</td>
                     </tr>
                     <tr>
+                      <th>電話</th>
+                      <td>
+                        <a href="tel:0300000000">03-0000-0000</a>
+                        （架空の番号です）
+                      </td>
+                    </tr>
+                    <tr>
                       <th>予約</th>
                       <td>完全予約制／Web・LINEにて受付</td>
                     </tr>

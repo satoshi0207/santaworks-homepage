@@ -178,7 +178,9 @@ export default function PhotoHome() {
                   <tr>
                     <th scope="row">ご予約</th>
                     <td>
-                      <span className="ht-tel">03-0000-0000</span>
+                      <a className="ht-tel" href="tel:0300000000">
+                        03-0000-0000
+                      </a>
                       <br />
                       （架空の番号です／完全予約制）
                     </td>

@@ -196,7 +196,7 @@ export default function FarmHome() {
                 <tr>
                   <th scope="row">お電話</th>
                   <td>
-                    0123-00-0000
+                    <a href="tel:0123000000">0123-00-0000</a>
                     <br />
                     <small>※ 架空の番号です。お掛けにならないでください</small>
                   </td>

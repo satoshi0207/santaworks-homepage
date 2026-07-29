@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Shippori_Mincho, Cinzel } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./club.css";
 
 const mincho = Shippori_Mincho({
@@ -20,12 +22,22 @@ const cinzel = Cinzel({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "club",
+  schemaType: "NightClub",
+  name: "銀座 月讀",
+  description: "架空の銀座・会員制クラブ「月讀」を想定した、ダークで上質なナイトラウンジのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "東京都中央区銀座某丁目0-0 月讀ビル7F",
+  openingHours: ["Mo-Sa 20:00-23:59"],
+};
+
 export const metadata: Metadata = {
   title: "銀座 月讀（つくよみ）｜デザインサンプル",
-  description:
-    "架空の銀座・会員制クラブ「月讀」を想定した、ダークで上質なナイトラウンジのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "銀座 月讀（つくよみ）｜デザインサンプル"),
 };
 
 export default function ClubLayout({
@@ -33,6 +45,7 @@ export default function ClubLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`tsukuyomi ${mincho.variable} ${cinzel.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="gz-header">
         <Link href="/demo/club/" className="gz-brand">
           <span className="name">銀座 月讀</span>

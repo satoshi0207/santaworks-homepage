@@ -3,6 +3,8 @@ import Link from "next/link";
 import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./factory.css";
 
 const zenKaku = Zen_Kaku_Gothic_New({
@@ -21,15 +23,24 @@ const zenOld = Zen_Old_Mincho({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "factory",
+  schemaType: "Organization",
+  name: "有限会社 灯火製作所",
+  description: "架空のものづくり企業「有限会社 灯火製作所」を想定したコーポレートサイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "東京都某区灯町2-7-4",
+};
+
 export const metadata: Metadata = {
   title: {
     default: "有限会社 灯火製作所｜デザインサンプル",
     template: "%s｜有限会社 灯火製作所",
   },
-  description:
-    "架空のものづくり企業「有限会社 灯火製作所」を想定したコーポレートサイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空企業のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "有限会社 灯火製作所｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -47,6 +58,7 @@ export default function FactoryLayout({
 }>) {
   return (
     <div className={`tomoshibi ${zenKaku.variable} ${zenOld.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="t-header">
         <Link href="/demo/factory/" className="t-logo">
           <span className="mark" aria-hidden="true">

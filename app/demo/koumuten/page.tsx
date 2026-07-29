@@ -240,7 +240,7 @@ export default function KoumutenHome() {
             「こんなことできる？」の段階で大丈夫です。ご相談・お見積りは無料です。
           </p>
           <p className="tel">
-            0120-00-0000
+            <a href="tel:0120000000">0120-00-0000</a>
             <small>受付 9:00–18:00（日祝休）／これは架空の番号です</small>
           </p>
           <div style={{ marginTop: "1.4rem" }}>

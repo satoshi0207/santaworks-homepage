@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Playfair_Display, Shippori_Mincho } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./candelume.css";
 
 const playfair = Playfair_Display({
@@ -21,12 +23,22 @@ const shippori = Shippori_Mincho({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "italian",
+  schemaType: "Restaurant",
+  name: "Osteria Candelume",
+  description: "架空のイタリアン居酒屋「Osteria Candelume（オステリア・カンデルーメ）」を想定した、夜のエノテカ風サイトのデザインサンプルです。制作: Santa Works",
+  telephone: "050-0000-0000",
+  streetAddress: "山ノ手県 港見市 灯り横丁2-9 カンテラビル1F",
+  servesCuisine: "イタリア料理",
+};
+
 export const metadata: Metadata = {
   title: "Osteria Candelume｜デザインサンプル",
-  description:
-    "架空のイタリアン居酒屋「Osteria Candelume（オステリア・カンデルーメ）」を想定した、夜のエノテカ風サイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "Osteria Candelume｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -42,6 +54,7 @@ export default function ItalianLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`candelume ${playfair.variable} ${shippori.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="cd-header">
         <Link href="/demo/italian/" className="cd-brand">
           <span className="name cd-en">Candelume</span>

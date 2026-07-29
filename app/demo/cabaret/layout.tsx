@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bodoni_Moda, Zen_Kaku_Gothic_New } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./cabaret.css";
 
 // 描画重視: ウェイトを最小限に絞り、preloadもしない（日本語グリフは遅延取得）
@@ -21,12 +23,22 @@ const zkg = Zen_Kaku_Gothic_New({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "cabaret",
+  schemaType: "NightClub",
+  name: "CLUB Diamantine",
+  description: "架空の高級キャバクラ「CLUB Diamantine」を想定した、漆黒とホワイトゴールドのナイトラウンジサイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "山ノ手県 港見市 宵坂2-9 ジュエルビル5F",
+  openingHours: ["Mo-Sa 20:00-23:59"],
+};
+
 export const metadata: Metadata = {
   title: "CLUB Diamantine（ディアマンティーヌ）｜デザインサンプル",
-  description:
-    "架空の高級キャバクラ「CLUB Diamantine」を想定した、漆黒とホワイトゴールドのナイトラウンジサイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "CLUB Diamantine（ディアマンティーヌ）｜デザインサンプル"),
 };
 
 const nav = [
@@ -41,6 +53,7 @@ export default function CabaretLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`diamantine ${bodoni.variable} ${zkg.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="dm-header">
         <Link href="/demo/cabaret/" className="dm-brand">
           <span className="club">CLUB</span>

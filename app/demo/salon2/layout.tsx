@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Bebas_Neue, Zen_Kaku_Gothic_New } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./salon2.css";
 
 const bebas = Bebas_Neue({
@@ -20,12 +22,22 @@ const zkg = Zen_Kaku_Gothic_New({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "salon2",
+  schemaType: "HairSalon",
+  name: "余白 -YOHAKU-",
+  description: "架空のモード系ヘアサロン「余白 -YOHAKU-」を想定した、モノトーン・エディトリアルな美容室サイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "山ノ手県 港見市 本町1-9 KITビル4F",
+  openingHours: ["We-Mo 11:00-20:00"],
+};
+
 export const metadata: Metadata = {
   title: "余白 -YOHAKU-｜デザインサンプル",
-  description:
-    "架空のモード系ヘアサロン「余白 -YOHAKU-」を想定した、モノトーン・エディトリアルな美容室サイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "余白 -YOHAKU-｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -40,6 +52,7 @@ export default function Salon2Layout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`yohaku ${bebas.variable} ${zkg.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="yh-header">
         <Link href="/demo/salon2/" className="yh-brand">
           <span className="name">YOHAKU</span>

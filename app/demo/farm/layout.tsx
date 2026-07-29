@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Zen_Maru_Gothic, Fraunces } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./sorairo.css";
 
 const zenmaru = Zen_Maru_Gothic({
@@ -21,12 +23,21 @@ const fraunces = Fraunces({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "farm",
+  schemaType: "LocalBusiness",
+  name: "そらいろ牧場",
+  description: "架空の北海道・酪農牧場「そらいろ牧場」を想定した、大自然を主役にした明るいサイトのデザインサンプルです。制作: Santa Works",
+  telephone: "0123-00-0000",
+  streetAddress: "北嶺地方 大空郡 みなも町 まきば野1200",
+};
+
 export const metadata: Metadata = {
   title: "そらいろ牧場｜デザインサンプル",
-  description:
-    "架空の北海道・酪農牧場「そらいろ牧場」を想定した、大自然を主役にした明るいサイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "そらいろ牧場｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -42,6 +53,7 @@ export default function FarmLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`sorairo ${zenmaru.variable} ${fraunces.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="sr-header">
         <Link href="/demo/farm/" className="sr-brand">
           <span className="mark" aria-hidden="true">

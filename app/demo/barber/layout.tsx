@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Anton, Zen_Kaku_Gothic_New } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./barber.css";
 
 const anton = Anton({
@@ -20,12 +22,23 @@ const zkg = Zen_Kaku_Gothic_New({
   preload: false,
 });
 
-export const metadata: Metadata = {
-  title: "バーバー ミナト（BARBER MINATO）｜デザインサンプル",
+const BIZ: DemoBiz = {
+  slug: "barber",
+  schemaType: "HairSalon",
+  name: "バーバー ミナト",
   description:
     "架空の理容室「バーバー ミナト」を想定した、ヴィンテージなメンズバーバーサイトのデザインサンプルです。制作: Santa Works",
+  telephone: "03-0000-0000",
+  streetAddress: "山ノ手県 港見市 栄町1-8",
+  openingHours: ["Tu-Su 09:00-19:00"],
+};
+
+export const metadata: Metadata = {
+  title: "バーバー ミナト（BARBER MINATO）｜デザインサンプル",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "バーバー ミナト（BARBER MINATO）｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -40,6 +53,7 @@ export default function BarberLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`minato ${anton.variable} ${zkg.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <div className="bm-stripe" aria-hidden="true" />
       <header className="bm-header">
         <Link href="/demo/barber/" className="bm-brand">

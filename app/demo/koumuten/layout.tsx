@@ -3,6 +3,8 @@ import Link from "next/link";
 import { BIZ_UDPGothic, Oswald } from "next/font/google";
 import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
+import DemoJsonLd from "@/components/DemoJsonLd";
+import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./koumuten.css";
 
 const biz = BIZ_UDPGothic({
@@ -21,15 +23,25 @@ const oswald = Oswald({
   preload: false,
 });
 
+const BIZ: DemoBiz = {
+  slug: "koumuten",
+  schemaType: "GeneralContractor",
+  name: "ひだまり工務店",
+  description: "架空の工務店「ひだまり工務店」を想定した、新築・リフォームの地域密着工務店サイトのデザインサンプルです。制作: Santa Works",
+  telephone: "0120-00-0000",
+  streetAddress: "山ノ手県 陽向市 本町3-12",
+  openingHours: ["Mo-Sa 09:00-18:00"],
+};
+
 export const metadata: Metadata = {
   title: {
     default: "ひだまり工務店｜デザインサンプル",
     template: "%s｜ひだまり工務店",
   },
-  description:
-    "架空の工務店「ひだまり工務店」を想定した、新築・リフォームの地域密着工務店サイトのデザインサンプルです。制作: Santa Works",
+  description: BIZ.description,
   // 架空の店舗のため検索エンジンには載せない
   robots: { index: false, follow: false },
+  ...demoOg(BIZ, "ひだまり工務店｜デザインサンプル"),
 };
 
 const footerNav = [
@@ -44,6 +56,7 @@ export default function KoumutenLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   return (
     <div className={`hidamari ${biz.variable} ${oswald.variable}`}>
+      <DemoJsonLd biz={BIZ} />
       <header className="hd-header">
         <Link href="/demo/koumuten/" className="hd-logo">
           <span className="mark" aria-hidden="true">

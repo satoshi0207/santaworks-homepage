@@ -294,7 +294,9 @@ export default function JukuHome() {
                   <tr>
                     <th scope="row">お電話</th>
                     <td>
-                      <span className="as-tel">0120-000-000</span>
+                      <a className="as-tel" href="tel:0120000000">
+                        0120-000-000
+                      </a>
                       <br />
                       （架空の番号です／受付 15:00–22:00）
                     </td>
