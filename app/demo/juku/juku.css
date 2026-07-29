@@ -794,13 +794,710 @@
 }
 
 /* ---------- レスポンシブ ---------- */
+/* =========================================================
+   多ページ化で追加した部品（/course/ /price/ /teacher/ /access/）
+   ========================================================= */
+
+/* ---------- 下層ページの見出し・パンくず ---------- */
+.as-pagehead {
+  background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+  color: #fff;
+  padding-block: clamp(2.6rem, 7vw, 4rem);
+}
+
+.as-pagehead .en {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.5rem;
+}
+
+.as-pagehead h1 {
+  font-size: clamp(1.6rem, 4.4vw, 2.3rem);
+  font-weight: 900;
+  margin: 0;
+  line-height: 1.4;
+}
+
+.as-pagehead .lead {
+  margin: 0.9rem 0 0;
+  max-width: 40rem;
+  font-size: 0.95rem;
+  line-height: 1.9;
+  color: color-mix(in srgb, #fff 82%, transparent);
+}
+
+.as-crumb {
+  background: var(--cream);
+  border-bottom: 1px solid var(--line);
+  font-size: 0.8rem;
+  color: var(--sub);
+}
+
+.as-crumb .inner {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding-block: 0.8rem;
+}
+
+.as-crumb a {
+  color: var(--blue);
+}
+
+/* ---------- 汎用：ボタンの並び・中央CTA ---------- */
+.as-more {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.9rem;
+  justify-content: center;
+  margin-top: 2.2rem;
+}
+
+.as-cta-center {
+  text-align: center;
+}
+
+.as-cta-center .as-h2 {
+  margin-bottom: 0.6rem;
+}
+
+/* ---------- コース詳細（/course/） ---------- */
+.as-cdetails {
+  display: grid;
+  gap: 1.6rem;
+}
+
+.as-cdetail {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(1.4rem, 3vw, 2rem);
+  scroll-margin-top: 4.5rem;
+}
+
+.as-cdetail-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 2px solid var(--sky);
+  margin-bottom: 1.2rem;
+}
+
+.as-cdetail-head .g {
+  font-size: 1.35rem;
+  font-weight: 900;
+  color: var(--blue);
+  margin-right: 0.7rem;
+}
+
+.as-cdetail-head .en {
+  font-size: 0.78rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--sub);
+}
+
+.as-cdetail-head .target {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #3a2600;
+  background: var(--accent);
+  border-radius: 999px;
+  padding: 0.2rem 0.85rem;
+  white-space: nowrap;
+}
+
+.as-cdetail-body {
+  margin: 0 0 1.3rem;
+  font-size: 0.95rem;
+  color: var(--sub);
+}
+
+.as-cdetail-spec {
+  display: grid;
+  gap: 0.7rem;
+  margin: 0 0 1.2rem;
+}
+
+.as-cdetail-spec > div {
+  display: grid;
+  grid-template-columns: 6.5rem 1fr;
+  gap: 0.8rem;
+  align-items: baseline;
+}
+
+.as-cdetail-spec dt {
+  font-size: 0.78rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 4px;
+  padding: 0.18rem 0.5rem;
+  text-align: center;
+}
+
+.as-cdetail-spec dd {
+  margin: 0;
+  font-size: 0.92rem;
+}
+
+.as-cdetail-spec dd b {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.15rem;
+  color: var(--blue);
+}
+
+.as-cdetail-items {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.as-cdetail-items li {
+  font-size: 0.82rem;
+  background: var(--paper2);
+  border-radius: 999px;
+  padding: 0.3rem 0.9rem;
+  color: var(--blue-deep);
+}
+
+/* ---------- 授業の流れ（/course/） ---------- */
+.as-lesson {
+  list-style: none;
+  margin: 2.2rem 0 1.4rem;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.as-lesson li {
+  display: grid;
+  grid-template-columns: 5.5rem 1fr;
+  gap: 1.2rem;
+  padding-bottom: 1.6rem;
+  position: relative;
+}
+
+.as-lesson li:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 2.6rem;
+  top: 2.2rem;
+  bottom: 0;
+  width: 2px;
+  background: var(--sky);
+}
+
+.as-lesson .t {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #fff;
+  background: var(--blue);
+  border-radius: 999px;
+  height: 2.2rem;
+  display: grid;
+  place-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.as-lesson h3 {
+  font-size: 1.02rem;
+  font-weight: 700;
+  margin: 0.2rem 0 0.35rem;
+}
+
+.as-lesson p {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--sub);
+}
+
+/* ---------- 向き・不向き（/course/） ---------- */
+.as-honest {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.as-honest > div {
+  border-radius: 14px;
+  padding: 1.5rem 1.4rem;
+  border: 1px solid var(--line);
+}
+
+.as-honest .fit {
+  background: var(--cream);
+  border-color: color-mix(in srgb, var(--blue) 30%, transparent);
+}
+
+.as-honest .unfit {
+  background: var(--paper2);
+}
+
+.as-honest h3 {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0 0 0.9rem;
+}
+
+.as-honest .badge {
+  width: 1.7rem;
+  height: 1.7rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 0.9rem;
+  color: #fff;
+  background: var(--blue);
+}
+
+.as-honest .unfit .badge {
+  background: var(--sub);
+}
+
+.as-honest ul {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: grid;
+  gap: 0.45rem;
+}
+
+.as-honest li {
+  font-size: 0.9rem;
+  color: var(--sub);
+}
+
+.as-honest .unfit p {
+  margin: 0.9rem 0 0;
+  font-size: 0.85rem;
+  color: var(--sub);
+}
+
+/* ---------- 料金（/price/） ---------- */
+.as-fee-caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 0.78rem;
+  color: var(--sub);
+  padding-top: 0.7rem;
+}
+
+.as-other-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  margin-top: 1.8rem;
+}
+
+.as-other-table th,
+.as-other-table td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.as-other-table thead th {
+  background: var(--paper2);
+  font-size: 0.8rem;
+  color: var(--sub);
+}
+
+.as-other-table tbody tr:last-child th,
+.as-other-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.as-other-table tbody th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.as-other-table .cost {
+  font-weight: 700;
+  color: var(--blue);
+  white-space: nowrap;
+}
+
+.as-discount {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 2rem;
+  background: var(--cream);
+  border: 2px dashed color-mix(in srgb, var(--accent) 65%, transparent);
+  border-radius: 16px;
+  padding: clamp(1.5rem, 4vw, 2.4rem);
+}
+
+.as-discount p {
+  margin: 0;
+  font-size: 0.95rem;
+  color: var(--sub);
+}
+
+.as-discount-figure {
+  display: grid;
+  place-items: center;
+  width: 7.5rem;
+  height: 7.5rem;
+  border-radius: 50%;
+  background: var(--accent);
+  color: #3a2600;
+  line-height: 1;
+}
+
+.as-discount-figure .off {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+.as-discount-figure .label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-top: 0.25rem;
+}
+
+/* ---------- 講師（/teacher/） ---------- */
+.as-teachers {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.as-teacher {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: 1.6rem 1.4rem;
+  text-align: center;
+}
+
+.as-teacher .avatar {
+  width: 66px;
+  height: 66px;
+  margin: 0 auto 0.9rem;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  font-size: 1.5rem;
+  font-weight: 900;
+  color: #fff;
+  background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep));
+}
+
+.as-teacher .role {
+  display: inline-block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--blue);
+  background: var(--paper2);
+  border-radius: 999px;
+  padding: 0.15rem 0.75rem;
+}
+
+.as-teacher h3 {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin: 0.5rem 0 0.2rem;
+}
+
+.as-teacher .subject {
+  font-size: 0.8rem;
+  color: var(--sub);
+  margin: 0 0 0.9rem;
+}
+
+.as-teacher .body {
+  font-size: 0.88rem;
+  color: var(--sub);
+  text-align: left;
+  margin: 0 0 0.9rem;
+}
+
+.as-teacher .word {
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: var(--blue-deep);
+  margin: 0;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+}
+
+/* ---------- 教室（/teacher/） ---------- */
+.as-roomgrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.2rem;
+  margin-top: 2rem;
+}
+
+.as-roomgrid figure {
+  margin: 0;
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  overflow: hidden;
+}
+
+.as-roomgrid img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  display: block;
+}
+
+.as-roomgrid figcaption {
+  padding: 1rem 1.1rem 1.2rem;
+  font-size: 0.88rem;
+  color: var(--sub);
+}
+
+.as-roomgrid figcaption b {
+  display: block;
+  font-size: 0.98rem;
+  color: var(--ink);
+  margin-bottom: 0.25rem;
+}
+
+/* ---------- 体験の流れ（/access/） ---------- */
+.as-trial {
+  list-style: none;
+  margin: 2.2rem 0 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.1rem;
+}
+
+.as-trial li {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--blue);
+  border-radius: 12px;
+  padding: 1.3rem 1.2rem;
+}
+
+.as-trial .no {
+  font-family: var(--font-poppins), sans-serif;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--sky);
+  line-height: 1;
+}
+
+.as-trial h3 {
+  font-size: 1rem;
+  font-weight: 700;
+  margin: 0.4rem 0 0.4rem;
+}
+
+.as-trial p {
+  margin: 0;
+  font-size: 0.87rem;
+  color: var(--sub);
+}
+
+/* ---------- 申し込みフォーム（/access/） ---------- */
+.as-form {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  padding: clamp(1.4rem, 3.5vw, 2.2rem);
+  display: grid;
+  gap: 1.1rem;
+  margin-top: 2rem;
+}
+
+.as-form .row {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+}
+
+.as-form .field {
+  display: grid;
+  gap: 0.35rem;
+}
+
+.as-form label {
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.as-form input,
+.as-form select,
+.as-form textarea {
+  font: inherit;
+  font-size: 0.92rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: var(--paper);
+  color: var(--ink);
+  width: 100%;
+}
+
+.as-form input:disabled,
+.as-form select:disabled,
+.as-form textarea:disabled,
+.as-form button:disabled {
+  opacity: 0.75;
+  cursor: not-allowed;
+}
+
+.as-form button {
+  justify-self: start;
+  border: 0;
+  cursor: pointer;
+}
+
+/* ---------- FAQ（/price/ /access/） ---------- */
+.as-faq {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 2rem;
+}
+
+.as-faq details {
+  background: var(--cream);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.as-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 3rem 1rem 1.2rem;
+  font-weight: 700;
+  font-size: 0.95rem;
+  position: relative;
+}
+
+.as-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.as-faq summary::after {
+  content: "＋";
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.as-faq details[open] summary::after {
+  content: "−";
+}
+
+.as-faq summary:focus-visible {
+  outline: 2px solid var(--blue);
+  outline-offset: -2px;
+}
+
+.as-faq details p {
+  margin: 0;
+  padding: 0 1.2rem 1.1rem;
+  font-size: 0.9rem;
+  color: var(--sub);
+}
+
 @media (max-width: 860px) {
+  /* 1ページ構成のときはナビを隠していたが、多ページ化したので
+     隠すと回遊できなくなる。全幅に落として横スクロールさせる */
   .as-nav {
+    order: 3;
+    width: 100%;
+    display: flex;
+    gap: 0.2rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    padding-bottom: 0.15rem;
+    margin-top: 0.1rem;
+  }
+
+  .as-nav::-webkit-scrollbar {
     display: none;
+  }
+
+  .as-nav a {
+    white-space: nowrap;
+    font-size: 0.84rem;
+    padding: 0.35rem 0.6rem;
+  }
+
+  .as-header {
+    flex-wrap: wrap;
   }
 
   .as-hero-inner {
     grid-template-columns: 1fr;
+  }
+
+  /* 多ページ化で追加した部品 */
+  .as-teachers,
+  .as-roomgrid {
+    grid-template-columns: 1fr;
+  }
+
+  .as-trial {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .as-honest,
+  .as-form .row {
+    grid-template-columns: 1fr;
+  }
+
+  .as-discount {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+  }
+
+  .as-cdetail-spec > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .as-cdetail-spec dt {
+    justify-self: start;
+    padding-inline: 0.7rem;
+  }
+
+  .as-lesson li {
+    grid-template-columns: 4.4rem 1fr;
+    gap: 0.9rem;
+  }
+
+  .as-lesson li:not(:last-child)::before {
+    left: 2.1rem;
   }
 
   .as-hero-media {
