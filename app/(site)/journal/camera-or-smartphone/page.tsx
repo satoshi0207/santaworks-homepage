@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
-import { IndexPc, IndexSp, TypesPc, TypesSp, MinePc, MineSp, Undated } from "./figures";
+import { IndexPc, IndexSp, TypesPc, TypesSp, HomePc, HomeSp } from "./figures";
 import "../journal.css";
 
 export const metadata: Metadata = {
@@ -31,7 +31,7 @@ export default function Page() {
       <div className="wrap">
         <article>
           <div className="hero">
-            {/* ⚠️ ヒーローに写真を使わない。この記事は一次データだけで書いているので、
+            {/* ⚠️ ヒーローに写真を使わない。この記事は一次資料だけで書いているので、
                 絵だけ借り物の素材にすると、記事全体の作り方と食い違う。
                 人物が写る素材を避ける（全社ガードレール⑤）という制約にも自動的に従える。
                 図版なので `nodim` で写真用の暗幕を外す（journal.css）。
@@ -60,9 +60,8 @@ export default function Page() {
               金額は横ばいでした。
             </h1>
             <p className="lede">
-              旅行に出るとき、<strong>スマホとカメラを両方持っていきます</strong>。
-              そして毎回、帰ってきてから同じことで困ります。同じ日の写真が、2箇所に分かれている。
-              どちらで撮っているんだろうと思って、
+              「カメラが売れなくなった」という話は、何度も聞いたことがあります。
+              <strong>ただ、どれくらい売れていないのかは知りませんでした。</strong>
               カメラ映像機器工業会が毎年出している出荷統計を、2003年から2025年まで全部開いてみました。
               <strong>思っていたのと違う絵が出ました。</strong>
             </p>
@@ -71,7 +70,7 @@ export default function Page() {
               <span className="dot" />
               <span>2026.08.XX</span>
               <span className="dot" />
-              <span>読了 約7分</span>
+              <span>読了 約6分</span>
               <span className="dot" />
               <span>出典つき / 一次資料から</span>
             </div>
@@ -125,14 +124,14 @@ export default function Page() {
                 <span className="n">03</span>
                 <span className="tx">
                   消えたのは「カメラ」ではなく<strong>「みんなのカメラ」</strong>でした。
-                  レンズ一体型は<strong>97.8%減</strong>。
+                  レンズ一体型は<strong>97.8%減</strong>、レンズ交換式は45.7%減。
                 </span>
               </li>
               <li>
                 <span className="n">04</span>
                 <span className="tx">
-                  そして自分の写真を数えたら、
-                  <strong>6枚に1枚が「いつ撮ったのか分からない」写真</strong>でした。
+                  そして<strong>家からは、まだ無くなっていません</strong>。
+                  二人以上の世帯の<strong>47.6%</strong>がいまも持っています。
                 </span>
               </li>
             </ol>
@@ -347,6 +346,14 @@ export default function Page() {
               <strong>一眼レフは 690,911台（前年比69.3%）</strong>。
               一眼レフはいま、年に3割ずつ減っています<sup>※2</sup>。
             </p>
+            <p>
+              もうひとつ、同じ資料に交換レンズの数字があります。2025年の出荷は
+              <strong>10,600,826本</strong>
+              <sup>※2</sup>。同じ年に出たレンズ交換式カメラ 7,001,965台より、
+              <strong>レンズのほうが多い</strong>。
+              本体を1台買って終わりではなく、レンズを足している人がいる、ということだと思います。
+              <b>（ここは私の読みです。出荷の数字は、誰が何本買ったかまでは教えてくれません。）</b>
+            </p>
 
             {/* ⚠️ 画質の優劣は、この記事のどの資料にも書かれていない。
                 「スマホはカメラに勝てない」と書いた瞬間、出典の無い主張が1つ混ざる。
@@ -446,268 +453,99 @@ export default function Page() {
 
           {/* 05 */}
           <section className="blk">
-            <span className="kicker">自分の写真を数える</span>
+            <span className="kicker">出荷ではなく、家の中</span>
             <div className="h2">
               <span className="idx">05</span>
-              <h2 className="tt">書こうとしていたことが、書けなくなりました</h2>
+              <h2 className="tt">家からは、まだ無くなっていない</h2>
             </div>
             <p>
-              全国の23年に、自分1人の線を重ねてみます。手元の写真フォルダ
-              <strong>約5,800ファイル</strong>のメタデータだけを読んで、機種別に数えました
+              ここまでは<strong>出荷</strong>の話でした。
+              では、<strong>家からカメラは無くなったのか</strong>。これは別の資料になります。
+            </p>
+            <p>
+              内閣府の消費動向調査に、二人以上の世帯がどんな耐久消費財を持っているかを聞いた項目があります
               <sup>※4</sup>。
             </p>
 
             <figure className="rv">
-              <div className="fh">私の写真は、何で撮られていたか</div>
-              <div className="fs">期間別の枚数<sup>※4</sup></div>
+              <div className="fh">デジタルカメラを持っている世帯の割合</div>
+              <div className="fs">
+                二人以上の世帯・各年3月末。<b>カメラ付き携帯電話は除く</b>
+                <sup>※4</sup>
+              </div>
               <div className="figbox pconly">
-                <MinePc />
+                <HomePc />
               </div>
               <div className="figbox sponly">
-                <MineSp />
+                <HomeSp />
               </div>
               <figcaption>
-                <strong>カメラを使っていたのは、実質2017〜2018年の2年間だけ</strong>でした。
-                前後はどの期間も9割以上がスマホです。
+                2026年3月末で<strong>47.6%</strong>。100世帯あたりの保有数量は66.6台です。
+                出荷が9割減っても、<strong>まだ半分近くの家にあります</strong>。
               </figcaption>
             </figure>
 
             <p>
-              この記事を始めたとき、私は
-              <strong>
-                「1つの出来事を2台で撮るから、写真が2箇所に分かれて困る」
-              </strong>
-              という話を書くつもりでいました。実際に数えたら、そうではありませんでした。
+              <strong>「売れていない」と「持っていない」は、別のことでした。</strong>
+              新しく買われなくなっても、かつて買われたものは家に残ります。押し入れの中かもしれませんが、
+              <strong>捨てられてはいません</strong>。
+            </p>
+            <p>
+              ただ、その割合も6年で<strong>62.3%から47.6%へ</strong>下がっています。
+              新しく入ってこないまま、古いものが少しずつ退場している。
+              <strong>いま起きているのは、そういう減り方に見えます。</strong>
             </p>
 
-            <figure className="rv">
-              <div className="fh">写真を撮った日を、数えてみると</div>
-              <div className="fs">約980日ぶん<sup>※4</sup></div>
-              <div className="fun">
-                <div className="fstep">
-                  <div className="pct">
-                    約920<small>日</small>
-                  </div>
-                  <div className="desc">
-                    <b>スマホだけの日</b>
-                    <em>ほとんどがこれでした</em>
-                  </div>
-                </div>
-                <div className="fstep bad">
-                  <div className="pct">
-                    約40<small>日</small>
-                  </div>
-                  <div className="desc">
-                    <b>カメラだけの日</b>
-                    <em>持ち出した日は、それ1台で済ませている</em>
-                  </div>
-                </div>
-                <div className="fstep bad">
-                  <div className="pct">
-                    20<small>日ほど</small>
-                  </div>
-                  <div className="desc">
-                    <b>両方で撮った日</b>
-                    <em>全体の約2%。いちばん多い2017〜2018年でも7%ほど、直近はほぼゼロ</em>
-                  </div>
-                </div>
-              </div>
-              <figcaption>
-                「2台持ちで困る」は、<strong>自分のデータでは起きていませんでした</strong>。思い込みでした。
-              </figcaption>
-            </figure>
-
             <div className="note rv">
-              <span className="nh">このフォルダは、そもそも普通の状態ではありません</span>
+              <span className="nh">この数字は単年で上下します</span>
               <p>
-                いちばん大きな偏りはこれです。
-                <b>これは私が端末から書き出して、並べ替える道具にかけたフォルダ</b>
-                です。多くの人の写真は、いまも<b>端末の中にあります</b>。
-                だから<b>これは何かの縮図ではありません。</b>
-                <br />
-                RAWファイルも<b>1枚もありません</b>。カメラで撮ったぶんは別の場所にあるか、
-                現像を通っていない可能性があります。
-                <b>「私の写真の98%はスマホ」ではなく、「このフォルダの98%はスマホ」</b>
-                が、ここで言えることの限界です。
+                標本調査なので、1年ごとの増減で語れません。実際
+                <b>2025年3月末は前年から+2.7ポイント増えています</b>
+                （48.6% → 51.3%）。ここでは<b>6年間の傾向としてのみ</b>読んでいます。
+                また<b>カメラ付き携帯電話を除いた数字</b>である点も、混ぜないよう注意が要ります。
               </p>
             </div>
           </section>
 
           {/* 06 */}
           <section className="blk">
-            {/* ⚠️ 「手が止まった」は他の記事で3回使っている。手癖なので使わない。 */}
-            <span className="kicker">並べ替えられない写真</span>
+            <span className="kicker">この記事の芯</span>
             <div className="h2">
               <span className="idx">06</span>
-              <h2 className="tt">6枚に1枚が、いつ撮ったのか分からない</h2>
-            </div>
-
-            <figure className="rv">
-              <div className="fh">撮影日時を持たない写真</div>
-              <div className="fs">
-                約5,800ファイルのうち、約970枚（約17%）<sup>※4</sup>
-              </div>
-              <div className="figbox">
-                <Undated />
-              </div>
-              <figcaption>
-                これらは撮影日時を持っていないので、日付で並べ替えることが
-                <strong>原理的にできません</strong>。私のフォルダでは
-                <code>Unknown_Date年</code> という行き場所のない場所に、まとめて入っていました。
-              </figcaption>
-            </figure>
-
-            <p>
-              面白いのは、<strong>この約970枚に共通点があった</strong>ことです。
-            </p>
-
-            <figure className="rv">
-              <div className="fh">サイズが、きれいに揃っていた</div>
-              <div className="fs">撮影日時を持たない約970枚の画像サイズ<sup>※4</sup></div>
-              <div className="stats">
-                <div className="stat ac">
-                  <div className="big">
-                    約750<small>枚</small>
-                  </div>
-                  <div className="cap">長辺が1400〜1500pxに収まる</div>
-                  <div className="src">全体の8割弱</div>
-                </div>
-                <div className="stat">
-                  <div className="big">
-                    約630<small>枚</small>
-                  </div>
-                  <div className="cap">長辺がちょうど1478px</div>
-                  <div className="src">同じ1点に集まっている</div>
-                </div>
-                <div className="stat">
-                  <div className="big">
-                    30<small>枚ほど</small>
-                  </div>
-                  <div className="cap">長辺が2000px以上</div>
-                  <div className="src">ほとんど残っていない</div>
-                </div>
-              </div>
-              <figcaption>
-                いまのスマホで撮った写真は、長辺が4000px前後あります。
-                <strong>つまりこの約970枚は、自分のカメラから直接来たものではありません。</strong>
-                どこかで一度縮小され、作り直されている。そのときに撮影日時が落ちています。
-              </figcaption>
-            </figure>
-
-            <p>
-              どこを経由したのかまでは、メタデータからは分かりません。ただ、
-              <strong>サイズがこれだけ揃っている</strong>ということは、
-              人の手ではなく、<strong>何かの仕組みが一律に処理した</strong>ということです。
-            </p>
-
-            {/* ⚠️ この節は、§05 で認めた偏り（自分で書き出したフォルダである）を
-                そのまま論の一部にしている。ここを削ると、
-                「特殊なフォルダの話でしょう」という当然の反論に答えられなくなる。 */}
-            <p>
-              ここまで書いて、ひとつ気づいたことがあります。
-              <strong>端末の中に置いたままなら、これに気づくことはありません。</strong>
-              写真アプリは、撮影日時を持たない写真にも何らかの日付を当てて、きれいに並べてくれます。
-              私も、書き出して並べ替えるまで知りませんでした。
-            </p>
-            <p>
-              <strong>取り出したときに、はじめて出てきます。</strong>
-              パソコンに移すとき。バックアップを取るとき。誰かに渡すとき。
-              つまり<strong>「残そう」と思って動かした、そのときです。</strong>
-            </p>
-
-            <div className="pull rv">
-              <p className="q">
-                自分で撮った写真は残る。
-                <br />
-                <em>もらった写真は、いつのものか分からなくなる。</em>
-              </p>
-              <div className="rule" />
-              <p className="sub">
-                アルバムに貼るときいちばん困るのは、たぶん<b>後者のほう</b>です。
-              </p>
-            </div>
-
-            <div className="note rv">
-              <span className="nh">道具を作ったのに、道具では直せない</span>
-              <p>
-                私は結局、撮影日時のメタデータで写真を並べ替える道具を自分で作りました。
-                <b>これは宣伝ではありません</b>——いまは配布を止めていて、押せるリンクもありません。
-                ただ、その道具がいちばん手こずるのが、この<b>日付を失った6分の1</b>です。
-                並べ替える道具は、<b>並べ替えるための情報が無いものには何もできません</b>。
-                数えてはじめて分かりました。
-              </p>
-            </div>
-          </section>
-
-          {/* 07 */}
-          <section className="blk">
-            {/* ⚠️ ここは前半（出荷統計）と後半（自分のフォルダ）を結ぶための節。
-                後半だけを受けて締めると、§01〜04 が何のためにあったのか回収されない。
-                ⚠️ 他の記事への相互参照は書かない。公開の順番が入れ替わると、
-                まだ無い記事を指すことになる。関連記事は本文ではなく一覧側で。 */}
-            <span className="kicker">2つの話が、つながるところ</span>
-            <div className="h2">
-              <span className="idx">07</span>
-              <h2 className="tt">写真は、撮るものから、渡されるものになった</h2>
+              <h2 className="tt">数えられる場所から、出ていっただけ</h2>
             </div>
             <p>
-              出荷統計が言っていたのは、「カメラが売れなくなった」ではありませんでした。
-              <strong>専用機が消えて、撮る道具が、通信する機械のほうに一本化された</strong>
-              ということです。
+              コンパクトデジカメは97.8%消えました。でも、
+              <strong>
+                家に1台あって、運動会と旅行のときだけ引き出しから出てくる機械
+              </strong>
+              ——あれ自体が無くなったとは、どうしても思えません。
             </p>
             <p>
-              <strong>撮ることと渡すことが、同じ機械の中で起きるようになりました。</strong>
-              焼き増しをして手渡していた頃には、無かった速さです。そして私のフォルダで日付を失っていた約970枚は、
-              <strong>どれも自分のカメラから直接来たものではありませんでした</strong>。
-              どこかを通って、縮小されて、届いたものでした。
-            </p>
-
-            <div className="note rv">
-              <span className="nh">ここから先は、統計に書いてあることではありません</span>
-              <p>
-                以下は<b>私の読みです</b>。撮る道具が1つになったから、写真は簡単に人から人へ渡るようになった。
-                <b>そして渡された写真は、日付を落として届く。</b>
-                出荷の統計にも、私のフォルダのメタデータにも、
-                <b>この2つを結ぶ証拠は入っていません。</b>
-                並べたら同じ向きを向いていた、というだけです。
-              </p>
-            </div>
-
-            <p>
-              それでも、こう思いました。
-              <strong>台数が9割減ったという数字は、カメラ市場の話に見えて、</strong>
-              じつは<strong>写真が誰の手元にどう溜まるかが変わった話</strong>だったのではないか。
-              買う機械が変わっただけなら、私のフォルダの6分の1が日付を失っている理由が、うまく説明できません。
+              <strong>いまはポケットに入っていて、毎日出てきます。</strong>
+              カメラが売れなくなったのではなく、
+              <strong>カメラが売り物ではなくなった</strong>
+              のだと思います。電話に含まれてしまったので、もう単体では数えられません。
+              <b>（ここは統計に書いてあることではなく、私の読みです。）</b>
             </p>
             <p>
-              そして今回は、<strong>自分の思い込みまで外れました</strong>。
-              2台で撮るから困っているのだと思っていたら、実際に困っていたのは
-              <strong>もらった写真</strong>のほうでした。
+              そして家の中を見れば、まだ半分近くの世帯に残っている。
+              出荷の表から消えたことと、世の中から消えたことは、<strong>同じではありませんでした</strong>。
             </p>
 
             <div className="closing rv">
               <p className="q">
-                「9割減った」は、遠い業界の話に見えました。
+                出荷統計から消えたものは、
                 <br />
-                数えてみたら、私の手元のフォルダの話でした。
+                無くなったのではなく、数えられる場所から出ていっただけでした。
               </p>
-              {/* ⚠️ 「6分の1を失った」で閉じない。事実として不正確だし、出口が無い。
-                  §06 で「道具では直せない」と書いたぶん、ここで
-                  「人にはまだ直せる」まで持っていかないと、読後がただ重くなる。
-                  製品の話はしない。読者が自分の手でできることだけを置く。 */}
               <p>
-                ひとつ、言い直させてください。
-                <b>私が失ったのは、写真ではありませんでした。</b>
-                6分の1はちゃんと残っています。写っているものも、そのままです。
-                <b>失われたのは、日付だけ</b>でした。
+                台数だけ見て「カメラは終わった」と言いかけて、同じ表の下の行に気づいた。
+                <b>数え方を変えたら、結論が反対になった。</b>
+                この記事は、それだけの話です。
                 <br />
                 <br />
-                そして日付は、<b>覚えている人がいるうちなら、書き戻せます。</b>
-                これは引っ越す前の家だ、これはあの旅行のときだ——そうやって埋められるうちは、まだ間に合う。
-                <b>並べ替える道具にできないことが、人にはまだできます。</b>
-              </p>
-              <p style={{ marginTop: "1.2em" }}>
-                この記事の数字は、すべて出典のPDFから直接引いています。間違いを見つけたら教えていただけるとありがたいです（
+                数字は、すべて出典のPDFから直接引いています。間違いを見つけたら教えていただけるとありがたいです（
                 <a href="mailto:contact@santaworks.net">contact@santaworks.net</a>
                 ）。直します。
               </p>
@@ -734,7 +572,7 @@ export default function Page() {
                 </a>
                 <br />
                 2025年実績のカテゴリー別内訳（ミラーレス 6,311,054台・前年比112.5%／一眼レフ
-                690,911台・前年比69.3%）はこちらによります。
+                690,911台・前年比69.3%）および交換レンズの総出荷本数 10,600,826本（前年比102.8%）はこちらによります。
               </li>
               <li>
                 ※3 総務省「令和6年 通信利用動向調査報告書（世帯編）」図表1-3{" "}
@@ -746,12 +584,15 @@ export default function Page() {
                 90.6%／令和6年 90.5%。
               </li>
               <li>
-                ※4 筆者自身の写真フォルダ 約5,800ファイル（1998年〜2026年7月）。
-                <code>exiftool</code>{" "}
-                でメーカー名・機種名・撮影日時・画像サイズのみを読み出して集計しました。
-                <b>画像の中身は解析していません。</b>RAWファイルは含まれません。
-                本文の枚数・日数は<b>概数</b>で、
-                比率は概数どうしを割ったものではなく実数から計算して丸めています。
+                ※4 内閣府経済社会総合研究所「消費動向調査」各年3月実施分{" "}
+                <a href="https://www.esri.cao.go.jp/jp/stat/shouhi/menu_shouhi.html">
+                  esri.cao.go.jp/jp/stat/shouhi/menu_shouhi.html
+                </a>
+                <br />
+                主要耐久消費財等の保有状況（二人以上の世帯）のうちデジタルカメラの普及率。
+                2020年 62.3%／2021年 59.4%／2022年 56.6%／2023年 53.1%／2024年 48.6%／2025年
+                51.3%／2026年 47.6%（いずれも各年3月末）。100世帯あたりの保有数量は2026年3月末で66.6台。
+                <b>カメラ付き携帯電話は除きます。</b>
               </li>
             </ol>
           </div>
@@ -765,8 +606,9 @@ export default function Page() {
             2020年のレンズ交換式は、総出荷から一体型を差し引いた値です。
             <br />※ 図の指数は<b>2010年＝100</b>で揃えています。基準年を変えると印象が変わります。
             2軸グラフは使っていません。
+            <br />※ ※1と※4は<b>別々の調査</b>です。出荷（世界全体・年）と世帯の保有（日本・各年3月末）を、
+            そのまま同じ物差しで比べることはできません。
             <br />※ 本記事は特定のメーカーや製品の優劣を論じるものではありません。
-            <br />※ ※4は個人のフォルダの集計であり、一般的な傾向を示すものではありません。
           </p>
 
           <Link href="/journal/" className="backlink">
