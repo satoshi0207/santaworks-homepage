@@ -178,7 +178,10 @@ export default function Works() {
                     className="flex flex-1 flex-col after:absolute after:inset-0 after:z-0"
                   >
                     {/* サンプルは増え続けるので、最初の2枚以外は遅延読み込みにする
-                        （一覧を開いた時点で全サムネを取りに行かせない） */}
+                        （一覧を開いた時点で全サムネを取りに行かせない）。
+                        サムネは実画面のスクリーンショット（4:3）。帯状に切ると見出しが
+                        横一文字に切れて「デザインを見せる」役目を果たさないため、
+                        元の比率のまま出す */}
                     <img
                       src={s.thumb}
                       alt=""
@@ -187,7 +190,7 @@ export default function Works() {
                       decoding="async"
                       width={600}
                       height={450}
-                      className="h-36 w-full object-cover object-[center_30%] transition-transform duration-700 group-hover:scale-105"
+                      className="aspect-[4/3] w-full object-cover transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="flex flex-1 flex-col p-6">
                       <h3 className="mb-1 line-clamp-2 min-h-[2.75em] text-[1.05rem] font-bold leading-snug">
