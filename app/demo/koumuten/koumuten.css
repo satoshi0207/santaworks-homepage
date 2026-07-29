@@ -1040,6 +1040,232 @@
   transform: translateY(-2px);
 }
 
+/* ---------- 家づくりの流れ（/flow/） ---------- */
+.hd-flow {
+  list-style: none;
+  margin: 2.4rem 0 0;
+  padding: 0;
+  display: grid;
+  gap: 0;
+}
+
+.hd-fstep {
+  display: grid;
+  grid-template-columns: 68px 1fr;
+  gap: 1.4rem;
+  position: relative;
+  padding-bottom: 2rem;
+}
+
+/* 段階どうしをつなぐ縦線。最後の1件だけ引かない */
+.hd-fstep:not(:last-child)::before {
+  content: "";
+  position: absolute;
+  left: 33px;
+  top: 58px;
+  bottom: 0;
+  width: 2px;
+  background: linear-gradient(
+    to bottom,
+    var(--line),
+    color-mix(in srgb, var(--line) 30%, transparent)
+  );
+}
+
+.hd-fstep .marker {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--paper);
+  border: 2px solid var(--accent);
+  position: relative;
+  z-index: 1;
+}
+
+.hd-fstep .marker .no {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  line-height: 1;
+}
+
+.hd-fstep .body {
+  padding-top: 0.4rem;
+}
+
+.hd-fstep .head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.hd-fstep h3 {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+}
+
+.hd-fstep .span,
+.hd-fstep .money {
+  font-size: 0.76rem;
+  font-weight: 700;
+  padding: 0.15rem 0.6rem;
+  border-radius: 999px;
+  white-space: nowrap;
+}
+
+.hd-fstep .span {
+  color: var(--sub);
+  background: var(--band);
+  border: 1px solid var(--line);
+}
+
+/* 費用は目立たせる。ここがいちばん知りたい情報 */
+.hd-fstep .money {
+  color: var(--accent-deep);
+  background: color-mix(in srgb, var(--accent) 12%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 40%, transparent);
+}
+
+.hd-fstep .body > p {
+  margin: 0 0 0.6rem;
+  font-size: 0.94rem;
+  color: var(--sub);
+}
+
+.hd-fstep .you {
+  font-size: 0.88rem;
+  color: var(--ink);
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--wood);
+  border-radius: 0 6px 6px 0;
+  padding: 0.7rem 0.9rem;
+  margin: 0;
+}
+
+.hd-fstep .you .tag {
+  display: block;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--wood);
+  margin-bottom: 0.15rem;
+}
+
+/* ---------- お支払いのタイミング ---------- */
+.hd-pay {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.6rem;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hd-pay caption {
+  caption-side: bottom;
+  text-align: left;
+  font-size: 0.78rem;
+  color: var(--sub);
+  padding-top: 0.7rem;
+}
+
+.hd-pay th,
+.hd-pay td {
+  padding: 0.9rem 1.1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--line);
+  font-size: 0.92rem;
+  vertical-align: top;
+}
+
+.hd-pay thead th {
+  background: var(--band);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--sub);
+}
+
+.hd-pay tbody tr:last-child th,
+.hd-pay tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.hd-pay tbody th {
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.hd-pay .rate {
+  font-family: var(--font-oswald), sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent-deep);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+/* ---------- よくあるご質問 ---------- */
+.hd-faq {
+  display: grid;
+  gap: 0.8rem;
+  margin-top: 1.8rem;
+}
+
+.hd-faq details {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.hd-faq summary {
+  cursor: pointer;
+  list-style: none;
+  padding: 1rem 3rem 1rem 1.2rem;
+  font-weight: 700;
+  font-size: 0.98rem;
+  position: relative;
+}
+
+.hd-faq summary::-webkit-details-marker {
+  display: none;
+}
+
+.hd-faq summary::after {
+  content: "＋";
+  position: absolute;
+  right: 1.2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--accent);
+  font-weight: 700;
+  transition: transform 0.2s ease;
+}
+
+.hd-faq details[open] summary::after {
+  content: "−";
+}
+
+.hd-faq summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: -2px;
+}
+
+.hd-faq details p {
+  margin: 0;
+  padding: 0 1.2rem 1.1rem;
+  font-size: 0.92rem;
+  color: var(--sub);
+}
+
 /* ---------- レスポンシブ ---------- */
 @media (max-width: 860px) {
   .hd-reasons,
@@ -1062,6 +1288,26 @@
 
   .hd-footer-inner {
     grid-template-columns: 1fr;
+  }
+
+  /* 丸バッジを小さくして、本文の幅を確保する */
+  .hd-fstep {
+    grid-template-columns: 52px 1fr;
+    gap: 1rem;
+  }
+
+  .hd-fstep .marker {
+    width: 52px;
+    height: 52px;
+  }
+
+  .hd-fstep .marker .no {
+    font-size: 1.1rem;
+  }
+
+  .hd-fstep:not(:last-child)::before {
+    left: 25px;
+    top: 44px;
   }
 }
 

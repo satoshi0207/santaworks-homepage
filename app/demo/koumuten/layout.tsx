@@ -47,6 +47,7 @@ export const metadata: Metadata = {
 const footerNav = [
   ["/demo/koumuten/", "ホーム"],
   ["/demo/koumuten/works/", "施工事例"],
+  ["/demo/koumuten/flow/", "家づくりの流れ"],
   ["/demo/koumuten/about/", "私たちのこと"],
   ["/demo/koumuten/contact/", "お問い合わせ"],
 ] as const;
