@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import { KpiTiles, CalendarHeat, WeekdayBars, AprilBars, RokuyoDots } from "./figures";
+import Cal from "./Cal";
 import "../journal.css";
 import "../dash.css";
 
@@ -88,7 +89,8 @@ export default function Page() {
               <li>
                 <span className="n">01</span>
                 <span className="tx">
-                  六曜による差は<strong>+0.9%</strong>。統計的には「差があるとは言えない」水準でした。
+                  六曜（大安・仏滅などの6つ）による差は<strong>+0.9%</strong>
+                  。統計的には「差があるとは言えない」水準でした。
                 </span>
               </li>
               <li>
@@ -116,8 +118,18 @@ export default function Page() {
               <h2 className="tt">「大安に産みたい」は、あるのだろうか</h2>
             </div>
             <p>きっかけは、ふと浮かんだ疑問でした。</p>
+            {/* ⚠️ 六曜は一般的な言葉ではない（Satoshiさん・2026-07-31）。
+                図とTOCに先に出てくるので、本文で最初に出るここで意味を渡しておく。
+                旧暦との関係は出典側にもう一度書いてある（そちらは検証の話）。 */}
             <p>
-              結婚式や引っ越しの日取りを六曜で決める人はいます。
+              カレンダーの隅に、小さく「大安」「仏滅」と入っていることがあります。
+              <strong>六曜（ろくよう）</strong>といって、
+              先勝・友引・先負・仏滅・大安・赤口の6つが順に巡るものです。
+              旧暦の月と日から機械的に決まるので、日付とも曜日とも関係なく並びます。
+              大安は縁起がよく、仏滅はよくない、とされています。
+            </p>
+            <p>
+              結婚式や引っ越しの日取りをこれで決める人はいます。
               <strong>では、子どもが生まれる日はどうなのだろう。</strong>
               予定帝王切開や計画分娩なら、日にちをある程度は選べるはずです。縁起のいい日に寄せたい、と考える人がいてもおかしくない。
             </p>
@@ -277,9 +289,10 @@ export default function Page() {
                 <div className="ttl">1年365日の出生数（2015〜2024年の平均）</div>
                 <div className="src n">n=3,653日</div>
               </div>
-              <div className="cal">
+              {/* `.cal` は Cal 側が持つ。読み取り欄をマスの真下に出すため */}
+              <Cal>
                 <CalendarHeat />
-              </div>
+              </Cal>
               <div className="ramp">
                 <span>少ない</span>
                 <span className="sw">
@@ -301,7 +314,7 @@ export default function Page() {
                 年をまたぐ6日間（12/29〜1/3）が、この並べ方だと図の両端に分かれて出ます。
                 <strong>4月1日のマスも1つだけ沈んでいます。</strong>
                 どちらも祝日でも土日でもありません。
-                縦の並びが月、横が日。濃淡は5段階（等頻度）。マスにカーソルを当てると日付と人数が出ます。
+                縦の並びが月、横が日。濃淡は5段階（等頻度）。マスに触れると、その日の数字が図の下に出ます。
               </figcaption>
             </figure>
 

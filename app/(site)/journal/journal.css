@@ -27,6 +27,26 @@
   word-break: auto-phrase;
 }
 
+/* ⚠️ 本文段落も同じ扱いにする（2026-07-31）。
+   globals.css の `.site-content p` が `word-break: keep-all` ＋ `overflow-wrap: anywhere`
+   なので、**放っておくと本文はここを継承する**。CJKは keep-all だと文がまるごと
+   1つの塊になり、入りきらなくなった瞬間に anywhere が任意の位置で断ち切る。結果:
+
+     - 「、」「。」でしか折り返せず、**行の3分の1が右端まで届かない**
+       （390px幅で実測：163行中55行が幅の72%未満で終わっていた）
+     - 断ち切りは禁則を見ないので、**句読点が行頭に来る**（同 4件）
+
+   `normal` を先に置いて、対応ブラウザだけ `auto-phrase` で上書きする。
+   ⚠️ 順番を入れ替えない。また `normal` を消さない——未対応ブラウザで
+   keep-all のまま overflow-wrap だけ切ることになり、今度は本文が横にはみ出す。
+   実測（390px）：短い行 55→9、行頭禁則 4→0、総行数 163→147。 */
+.journal .blk p, .journal .blk li,
+.journal .closing p, .journal .disclaimer {
+  word-break: normal;
+  word-break: auto-phrase;
+  overflow-wrap: normal;
+}
+
 /* スクロール進捗バー */
 .journal .jprog { position: fixed; top: 0; left: 0; height: 3px; width: 0; background: var(--accent); z-index: 30; transition: width .1s linear; }
 
