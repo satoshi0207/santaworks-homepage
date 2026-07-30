@@ -159,6 +159,18 @@
 .journal.dash .cal .d[data-q="5"] { background: var(--ramp-5); }
 .journal.dash .cal .d[data-q="0"] { background: transparent; }  /* 暦に存在しない日 */
 
+/* 横軸（日）。1行目に置く目盛り。マスと同じ31列グリッドに乗せて位置を合わせる。
+   ⚠️ `min-width: 0` が要る。grid のアイテムは既定で auto（＝中身より縮まない）なので、
+   2桁の数字が入ったセルだけ列幅を押し広げ、下のマスと1列ぶんずれる。 */
+.journal.dash .cal .dnum span {
+  min-width: 0;
+  font-size: 0.56rem;
+  line-height: 1;
+  text-align: center;
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ランプの凡例。連続風のグラデーションにはしない（段が5つであることを見せる） */
 .journal.dash .ramp { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.9rem; font-size: 0.66rem; color: var(--muted); }
 .journal.dash .ramp .sw { display: flex; gap: 2px; }
@@ -216,6 +228,11 @@
   .journal.dash .kpi > :nth-child(n+3) { border-top: 1px solid var(--hair); }
   .journal.dash .cal { grid-template-columns: 1.7rem 1fr; gap: 0.25rem 0.35rem; }
   .journal.dash .cal .days { gap: 1px; }
+  /* 列が9px前後になるので目盛りを間引く。10刻みだけ残す */
+  .journal.dash .cal .dnum span { font-size: 0.5rem; }
+  .journal.dash .cal .dnum span[data-d="5"],
+  .journal.dash .cal .dnum span[data-d="15"],
+  .journal.dash .cal .dnum span[data-d="25"] { visibility: hidden; }
 }
 
 /* 動きを減らす設定を尊重する */

@@ -11,6 +11,17 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "birthday-distribution",
+    title: "生まれる日を決めていたのは、病院の営業日と法律でした",
+    excerpt:
+      "子どもが生まれる日は縁起のいい日に寄っているのか。人口動態統計の保管統計表を10年分・854万人ぶん数えたら、六曜による差は0.9%しかありませんでした。代わりに出てきたのは、曜日で1.68倍、そして4月1日と2日のあいだにある38.4%の段差です。",
+    date: "2026-07-31",
+    category: "データ / 暮らし",
+    // ⚠️ 一覧では 16/9 と約4/3 の両方に cover でトリミングされる。
+    // 横長のヒーローだと数字が切れるので、中央寄せの thumb を別に用意している。
+    hero: "/blog/birthday-distribution/thumb.webp",
+  },
+  {
     slug: "camera-or-smartphone",
     title: "カメラは9割売れなくなって、金額は残りました",
     excerpt:

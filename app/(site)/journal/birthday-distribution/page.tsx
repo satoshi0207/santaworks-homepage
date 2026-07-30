@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     description:
       "六曜による差は0.9%。一方、曜日は1.68倍、祝日は0.69倍。4月1日から2日にかけては一晩で38.4%跳ねます。人口動態統計の保管統計表を10年分数えました。",
     url: "/journal/birthday-distribution/",
+    images: ["/blog/birthday-distribution/ogp.png"],
   },
   twitter: {
     card: "summary_large_image",
@@ -24,6 +25,7 @@ export const metadata: Metadata = {
       "生まれる日を決めていたのは、病院の営業日と法律でした｜Santa Works Journal",
     description:
       "六曜の差は0.9%。曜日は1.68倍、祝日は0.69倍。4月1日と2日のあいだに38.4%の段差があります。",
+    images: ["/blog/birthday-distribution/ogp.png"],
   },
 };
 
@@ -36,9 +38,26 @@ export default function Page() {
       <div className="wrap">
         <article>
           <div className="hero">
-            {/* 🟡 ヒーロー画像は未作成。この記事は図が主役なので、
-                画像を置かず KPI タイルを最初の視覚にしている。
-                置くなら `.herofig nodim` ＋ /blog/birthday-distribution/hero.webp。 */}
+            {/* ⚠️ ヒーローに写真を使わない。この記事は一次資料だけで書いているので、
+                絵だけ借り物の素材にすると、記事全体の作り方と食い違う。
+                人物が写る素材を避ける（全社ガードレール⑤）という制約にも自動的に従える。
+                図版なので `nodim` で写真用の暗幕を外す（journal.css）。
+                中身は §03 のヒートマップそのもの。記事の看板を表紙にしている。
+                生成は pr/drafts/birthday-distribution-src/make_images.py。 */}
+            <figure className="herofig nodim rv">
+              <div className="ph">
+                <div
+                  className="ph-photo"
+                  aria-hidden="true"
+                  style={
+                    {
+                      "--hero-pc": "url(/blog/birthday-distribution/hero.webp)",
+                      "--hero-sp": "url(/blog/birthday-distribution/hero-sp.webp)",
+                    } as React.CSSProperties
+                  }
+                />
+              </div>
+            </figure>
             <span className="eyebrow">データ / 暮らし</span>
             <h1 className="title">
               生まれる日を決めていたのは、
@@ -232,7 +251,7 @@ export default function Page() {
             </ul>
             <p>
               六曜が1.014倍だったのに対して、曜日は1.684倍、祝日は0.692倍。
-              <strong>桁が2つ違います。</strong>
+              <strong>六曜の0.9%とは、大きさがまるで違います。</strong>
             </p>
             <p>
               つまり、生まれる日を動かしていたのは縁起ではなく、
@@ -250,7 +269,7 @@ export default function Page() {
             </p>
 
             <h3 style={{ marginTop: "2.6rem", marginBottom: "0.2rem", fontSize: "1.12rem", fontWeight: 800, lineHeight: 1.5 }}>
-              年末年始に、横一列の空きができる
+              年末年始だけ、6日つづけて沈みます
             </h3>
 
             <figure className="fig rv">
@@ -282,7 +301,7 @@ export default function Page() {
                 年をまたぐ6日間（12/29〜1/3）が、この並べ方だと図の両端に分かれて出ます。
                 <strong>4月1日のマスも1つだけ沈んでいます。</strong>
                 どちらも祝日でも土日でもありません。
-                濃淡は5段階（等頻度）。マスにカーソルを当てると日付と人数が出ます。
+                縦の並びが月、横が日。濃淡は5段階（等頻度）。マスにカーソルを当てると日付と人数が出ます。
               </figcaption>
             </figure>
 
@@ -353,6 +372,13 @@ export default function Page() {
               同じ学年のなかで最も幼く、いわゆる「早生まれ」の極みになる。
             </p>
             <p>その差が、出生数に出ていました。</p>
+            <p>
+              沈んでいるのは4月1日だけではありません。3月26日から30日は<strong>92%台</strong>
+              、3月31日は<strong>84.8%</strong>で、月末にかけて少しずつ下がっていきます
+              （3月1日〜25日の平均は96.7%）。学年の区切りは4月2日なので、
+              <strong>3月末に生まれた子も、4月1日生まれと同じ学年に入ります。</strong>
+              段差は一晩でできたのではなく、数日かけて下がりきった先にありました。
+            </p>
             <p>
               <strong>産む日を1日ずらせるなら、ずらす。</strong>
               そういう判断が、10年分・数万件の規模で積み重なると、統計に段差として現れる。誰かが号令をかけたわけでもないのに。

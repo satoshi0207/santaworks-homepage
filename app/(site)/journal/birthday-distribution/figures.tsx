@@ -38,6 +38,10 @@ export function KpiTiles() {
 export function CalendarHeat() {
   return (
     <>
+      <div className="mo" />
+      <div className="days dnum n">
+        <span data-d="1">1</span><span /><span /><span /><span data-d="5">5</span><span /><span /><span /><span /><span data-d="10">10</span><span /><span /><span /><span /><span data-d="15">15</span><span /><span /><span /><span /><span data-d="20">20</span><span /><span /><span /><span /><span data-d="25">25</span><span /><span /><span /><span /><span /><span data-d="31">31</span>
+      </div>
       <div className="mo n">1月</div>
       <div className="days">
         <i className="d" data-q="1" title="1/1　1,475人" /><i className="d" data-q="1" title="1/2　1,487人" /><i className="d" data-q="1" title="1/3　1,597人" /><i className="d" data-q="4" title="1/4　2,412人" /><i className="d" data-q="5" title="1/5　2,820人" /><i className="d" data-q="5" title="1/6　2,609人" /><i className="d" data-q="4" title="1/7　2,404人" /><i className="d" data-q="1" title="1/8　2,209人" /><i className="d" data-q="1" title="1/9　2,201人" /><i className="d" data-q="2" title="1/10　2,316人" /><i className="d" data-q="3" title="1/11　2,373人" /><i className="d" data-q="3" title="1/12　2,379人" /><i className="d" data-q="3" title="1/13　2,340人" /><i className="d" data-q="1" title="1/14　2,231人" /><i className="d" data-q="4" title="1/15　2,420人" /><i className="d" data-q="4" title="1/16　2,420人" /><i className="d" data-q="4" title="1/17　2,394人" /><i className="d" data-q="4" title="1/18　2,426人" /><i className="d" data-q="4" title="1/19　2,453人" /><i className="d" data-q="4" title="1/20　2,429人" /><i className="d" data-q="3" title="1/21　2,328人" /><i className="d" data-q="3" title="1/22　2,360人" /><i className="d" data-q="5" title="1/23　2,464人" /><i className="d" data-q="3" title="1/24　2,366人" /><i className="d" data-q="4" title="1/25　2,412人" /><i className="d" data-q="4" title="1/26　2,433人" /><i className="d" data-q="3" title="1/27　2,357人" /><i className="d" data-q="1" title="1/28　2,249人" /><i className="d" data-q="2" title="1/29　2,291人" /><i className="d" data-q="2" title="1/30　2,309人" /><i className="d" data-q="2" title="1/31　2,254人" />
