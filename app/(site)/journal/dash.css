@@ -1,0 +1,224 @@
+/* Journal のダッシュボード寄りレイヤー（2026-07-30〜）。
+   `journal.css` の上に重ねる追加層。記事側で className="journal dash" としたときだけ効く。
+
+   なぜ別ファイルなのか：既存6本は journal.css の見た目で完成している。
+   遡って統一する価値が薄い（記事には日付があるので、古い記事が古い見た目なのは自然）ため、
+   **既存には一切触れず、ここから先の記事がこの層に乗る**という形にしている。
+
+   既存との違いは3点。
+   1. 大きな数字を明朝から「詰めたサンセリフ＋等幅数字」へ。ダッシュボードらしさはここで出る
+   2. カードの影ではなく、ヘアラインと余白で構造を作る
+   3. 図が主役。本文が図を説明するのではなく、図を読んで本文が補足する
+
+   配色は globals.css のトークンを継承する。ヒートマップのランプだけここで定義し、
+   dataviz の順序尺度チェック（単調性・段の間隔・薄い端がサーフェスから見えるか・単一色相）を
+   ライト/ダーク両方で通した値を使っている。目視で決めていない。 */
+
+.journal.dash {
+  /* ヒートマップ用 5段ランプ（薄→濃）＝ペトロール。ライト：全項目PASS
+
+     🔴 ランプにブランドの赤を使わない。
+     ヒートマップは365セルあるので、そこを赤で塗ると赤が記事に400回出て、
+     アクセントがアクセントでなくなる。**赤は強調だけに温存する**（記事全体で5回程度）。
+     ランプは「多いか少ないか」しか運ばないので、色相の情報量はゼロでよい。 */
+  --ramp-1: #8fb0b3;
+  --ramp-2: #699599;
+  --ramp-3: #457a7e;
+  --ramp-4: #2a5c60;
+  --ramp-5: #183f42;
+  /* 強調図の非強調色。アクセントとの分離 ΔE 14.1（deutan）で検証済み */
+  --demph: #8b91a0;
+  /* ヘアライン。線は1本の太さで統一し、影は使わない */
+  --hair: var(--line);
+  --hair-strong: color-mix(in oklab, var(--ink) 22%, transparent);
+}
+
+[data-theme="dark"] .journal.dash {
+  /* ダーク：暗→明。こちらも全項目PASS。ライトの単純な反転ではなく、別に選んでいる */
+  --ramp-1: #2f5457;
+  --ramp-2: #417276;
+  --ramp-3: #569296;
+  --ramp-4: #6fb1b6;
+  --ramp-5: #8fd0d5;
+  --demph: #7e8aa4;
+}
+
+/* ── 数字の組版 ───────────────────────────────────
+   ダッシュボードは桁が揃っていないと読めない。tnum を必ず効かせる。 */
+.journal.dash .n {
+  font-variant-numeric: tabular-nums;
+  font-feature-settings: "tnum" 1;
+  letter-spacing: -0.01em;
+}
+
+/* 小さなラベル。図やタイルの上に置く見出し。装飾ではなく索引として使う */
+.journal.dash .lbl {
+  display: block;
+  font-size: 0.66rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--muted);
+  text-transform: uppercase;
+}
+
+/* ── KPIタイル ───────────────────────────────────
+   「3つ並べる」を目的にしない。数が2でも4でも grid が受ける。 */
+.journal.dash .kpi {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 0;
+  border-top: 1px solid var(--hair-strong);
+  border-bottom: 1px solid var(--hair);
+  margin: 2.2rem 0;
+}
+.journal.dash .kpi > * + * { border-left: 1px solid var(--hair); }
+.journal.dash .tile { padding: 1rem 1.1rem 1.05rem; }
+.journal.dash .tile .v {
+  display: block;
+  margin-top: 0.45rem;
+  font-size: clamp(1.7rem, 5.5vw, 2.3rem);
+  font-weight: 800;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.025em;
+}
+.journal.dash .tile .v small { font-size: 0.5em; font-weight: 700; margin-left: 0.15em; letter-spacing: 0; }
+/* ⚠️ `.note` は journal.css で**赤い縦線つきの囲み**（記事中の補足ボックス）に使われている。
+   タイルの中の小さな説明も同じ名前なので、囲みの装飾を明示的に打ち消す。
+   ここを消すと、KPIタイルの説明文が1つずつ枠に入って赤い線が4本出る。 */
+.journal.dash .tile .note {
+  display: block;
+  margin: 0.4rem 0 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  font-size: 0.72rem;
+  line-height: 1.55;
+  color: var(--muted);
+}
+.journal.dash .tile.on .v { color: var(--accent); }
+
+/* ── ヒーロー数値 ─────────────────────────────────
+   記事が1つの数字で言い切れるときだけ使う。乱発すると効かない。
+
+   ⚠️ `.fig` の中に限定している。journal.css の `.journal .hero` は
+   **記事ヘッダー（サムネ＋見出し＋リード）**の器で、名前がぶつかる。
+   スコープを外すと詳細度でこちらが勝ち、記事の見出し全体に赤い縦線が付く。
+   プレビュー（build_preview.py）もこの数字を figure の中に置いている。 */
+.journal.dash .fig .hero {
+  margin: 2.4rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--accent);
+}
+.journal.dash .fig .hero .v {
+  display: block;
+  font-size: clamp(3rem, 13vw, 5rem);
+  font-weight: 800;
+  line-height: 0.95;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.04em;
+}
+.journal.dash .fig .hero .cap { display: block; margin-top: 0.5rem; font-size: 0.9rem; color: var(--muted); }
+
+/* ── 図の枠 ──────────────────────────────────────
+   影も角丸も付けない。上下のヘアラインと余白だけで図を区切る。 */
+/* ⚠️ journal.css の `.journal figure` はカード（背景・枠・角丸・影）。
+   ここで打ち消さないと、この層の狙い（ヘアラインと余白だけで区切る）と正反対になり、
+   図が全部カードの中に入る。上書きではなく**明示的な打ち消し**が必要。 */
+.journal.dash .fig {
+  margin: 2.6rem 0;
+  padding: 0.7rem 0 0;
+  background: none;
+  border: 0;
+  border-top: 1px solid var(--hair-strong);
+  border-radius: 0;
+  box-shadow: none;
+}
+.journal.dash .fig .hd { display: flex; align-items: baseline; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+.journal.dash .fig .ttl { font-size: 0.94rem; font-weight: 700; line-height: 1.5; }
+.journal.dash .fig .src { flex: 0 0 auto; font-size: 0.66rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.journal.dash .fig figcaption { margin-top: 0.9rem; font-size: 0.78rem; line-height: 1.75; color: var(--muted); }
+
+/* SVGは色を固定しない。currentColor を親から継承させ、data-theme に追従させる。
+   ここを固定すると、既定のダークで図の文字が消える（summer-50years で踏んだ罠）。 */
+.journal.dash .fig svg { display: block; width: 100%; height: auto; color: var(--ink); }
+.journal.dash .fig svg text { fill: currentColor; }
+
+/* ── カレンダー・ヒートマップ ───────────────────────
+   12行 × 31列。セルは矩形のまま角を丸めない（隣と地続きに見せる）。 */
+.journal.dash .cal { display: grid; grid-template-columns: 2.1rem 1fr; gap: 0.35rem 0.5rem; align-items: center; }
+.journal.dash .cal .mo { font-size: 0.64rem; color: var(--muted); text-align: right; font-variant-numeric: tabular-nums; }
+.journal.dash .cal .days { display: grid; grid-template-columns: repeat(31, 1fr); gap: 2px; }
+.journal.dash .cal .d { aspect-ratio: 1; background: var(--track); }
+.journal.dash .cal .d[data-q="1"] { background: var(--ramp-1); }
+.journal.dash .cal .d[data-q="2"] { background: var(--ramp-2); }
+.journal.dash .cal .d[data-q="3"] { background: var(--ramp-3); }
+.journal.dash .cal .d[data-q="4"] { background: var(--ramp-4); }
+.journal.dash .cal .d[data-q="5"] { background: var(--ramp-5); }
+.journal.dash .cal .d[data-q="0"] { background: transparent; }  /* 暦に存在しない日 */
+
+/* ランプの凡例。連続風のグラデーションにはしない（段が5つであることを見せる） */
+.journal.dash .ramp { display: flex; align-items: center; gap: 0.5rem; margin-top: 0.9rem; font-size: 0.66rem; color: var(--muted); }
+.journal.dash .ramp .sw { display: flex; gap: 2px; }
+.journal.dash .ramp .sw i { width: 22px; height: 10px; display: block; }
+
+/* ── 強調バー（横） ────────────────────────────────
+   系列を色で分けない。目立たせる1〜2本だけアクセント、残りは非強調グレー。 */
+.journal.dash .bars { display: grid; gap: 0.4rem; }
+.journal.dash .bars .b { display: grid; grid-template-columns: 2.6rem 1fr auto; align-items: center; gap: 0.7rem; }
+.journal.dash .bars .k { font-size: 0.78rem; color: var(--muted); }
+.journal.dash .bars .t { position: relative; height: 14px; background: var(--track); }
+.journal.dash .bars .t i {
+  position: absolute; inset: 0 auto 0 0; display: block;
+  background: var(--demph);
+  border-radius: 0 3px 3px 0;   /* データ側の端だけ丸める。基線側は角のまま */
+  width: var(--w, 0%);
+  transition: width 1.1s cubic-bezier(.16,.8,.3,1);
+}
+.journal.dash .bars .b.on i { background: var(--accent); }
+.journal.dash .bars .b.on .k { color: var(--ink); font-weight: 700; }
+.journal.dash .bars .v { font-size: 0.8rem; font-weight: 700; font-variant-numeric: tabular-nums; min-width: 3.6rem; text-align: right; }
+
+/* ── 点＋信頼区間 ──────────────────────────────────
+   「差が無い」ことを見せる図。棒ではなく点にして、基準線をまたぐ様子を出す。 */
+.journal.dash .dots { display: grid; gap: 0.55rem; }
+.journal.dash .dots .r { display: grid; grid-template-columns: 3.2rem 1fr auto; align-items: center; gap: 0.7rem; }
+.journal.dash .dots .k { font-size: 0.78rem; color: var(--muted); }
+.journal.dash .dots .t { position: relative; height: 16px; }
+.journal.dash .dots .t::before {   /* 基準線 1.00 */
+  content: ""; position: absolute; left: 50%; top: -2px; bottom: -2px;
+  border-left: 1px dashed var(--hair-strong);
+}
+.journal.dash .dots .ci { position: absolute; top: 50%; height: 2px; transform: translateY(-50%); background: var(--demph); opacity: .55; }
+.journal.dash .dots .pt {
+  position: absolute; top: 50%; width: 9px; height: 9px; margin: -4.5px 0 0 -4.5px;
+  border-radius: 50%; background: var(--demph);
+  box-shadow: 0 0 0 2px var(--surface);   /* 重なり回避の2pxリング */
+}
+.journal.dash .dots .r.on .pt { background: var(--accent); }
+.journal.dash .dots .v { font-size: 0.76rem; font-variant-numeric: tabular-nums; min-width: 4.2rem; text-align: right; color: var(--muted); }
+.journal.dash .dots .r.on .v { color: var(--ink); font-weight: 700; }
+
+/* ── 表 ──────────────────────────────────────────
+   7分類を超えたら図をやめて表にする。表も設計対象として扱う。 */
+.journal.dash .tbl { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin: 1.2rem 0; }
+.journal.dash .tbl th, .journal.dash .tbl td { padding: 0.5rem 0.6rem; border-bottom: 1px solid var(--hair); text-align: right; font-variant-numeric: tabular-nums; }
+.journal.dash .tbl th:first-child, .journal.dash .tbl td:first-child { text-align: left; font-variant-numeric: normal; }
+.journal.dash .tbl thead th { border-bottom: 1px solid var(--hair-strong); font-size: 0.66rem; letter-spacing: 0.1em; color: var(--muted); font-weight: 700; }
+
+/* スマホ。横長の図はここで縦向きの別図に差し替える（.pconly/.sponly は journal.css 側） */
+@media (max-width: 640px) {
+  .journal.dash .kpi { grid-template-columns: 1fr 1fr; }
+  .journal.dash .kpi > * + * { border-left: none; }
+  .journal.dash .kpi > :nth-child(2n) { border-left: 1px solid var(--hair); }
+  .journal.dash .kpi > :nth-child(n+3) { border-top: 1px solid var(--hair); }
+  .journal.dash .cal { grid-template-columns: 1.7rem 1fr; gap: 0.25rem 0.35rem; }
+  .journal.dash .cal .days { gap: 1px; }
+}
+
+/* 動きを減らす設定を尊重する */
+@media (prefers-reduced-motion: reduce) {
+  .journal.dash .bars .t i { transition: none; }
+}
