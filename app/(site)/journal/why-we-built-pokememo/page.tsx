@@ -252,12 +252,16 @@ export default function Page() {
               <h2 className="tt">なぜ「写真」ではなく「人」だったのか</h2>
             </div>
             <p>
-              {/* ExifSort Pro は /works/ に未掲載のため、意図的にリンクを張らない
-                  （載っていないページへ送ると記事の信用が落ちる）→ hq/ORG.md §5-1 */}
+              {/* /works/ には未掲載なので、そちらへは張らない（載っていないページへ
+                  送ると記事の信用が落ちる）→ hq/ORG.md §5-1。
+                  製品ページは実在するので外部リンクとして張る。
+                  🔴 DMG の直リンクは張らない。配布は招待制（pr/brand/truth.md §4） */}
               Santa Works では、写真を撮影日ごとに自動で仕分けする
-              <strong>ExifSort Pro</strong>
-              <span style={{ fontSize: ".82em" }}>（※近日公開予定）</span>
-              というデスクトップアプリも準備しています。同じ「記録を扱う道具」ですが、こちらは
+              <a href="https://exifsort.web.app" target="_blank" rel="noopener noreferrer">
+                <strong>ExifSortPro</strong>
+              </a>
+              <span style={{ fontSize: ".82em" }}>（※ベータテスト中）</span>
+              というデスクトップアプリも作っています。同じ「記録を扱う道具」ですが、こちらは
               <strong>すでに残っているもの</strong>を整えるための道具です。
             </p>
             <p>
