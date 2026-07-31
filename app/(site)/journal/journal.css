@@ -23,7 +23,12 @@
    （実例：「飲食店の集客、グ／ルメサイト」「娘が欲しがったのはス／マホで」）。
    文節単位で折らせる。未対応のブラウザでは単に無視される（従来の折り返しに戻るだけ）。 */
 .journal .title, .journal .h2 .tt, .journal .lede,
-.journal .pull .q, .journal .closing .q, .journal .toc .tx {
+.journal .pull .q, .journal .closing .q, .journal .toc .tx,
+/* 図の見出し・注記の見出しも同じ扱い（2026-07-31追加）。
+   ⚠️ ここは <div> なので globals.css の `.site-content p` が当たらず、
+   既定のCJK折り返しのままだった。狭い画面で「47都道府／県）」のように
+   語の途中で割れる。**見出しは全部この行に足す**、が覚え方。 */
+.journal .fh, .journal .note .nh, .journal .fs {
   word-break: auto-phrase;
 }
 
@@ -198,6 +203,24 @@
 .journal .vscol.hp li .ic { color: var(--accent); }
 .journal .vscol.plat li .ic { color: var(--muted); }
 
+/* 左右を1行ずつ突き合わせて読む比較のとき、行の高さを列間でそろえる（2026-07-31）。
+   既定では左右の <ul> が独立しているので、**片方の行だけ2行に折り返すと、
+   それ以降の行が最後までズレる**（外側の箱の高さは揃うので気づきにくい）。
+
+   🔴 **両列の <li> 数が同じときだけ付ける。**
+   数が違う比較（`gourmet-site-dependency` の 5対15 など）に付けると、
+   行の対応が無いのに高さだけ揃い、対応しているように読めてしまう。だから既定では効かせない。
+
+   ⚠️ 行数ぶんだけ変種が要る。CSS の `repeat()` は個数にカスタムプロパティを取れず、
+   `span calc(var(--n))` も書けないため、`sync2` `sync3` と明示する。
+   ⚠️ subgrid 非対応のブラウザでは宣言ごと無効になり、**いまの見た目に戻るだけ**（壊れない）。 */
+.journal .vsgrid.sync2 { grid-template-rows: auto auto auto; }
+.journal .vsgrid.sync3 { grid-template-rows: auto auto auto auto; }
+.journal .vsgrid.sync2 .vscol,
+.journal .vsgrid.sync3 .vscol { grid-row: 1 / -1; display: grid; grid-template-rows: subgrid; }
+.journal .vsgrid.sync2 .vscol ul,
+.journal .vsgrid.sync3 .vscol ul { grid-row: 2 / -1; display: grid; grid-template-rows: subgrid; }
+
 /* pull quote — 記事の芯を1行で立てる。callout は数値を主役にする器なので、
    "言葉そのもの"を見せたいときはこちらを使う。明朝＋大サイズ＋центрで、
    本文の流れを一度止める。文字は clamp でスマホから広い画面まで連続的に効かせる。 */
@@ -278,6 +301,14 @@
   .journal .title br { display: none; }
   .journal .stats { grid-template-columns: 1fr; }
   .journal .vsgrid { grid-template-columns: 1fr; }
+  /* 🔴 1列に落ちるので、行そろえは必ず解除する。
+     解除しないと `grid-row: 1 / -1` の2つの箱が**同じ場所に重なる**。
+     そもそも縦に積んだ時点で、左右を突き合わせて読む形ではない。 */
+  .journal .vsgrid.sync2, .journal .vsgrid.sync3 { grid-template-rows: none; }
+  .journal .vsgrid.sync2 .vscol, .journal .vsgrid.sync3 .vscol,
+  .journal .vsgrid.sync2 .vscol ul, .journal .vsgrid.sync3 .vscol ul {
+    grid-row: auto; display: block;
+  }
   .journal .duel { grid-template-columns: 1fr; }
   .journal .duel .vs { padding: 8px; border: 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
 }

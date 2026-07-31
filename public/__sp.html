@@ -1,0 +1,27 @@
+<!doctype html><meta charset="utf-8">
+<style>html,body{margin:0;background:#000}iframe{border:0;display:block;width:390px}</style>
+<iframe id="f"></iframe>
+<script>
+const slug = new URLSearchParams(location.search).get("s");
+const f = document.getElementById("f");
+f.style.height = (new URLSearchParams(location.search).get("h") || 1200) + "px";
+f.src = "/journal/" + slug + "/";
+f.onload = () => setTimeout(() => {
+  const d = f.contentDocument;
+  const h = Math.max(d.body.scrollHeight, d.documentElement.scrollHeight);
+  document.title = "H=" + h;
+  // 横あふれの検出：本文カラムより外へ出ている要素を拾う
+  const bad = [];
+  const vw = f.contentWindow.innerWidth;
+  d.querySelectorAll("body *").forEach(el => {
+    const r = el.getBoundingClientRect();
+    if (r.width > 0 && (r.right > vw + 1 || r.left < -1)) {
+      const cs = f.contentWindow.getComputedStyle(el);
+      if (cs.position === "fixed") return;
+      bad.push(el.tagName.toLowerCase() + "." + (el.className || "").toString().slice(0,40)
+               + " L" + Math.round(r.left) + " R" + Math.round(r.right));
+    }
+  });
+  document.title += " | overflow:" + bad.length + " | " + bad.slice(0,12).join(" ;; ");
+}, 2500);
+</script>
