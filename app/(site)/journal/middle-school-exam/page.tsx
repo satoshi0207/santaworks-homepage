@@ -12,6 +12,7 @@ import {
 } from "./figures";
 import "../journal.css";
 import "../dash.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "調べたら、決められることが1つも増えませんでした",
@@ -65,7 +66,7 @@ export default function Page() {
                 />
               </div>
             </figure>
-            <span className="eyebrow">親として / 公開データの整理</span>
+            <span className="eyebrow">{eyebrowOf("middle-school-exam")}</span>
             <h1 className="title">
               調べたら、決められることが
               <br />

@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "娘が欲しがったのはスマホで、パソコンではありませんでした",
@@ -55,7 +56,7 @@ export default function Page() {
                 <span className="ph-t">楽しむ道具と、つくる道具</span>
               </div>
             </figure>
-            <span className="eyebrow">子どもとAI</span>
+            <span className="eyebrow">{eyebrowOf("tools-that-make")}</span>
             <h1 className="title">
               娘が欲しがったのはスマホで、
               <br />

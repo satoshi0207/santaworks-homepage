@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "10年ぶりに同じデータを開いたら、1割は1割のままでした",
@@ -138,7 +139,7 @@ export default function Page() {
                 />
               </div>
             </figure>
-            <span className="eyebrow">運転 / 公開データの整理</span>
+            <span className="eyebrow">{eyebrowOf("obon-uninsured")}</span>
             <h1 className="title">
               10年ぶりに同じデータを開いたら、
               <br />

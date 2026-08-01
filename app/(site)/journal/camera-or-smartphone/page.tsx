@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import { IndexPc, IndexSp, TypesPc, TypesSp, HomePc, HomeSp } from "./figures";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "カメラは9割売れなくなって、金額は残りました",
@@ -63,7 +64,7 @@ export default function Page() {
                     図版の線の上に重なる。見出しは画像側に入れてある。 */}
               </div>
             </figure>
-            <span className="eyebrow">写真 / 公開データの整理</span>
+            <span className="eyebrow">{eyebrowOf("camera-or-smartphone")}</span>
             <h1 className="title">
               カメラは9割売れなくなって、
               <br />

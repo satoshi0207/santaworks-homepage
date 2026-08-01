@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import { CalendarPc, CalendarSp, SlopePc, SlopeSp } from "./figures";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 const TITLE = "昔の夏は涼しかった、を50年分の記録で確かめました";
 const DESC =
@@ -80,7 +81,7 @@ export default function Page() {
                 />
               </div>
             </figure>
-            <span className="eyebrow">公開データ</span>
+            <span className="eyebrow">{eyebrowOf("summer-50years")}</span>
             <h1 className="title">
               昔の夏は涼しかった、を
               <br />

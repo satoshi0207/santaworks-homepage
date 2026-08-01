@@ -5,6 +5,7 @@ import { KpiTiles, CalendarHeat, WeekdayBars, AprilBars, RokuyoDots } from "./fi
 import Cal from "./Cal";
 import "../journal.css";
 import "../dash.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "生まれる日を決めていたのは、病院の営業日と法律でした",
@@ -59,7 +60,7 @@ export default function Page() {
                 />
               </div>
             </figure>
-            <span className="eyebrow">データ / 暮らし</span>
+            <span className="eyebrow">{eyebrowOf("birthday-distribution")}</span>
             <h1 className="title">
               生まれる日を決めていたのは、
               <br />

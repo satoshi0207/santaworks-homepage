@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "飲食店の集客、グルメサイトだけに委ねてよいか——公開データから考える",
@@ -59,7 +60,7 @@ export default function Page() {
                 <span className="ph-t">データで読み解く、飲食店の集客</span>
               </div>
             </figure>
-            <span className="eyebrow">データで考える</span>
+            <span className="eyebrow">{eyebrowOf("gourmet-site-dependency")}</span>
             <h1 className="title">
               飲食店の集客、グルメサイトだけに
               <br />

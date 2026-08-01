@@ -19,6 +19,14 @@
   --mote: rgba(190, 148, 138, 0.55);
   --mote-accent: rgba(196, 51, 62, 0.5);
   --card-shadow: 0 12px 40px rgba(36, 38, 46, 0.07);
+
+  /* ジャーナルのテーマ色（一覧のチップと左のレール）。
+     ⚠️ 彩度を上げない。赤のアクセントと張り合うとサイト全体が賑やかになる。
+     product は自社の話なので、専用色ではなく accent をそのまま使う。 */
+  --th-kids: #6f5aa0;
+  --th-life: #2f7060;
+  --th-memory: #2a5c60;
+  --th-product: var(--accent);
 }
 
 :root[data-theme="dark"] {
@@ -33,6 +41,12 @@
   --mote: rgba(255, 253, 245, 0.6);
   --mote-accent: rgba(226, 86, 98, 0.5);
   --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+
+  /* 暗い地の上では同じ色が沈むので、明度を上げた別の値を持つ */
+  --th-kids: #a996d8;
+  --th-life: #6fb8a4;
+  --th-memory: #67aab0;
+  --th-product: var(--accent);
 }
 
 @theme inline {
@@ -63,6 +77,33 @@ h1,
 h2,
 h3 {
   text-wrap: balance;
+}
+
+/* ── ジャーナル一覧 ──────────────────────────────────────────
+   テーマ色は各カードが `--tc` で受け取る（JournalList.tsx が inline style で渡す）。
+   color-mix や currentColor を使うので、Tailwind の任意値ではなくここに置く。 */
+.jcard:hover {
+  border-color: color-mix(in oklab, var(--tc) 50%, transparent);
+}
+.jcard:hover .jtitle {
+  color: var(--tc);
+}
+/* ⚠️ h2 の `text-wrap: balance` を打ち消す。2行のカード見出しだと両行を同じ長さに
+   揃えようとして「10年ぶりに同じデータを開い／たら」のように語の途中で折れる。 */
+.jtitle {
+  text-wrap: pretty;
+}
+.jchip {
+  color: var(--tc);
+  border: 1px solid currentColor;
+}
+.jrail {
+  background: var(--tc);
+}
+.jfilter[aria-pressed="true"] {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--bg);
 }
 
 /* 「ふわぁ」出現アニメ（framer-motion廃止・CSSで実装）

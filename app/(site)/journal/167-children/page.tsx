@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "小学生167人。この数字を、届く人に渡したいです",
@@ -60,7 +61,7 @@ export default function Page() {
                     グラフの真ん中に重なってしまう。図版側に見出しを持たせてある。 */}
               </div>
             </figure>
-            <span className="eyebrow">親として / 公開データの整理</span>
+            <span className="eyebrow">{eyebrowOf("167-children")}</span>
             <h1 className="title">
               小学生167人。
               <br />

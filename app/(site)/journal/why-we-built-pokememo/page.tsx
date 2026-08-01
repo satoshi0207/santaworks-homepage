@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
   title: "覚えていることは、才能ではなく仕組みでした——ポケメモをつくった理由",
@@ -55,7 +56,7 @@ export default function Page() {
                 <span className="ph-t">「忘れたくない」を、かたちに</span>
               </div>
             </figure>
-            <span className="eyebrow">つくった理由</span>
+            <span className="eyebrow">{eyebrowOf("why-we-built-pokememo")}</span>
             <h1 className="title">
               覚えていることは、
               <br />
