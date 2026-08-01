@@ -43,9 +43,9 @@ const services: {
   {
     icon: "product",
     title: "プロダクト運営",
-    body: "記憶と思い出をテーマにしたサービスを開発・運営。第一弾はLINEで使える記憶サポート「ポケメモ」。",
+    body: "記憶と思い出をテーマにしたサービスを開発・運営。LINEで使える記憶サポート「ポケメモ」と、Mac用の写真整理アプリ「ExifSortPro」。",
     href: "/works/",
-    cta: "ポケットメモリーを見る",
+    cta: "プロダクトを見る",
   },
   {
     icon: "web",
@@ -246,6 +246,43 @@ export default function Home() {
               />
             </div>
           </div>
+
+          {/* 商品2: ExifSortPro。トップは要約だけにして、詳細は /works/ に送る。
+              スクショを縮めると何も読めないので、ここはアイコンで出す */}
+          <Link
+            href="/works/#exifsortpro"
+            className="group mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/70 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-accent/45 md:p-7"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/exifsortpro/icon-256.png"
+              alt=""
+              aria-hidden="true"
+              width={256}
+              height={256}
+              loading="lazy"
+              className="hidden h-20 w-20 shrink-0 sm:block"
+            />
+            <div className="min-w-0">
+              <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                {/* ワードマークは LP と同じ —「Pro」だけブランドの藍 */}
+                <h3 className="text-lg font-extrabold">
+                  ExifSort
+                  <span className="text-[#4F46E5] dark:text-[#818cf8]">Pro</span>
+                </h3>
+                <span className="rounded-full bg-line/60 px-2.5 py-0.5 text-[0.66rem] font-bold tracking-[0.1em] text-muted">
+                  Mac アプリ・βテスト中
+                </span>
+              </div>
+              <p className="text-[0.92rem] text-muted [word-break:keep-all]">
+                散らばった写真と動画を、撮ったときのデータで並べ直す Mac
+                アプリ。コピーしか作らないので、元のファイルは触りません。
+              </p>
+              <span className="mt-3 inline-block text-[0.85rem] font-bold text-accent">
+                くわしく見る →
+              </span>
+            </div>
+          </Link>
 
           {/* デザインサンプル ショーケース */}
           <div className="mt-16">

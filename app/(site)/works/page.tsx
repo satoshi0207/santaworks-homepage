@@ -2,22 +2,29 @@ import type { Metadata } from "next";
 import SectionLabel from "@/components/SectionLabel";
 import { Reveal } from "@/components/motion";
 import CopyPassword from "@/components/CopyPassword";
+import ExifSortProArt from "@/components/ExifSortProArt";
 import { samples } from "../samples";
+
+const WORKS_DESCRIPTION =
+  "Santa Works の実績・プロダクト。LINEで使える記憶サポート「ポケメモ」と、写真・動画をメタデータで整理する Mac アプリ「ExifSortPro」。";
 
 export const metadata: Metadata = {
   title: "Works",
-  description:
-    "Santa Works の実績・プロダクト。LINEで使える記憶サポートサービス「ポケメモ」など。",
+  description: WORKS_DESCRIPTION,
   alternates: { canonical: "/works/" },
   openGraph: {
     title: "Works｜Santa Works",
-    description:
-      "Santa Works の実績・プロダクト。LINEで使える記憶サポートサービス「ポケメモ」など。",
+    description: WORKS_DESCRIPTION,
     url: "/works/",
   },
 };
 
 const POKEMEMO_URL = "https://pokememo.santaworks.net";
+
+/* ExifSortPro は招待制のβテスト中。DMG の直リンクは載せず、導線は必ず応募ページへ送る
+   （配布は5〜10名にURLを個別送付しているため、ここから直接落とせると前提が崩れる）。 */
+const EXIFSORT_URL = "https://exifsort.web.app/";
+const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
 
 const features: { img: string; title: string; body: string }[] = [
   {
@@ -34,6 +41,26 @@ const features: { img: string; title: string; body: string }[] = [
     img: "/pokememo/feat-search.webp",
     title: "次に会う前に見返す",
     body: "名前で検索、最後に話した順に一覧。会う前にさっと見返せば、会話がもっとスムーズに。",
+  },
+];
+
+/* LP で明言している「3つの約束」をそのまま持ってくる。
+   言い方を変えると、製品サイトと言っていることがズレる。 */
+const promises: { title: string; body: string; note: string }[] = [
+  {
+    title: "壊さない",
+    body: "作るのはコピーだけ。元のファイルは移動もリネームもしません。整理をやり直しても、元の場所はそのままです。",
+    note: "コピーのみ・元ファイル無破壊",
+  },
+  {
+    title: "漏らさない",
+    body: "写真には撮った場所の座標が埋まっています。フォルダを決めるために読みますが、読むだけで、どこへも送りません。アカウント登録もありません。",
+    note: "ネットワーク送信なし・機内モードで動く",
+  },
+  {
+    title: "なくさない",
+    body: "いつ・何を・どこへコピーしたかを記録します。やり直したくなったら、履歴からまるごと巻き戻せます。",
+    note: "全操作を巻き戻せる",
   },
 ];
 
@@ -126,6 +153,99 @@ export default function Works() {
                 <p className="text-[0.86rem] leading-relaxed text-muted">{f.body}</p>
               </div>
             ))}
+          </div>
+
+          {/* 商品2: ExifSortPro。ポケメモ（人を憶える）と対になる「写真を憶える」側 */}
+          <div
+            id="exifsortpro"
+            className="mt-20 scroll-mt-24 border-t border-line pt-16"
+          >
+            <div className="grid items-center gap-10 md:grid-cols-2">
+              <div>
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded-full bg-accent-soft px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-accent">
+                    Mac アプリ
+                  </span>
+                  <span className="inline-block rounded-full bg-line/60 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-muted">
+                    βテスト中
+                  </span>
+                </div>
+                {/* ワードマークは LP と同じ組み方 —「Pro」だけブランドの藍(#4F46E5)。
+                    ダークだと沈むので、そのときだけ indigo-400 相当に振る */}
+                <h2 className="mb-3 text-2xl font-extrabold">
+                  ExifSort
+                  <span className="text-[#4F46E5] dark:text-[#818cf8]">Pro</span>
+                </h2>
+                <p className="mb-5 text-[1.05rem] font-bold leading-snug text-[#4F46E5] dark:text-[#818cf8]">
+                  「撮る楽しみ」を、
+                  <br />
+                  「見返す喜び」に。
+                </p>
+                <p className="mb-6 text-[0.95rem] text-muted [word-break:keep-all] [overflow-wrap:anywhere]">
+                  撮ったその瞬間のデータを手がかりに、散らばった写真と動画を本棚のように並べ直す
+                  Mac アプリ。撮影日・カメラ・拡張子などのメタデータを読んで、フォルダの形をドラッグで組み立てられます。
+                </p>
+                <dl className="mb-7 space-y-1.5 text-[0.85rem]">
+                  <div className="flex gap-3">
+                    <dt className="w-20 shrink-0 font-bold">動作環境</dt>
+                    <dd className="text-muted">
+                      macOS 12 Monterey 以降／Apple Silicon・Intel 両対応
+                    </dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-20 shrink-0 font-bold">価格</dt>
+                    <dd className="text-muted">
+                      正式版は ¥1,280（買い切り・税込）を予定
+                    </dd>
+                  </div>
+                </dl>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <a
+                    href={EXIFSORT_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  >
+                    ExifSortPro の公式サイトを見る →
+                  </a>
+                  <a
+                    href={EXIFSORT_BETA_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
+                  >
+                    テスターに応募する →
+                  </a>
+                </div>
+                <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
+                  いまは招待制のβテスト中です。Apple の Developer ID
+                  で署名・公証を済ませているので、開いたときに警告は出ません。
+                </p>
+              </div>
+              {/* 絵が自前で地を持っているので、パネルは付けずに敷き詰める */}
+              <div className="overflow-hidden rounded-md shadow-card">
+                <ExifSortProArt />
+              </div>
+            </div>
+
+            {/* 3つの約束 */}
+            <div className="mt-12 grid gap-5 sm:grid-cols-3">
+              {promises.map((p) => (
+                <div
+                  key={p.title}
+                  className="flex flex-col rounded-md border border-line bg-surface p-6 shadow-card"
+                >
+                  <h3 className="mb-2 text-[1.02rem] font-bold">{p.title}</h3>
+                  {/* 長めなので keep-all を切る。切らないと句点が行頭に落ちる */}
+                  <p className="jp-flow text-[0.86rem] leading-relaxed text-muted">
+                    {p.body}
+                  </p>
+                  <p className="mt-auto pt-3 text-[0.7rem] tracking-tight text-muted/70">
+                    {p.note}
+                  </p>
+                </div>
+              ))}
+            </div>
           </div>
         </Reveal>
       </section>
