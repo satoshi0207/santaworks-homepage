@@ -246,6 +246,77 @@
   .journal.dash .cal .dnum span[data-d="25"] { visibility: hidden; }
 }
 
+/* ── 記事ヘッダーの図版ヒーロー ──────────────────────
+   ⚠️ `.herofig` も <figure> なので、journal.css の**カード装飾**（背景・枠・角丸・影・
+      padding 26px）を受け取る。ヒーローが暗い図版のうちは枠が同化して見えなかったが、
+      **明るい図版を入れると、暗い額縁に white な紙が浮いた状態**になる（2026-08-01）。
+      `.fig` と同じように、ここでも明示的に打ち消す。 */
+.journal.dash .herofig {
+  margin: 0 0 30px;
+  padding: 0;
+  background: none;
+  border: 0;
+  box-shadow: none;
+}
+
+/* ── 100個のドット（割合を「人」で見せる） ──────────────
+   2026-08-01 追加。%を棒で見せると小さい割合が潰れるので、100人に縮めて数える。
+   ⚠️ 端数は丸める。図の下のキャプションに必ず素の%を書く（丸めた数だけ残さない）。 */
+.journal.dash .hundred {
+  display: grid;
+  grid-template-columns: repeat(20, 1fr);
+  gap: 4px;
+  margin: 0.4rem 0 0.9rem;
+}
+.journal.dash .hundred i { display: block; aspect-ratio: 1; border-radius: 50%; background: var(--track); }
+.journal.dash .hundred i[data-k="shi"] { background: var(--accent); }
+.journal.dash .hundred i[data-k="koku"] { background: var(--ramp-3); }
+.journal.dash .hkey { display: flex; gap: 1.1rem; font-size: 0.7rem; color: var(--muted); }
+.journal.dash .hkey span { display: inline-flex; align-items: center; gap: 0.35rem; }
+.journal.dash .hkey i { width: 9px; height: 9px; border-radius: 50%; background: var(--track); }
+.journal.dash .hkey i[data-k="shi"] { background: var(--accent); }
+.journal.dash .hkey i[data-k="koku"] { background: var(--ramp-3); }
+
+/* .bars の見出しに、数え方の但し書きを2行目として置けるようにする。
+   ⚠️ 既定の 2.6rem は「大安」「仏滅」のような2文字用。資料名を入れると折り返して潰れるので、
+      文字の入る見出しでは `.bars.wk` を付けて列を広げる。 */
+.journal.dash .bars .k small { display: block; font-size: 0.68em; opacity: 0.7; margin-top: 0.15rem; line-height: 1.35; }
+.journal.dash .bars.wk .b { grid-template-columns: 7.4rem 1fr auto; }
+.journal.dash .bars.wk .k { font-size: 0.74rem; line-height: 1.35; }
+
+/* ── 51行の積み上げ横棒 ──────────────────────────────
+   2026-08-01 追加。**並びを率順にしない**前提の図（順位表に見せない）。
+   1本が2区間：s1＝細い側、s2＝濃い側。b は基準線（都全体）。 */
+.journal.dash .d51 { display: grid; gap: 3px; }
+.journal.dash .d51 .dr { display: grid; grid-template-columns: 4.6rem 1fr 2.4rem; align-items: center; gap: 0.5rem; }
+.journal.dash .d51 .dk { font-size: 0.7rem; color: var(--muted); line-height: 1.2; }
+/* ⚠️ トラックを濃くしない。`--track` をそのまま敷くと s1（グレー）と見分けがつかず、
+      **全行が端まで伸びた棒に見える**（＝全員100%に読める）。溝が分かる最小限にとどめる。 */
+.journal.dash .d51 .dt { position: relative; height: 11px; background: color-mix(in oklab, var(--ink) 7%, transparent); }
+.journal.dash .d51 .dt i { position: absolute; top: 0; bottom: 0; display: block; }
+.journal.dash .d51 .dt .s1 { left: 0; background: var(--demph); opacity: 0.9; }
+.journal.dash .d51 .dt .s2 { background: var(--accent); }
+.journal.dash .d51 .dt b {   /* 基準線。データの上に重ねるので細く */
+  position: absolute; top: -2px; bottom: -2px; width: 1px;
+  background: currentColor; opacity: 0.42;
+}
+.journal.dash .d51 .dv { font-size: 0.7rem; text-align: right; color: var(--muted); }
+/* 6地区だけの版は行に余裕があるので、太く・文字も大きく */
+.journal.dash .d51.wide { gap: 0.55rem; }
+.journal.dash .d51.wide .dr { grid-template-columns: 5.2rem 1fr 5.4rem; }
+.journal.dash .d51.wide .dk { font-size: 0.8rem; color: var(--ink); }
+.journal.dash .d51.wide .dt { height: 16px; }
+.journal.dash .d51.wide .dv { font-size: 0.78rem; font-weight: 700; color: var(--ink); }
+.journal.dash .d51.wide .dv em { font-style: normal; color: var(--muted); font-weight: 400; margin: 0 0.1em; }
+
+@media (max-width: 640px) {
+  /* 20列だと1個が12px を切って点に見えなくなる。10列×10段にする */
+  .journal.dash .hundred { grid-template-columns: repeat(10, 1fr); gap: 5px; }
+  .journal.dash .d51 .dr { grid-template-columns: 4rem 1fr 2.2rem; gap: 0.4rem; }
+  .journal.dash .d51 .dk { font-size: 0.64rem; }
+  .journal.dash .d51.wide .dr { grid-template-columns: 4.6rem 1fr 4.8rem; }
+}
+
 /* 動きを減らす設定を尊重する */
 @media (prefers-reduced-motion: reduce) {
   .journal.dash .bars .t i { transition: none; }

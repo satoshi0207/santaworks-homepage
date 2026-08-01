@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/journal/camera-or-smartphone/", priority: 0.6 },
     { path: "/journal/birthday-distribution/", priority: 0.6 },
     { path: "/journal/obon-uninsured/", priority: 0.6 },
+    { path: "/journal/middle-school-exam/", priority: 0.6 },
     { path: "/contact/", priority: 0.6 },
     { path: "/privacy/", priority: 0.3 },
     { path: "/legal/", priority: 0.3 },
