@@ -317,7 +317,35 @@
   .journal.dash .d51.wide .dr { grid-template-columns: 4.6rem 1fr 4.8rem; }
 }
 
+/* ── 立ち上がりの演出 ─────────────────────────────────────
+   🔴 **幅ではなく transform を動かす。**`width` を毎フレーム変えるとレイアウトが走る。
+      図④は51行×2区間＝102本あるので、そこで落ちる。`scaleX()` は合成だけで済む。
+   CSS が持つのは**初期値と transition の2つだけ**。JS は最終値と遅延を1回書くのみ
+   （→ components/JournalFx.tsx の play()）。動き終わったあとのコストはゼロ。
+   ⚠️ **目印は箱に1つだけ**（`data-fx`）。要素ごとに属性を書くと、ドットと点と数字で
+      **HTMLが 17KB 増える**（実測して作り直した）。中身は形で拾う——
+      `i` が棒とドット、`circle` が点、`.n` が数字。
+   ⚠️ **will-change は付けない。**ドットは100個あるので、付けると合成レイヤーが
+      100枚できてメモリを食う。transition 中は自動で昇格するので要らない。 */
+.journal.dash [data-fx] i {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.05s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+/* ドットと散らばりの点は横に伸ばすのではなく、中心からふくらむ（順序が効くので後に置く） */
+.journal.dash .hundred[data-fx] i,
+.journal.dash [data-fx] circle {
+  transform: scale(0);
+  transform-origin: center;
+  transition: transform 0.5s cubic-bezier(0.16, 0.9, 0.3, 1);
+}
+/* SVG は既定で要素のバウンディングボックスを基準にしないので、明示する */
+.journal.dash svg[data-fx] circle { transform-box: fill-box; }
+
 /* 動きを減らす設定を尊重する */
 @media (prefers-reduced-motion: reduce) {
   .journal.dash .bars .t i { transition: none; }
+  /* JS 側も reduced を見て遅延を書かないが、CSS だけでも最終形になるようにしておく */
+  .journal.dash [data-fx] i,
+  .journal.dash [data-fx] circle { transform: none; transition: none; }
 }

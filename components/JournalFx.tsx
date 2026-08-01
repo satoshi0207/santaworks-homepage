@@ -8,7 +8,21 @@ import { useEffect } from "react";
  * - 図版の「ふわぁ」リビール（.rv → .in）
  * - グラフのバーが 0 から伸び、数字がバーに連動してカウントアップ（小数対応・時間差）
  * reduced-motion 時はアニメーションせず最終値を即表示。
- * ドラフト（Artifact）の挙動をそのまま移植。
+ *
+ * ## 2つの系統がある（2026-08-02）
+ *
+ * **① 旧：クラス名で拾う**（`.chart .row` の `.fl`＋`.vl` と `.split .sp`）。
+ * gourmet-site-dependency と summer-50years だけが使っている。**触っていない。**
+ *
+ * **② 新：属性で宣言する**（`data-grow` / `data-pop` / `data-count`）。
+ * 167-children 以降は図版を `figures.tsx` の自前SVGと dash 層の div に変えたので、
+ * ①のクラス名から外れて演出が効かなくなっていた。**クラス名に依存するのをやめた。**
+ * HTML の div でも SVG の circle でも、属性さえ付いていれば同じ処理で動く。
+ *
+ * 🔴 **②は幅ではなく transform を動かす。**`width` を毎フレーム変えるとレイアウトが
+ * 走る。図④は51行×2区間＝102本あるので、そのままだと古い端末で落ちる。
+ * `scaleX()` なら合成だけで済む（レイアウトもペイントも起きない）。
+ * 🔴 **カウントアップは rAF を1本だけ回す。**要素ごとに立てない。
  */
 export default function JournalFx() {
   useEffect(() => {
@@ -51,6 +65,99 @@ export default function JournalFx() {
       };
       requestAnimationFrame(step);
     };
+
+    // ── ② 属性で宣言する系統 ───────────────────────────────
+    // rAF は**1本だけ**。動く数字が無くなったらループごと止める（常時コストを残さない）。
+    type Ctr = { node: Text | HTMLElement; to: number; dec: number; sfx: string; t0: number };
+    const ctrs: Ctr[] = [];
+    let raf = 0;
+
+    const put = (c: Ctr, v: number) => {
+      const s = v.toFixed(c.dec) + c.sfx;
+      if (c.node.nodeType === 3) c.node.textContent = s;
+      else (c.node as HTMLElement).textContent = s;
+    };
+
+    const loop = (ts: number) => {
+      for (let i = ctrs.length - 1; i >= 0; i--) {
+        const c = ctrs[i];
+        const p = Math.min(Math.max((ts - c.t0) / 1050, 0), 1);
+        put(c, (1 - Math.pow(1 - p, 3)) * c.to);
+        if (p >= 1) ctrs.splice(i, 1);
+      }
+      raf = ctrs.length ? requestAnimationFrame(loop) : 0;
+    };
+
+    /** 数字は「最初のテキストノード」だけ見る（`21.9<small>%</small>` の % を残すため） */
+    const textNodeOf = (el: HTMLElement) => {
+      for (const n of Array.from(el.childNodes))
+        if (n.nodeType === 3 && n.textContent?.trim()) return n as Text;
+      return null;
+    };
+
+    // 51行あっても全体が伸び切るまで 1.7 秒で終わるように、遅延に上限を置く
+    const MAXD = 700;
+    const delayOf = (i: number, step: number) => Math.min(i * step, MAXD);
+
+    /**
+     * 🔴 **要素ごとに属性を書かない**（2026-08-02）。
+     * 最初 `data-grow` / `data-pop` / `data-count` を1要素ずつ付けたら、
+     * ドット100個＋点102個＋数字73個で **HTMLが 17KB 増えた**。
+     * → 目印は**箱に1つ**（`data-fx`）。中の `i`（棒・ドット）と `circle`（点）と
+     *   `.n`（数字）を、箱の側から拾う。**マークアップは1バイトも増えない。**
+     * 目標値は表示テキストから読む。属性に書き写さないので、**数字が二重に持たれない。**
+     */
+    const play = (box: HTMLElement) => {
+      const seq = parseInt(box.getAttribute("data-seq") || "", 10) || 34;
+
+      // 棒とドットと点。CSS が初期値（scale 0）と transition を持ち、
+      // ここで書くのは遅延と最終値の2つ、**1要素につき1回きり**。
+      box.querySelectorAll<HTMLElement>("i, circle").forEach((el, i) => {
+        if (!reduced) el.style.transitionDelay = delayOf(i, seq) + "ms";
+        el.style.transform = "none";
+      });
+
+      // 🔴 **数えるのは名乗った箱だけ**（`data-num`）。textContent を毎フレーム書き換えると、
+      //    幅が変わらなくてもレイアウトが走る。図④は数字が51個あって、
+      //    ここを全部数えると**レイアウト時間が 7ms → 107ms に跳ねた**（実測して外した）。
+      //    51個の小さい数字が一斉に回っても読めないので、図④は棒だけ動かす。
+      if (!box.hasAttribute("data-num")) return;
+
+      const now = performance.now();
+      box.querySelectorAll<HTMLElement>(".n").forEach((el, i) => {
+        const node = textNodeOf(el);
+        if (!node) return;
+        const m = /^\s*(-?[\d.]+)(.*)$/.exec(node.textContent || "");
+        if (!m) return;
+        const dot = m[1].indexOf(".");
+        const c: Ctr = {
+          node,
+          to: parseFloat(m[1]),
+          dec: dot < 0 ? 0 : m[1].length - dot - 1,
+          sfx: m[2],
+          t0: now + delayOf(i, seq),
+        };
+        if (reduced) return; // 表示は最終値のまま。何もしない
+        put(c, 0);
+        ctrs.push(c);
+      });
+      if (ctrs.length && !raf) raf = requestAnimationFrame(loop);
+    };
+
+    const fio = new IntersectionObserver(
+      (ents) => {
+        ents.forEach((e) => {
+          if (!e.isIntersecting) return;
+          play(e.target as HTMLElement);
+          fio.unobserve(e.target); // 一度動いたら見張らない
+        });
+      },
+      { threshold: 0.2 },
+    );
+    // 図の外にある KPI タイルも拾えるよう、figure ではなく「中身を持つ箱」で観測する
+    root
+      .querySelectorAll<HTMLElement>("[data-fx]")
+      .forEach((el) => fio.observe(el));
 
     const io = new IntersectionObserver(
       (ents) => {
@@ -152,6 +259,8 @@ export default function JournalFx() {
       document.removeEventListener("scroll", onScroll);
       io.disconnect();
       bio.disconnect();
+      fio.disconnect();
+      if (raf) cancelAnimationFrame(raf);
     };
   }, []);
 

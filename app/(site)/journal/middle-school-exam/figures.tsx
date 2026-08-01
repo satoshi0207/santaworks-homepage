@@ -38,7 +38,7 @@ function Fig({
       本文を読む前に順位表として受け取られる。名前は図③の中でだけ出す。 */
 export function KpiTiles() {
   return (
-    <div className="kpi rv">
+    <div className="kpi rv" data-fx data-num data-seq="120">
       <div className="tile">
         <span className="lbl">全国</span>
         <span className="v n">8.3<small>%</small></span>
@@ -78,7 +78,7 @@ export function FigNational() {
         </>
       }
     >
-      <div className="hundred" aria-hidden="true">
+      <div className="hundred" aria-hidden="true" data-fx data-seq="9">
         <i key={0} data-k="shi" />
         <i key={1} data-k="shi" />
         <i key={2} data-k="shi" />
@@ -209,7 +209,7 @@ export function FigBasis() {
         </>
       }
     >
-      <div className="bars wk">
+      <div className="bars wk" data-fx data-num data-seq="90">
         {rows.map(([k, basis, v, on]) => (
           <div className={"b" + (on ? " on" : "")} key={k}>
             <span className="k">
@@ -243,7 +243,7 @@ export function FigSpread() {
         </>
       }
     >
-      <div className="pconly"><svg viewBox="0 0 600 132" role="img" aria-label="東京都の51区市町村の受験計の散らばり">
+      <div className="pconly"><svg viewBox="0 0 600 132" role="img" data-fx data-seq="11" aria-label="東京都の51区市町村の受験計の散らばり">
       <line x1="46" y1="74" x2="554" y2="74" stroke="currentColor" strokeWidth="1" opacity="0.28" />
       <line x1="46.0" y1="74" x2="46.0" y2="79" stroke="currentColor" strokeWidth="1" opacity="0.28" />
       <text x="46.0" y="94" fontSize="15" textAnchor="middle" opacity="0.55">0%</text>
@@ -313,7 +313,7 @@ export function FigSpread() {
       <text x="72.9" y="124" fontSize="16" textAnchor="start" fontWeight="700">瑞穂町 3.1%</text>
       <text x="531.4" y="124" fontSize="16" textAnchor="end" fontWeight="700">文京区 52.3%</text>
       </svg></div>
-      <div className="sponly"><svg viewBox="0 0 360 150" role="img" aria-label="東京都の51区市町村の受験計の散らばり">
+      <div className="sponly"><svg viewBox="0 0 360 150" role="img" data-fx data-seq="11" aria-label="東京都の51区市町村の受験計の散らばり">
       <line x1="26" y1="84" x2="334" y2="84" stroke="currentColor" strokeWidth="1" opacity="0.28" />
       <line x1="26.0" y1="84" x2="26.0" y2="89" stroke="currentColor" strokeWidth="1" opacity="0.28" />
       <text x="26.0" y="102" fontSize="13" textAnchor="middle" opacity="0.55">0%</text>
@@ -459,7 +459,7 @@ export function FigAll() {
         </>
       }
     >
-      <div className="d51">
+      <div className="d51" data-fx data-seq="16">
         {D51.map(([name, shi, all]) => (
           <div className="dr" key={name}>
             <span className="dk">{name}</span>
@@ -501,7 +501,7 @@ export function FigPick() {
         </>
       }
     >
-      <div className="d51 wide">
+      <div className="d51 wide" data-fx data-num data-seq="80">
         {PICK6.map(([name, shi, all]) => (
           <div className="dr" key={name}>
             <span className="dk">{name}</span>
@@ -509,8 +509,10 @@ export function FigPick() {
               <i className="s1" style={{ width: shi * 1.8 + "%" }} />
               <i className="s2" style={{ left: shi * 1.8 + "%", width: (all - shi) * 1.8 + "%" }} />
             </span>
-            <span className="dv n">
-              {shi.toFixed(1)} <em>→</em> {all.toFixed(1)}
+            <span className="dv">
+              <span className="n">{shi.toFixed(1)}</span>{" "}
+              <em>→</em>{" "}
+              <span className="n">{all.toFixed(1)}</span>
             </span>
           </div>
         ))}
