@@ -17,7 +17,7 @@ import { useEffect } from "react";
  * **② 新：属性で宣言する**（`data-grow` / `data-pop` / `data-count`）。
  * 167-children 以降は図版を `figures.tsx` の自前SVGと dash 層の div に変えたので、
  * ①のクラス名から外れて演出が効かなくなっていた。**クラス名に依存するのをやめた。**
- * HTML の div でも SVG の circle でも、属性さえ付いていれば同じ処理で動く。
+ * HTML の div でも SVG の circle / rect でも、属性さえ付いていれば同じ処理で動く。
  *
  * 🔴 **②は幅ではなく transform を動かす。**`width` を毎フレーム変えるとレイアウトが
  * 走る。図④は51行×2区間＝102本あるので、そのままだと古い端末で落ちる。
@@ -112,7 +112,9 @@ export default function JournalFx() {
 
       // 棒とドットと点。CSS が初期値（scale 0）と transition を持ち、
       // ここで書くのは遅延と最終値の2つ、**1要素につき1回きり**。
-      box.querySelectorAll<HTMLElement>("i, circle").forEach((el, i) => {
+      // `rect` を足した（2026-08-02）。SVG の棒グラフを動かすため。
+      // ✅ 既存の `data-fx` 箱に `<rect>` は1つも無いことを確認済み＝他の記事は変わらない。
+      box.querySelectorAll<HTMLElement>("i, circle, rect").forEach((el, i) => {
         if (!reduced) el.style.transitionDelay = delayOf(i, seq) + "ms";
         el.style.transform = "none";
       });

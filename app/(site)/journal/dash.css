@@ -340,12 +340,27 @@
   transition: transform 0.5s cubic-bezier(0.16, 0.9, 0.3, 1);
 }
 /* SVG は既定で要素のバウンディングボックスを基準にしないので、明示する */
-.journal.dash svg[data-fx] circle { transform-box: fill-box; }
+.journal.dash svg[data-fx] circle,
+.journal.dash svg[data-fx] rect { transform-box: fill-box; }
+
+/* SVG の棒（2026-08-02 追加）。既定は横棒＝左から伸びる。
+   ⚠️ **縦棒は下から伸ばす。**`data-fx="up"` と名乗った箱だけ向きを変える。
+   （値を持たせても JS は属性の有無しか見ないので、動きは変わらない） */
+.journal.dash [data-fx] rect {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1.05s cubic-bezier(0.16, 0.8, 0.3, 1);
+}
+.journal.dash [data-fx="up"] rect {
+  transform: scaleY(0);
+  transform-origin: center bottom;
+}
 
 /* 動きを減らす設定を尊重する */
 @media (prefers-reduced-motion: reduce) {
   .journal.dash .bars .t i { transition: none; }
   /* JS 側も reduced を見て遅延を書かないが、CSS だけでも最終形になるようにしておく */
   .journal.dash [data-fx] i,
-  .journal.dash [data-fx] circle { transform: none; transition: none; }
+  .journal.dash [data-fx] circle,
+  .journal.dash [data-fx] rect { transform: none; transition: none; }
 }
