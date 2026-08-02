@@ -53,8 +53,10 @@ export default function JournalList() {
                   : "grid-cols-[4px_1fr]"
               }`}
             >
-              {/* テーマ色のレール。一覧を縦に流し読みしたとき、ここだけで話題が変わる */}
-              <div className="jrail" aria-hidden="true" />
+              {/* テーマ色のレール。一覧を縦に流し読みしたとき、ここだけで話題が変わる。
+                  🔴 `row-span-full` が要る。スマホはサムネと本文が2行になるので、
+                     付けないとレールが1行目（サムネの高さ）で切れる。 */}
+              <div className="jrail row-span-full" aria-hidden="true" />
 
               {/* サムネイル。背景画像なので、ファイルが無くても壊れ画像にならない */}
               {p.hero && (
@@ -68,7 +70,12 @@ export default function JournalList() {
                 </div>
               )}
 
-              <div className="p-6 sm:self-center sm:p-7">
+              {/* 🔴 `col-start-2` が要る（2026-08-03 に直した）。
+                  スマホの列は `4px 1fr` の2本しかないのに、子が
+                  レール・サムネ・本文の3つある。自動配置だと本文が
+                  **2行目の1列目＝4px の列**に入って、1文字ずつ縦に折れていた。
+                  PC は列が3本あるので自動配置でよい（`sm:col-start-auto`）。 */}
+              <div className="col-start-2 p-6 sm:col-start-auto sm:self-center sm:p-7">
                 <div className="mb-2.5 flex flex-wrap items-center gap-x-3 gap-y-1 text-[0.72rem] font-bold tracking-[0.09em] text-muted">
                   <span className="jchip rounded-full px-2.5 py-0.5">
                     {THEMES[p.theme]}
