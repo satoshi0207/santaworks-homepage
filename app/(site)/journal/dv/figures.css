@@ -1,0 +1,109 @@
+/* DV記事の図（13点）の見た目。**この記事だけ**に効くよう `.dvfig` に閉じてある。
+ *
+ * 🔴 色を SVG に直書きしていない理由：系列色はライトとダークで別の値が要る。
+ *    ライト 女性 #00968f / 男性 #b5641f（surface #ffffff）
+ *    ダーク 女性 #00a5a8 / 男性 #c8823c（surface #1c1f28）
+ *    dataviz の6チェックを両モードで通した値（validate_palette.js）。
+ *    → 経緯は pr/drafts/dv-src/build_preview.py 冒頭
+ *
+ * 🔴 ペトロールのランプ（--ramp-*）はカテゴリ色に使わない。彩度が低く灰色に見える。
+ *    ランプは「多い少ない」専用。ここでは図02・図04の「範囲」にだけ使っている。
+ *
+ * ⚠️ `.f` `.m` のような短い名前を使えるのは `.dvfig` の中だけだから。
+ *    このファイルのセレクタから `.dvfig` を外さないこと。
+ *
+ * ⚠️ 文字サイズは PC 版（viewBox 720）とスマホ版（viewBox 358）で共通でよい。
+ *    どちらも実寸とほぼ 1:1 で描画されるため（720→約700px／358→約328px）。
+ */
+
+/* dash.css の `.fig svg` より後に効かせたいので、いずれも `.dvfig` を挟んで
+   詳細度を1つ上げてある（読み込み順に依存させない） */
+.journal.dash .dvfig svg { display: block; width: 100%; height: auto; }
+.journal.dash .dvfig svg + svg { margin-top: 0.75rem; }
+
+.journal.dash .dvfig text { fill: currentColor; font-family: inherit; }
+.journal.dash .dvfig text.tick { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .dvfig text.rowlab { font-size: 12px; fill: var(--ink); }
+.journal.dash .dvfig text.rowlab2 {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.journal.dash .dvfig text.lgd { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .dvfig text.ann { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .dvfig text.dl { font-size: 12.5px; font-weight: 700; }
+.journal.dash .dvfig text.delta { font-size: 11.5px; }
+.journal.dash .dvfig text.civ {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.journal.dash .dvfig text.evw { font-size: 12px; font-weight: 700; }
+.journal.dash .dvfig text.evd { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .dvfig text.bnum {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.journal.dash .dvfig text.bignum {
+  font-size: 30px;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+.journal.dash .dvfig .sponly text.bignum { font-size: 26px; }
+/* 帯の中に置く文字。地の色が濃いので白で固定する（テーマで反転させない） */
+.journal.dash .dvfig text.seglab { font-size: 12px; font-weight: 700; fill: #fff; }
+.journal.dash .dvfig text.segnum {
+  font-size: 12px;
+  fill: #fff;
+  font-variant-numeric: tabular-nums;
+}
+
+.journal.dash .dvfig line.grid { stroke: var(--hair); stroke-width: 1; }
+.journal.dash .dvfig line.axis { stroke: var(--hair-strong); stroke-width: 1; }
+.journal.dash .dvfig line.stem { stroke: var(--hair-strong); stroke-width: 1; }
+.journal.dash .dvfig line.zero {
+  stroke: var(--hair-strong);
+  stroke-width: 1.5;
+  stroke-dasharray: 3 3;
+}
+.journal.dash .dvfig .ln {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.journal.dash .dvfig .ln.ghost { stroke-width: 1.5; stroke-dasharray: 4 4; opacity: 0.5; }
+.journal.dash .dvfig circle.pt.ghost { opacity: 0.5; }
+.journal.dash .dvfig line.ci { stroke: var(--demph); stroke-width: 2.5; stroke-linecap: round; }
+.journal.dash .dvfig rect.overlap {
+  fill: color-mix(in oklab, var(--ink) 7%, transparent);
+  stroke: none;
+}
+
+/* 系列色。`--c` を配って、線・面・文字がそれを見る */
+.journal.dash .dvfig .f { --c: #00968f; }
+.journal.dash .dvfig .m { --c: #b5641f; }
+.journal.dash .dvfig .acc { --c: var(--accent); }
+.journal.dash .dvfig .ramp { --c: var(--ramp-4); }
+.journal.dash .dvfig .neutral,
+.journal.dash .dvfig .demph { --c: var(--demph); }
+.journal.dash .dvfig .off { --c: var(--hair-strong); }
+
+.journal.dash .dvfig :where(.ln, line.ci) { stroke: var(--c); }
+.journal.dash .dvfig :where(circle.pt, circle.sw, rect.seg, circle.dot) { fill: var(--c); }
+.journal.dash .dvfig circle.pt { stroke: var(--surface); stroke-width: 2; }
+.journal.dash .dvfig text.dl,
+.journal.dash .dvfig text.delta,
+.journal.dash .dvfig text.evw,
+.journal.dash .dvfig text.bignum { fill: var(--c); }
+.journal.dash .dvfig text.dl.ghost { font-size: 11.5px; font-weight: 400; fill: var(--muted); }
+
+[data-theme="dark"] .journal.dash .dvfig .f { --c: #00a5a8; }
+[data-theme="dark"] .journal.dash .dvfig .m { --c: #c8823c; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .journal.dash .dvfig .f { --c: #00a5a8; }
+  :root:not([data-theme="light"]) .journal.dash .dvfig .m { --c: #c8823c; }
+}
