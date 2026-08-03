@@ -49,6 +49,17 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    slug: "dv-police",
+    title: "DVの相談件数を、警察庁の統計で調べました",
+    lede: "警察庁の相談等件数を、性別と計上範囲まで開きました",
+    excerpt:
+      "配偶者からの暴力事案等の相談等件数は令和6年に94,937件で、DV防止法の施行以降で最多。5年の増加分のうち71.1%は男性被害者でした。ただし相談等件数は発生件数ではなく、その最多を更新した年は、計上する対象が広がった年でもありました。",
+    date: "2026-08-04",
+    theme: "life",
+    kind: "data",
+    hero: "/blog/dv-police/thumb.webp",
+  },
+  {
     slug: "dv",
     title: "DVについて調べてみました",
     lede: "配偶者からの暴力の調査を、対象年齢を揃えて数え直しました",

@@ -236,6 +236,13 @@
 .journal .closing .q { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; margin: 0 0 12px; }
 .journal .closing p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.85; }
 
+/* opinion — 「ここから先は私の考えです」の節（2026-08-04〜）
+   🔴 data の節と見分けがつくことが役目。**読者が片方だけ受け取れるようにする。**
+   左の罫だけで区切り、背景は敷かない（closing と続けて置くと箱が2つ重なって重い）。 */
+.journal .opinion { margin-top: 28px; padding: 4px 0 4px 22px; border-left: 3px solid var(--accent); }
+.journal .opinion p { margin: 0 0 14px; font-family: var(--font-serif); font-size: 1.02rem; line-height: 1.9; }
+.journal .opinion p:last-child { margin-bottom: 0; }
+
 /* sources */
 .journal .sources { margin-top: 64px; padding-top: 24px; border-top: 2px solid var(--line); }
 .journal .sources h3 { font-size: .8rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); font-weight: 800; margin: 0 0 16px; }
