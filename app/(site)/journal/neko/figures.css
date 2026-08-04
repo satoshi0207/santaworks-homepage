@@ -1,0 +1,97 @@
+/* 猫記事の図（6点）の見た目。**この記事だけ**に効くよう `.nkfig` に閉じてある。
+ *
+ * 🔴 色を SVG に直書きしていない理由：系列色はライトとダークで別の値が要る。
+ *    ライト .a #00968f / .b #b5641f（surface #ffffff）
+ *    ダーク .a #00a5a8 / .b #c8823c（surface #1c1f28）
+ *    DV記事で dataviz の6チェックを両モードで通した値をそのまま使っている
+ *    （→ pr/drafts/dv-src/build_preview.py 冒頭に経緯）。
+ *
+ * ⚠️ `.a` `.b` のような短い名前を使えるのは `.nkfig` の中だけだから。
+ *    このファイルのセレクタから `.nkfig` を外さないこと。
+ *
+ * ⚠️ 文字サイズは PC 版（viewBox 720）とスマホ版（viewBox 358）で共通でよい。
+ *    どちらも実寸とほぼ 1:1 で描画されるため（720→約700px／358→約328px）。
+ */
+
+/* dash.css の `.fig svg` より後に効かせたいので `.nkfig` を挟んで詳細度を上げる
+   （読み込み順に依存させない） */
+.journal.dash .nkfig svg { display: block; width: 100%; height: auto; }
+.journal.dash .nkfig svg + svg { margin-top: 0.75rem; }
+
+.journal.dash .nkfig text { fill: currentColor; font-family: inherit; }
+.journal.dash .nkfig text.tick { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .nkfig text.rowlab { font-size: 12.5px; fill: var(--ink); font-weight: 700; }
+.journal.dash .nkfig text.rowlab2 {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+}
+.journal.dash .nkfig text.lgd { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .nkfig text.ann { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .nkfig text.dl { font-size: 12.5px; font-weight: 700; }
+.journal.dash .nkfig text.civ {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.journal.dash .nkfig text.bnum {
+  font-size: 11.5px;
+  fill: var(--muted);
+  font-variant-numeric: tabular-nums;
+}
+.journal.dash .nkfig text.evw { font-size: 13px; font-weight: 700; }
+.journal.dash .nkfig text.evd { font-size: 11.5px; fill: var(--muted); }
+
+/* 帯の中に置く文字。地の色が濃いので白で固定する（テーマで反転させない） */
+.journal.dash .nkfig text.seglab { font-size: 12.5px; font-weight: 700; fill: #fff; }
+.journal.dash .nkfig text.segnum {
+  font-size: 12px;
+  fill: #fff;
+  font-variant-numeric: tabular-nums;
+  opacity: 0.88;
+}
+
+.journal.dash .nkfig line.grid { stroke: var(--hair); stroke-width: 1; }
+.journal.dash .nkfig line.axis { stroke: var(--hair-strong); stroke-width: 1; }
+.journal.dash .nkfig line.stem { stroke: var(--hair-strong); stroke-width: 1; }
+.journal.dash .nkfig .ln {
+  fill: none;
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+/* 帯の下地（図02の「15年ぶんの物差し」） */
+.journal.dash .nkfig rect.track {
+  fill: color-mix(in oklab, var(--ink) 6%, transparent);
+}
+/* 娘の帯の、はっきりしない側（図01）。**確定した年を1本引かないための表現** */
+.journal.dash .nkfig rect.seg.soft { fill: var(--c); opacity: 0.28; }
+/* 条文の箱（図06）。塗らずに枠と左の色帯だけで持たせる */
+.journal.dash .nkfig rect.card {
+  fill: color-mix(in oklab, var(--ink) 4%, transparent);
+  stroke: var(--hair);
+  stroke-width: 1;
+}
+
+/* 系列色。`--c` を配って、線・面・文字がそれを見る */
+.journal.dash .nkfig .a { --c: #00968f; }
+.journal.dash .nkfig .b { --c: #b5641f; }
+.journal.dash .nkfig .acc { --c: var(--accent); }
+.journal.dash .nkfig .neutral,
+.journal.dash .nkfig .demph { --c: var(--demph); }
+.journal.dash .nkfig .off { --c: var(--hair-strong); }
+
+.journal.dash .nkfig .ln { stroke: var(--c); }
+.journal.dash .nkfig :where(circle.pt, circle.sw, rect.seg) { fill: var(--c); }
+.journal.dash .nkfig circle.pt { stroke: var(--surface); stroke-width: 2; }
+.journal.dash .nkfig text.dl,
+.journal.dash .nkfig text.evw { fill: var(--c); }
+
+[data-theme="dark"] .journal.dash .nkfig .a { --c: #00a5a8; }
+[data-theme="dark"] .journal.dash .nkfig .b { --c: #c8823c; }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .journal.dash .nkfig .a { --c: #00a5a8; }
+  :root:not([data-theme="light"]) .journal.dash .nkfig .b { --c: #c8823c; }
+}
