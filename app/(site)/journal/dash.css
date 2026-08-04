@@ -66,13 +66,24 @@
 .journal.dash .kpi {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  /* 🔴 ラベル・数字・注記の3行を、**タイルをまたいで揃える**（subgrid）。
+     ラベルの折り返しが2行のタイルと3行のタイルが混ざると、
+     数字のベースラインがタイルごとにずれる（DV記事で実際にずれた・2026-08-04）。
+     ⚠️ subgrid が効かないブラウザでは、この2行が無視されて従来どおりになるだけ。
+        **崩れる方向には転ばない。** */
+  grid-template-rows: auto auto auto;
   gap: 0;
   border-top: 1px solid var(--hair-strong);
   border-bottom: 1px solid var(--hair);
   margin: 2.2rem 0;
 }
 .journal.dash .kpi > * + * { border-left: 1px solid var(--hair); }
-.journal.dash .tile { padding: 1rem 1.1rem 1.05rem; }
+.journal.dash .tile {
+  padding: 1rem 1.1rem 1.05rem;
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
 .journal.dash .tile .v {
   display: block;
   margin-top: 0.45rem;
