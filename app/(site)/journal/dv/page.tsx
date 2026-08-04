@@ -382,7 +382,8 @@ export default function Page() {
             <p>
               警察庁によると、配偶者からの暴力事案等の相談等件数は
               <strong>令和6年に94,937件</strong>。前年比+7.1%で、
-              <strong>DV防止法の施行以降で最多</strong>でした<sup>※3</sup>。
+              <strong>DV防止法の施行以降で最多</strong>
+              <sup>※3</sup>。
               性別で開くと、5年で女性は+5.6%、
               <strong>男性は+44.9%</strong>（19,478 → 28,214件）。
               増えた12,294件のうち、
