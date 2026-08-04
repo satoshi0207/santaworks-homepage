@@ -496,7 +496,7 @@ export default function Page() {
               <p className="q">
                 「相談するほどのことか」を決めているのは、
                 <br />
-                <em>相談する前の自分</em>でした。
+                <em>相談する前の自分</em>。
               </p>
               <div className="rule" />
               <p className="sub">
