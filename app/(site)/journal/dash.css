@@ -110,6 +110,42 @@
 }
 .journal.dash .tile.on .v { color: var(--accent); }
 
+/* ── 要点の囲み ───────────────────────────────────
+   KPIタイルの直後に置く「3行で言うと」。
+
+   🔴 **これが無いと、ただの3行の地の文になる**（2026-08-06 に発見）。
+      `.points` は猫記事から使っていたのに CSS が1行も無く、
+      番号が本文に食い込んで「01見合い結婚は7割でした。」と出ていた。
+      **公開済みの猫記事も同じ状態だったので、ここを足すと両方が直る。**
+
+   ⚠️ タイルが**数字**を並べるのに対して、こちらは**文**を並べる。
+      同じ見た目にすると2つが地続きの1つの表に見えるので、
+      タイルはヘアラインだけ・こちらは面（surface-2）で分ける。 */
+.journal.dash .points {
+  margin: 2.2rem 0;
+  padding: 0 1.35rem;
+  background: var(--surface-2);
+  border: 1px solid var(--line);
+  border-radius: 14px;
+}
+/* 番号は `.n` で自前に持っているので、ol 側の番号を出すと二重になる */
+.journal.dash .points ol { list-style: none; margin: 0; padding: 0; }
+.journal.dash .points li {
+  display: grid;
+  grid-template-columns: 2.2rem 1fr;
+  align-items: baseline;
+  padding: 1.05rem 0;
+}
+.journal.dash .points li + li { border-top: 1px solid var(--line); }
+.journal.dash .points .n {
+  font-family: var(--font-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.02em;
+}
+.journal.dash .points .tx { font-size: 0.94rem; line-height: 1.95; }
+
 /* ── ヒーロー数値 ─────────────────────────────────
    記事が1つの数字で言い切れるときだけ使う。乱発すると効かない。
 
