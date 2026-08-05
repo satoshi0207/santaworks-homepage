@@ -117,21 +117,21 @@ export default function Page() {
               <li>
                 <span className="n">01</span>
                 <span className="tx">
-                  見合い結婚は<strong>7割</strong>でした。
-                  戦後もしばらく、そちらのほうが多数派です。
+                  見合い結婚は<strong>7割</strong>。
+                  戦後もしばらく、多数派です。
                 </span>
               </li>
               <li>
                 <span className="n">02</span>
                 <span className="tx">
-                  <strong>入れ替わった5年間は、書けませんでした。</strong>
-                  差が小さく、信頼区間が公表されていません。
+                  <strong>入れ替わった5年間は不明。</strong>
+                  差が小さく信頼区間が公表されていません。
                 </span>
               </li>
               <li>
                 <span className="n">03</span>
                 <span className="tx">
-                  いちばん新しい数字は<strong>コロナで動いています</strong>。
+                  いちばん新しい数字は<strong>コロナ禍</strong>。
                   報告書が注でそう書いています。
                 </span>
               </li>
@@ -165,7 +165,7 @@ export default function Page() {
               <strong>恋愛があったかどうかを聞いた数字ではありません。</strong>
             </p>
             <p>
-              ⚠️ もうひとつ。対象は<b>初婚どうしの夫婦</b>だけです。
+              ⚠️ 対象は<b>初婚どうしの夫婦</b>だけです。
               そして図の点は、<b>第7回（1977年）から第16回（2021年）までの
               10回ぶんの調査をつないだもの</b>で、
               <strong>同じ調査をずっと続けた系列ではありません。</strong>
@@ -177,7 +177,7 @@ export default function Page() {
             <span className="kicker">ここで、書けなくなる</span>
             <div className="h2">
               <span className="idx">02</span>
-              <h2 className="tt">入れ替わった年は、書けませんでした</h2>
+              <h2 className="tt">どの5年かは、特定できませんでした</h2>
             </div>
 
             <Fig02 />
