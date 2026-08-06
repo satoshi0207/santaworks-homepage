@@ -92,14 +92,14 @@ export default function Page() {
             <div className="tile on">
               <span className="lbl">恋愛結婚と入れ替わったのは</span>
               <span className="v">
-                1960<small>年代後半</small>
+                60<small>年代後半</small>
               </span>
               <span className="note">どの5年かは特定できませんでした</span>
             </div>
             <div className="tile">
               <span className="lbl">恋愛結婚が7割を超えたのは</span>
               <span className="v">
-                1980<small>年代</small>
+                80<small>年代</small>
               </span>
               <span className="note">8割は1985〜89年です</span>
             </div>
