@@ -107,13 +107,13 @@ export default function Page() {
               </span>
               <span className="note">8割は1985〜89年です</span>
             </div>
-            <div className="tile">
-              <span className="lbl">いちばん新しい数字（恋愛結婚）</span>
-              <span className="v n">
-                74.8<small>%</small>
-              </span>
-              <span className="note">⚠️ コロナで動いています（§04）</span>
-            </div>
+            {/* 🔴 ここに「いちばん新しい数字 74.8%」を戻さない
+                （Satoshiさん・2026-08-06 に削除）。
+                **KPIはいちばん飛ばし読みされる場所**なので、記事が
+                「傾向として読めません」と明言している数字を置くと、
+                ⚠️を付けても**流し読みの人は 74.8% だけ持って帰る。**
+                隠したことにはならない——**§04 が丸ごとこの数字の節**で、
+                断りもそこに全部ある。 */}
           </div>
 
           <div className="points rv">
