@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import { CalendarPc, CalendarSp, SlopePc, SlopeSp } from "./figures";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 const TITLE = "昔の夏は涼しかった、を50年分の記録で確かめました";
@@ -503,6 +504,9 @@ export default function Page() {
             <br />※ 東京の熱帯夜（日最低気温25℃以上）は使用していません。移転で最低気温が約1.4℃低く出るため、
             日数の推移が観測場所の変更を反映してしまうためです。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

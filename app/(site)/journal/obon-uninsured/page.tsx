@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -803,6 +804,9 @@ export default function Page() {
             <br />※
             本記事は保険・法律・金融上の助言を目的とするものではありません。ご自身の契約内容については、契約先の窓口にご確認ください。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

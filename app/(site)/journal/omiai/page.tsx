@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 import { Fig01, Fig02, Fig03, Fig04, Fig05, Fig06, Fig07 } from "./figures";
 
@@ -657,6 +658,9 @@ export default function Page() {
             <br />※ FIG 05は<b>妻の初婚年齢</b>で分けたもので、
             結婚年次で分けたFIG 01とは母数が違います。並べて比べられません。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

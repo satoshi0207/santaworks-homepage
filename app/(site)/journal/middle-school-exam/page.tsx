@@ -12,6 +12,7 @@ import {
 } from "./figures";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -414,6 +415,9 @@ export default function Page() {
             <br />※ 「16.7倍」は、集計対象の51区市町村のうち、受験計がいちばん高い地区と
             いちばん低い地区の比です。<b>順位を示すために出した数字ではありません。</b>
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

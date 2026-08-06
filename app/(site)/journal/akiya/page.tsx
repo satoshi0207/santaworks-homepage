@@ -4,6 +4,7 @@ import JournalFx from "@/components/JournalFx";
 import { FigVacant, FigStock, FigIndex } from "./figures";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -524,6 +525,9 @@ export default function Page() {
             <b>その家に価値がないことを意味しません。</b>
             取引されていないから測られていない、というだけです。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

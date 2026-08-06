@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -456,6 +457,9 @@ export default function Page() {
             <br />※
             本記事は公開されている調査・報道をもとに構成しています。各数値は出典元の調査時点のものであり、調査ごとに対象・母数・時期が異なります。記憶に関する記述は健康な範囲での加齢変化について一般に知られている知見を紹介したもので、医学的な診断・助言を目的とするものではありません。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

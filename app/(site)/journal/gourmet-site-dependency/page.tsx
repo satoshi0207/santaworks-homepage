@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -772,6 +773,9 @@ export default function Page() {
             ※
             本記事は公開されている調査・報道をもとに構成しています。各数値は出典元の調査時点のものであり、調査ごとに対象・母数・時期が異なります。特定のサービスを推奨・批判する意図はなく、最終的な判断は読者の皆様にお委ねしています。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

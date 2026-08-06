@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -378,6 +379,9 @@ export default function Page() {
             <br />※
             本記事は法律・医療・教育上の助言を目的とするものではありません。個別のご心配は、警察相談専用電話（#9110）や各自治体の相談窓口にご相談ください。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

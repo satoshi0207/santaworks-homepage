@@ -1,0 +1,31 @@
+import Link from "next/link";
+
+/**
+ * 記事末の「書いた人」。**全記事が同じものを読む。**
+ *
+ * 🔴 **13本に手で書かない。**文言を変えたとき13か所ずれる。
+ *    2026-08-06、`gourmet-site-dependency` で実際に起きた
+ *    （一覧の題名とタブ・OGPの題名が11日間ちがっていた）。
+ *
+ * 🔴 **ここに販促を入れない。**商品名・価格・「ご相談ください」を書かない。
+ *    記事の信用は「何も売っていないこと」と引き換えに成立している。
+ *    `journal.css` の `.condolence` にも同じ注意書きがある。
+ * 🔴 **更新の約束を書かない**（「毎日更新しています」等）。
+ *    止まった瞬間、過去の記事すべてが嘘になる。
+ *
+ * ⚠️ **名乗りは「Satoshi」**（Satoshiさん・2026-08-06）。
+ *    法的な名前が要る `legal` `privacy` は「山田 悟司」のまま。
+ *    About のプロフィールに「YAMADA SATOSHI」と併記があるので、
+ *    リンクを踏んだ先で必ず繋がる。
+ */
+export default function Byline() {
+  return (
+    <aside className="byline">
+      <p>
+        書いたのは、Santa Works の <b>Satoshi</b> です。
+        ITで、記憶と思い出をサポートするものをつくっています。
+      </p>
+      <Link href="/about/">Santa Works について →</Link>
+    </aside>
+  );
+}

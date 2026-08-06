@@ -5,6 +5,7 @@ import { KpiTiles, CalendarHeat, WeekdayBars, AprilBars, RokuyoDots } from "./fi
 import Cal from "./Cal";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -494,6 +495,9 @@ export default function Page() {
             年によって日付が動くため、ふつうの平日に含まれています。したがって
             <b>祝日の落ち込みは、実際にはもう少し大きい可能性があります。</b>
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

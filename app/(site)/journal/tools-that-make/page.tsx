@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -470,6 +471,9 @@ export default function Page() {
             <br />※
             本記事は公開されている調査をもとに構成しています。各数値は出典元の調査時点のものであり、調査ごとに対象・母数・時期が異なります。子育てや教育について一般的な助言をするものではなく、私個人が迷っていることをそのまま書いたものです。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

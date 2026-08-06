@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 import {
   Fig01,
@@ -604,6 +605,9 @@ export default function Page() {
             回収率は68.8%から59.0%に下がっています。
             回答する人の性質が変わった可能性は、本記事では検討できていません。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

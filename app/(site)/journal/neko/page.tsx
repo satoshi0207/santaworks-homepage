@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import "../journal.css";
 import "../dash.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 import { Fig01, Fig02, Fig03, Fig04, Fig05, Fig06 } from "./figures";
 
@@ -491,6 +492,9 @@ export default function Page() {
             理由についての記述は、意図的に置いていません。
             <br />※ FIG 01の「娘が家にいるあいだ」は目安であり、統計ではありません。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ

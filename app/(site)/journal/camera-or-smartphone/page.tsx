@@ -3,6 +3,7 @@ import Link from "next/link";
 import JournalFx from "@/components/JournalFx";
 import { IndexPc, IndexSp, TypesPc, TypesSp, HomePc, HomeSp } from "./figures";
 import "../journal.css";
+import Byline from "../Byline";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
@@ -630,6 +631,9 @@ export default function Page() {
             そのまま同じ物差しで比べることはできません。
             <br />※ 本記事は特定のメーカーや製品の優劣を論じるものではありません。
           </p>
+
+          <Byline />
+
 
           <Link href="/journal/" className="backlink">
             ← Journal 一覧へ
