@@ -122,9 +122,16 @@
 .journal.dash .omfig text.lgd.lv2,
 .journal.dash .omfig text.lgd.lv3 { fill: var(--c); font-weight: 700; }
 
-/* 図03の指示線。点とラベルを結ぶ。**細く・薄く**（主役は線と点）。 */
-.journal.dash .omfig line.lead {
-  stroke: var(--c);
-  stroke-width: 1;
-  opacity: 0.5;
+/* 図03のラベルの縁取り（2026-08-06。指示線をやめた代わり）。
+   ラベルを●のすぐ横に置くと、しきい値の破線が字の足をかすめる。
+   `paint-order: stroke` で**地の色を字の下に敷き、罫のほうを切る。**
+   🔴 色は `--surface`（#fff）**ではなく** `--bg`（#fbfbf8）。
+   図に背景は敷かれておらず、地はページの色。**#fff だと白い縁が浮く。**
+   （ブラウザで親をさかのぼって実測した。`circle.pt` の縁取りは --surface のままだが、
+   あちらは 2px なので目立たない。触ると他の図にも効くので据え置き。） */
+.journal.dash .omfig text.evw.hl {
+  paint-order: stroke;
+  stroke: var(--bg);
+  stroke-width: 3.5;
+  stroke-linejoin: round;
 }
