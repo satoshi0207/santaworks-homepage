@@ -184,7 +184,7 @@ export const posts: Post[] = [
     date: "2026-07-27",
     theme: "kids",
     kind: "think",
-    hero: "/blog/tools-that-make/hero.webp",
+    hero: "/blog/tools-that-make/thumb.webp",
   },
   {
     slug: "why-we-built-pokememo",
@@ -195,7 +195,7 @@ export const posts: Post[] = [
     date: "2026-07-26",
     theme: "product",
     kind: "make",
-    hero: "/blog/why-we-built-pokememo/hero.webp",
+    hero: "/blog/why-we-built-pokememo/thumb.webp",
   },
   {
     slug: "gourmet-site-dependency",
@@ -207,7 +207,7 @@ export const posts: Post[] = [
     date: "2026-07-25",
     theme: "product",
     kind: "data",
-    hero: "/blog/gourmet-site-dependency/hero.webp",
+    hero: "/blog/gourmet-site-dependency/thumb.webp",
   },
 ];
 
