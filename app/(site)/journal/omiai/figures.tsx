@@ -90,3 +90,12 @@ export function Fig06() {
     </Fig>
   );
 }
+
+export function Fig07() {
+  return (
+    <Fig n="07" title="いまのネットは、90年前の恋愛結婚と同じ高さ" src="同調査 図表5-2-1" caption={<>同じ図・同じ母数なので並べられます。ただし「ネットで」は<b>第16回で新設された選択肢</b>で、この期間は<b>コロナで婚姻そのものが減っています</b>。<b>同じ道を辿るという意味ではありません。</b></>}>
+      <div className="pconly"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 226" width="100%" role="img" fontFamily="inherit" aria-label="1930年代の恋愛結婚と、いまのネットの水準" data-fx="right"><text className="rowlab" x="130.0" y="71.0" textAnchor="end">1930〜39年の結婚</text><text className="ann" x="130.0" y="87.0" textAnchor="end">恋愛結婚</text><rect className="seg a" x="142" y="54" width="336.3" height="38" rx="4"><title>1930〜39年の結婚 恋愛結婚 13.4%</title></rect><text className="bnum" x="488.3" y="77.5">13.4%</text><text className="rowlab" x="130.0" y="139.0" textAnchor="end">2019〜21年の結婚</text><text className="ann" x="130.0" y="155.0" textAnchor="end">ネットで</text><rect className="seg acc" x="142" y="122" width="379.0" height="38" rx="4"><title>2019〜21年の結婚 ネットで 15.1%</title></rect><text className="bnum" x="531.0" y="145.5">15.1%</text><text className="ann" x="24.0" y="188.0">どちらも図表5-2-1・初婚どうしの夫婦</text><text className="ann" x="24.0" y="206.0">90年の差があります</text></svg></div>
+      <div className="sponly"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 358 224" width="100%" role="img" fontFamily="inherit" aria-label="1930年代の恋愛結婚と、いまのネットの水準" data-fx="right"><text className="rowlab" x="98.0" y="75.0" textAnchor="end">1930〜39年の結婚</text><text className="ann" x="98.0" y="91.0" textAnchor="end">恋愛結婚</text><rect className="seg a" x="110" y="60" width="127.3" height="34" rx="4"><title>1930〜39年の結婚 恋愛結婚 13.4%</title></rect><text className="bnum" x="247.3" y="81.5">13.4%</text><text className="rowlab" x="98.0" y="139.0" textAnchor="end">2019〜21年の結婚</text><text className="ann" x="98.0" y="155.0" textAnchor="end">ネットで</text><rect className="seg acc" x="110" y="124" width="143.4" height="34" rx="4"><title>2019〜21年の結婚 ネットで 15.1%</title></rect><text className="bnum" x="263.4" y="145.5">15.1%</text><text className="ann" x="14.0" y="186.0">どちらも図表5-2-1・初婚どうしの夫婦</text><text className="ann" x="14.0" y="204.0">90年の差があります</text></svg></div>
+    </Fig>
+  );
+}

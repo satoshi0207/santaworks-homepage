@@ -4,7 +4,7 @@ import JournalFx from "@/components/JournalFx";
 import "../journal.css";
 import "../dash.css";
 import { eyebrowOf } from "../posts";
-import { Fig01, Fig02, Fig03, Fig04, Fig05, Fig06 } from "./figures";
+import { Fig01, Fig02, Fig03, Fig04, Fig05, Fig06, Fig07 } from "./figures";
 
 export const metadata: Metadata = {
   title: "恋愛結婚が当たり前になってから、まだ60年でした",
@@ -313,11 +313,53 @@ export default function Page() {
             </p>
           </section>
 
-          {/* 06 */}
+          {/* 06 ── §05「まだ残っているところ」と対になる節（2026-08-06 追加）。
+              🔴 **ここは §04 より後ろに置く。**使う15.1%は選択肢の新設とコロナを含むので、
+                 **先に §04 で断ってからでないと出せない。** */}
+          <section className="blk">
+            <span className="kicker">もう始まっているところ</span>
+            <div className="h2">
+              <span className="idx">06</span>
+              <h2 className="tt">次の「当たり前」は、いまここにいます</h2>
+            </div>
+
+            <Fig07 />
+
+            <p>
+              では、いま「普通」なのは何なのか。
+              <b>アプリだろう</b>と思っていました。けれど、いちばん新しい数字で多いのは
+              <strong>「友人・兄弟姉妹を通じて」25.9%</strong>、次が
+              <strong>「職場や仕事で」21.4%</strong>です<sup>※2</sup>。
+              <b>「ネットで」は13.6%で、4番目</b>でした。
+            </p>
+            <p>
+              代わりに、ひとつ気づいたことがあります。
+              図01の系列の中で、
+              <strong>2019〜21年に結婚した夫婦の「ネットで」は15.1%</strong>。
+              そして<strong>1930年代の「恋愛結婚」は13.4%</strong>でした
+              <sup>※1</sup>。
+              <b>いま出てきたばかりの出会い方は、90年前の恋愛結婚とほぼ同じ高さにいます。</b>
+            </p>
+            <p>
+              ⚠️ <b>同じ道を辿る、という意味ではありません。</b>
+              §04のとおり、この15.1%には<b>選択肢を新設した効果</b>と
+              <b>コロナで婚姻そのものが減った効果</b>が混ざっています。
+              <strong>言えるのは、いまの水準が並んでいるということだけです。</strong>
+            </p>
+            <p>
+              ⚠️ そして<b>「今」の数字は、まだ誰も公表していません。</b>
+              この調査が見ているのは<b>2021年6月までに結婚した夫婦</b>で、
+              それより後の5年間は空白です。第17回は
+              <b>2025年6月に実施済みですが、結果は出ていません</b>
+              <sup>※4</sup>。
+            </p>
+          </section>
+
+          {/* 07 */}
           <section className="blk">
             <span className="kicker">読み終えて</span>
             <div className="h2">
-              <span className="idx">06</span>
+              <span className="idx">07</span>
               <h2 className="tt">当たり前だと思っていた</h2>
             </div>
 
@@ -351,11 +393,11 @@ export default function Page() {
             </p>
           </section>
 
-          {/* 07 */}
+          {/* 08 */}
           <section className="blk">
             <span className="kicker">その線は、外にもあった</span>
             <div className="h2">
-              <span className="idx">07</span>
+              <span className="idx">08</span>
               <h2 className="tt">窓口には、要件がありました</h2>
             </div>
 
@@ -383,7 +425,7 @@ export default function Page() {
               それにオンラインの面談<sup>※5</sup>。
             </p>
             <p>
-              ⚠️ <b>申込と登録の差が何なのかは、書けません。</b>
+              ⚠️ <b>申込と登録の差が何なのかは、わかりません。</b>
               書類が揃わなかったのか、途中でやめたのか、
               いま手続きの最中なのか、公表されている数字では分けられません。
               <b>入口で数が半分以下になっている</b>、というところまでです。
