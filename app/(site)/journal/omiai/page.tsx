@@ -126,14 +126,18 @@ export default function Page() {
               <li>
                 <span className="n">01</span>
                 <span className="tx">
-                  見合い結婚は<strong>7割</strong>。
+                  <strong>1930年代の見合い結婚は7割。</strong>
                   戦後もしばらく、多数派です。
                 </span>
               </li>
               <li>
                 <span className="n">02</span>
                 <span className="tx">
-                  <strong>入れ替わった5年間は不明。</strong>
+                  {/* 🔴 主語を省かない（Satoshiさん・2026-08-06）。
+                      要点のリストは**3行だけ読む人・切り取って引用する人**が見る場所で、
+                      「入れ替わった」だけでは**何と何が入れ替わったのか分からない。**
+                      上（リード・KPIのラベル）に手がかりはあるが、そこまで戻らせない。 */}
+                  <strong>恋愛結婚が見合いを抜いた5年間は不明。</strong>
                   差が小さく信頼区間が公表されていません。
                 </span>
               </li>
