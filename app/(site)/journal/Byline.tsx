@@ -21,9 +21,11 @@ import Link from "next/link";
 export default function Byline() {
   return (
     <aside className="byline">
+      {/* ⚠️ **文を改行で割らない。**JSX は改行を半角スペースにするので、
+          「です。 ITで」と**日本語の文中に空きが1つ入る**（2026-08-06 に
+          公開後の画面で見つけた）。`<b>` の前後の空きは latin の語間なので意図的。 */}
       <p>
-        書いたのは、Santa Works の <b>Satoshi</b> です。
-        ITで、記憶と思い出をサポートするものをつくっています。
+        書いたのは、Santa Works の <b>Satoshi</b> です。ITで、記憶と思い出をサポートするものをつくっています。
       </p>
       <Link href="/about/">Santa Works について →</Link>
     </aside>
