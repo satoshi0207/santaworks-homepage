@@ -7,13 +7,13 @@ import { eyebrowOf } from "../posts";
 import { Fig01, Fig02, Fig03, Fig04, Fig05, Fig06, Fig07 } from "./figures";
 
 export const metadata: Metadata = {
-  title: "恋愛結婚が当たり前になってから、まだ60年でした",
+  title: "出会い方の「当たり前」には、始まった年がありました",
   description:
     "1930年代に結婚した夫婦の69.0%は見合い結婚でした。恋愛結婚がそれを追い抜くのは1960年代の後半で、7割を超えるのは1980年代。いま「普通」だと思っている出会い方は、そんなに古いものではありませんでした。社人研の出生動向基本調査を一次資料から読んだ記録です。",
   alternates: { canonical: "/journal/omiai/" },
   openGraph: {
     type: "article",
-    title: "恋愛結婚が当たり前になってから、まだ60年でした｜Santa Works Journal",
+    title: "出会い方の「当たり前」には、始まった年がありました｜Santa Works Journal",
     description:
       "1930年代の夫婦は69.0%が見合い結婚。入れ替わったのは1960年代の後半でした。ただし、どの5年で入れ替わったかは書けませんでした。",
     url: "/journal/omiai/",
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "恋愛結婚が当たり前になってから、まだ60年でした｜Santa Works Journal",
+    title: "出会い方の「当たり前」には、始まった年がありました｜Santa Works Journal",
     description:
       "見合い結婚を「昔の話」だと思っていました。数字を見たら、60年前のことでした。",
     images: ["/blog/omiai/ogp.png"],
@@ -55,10 +55,17 @@ export default function Page() {
               </div>
             </figure>
             <span className="eyebrow">{eyebrowOf("omiai")}</span>
+            {/* 🔴 題名を差し替えた（Satoshiさん・2026-08-06）。元は
+                「恋愛結婚が当たり前になってから、まだ60年でした」。
+                ⚠️ **この調査ではアプリは「恋愛結婚」ではなく「ネットで」**なので、
+                   「恋愛結婚が当たり前」だけを読むと**アプリで出会った人が枠の外**になる。
+                   → **どの出会い方も「当たり前」と名指ししない**言い方に変えた。
+                🔴 おわりにの見出し「「当たり前」には、始まった年がある」と対。
+                   **わざと同じ言葉で返している**（重複ではない）。 */}
             <h1 className="title">
-              恋愛結婚が当たり前になってから、
+              出会い方の「当たり前」には、
               <br />
-              まだ60年でした
+              始まった年がありました
             </h1>
             <p className="lede">
               「見合い結婚」と聞くと、ずいぶん昔の話だと思っていました。
