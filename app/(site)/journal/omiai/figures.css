@@ -110,3 +110,21 @@
   stroke-width: 1;
   stroke-dasharray: 2 4;
 }
+
+/* 図03のしきい値の濃淡（2026-08-06）。**同じ緑の中で濃さだけ変える。**
+   別の色相を振ると、茶（見合い）や赤（ネット）と意味がぶつかる。
+   ランプは dash.css 側でライト/ダーク両方を検証済み。**濃いほど高い水準。**
+   ⚠️ `.lgd` は `fill: var(--muted)` を持っているので、**上書きを明示する。** */
+.journal.dash .omfig .lv1 { --c: var(--ramp-3); }
+.journal.dash .omfig .lv2 { --c: var(--ramp-4); }
+.journal.dash .omfig .lv3 { --c: var(--ramp-5); }
+.journal.dash .omfig text.lgd.lv1,
+.journal.dash .omfig text.lgd.lv2,
+.journal.dash .omfig text.lgd.lv3 { fill: var(--c); font-weight: 700; }
+
+/* 図03の指示線。点とラベルを結ぶ。**細く・薄く**（主役は線と点）。 */
+.journal.dash .omfig line.lead {
+  stroke: var(--c);
+  stroke-width: 1;
+  opacity: 0.5;
+}
