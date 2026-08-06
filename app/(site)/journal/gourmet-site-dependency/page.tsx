@@ -5,13 +5,15 @@ import "../journal.css";
 import { eyebrowOf } from "../posts";
 
 export const metadata: Metadata = {
-  title: "飲食店の集客、グルメサイトだけに委ねてよいか——公開データから考える",
+  title:
+    "飲食店の集客、グルメサイトだけに委ねてよいのでしょうか——公開データから考える",
   description:
     "グルメサイト・SNSへの依存と自社ホームページの役割を、公正取引委員会の調査や各種の公開データ（2020〜2026）から整理します。手数料・表示順位・口コミ評価・予約経路のデータを可視化。",
   alternates: { canonical: "/journal/gourmet-site-dependency/" },
   openGraph: {
     type: "article",
-    title: "飲食店の集客、グルメサイトだけに委ねてよいか｜Santa Works Journal",
+    title:
+      "飲食店の集客、グルメサイトだけに委ねてよいのでしょうか｜Santa Works Journal",
     description:
       "グルメサイト依存と自社ホームページの役割を公開データ（2020〜2026）で整理。手数料・表示順位・口コミ・予約経路を可視化。",
     url: "/journal/gourmet-site-dependency/",
@@ -26,7 +28,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "飲食店の集客、グルメサイトだけに委ねてよいか｜Santa Works Journal",
+    title:
+      "飲食店の集客、グルメサイトだけに委ねてよいのでしょうか｜Santa Works Journal",
     description:
       "グルメサイト依存と自社ホームページの役割を公開データ（2020〜2026）で整理。",
     images: ["/blog/gourmet-site-dependency/ogp.png"],
