@@ -82,9 +82,14 @@ export default function Page() {
             </div>
           </div>
 
-          {/* ⚠️ 4枚の並びが、そのまま記事の筋になっている。
-              7割が見合いだった → 入れ替わりは1960年代後半 →
-              7割を超えたのは1980年代 → 最新値はコロナで動いている。 */}
+          {/* ⚠️ 3枚の並びが、そのまま記事の筋になっている。
+              🔴 **値は「1960年代後半」で、2桁に縮めない**（2026-08-06）。
+                 一度 KPI が4枚だったとき、タイル幅178pxに「1960年代後半」（177px必要）が
+                 入らず「60年代後半」にした。**4枚目を外して237pxになったので戻した。**
+                 2桁だと**題名の「まだ60年」（＝経過した長さ）と混同される。**
+                 スマホでは余裕が6pxしかないが、折り返しても崩れはしない（subgrid）。
+              7割が見合いだった → 入れ替わりは1960年代後半 → 7割を超えたのは1980年代。
+              **過去・転換・定着の3段で、コロナの話は混ぜない**（→ 下の削除メモ）。 */}
           <div className="kpi rv" data-fx data-num data-seq="120">
             <div className="tile">
               <span className="lbl">1930年代の夫婦のうち、見合い結婚</span>
@@ -96,14 +101,14 @@ export default function Page() {
             <div className="tile on">
               <span className="lbl">恋愛結婚と入れ替わったのは</span>
               <span className="v">
-                60<small>年代後半</small>
+                1960<small>年代後半</small>
               </span>
               <span className="note">どの5年かは特定できませんでした</span>
             </div>
             <div className="tile">
               <span className="lbl">恋愛結婚が7割を超えたのは</span>
               <span className="v">
-                80<small>年代</small>
+                1980<small>年代</small>
               </span>
               <span className="note">8割は1985〜89年です</span>
             </div>
