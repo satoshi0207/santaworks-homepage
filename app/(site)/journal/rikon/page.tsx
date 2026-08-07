@@ -195,13 +195,20 @@ export default function Page() {
               が13の項目で数えられています<sup>※2</sup>。
             </p>
             <p>ひとつ、読み方の注意があります。</p>
-            <blockquote className="quote">
-              <p>
-                （注）申立ての動機は、申立人の言う動機のうち主なものを
-                <b>３個まで</b>挙げる方法で調査<b>重複集計</b>した。
+
+            {/* ⚠️ **`blockquote` を使わない。**journal.css にスタイルが無く、
+                地の文と見分けがつかなくなる（2026-08-07 にスマホで見つけた）。
+                注記の引用は DV記事と同じ `.pull` を使う。 */}
+            <div className="pull rv">
+              <p className="q">
+                申立ての動機は、申立人の言う動機のうち主なものを
+                <em>３個まで</em>挙げる方法で調査重複集計した。
               </p>
-              <cite>司法統計年報 家事編 第19表</cite>
-            </blockquote>
+              <p className="sub">
+                司法統計年報 家事編 <b>第19表</b>の注記
+              </p>
+            </div>
+
             <p>
               <strong>1人が3つまで選べるので、足しても人数にはなりません。</strong>
             </p>
@@ -331,7 +338,11 @@ export default function Page() {
             <p>不倫の数字が見つからなかったのも、たぶん同じ理由です。</p>
           </section>
 
-          <div className="notes">
+          {/* ⚠️ クラス名を思いつきで作らない。`.notes` は journal.css に無く、
+              スタイルが当たらないまま出るところだった（2026-08-07）。
+              出典の器は `.sources`（見出しつき）。 */}
+          <div className="sources">
+            <h3>参考文献・出典</h3>
             <ol>
               <li>
                 ※1 厚生労働省「人口動態調査」上巻 離婚の種類別にみた年次別離婚件数及び百分率
