@@ -1,0 +1,59 @@
+/* 離婚記事の図（7点）の見た目。**この記事だけ**に効くよう `.rkfig` に閉じてある。
+ *
+ * 🔴 色を SVG に直書きしていない理由：系列色はライトとダークで別の値が要る。
+ *    ライト .a #3f4657 / .b #b5641f / .n #6b7280
+ *    ダーク .a #c3cad8 / .b #c8823c / .n #7b8395
+ *    （neko/figures.css と同じ考え方。`--c` を配って面と文字がそれを見る）
+ *
+ * ⚠️ `.a` `.b` のような短い名前を使えるのは `.rkfig` の中だけ。
+ *    このファイルのセレクタから `.rkfig` を外さないこと。
+ * ⚠️ **棒の中に置く数字（.segnum）は `--seg-ink` を見る。**
+ *    ダークでは面が明るくなるので、文字は逆に暗くしないと消える。
+ *
+ * 自動生成ではない（`pr/drafts/rikon-src/make_figures.py` が書き出す）。**直接編集しない。**
+ */
+.journal.dash .rkfig svg { display: block; width: 100%; height: auto; }
+.journal.dash .rkfig text { fill: currentColor; font-family: inherit; }
+.journal.dash .rkfig text.tick { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .rkfig text.rowlab { font-size: 12.5px; fill: var(--ink); font-weight: 700; }
+.journal.dash .rkfig text.rowlab2 {
+  font-size: 11.5px; fill: var(--muted); font-weight: 700; letter-spacing: 0.08em;
+}
+.journal.dash .rkfig text.ann { font-size: 11.5px; fill: var(--muted); }
+.journal.dash .rkfig text.civ {
+  font-size: 11.5px; fill: var(--muted); font-variant-numeric: tabular-nums;
+}
+.journal.dash .rkfig text.dl {
+  font-size: 12.5px; font-weight: 700; fill: var(--ink);
+  font-variant-numeric: tabular-nums;
+}
+.journal.dash .rkfig text.segnum { font-size: 12.5px; font-weight: 700; fill: var(--seg-ink); }
+.journal.dash .rkfig text.chiptx { font-size: 12.5px; fill: var(--muted); }
+.journal.dash .rkfig text.chiptx.on { font-weight: 700; fill: #b5641f; }
+.journal.dash .rkfig line.stem { stroke: var(--hair-strong); stroke-width: 1; }
+
+.journal.dash .rkfig { --seg-ink: #fbfbf8; }
+.journal.dash .rkfig .a { --c: #3f4657; }
+.journal.dash .rkfig .b { --c: #b5641f; }
+.journal.dash .rkfig .n { --c: #6b7280; }
+.journal.dash .rkfig rect.seg { fill: var(--c); }
+.journal.dash .rkfig rect.track { fill: var(--track); }
+.journal.dash .rkfig rect.chip { fill: var(--track); }
+.journal.dash .rkfig rect.chip.on { fill: rgba(181, 100, 31, 0.14); }
+
+[data-theme="dark"] .journal.dash .rkfig { --seg-ink: #14161d; }
+[data-theme="dark"] .journal.dash .rkfig .a { --c: #c3cad8; }
+[data-theme="dark"] .journal.dash .rkfig .b { --c: #c8823c; }
+[data-theme="dark"] .journal.dash .rkfig .n { --c: #7b8395; }
+[data-theme="dark"] .journal.dash .rkfig text.chiptx.on { fill: #c8823c; }
+[data-theme="dark"] .journal.dash .rkfig rect.chip.on { fill: rgba(200, 130, 60, 0.18); }
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .journal.dash .rkfig { --seg-ink: #14161d; }
+  :root:not([data-theme="light"]) .journal.dash .rkfig .a { --c: #c3cad8; }
+  :root:not([data-theme="light"]) .journal.dash .rkfig .b { --c: #c8823c; }
+  :root:not([data-theme="light"]) .journal.dash .rkfig .n { --c: #7b8395; }
+  :root:not([data-theme="light"]) .journal.dash .rkfig text.chiptx.on { fill: #c8823c; }
+  :root:not([data-theme="light"]) .journal.dash .rkfig rect.chip.on {
+    fill: rgba(200, 130, 60, 0.18);
+  }
+}
