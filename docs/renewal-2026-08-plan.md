@@ -107,10 +107,23 @@ https://claude.ai/code/artifact/b4f3e58a-55d3-4c97-acb1-b45e10dedd3e （右上�
 ⚠️ 参考に見た他の5案は `docs/mocks/hero-directions-cdef-2026-08-15.html`（C/D/E/F切替）と
 `hero-motes-2026-08-15.html`（粒の強化版）に保存済み。経緯ごと残す。
 
-📤 **Claude Design に引き継ぎ済み**（2026-08-16）。claude.ai/design のプロジェクト
-**「Santa Works」**（3def896c-9332-40e5-915e-cbc5ab63da8d）に Hero／Colors／Components の
-3カードをプッシュ。**あちらで磨いた結果は自動では返ってこない**——取り込みは
-DesignSync（get_file）でこちらから読んで、モックと台帳に反映してからコードへ。
+📤 Claude Design（claude.ai/design「Santa Works」）と往復済み（2026-08-16）。
+✅ **ブラッシュアップ版を取り込んだ → 設計図は `docs/mocks/hero-f-pro-2026-08-16.html` に更新。**
+**実装はこのファイルが正**（旧 `hero-f-final-2026-08-15.html` は経緯として残す）。
+
+**design 側で磨かれた点（取り込み済み）：**
+- 見出しを **Noto Sans JP 900** に（⚠️ 実装時は Google Fonts の `<link>` ではなく
+  **`next/font` でセルフホスト・サブセット化**する。LCP 2.5秒の予算を webfont で食わない）
+- ブラウザ枠に **URLチップ**（中央・等幅フォント）
+- カード4型の中身を精細化（ヒーローバンドに白文字バー＋ボタン、ギャラリーに円モチーフ＋
+  キャプション、ロゴ円にリング影＋ピル2つ、スプリットに白バー）
+- 白箱：radius 20px・二層シャドウ・eyebrow に左右の罫・見出し2行を `display:block` で固定
+- lede を1文に短縮／靄と外列ブラーを弱めて壁の見えを上げた
+- `::selection` をアクセント色に
+
+🔴 **取り込み時にこちらで直した点：**カードURL欄が `kissa.jp` 等の**実在しうるドメイン**
+だった → 架空店舗は `.example`、自社2商品は実物URL（pokememo.santaworks.net /
+exifsort.web.app）に変更（ガードレール③）。**design 側にも修正を書き戻し済み。**
 
 ## 3-2. 🔴 スマホの見た目は同格（Satoshiさん・2026-08-15）
 
