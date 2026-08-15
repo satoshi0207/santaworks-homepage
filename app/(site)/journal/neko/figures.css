@@ -88,10 +88,3 @@
 .journal.dash .nkfig circle.pt { stroke: var(--surface); stroke-width: 2; }
 .journal.dash .nkfig text.dl,
 .journal.dash .nkfig text.evw { fill: var(--c); }
-
-[data-theme="dark"] .journal.dash .nkfig .a { --c: #00a5a8; }
-[data-theme="dark"] .journal.dash .nkfig .b { --c: #c8823c; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .journal.dash .nkfig .a { --c: #00a5a8; }
-  :root:not([data-theme="light"]) .journal.dash .nkfig .b { --c: #c8823c; }
-}

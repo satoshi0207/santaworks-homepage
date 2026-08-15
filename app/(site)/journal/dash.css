@@ -33,15 +33,6 @@
   --hair-strong: color-mix(in oklab, var(--ink) 22%, transparent);
 }
 
-[data-theme="dark"] .journal.dash {
-  /* ダーク：暗→明。こちらも全項目PASS。ライトの単純な反転ではなく、別に選んでいる */
-  --ramp-1: #2f5457;
-  --ramp-2: #417276;
-  --ramp-3: #569296;
-  --ramp-4: #6fb1b6;
-  --ramp-5: #8fd0d5;
-  --demph: #7e8aa4;
-}
 
 /* ── 数字の組版 ───────────────────────────────────
    ダッシュボードは桁が揃っていないと読めない。tnum を必ず効かせる。 */
@@ -204,7 +195,7 @@
 .journal.dash .fig .src { flex: 0 0 auto; font-size: 0.66rem; color: var(--muted); font-variant-numeric: tabular-nums; }
 .journal.dash .fig figcaption { margin-top: 0.9rem; font-size: 0.78rem; line-height: 1.75; color: var(--muted); }
 
-/* SVGは色を固定しない。currentColor を親から継承させ、data-theme に追従させる。
+/* SVGは色を固定しない。currentColor を親から継承させ、テーマトークンに追従させる。
    ここを固定すると、既定のダークで図の文字が消える（summer-50years で踏んだ罠）。 */
 .journal.dash .fig svg { display: block; width: 100%; height: auto; color: var(--ink); }
 .journal.dash .fig svg text { fill: currentColor; }

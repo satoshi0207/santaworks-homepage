@@ -174,9 +174,9 @@ export default function Works() {
                     ダークだと沈むので、そのときだけ indigo-400 相当に振る */}
                 <h2 className="mb-3 text-2xl font-extrabold">
                   ExifSort
-                  <span className="text-[#4F46E5] dark:text-[#818cf8]">Pro</span>
+                  <span className="text-[#4F46E5]">Pro</span>
                 </h2>
-                <p className="mb-5 text-[1.05rem] font-bold leading-snug text-[#4F46E5] dark:text-[#818cf8]">
+                <p className="mb-5 text-[1.05rem] font-bold leading-snug text-[#4F46E5]">
                   「撮る楽しみ」を、
                   <br />
                   「見返す喜び」に。

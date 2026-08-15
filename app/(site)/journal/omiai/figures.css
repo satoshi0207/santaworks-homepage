@@ -90,13 +90,6 @@
 .journal.dash .omfig text.dl,
 .journal.dash .omfig text.evw { fill: var(--c); }
 
-[data-theme="dark"] .journal.dash .omfig .a { --c: #00a5a8; }
-[data-theme="dark"] .journal.dash .omfig .b { --c: #c8823c; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .journal.dash .omfig .a { --c: #00a5a8; }
-  :root:not([data-theme="light"]) .journal.dash .omfig .b { --c: #c8823c; }
-}
-
 /* 決められない区間を囲う点線の箱（図02）。**塗らない**——塗ると強調に見える */
 .journal.dash .omfig rect.undecided {
   fill: none;

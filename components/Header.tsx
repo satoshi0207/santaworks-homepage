@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import ThemeToggle from "@/components/ThemeToggle";
 
 const links = [
   { href: "/about/", label: "About" },
@@ -66,7 +65,6 @@ export default function Header() {
               </Link>
             ))}
           </nav>
-          <ThemeToggle />
           <button
             type="button"
             aria-label="メニュー"

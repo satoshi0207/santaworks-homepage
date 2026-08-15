@@ -40,20 +40,3 @@
 .journal.dash .rkfig rect.track { fill: var(--track); }
 .journal.dash .rkfig rect.chip { fill: var(--track); }
 .journal.dash .rkfig rect.chip.on { fill: rgba(181, 100, 31, 0.14); }
-
-[data-theme="dark"] .journal.dash .rkfig { --seg-ink: #14161d; }
-[data-theme="dark"] .journal.dash .rkfig .a { --c: #c3cad8; }
-[data-theme="dark"] .journal.dash .rkfig .b { --c: #c8823c; }
-[data-theme="dark"] .journal.dash .rkfig .n { --c: #7b8395; }
-[data-theme="dark"] .journal.dash .rkfig text.chiptx.on { fill: #c8823c; }
-[data-theme="dark"] .journal.dash .rkfig rect.chip.on { fill: rgba(200, 130, 60, 0.18); }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .journal.dash .rkfig { --seg-ink: #14161d; }
-  :root:not([data-theme="light"]) .journal.dash .rkfig .a { --c: #c3cad8; }
-  :root:not([data-theme="light"]) .journal.dash .rkfig .b { --c: #c8823c; }
-  :root:not([data-theme="light"]) .journal.dash .rkfig .n { --c: #7b8395; }
-  :root:not([data-theme="light"]) .journal.dash .rkfig text.chiptx.on { fill: #c8823c; }
-  :root:not([data-theme="light"]) .journal.dash .rkfig rect.chip.on {
-    fill: rgba(200, 130, 60, 0.18);
-  }
-}

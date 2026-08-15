@@ -1,6 +1,6 @@
 /* Journal（ブログ記事）専用スタイル。スコープは .journal。
    配色は globals.css のトークン（--bg/--surface/--ink/--muted/--line/--accent…）を再利用し、
-   ライト/ダークは既存の data-theme 方式に自動追従する。
+   ライト固定（2026-08-15決定・モード切替廃止）。
    ここでは記事固有の追加トークンだけ定義する。 */
 .journal {
   --surface-2: #f5f4ef;
@@ -9,11 +9,6 @@
   --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
   color: var(--ink);
   line-height: 1.9;
-}
-[data-theme="dark"] .journal {
-  --surface-2: #22262f;
-  --track: #2b2f3a;
-  --ghost: #565d6d;
 }
 
 .journal .num { font-variant-numeric: tabular-nums; }

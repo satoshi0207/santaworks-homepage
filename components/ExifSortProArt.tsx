@@ -36,9 +36,9 @@ const SORTED: { x: number; y: number; w: number; label: string; tones: string[] 
 
 const ICON = { x: 252, y: 208, size: 88 };
 
-const CARD = "fill-white dark:fill-[#252936]";
-const EDGE = "stroke-[#e6e0d5] dark:stroke-[#39404f]";
-const THREAD = "stroke-[#cec5b6] dark:stroke-[#4c5364]";
+const CARD = "fill-white";
+const EDGE = "stroke-[#e6e0d5]";
+const THREAD = "stroke-[#cec5b6]";
 
 export default function ExifSortProArt() {
   return (
@@ -62,14 +62,14 @@ export default function ExifSortProArt() {
       </defs>
 
       {/* 地。白〜クリームで、サイトの雪の日の明るさに寄せる */}
-      <rect width="640" height="456" className="fill-[#fbf8f3] dark:fill-[#222634]" />
+      <rect width="640" height="456" className="fill-[#fbf8f3]" />
 
       {/* 両側に一言ずつ。右は 2024年・03月 と喋っているのに左が黙っていると、
           絵が仕組みの図解で終わる。「撮った」で受けて、変わったのは並び方だけ
           だと言う。責める言い方（散らかっている等）はしない */}
       {/* viewBox 640 が幅 490px 前後で描かれるので、実寸は約 0.77 倍になる。
           17 で描いて、画面上で 13px。14 だと 10.7px で小さすぎた */}
-      <g className="fill-[#8a8172] dark:fill-[#98a0b2]" fontSize="17" fontWeight="600">
+      <g className="fill-[#8a8172]" fontSize="17" fontWeight="600">
         <text x="26" y="66" letterSpacing="0.06em">
           撮ったまま
         </text>
@@ -107,10 +107,10 @@ export default function ExifSortProArt() {
           <g key={row.label}>
             <rect x={row.x} y={row.y} width={row.w} height="88" rx="11" className={`${CARD} ${EDGE}`} strokeWidth="1" />
             {/* フォルダーの目印。ブランドの藍を薄く敷く */}
-            <rect x={row.x + 18} y={row.y + 17} width="22" height="22" rx="6" className="fill-[#4F46E5]/12 dark:fill-[#818cf8]/20" />
-            <rect x={row.x + 24} y={row.y + 24} width="10" height="2.5" rx="1.25" className="fill-[#4F46E5] dark:fill-[#a5b0f7]" />
-            <rect x={row.x + 24} y={row.y + 30} width="10" height="2.5" rx="1.25" className="fill-[#4F46E5]/45 dark:fill-[#a5b0f7]/50" />
-            <text x={row.x + 48} y={row.y + 34} className="fill-[#3d3a33] dark:fill-[#e3e6ee]" fontSize="15" fontWeight="700">
+            <rect x={row.x + 18} y={row.y + 17} width="22" height="22" rx="6" className="fill-[#4F46E5]/12" />
+            <rect x={row.x + 24} y={row.y + 24} width="10" height="2.5" rx="1.25" className="fill-[#4F46E5]" />
+            <rect x={row.x + 24} y={row.y + 30} width="10" height="2.5" rx="1.25" className="fill-[#4F46E5]/45" />
+            <text x={row.x + 48} y={row.y + 34} className="fill-[#3d3a33]" fontSize="15" fontWeight="700">
               {row.label}
             </text>
             {/* 中身の写真は、散らかっている側と同じ色。同じ1枚が並び直ったことを示す */}

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import Script from "next/script";
 import "./globals.css";
 
@@ -14,6 +14,12 @@ const DEFAULT_TITLE =
   "Santa Works（サンタワークス）｜「忘れたくない」を、かたちに。";
 const DESCRIPTION =
   "Santa Works（サンタワークス）は、記憶と思い出をITでサポートする個人事業です。Web制作・LINE Bot・業務ツール各種・AI活用支援まで親身になって伴走致します。";
+
+// ✅ ライト固定（2026-08-15決定）。ブラウザUI（アドレスバー等）の色も地色に合わせて固定
+export const viewport: Viewport = {
+  themeColor: "#fbfbf8",
+  colorScheme: "light",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -108,20 +114,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ja"
-      data-theme="dark"
-      suppressHydrationWarning
-      className="h-full antialiased"
-    >
+    <html lang="ja" className="h-full antialiased">
       <body className="min-h-full">
-        {/* チラつき防止: 保存済みの好みがあれば描画前に反映（既定はダーク） */}
-        <script
-          dangerouslySetInnerHTML={{
-            __html:
-              "try{var t=localStorage.getItem('theme');if(t==='light'||t==='dark')document.documentElement.setAttribute('data-theme',t);}catch(e){}",
-          }}
-        />
         {children}
         <script
           type="application/ld+json"

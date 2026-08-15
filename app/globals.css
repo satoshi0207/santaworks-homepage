@@ -1,11 +1,9 @@
 @import "tailwindcss";
 
-/* ダーク判定を data-theme 属性ベースにする（手動トグル対応・デフォルトはダーク） */
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
 /*
  * デザイントークン（デザインモック準拠）
- * ライト = 明るい雪の日 / ダーク = 雪の降る夜
+ * ✅ ライト固定（2026-08-15決定・モード切替廃止）。ダークのトークン一式は撤去済み。
+ *    ⚠️ --bg はオフホワイトのまま。白 #fff に寄せない（docs/renewal-2026-08-plan.md §5 段1）
  */
 :root {
   --bg: #fbfbf8;
@@ -16,8 +14,6 @@
   --accent: #c4333e;
   --accent-strong: #a2242f;
   --accent-soft: rgba(196, 51, 62, 0.08);
-  --mote: rgba(190, 148, 138, 0.55);
-  --mote-accent: rgba(196, 51, 62, 0.5);
   --card-shadow: 0 12px 40px rgba(36, 38, 46, 0.07);
 
   /* ジャーナルのテーマ色（一覧のチップと左のレール）。
@@ -29,24 +25,13 @@
   --th-product: var(--accent);
 }
 
-:root[data-theme="dark"] {
-  --bg: #14161d;
-  --surface: #1c1f28;
-  --ink: #ecedf2;
-  --muted: #acb3c2;
-  --line: #2b2f3b;
-  --accent: #e25662;
-  --accent-strong: #ec7680;
-  --accent-soft: rgba(226, 86, 98, 0.12);
-  --mote: rgba(255, 253, 245, 0.6);
-  --mote-accent: rgba(226, 86, 98, 0.5);
-  --card-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+/* ライト固定の宣言。フォームコントロール等のUA描画もライトに固定する */
+html {
+  color-scheme: light;
+}
 
-  /* 暗い地の上では同じ色が沈むので、明度を上げた別の値を持つ */
-  --th-kids: #a996d8;
-  --th-life: #6fb8a4;
-  --th-memory: #67aab0;
-  --th-product: var(--accent);
+::selection {
+  background: rgba(196, 51, 62, 0.16);
 }
 
 @theme inline {

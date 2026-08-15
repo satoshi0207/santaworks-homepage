@@ -100,10 +100,3 @@
 .journal.dash .dvfig text.evw,
 .journal.dash .dvfig text.bignum { fill: var(--c); }
 .journal.dash .dvfig text.dl.ghost { font-size: 11.5px; font-weight: 400; fill: var(--muted); }
-
-[data-theme="dark"] .journal.dash .dvfig .f { --c: #00a5a8; }
-[data-theme="dark"] .journal.dash .dvfig .m { --c: #c8823c; }
-@media (prefers-color-scheme: dark) {
-  :root:not([data-theme="light"]) .journal.dash .dvfig .f { --c: #00a5a8; }
-  :root:not([data-theme="light"]) .journal.dash .dvfig .m { --c: #c8823c; }
-}
