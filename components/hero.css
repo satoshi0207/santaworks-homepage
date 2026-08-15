@@ -1,0 +1,405 @@
+/* ヒーローF「つくったものの壁」──設計図は docs/mocks/hero-f-pro-2026-08-16.html。
+   クラスは hf- 接頭辞で隔離する。/demo/ 配下のCSSはクライアント遷移でページを跨いで
+   生き残るため、.bar や .site のような一般名は衝突する。
+   登場アニメはJS不要（マークアップに直書き）。JSはポインタ視差のみ（HeroParallax.tsx）。 */
+
+/* ── 壁 ─────────────────────────────────────────── */
+.hf {
+  position: relative;
+  isolation: isolate;
+  min-height: 100svh;
+  overflow: hidden;
+  display: grid;
+  place-items: center;
+  padding: 100px clamp(20px, 5vw, 56px) 90px;
+}
+.hf-wall {
+  --wg: 30px;
+  position: absolute;
+  inset: -34% -22%;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  gap: var(--wg);
+  rotate: -7deg;
+  pointer-events: none;
+  will-change: transform;
+}
+.hf-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--wg);
+  scale: var(--s, 1);
+  animation: hfFlowUp var(--t, 42s) linear infinite;
+}
+.hf-col-down {
+  animation-name: hfFlowDown;
+}
+.hf-col-far {
+  filter: blur(1.2px);
+  opacity: 0.8;
+}
+/* 列＝同じカード列2セットの縦積み。半分＋間隔の半分だけ動かすと継ぎ目なく一周する */
+@keyframes hfFlowUp {
+  from { translate: 0 0; }
+  to { translate: 0 calc(-50% - var(--wg) / 2); }
+}
+@keyframes hfFlowDown {
+  from { translate: 0 calc(-50% - var(--wg) / 2); }
+  to { translate: 0 0; }
+}
+
+/* ── ブラウザ枠カード ──────────────────────────── */
+.hf-site {
+  width: clamp(280px, 24vw, 340px);
+  flex: none;
+  background: #fff;
+  border: 1px solid rgba(36, 38, 46, 0.1);
+  border-radius: 12px;
+  box-shadow: 0 14px 44px rgba(36, 38, 46, 0.09);
+  overflow: hidden;
+  opacity: 0;
+  translate: 0 28px;
+  animation: hfCardIn 1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation-delay: var(--fd, 0s);
+}
+@keyframes hfCardIn {
+  to { opacity: 1; translate: 0 0; }
+}
+.hf-cbar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  height: 21px;
+  padding: 0 10px;
+  background: #f1efe9;
+  border-bottom: 1px solid rgba(36, 38, 46, 0.12);
+}
+.hf-cbar i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: rgba(36, 38, 46, 0.18);
+}
+.hf-cbar u {
+  margin-inline: auto;
+  padding: 3px 9px;
+  border-radius: 99px;
+  background: #fff;
+  border: 1px solid rgba(36, 38, 46, 0.06);
+  font: 600 7px/1 ui-monospace, SFMono-Regular, Menlo, monospace;
+  letter-spacing: 0.06em;
+  color: rgba(36, 38, 46, 0.5);
+  text-decoration: none;
+  font-style: normal;
+}
+.hf-cbar .hf-sp {
+  width: 23px;
+  flex: none;
+}
+.hf-mini {
+  aspect-ratio: 16 / 12.5;
+  display: flex;
+  flex-direction: column;
+  background: var(--tint);
+}
+.hf-mnav {
+  flex: none;
+  height: 15%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 8%;
+  background: var(--main);
+}
+.hf-brand {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.hf-brand i {
+  width: 9px;
+  height: 9px;
+  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.92);
+}
+.hf-mnav em {
+  font-style: normal;
+  font-size: 9.5px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  color: #fff;
+}
+.hf-mlinks {
+  display: flex;
+  gap: 4px;
+}
+.hf-mlinks i {
+  width: 11px;
+  height: 2.5px;
+  border-radius: 2px;
+  background: rgba(255, 255, 255, 0.5);
+}
+.hf-mbody {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 7%;
+  padding: 8%;
+}
+/* 型1: ヒーローバンド */
+.hf-hero-t .hf-mhero {
+  flex: 1;
+  border-radius: 6px;
+  background: linear-gradient(135deg, var(--soft), var(--main));
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.14);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 8%;
+  padding: 0 8%;
+}
+.hf-hero-t .hf-mhero i {
+  display: block;
+  border-radius: 99px;
+}
+.hf-hero-t .hf-t1 { width: 56%; height: 9px; background: rgba(255, 255, 255, 0.95); }
+.hf-hero-t .hf-t2 { width: 38%; height: 6px; background: rgba(255, 255, 255, 0.6); }
+.hf-hero-t .hf-mbtn { width: 26%; height: 12px; background: #fff; box-shadow: 0 2px 6px rgba(0, 0, 0, 0.14); }
+.hf-hero-t .hf-mrow { flex: none; display: flex; gap: 5%; height: 16%; }
+.hf-hero-t .hf-mrow b { flex: 1; border-radius: 4px; background: color-mix(in srgb, var(--soft) 55%, #fff); }
+.hf-hero-t .hf-mrow b.hf-acc { background: var(--main); }
+/* 型2: ギャラリー */
+.hf-grid-t .hf-mgrid { flex: 1; display: grid; grid-template-columns: 1fr 1fr; gap: 6%; }
+.hf-grid-t .hf-mgrid b { border-radius: 6px; background: linear-gradient(150deg, color-mix(in srgb, var(--soft) 65%, #fff), var(--soft)); }
+.hf-grid-t .hf-mgrid b:nth-child(2) { background: linear-gradient(135deg, var(--soft), var(--main)); }
+.hf-grid-t .hf-mgrid b:nth-child(3) { background: linear-gradient(200deg, var(--main), color-mix(in srgb, var(--main) 50%, var(--soft))); }
+.hf-grid-t .hf-mgrid b:nth-child(4) { display: grid; place-items: center; }
+.hf-grid-t .hf-mgrid b:nth-child(4)::after { content: ""; width: 32%; aspect-ratio: 1; border-radius: 50%; background: var(--main); opacity: 0.8; }
+.hf-grid-t .hf-mcap { flex: none; height: 6%; display: flex; gap: 5%; }
+.hf-grid-t .hf-mcap i { border-radius: 99px; background: color-mix(in srgb, var(--main) 26%, #fff); }
+.hf-grid-t .hf-mcap i:first-child { width: 34%; }
+.hf-grid-t .hf-mcap i:last-child { width: 16%; opacity: 0.7; }
+/* 型3: ロゴ円 */
+.hf-circle-t .hf-mbody { align-items: center; justify-content: center; gap: 6%; }
+.hf-circle-t .hf-mlogo { width: 29%; aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle at 36% 30%, var(--soft), var(--main)); box-shadow: 0 0 0 5px color-mix(in srgb, var(--main) 10%, #fff), 0 5px 12px color-mix(in srgb, var(--main) 28%, transparent); }
+.hf-circle-t .hf-mname { width: 44%; height: 8px; border-radius: 99px; background: color-mix(in srgb, var(--main) 55%, #fff); }
+.hf-circle-t .hf-msub { width: 28%; height: 5px; border-radius: 99px; background: color-mix(in srgb, var(--main) 22%, #fff); }
+.hf-circle-t .hf-mpills { display: flex; gap: 6px; margin-top: 2%; }
+.hf-circle-t .hf-mpills i { width: 27px; height: 10px; border-radius: 99px; background: #fff; border: 1px solid color-mix(in srgb, var(--main) 32%, #fff); }
+.hf-circle-t .hf-mpills i:first-child { background: var(--main); border-color: var(--main); }
+/* 型4: スプリット */
+.hf-split-t .hf-mbody { flex-direction: row; }
+.hf-split-t .hf-mleft { flex: 1.1; border-radius: 6px; background: linear-gradient(160deg, var(--main), var(--soft)); position: relative; overflow: hidden; }
+.hf-split-t .hf-mleft i { position: absolute; left: 9%; bottom: 10%; width: 46%; height: 8px; border-radius: 99px; background: rgba(255, 255, 255, 0.9); }
+.hf-split-t .hf-mright { flex: 1; display: flex; flex-direction: column; gap: 9%; justify-content: center; }
+.hf-split-t .hf-mright s { display: block; height: 7px; border-radius: 99px; background: color-mix(in srgb, var(--main) 30%, #fff); text-decoration: none; }
+.hf-split-t .hf-mright s:nth-child(2) { width: 78%; }
+.hf-split-t .hf-mright s.hf-btn { width: 56%; height: 12px; border-radius: 99px; background: var(--main); box-shadow: 0 3px 8px color-mix(in srgb, var(--main) 35%, transparent); }
+
+/* ── 靄と裾のグラデ ─────────────────────────────── */
+/* 中央の可読域。壁が「見える」濃度まで薄く（design往復で調整済みの値） */
+.hf-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  background: radial-gradient(
+    ellipse 70% 58% at 50% 46%,
+    rgba(251, 251, 248, 0.92),
+    rgba(251, 251, 248, 0.5) 55%,
+    rgba(251, 251, 248, 0.04)
+  );
+  pointer-events: none;
+}
+.hf-fade {
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  height: 130px;
+  z-index: 2;
+  background: linear-gradient(to top, var(--bg), transparent);
+  pointer-events: none;
+}
+
+/* ── 白箱 ─────────────────────────────────────── */
+.hf-box {
+  position: relative;
+  z-index: 3;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(36, 38, 46, 0.07);
+  box-shadow:
+    0 30px 90px -10px rgba(36, 38, 46, 0.18),
+    0 2px 6px rgba(36, 38, 46, 0.05);
+  border-radius: 20px;
+  padding: clamp(32px, 5.5vh, 56px) clamp(28px, 5vw, 64px);
+  max-width: 42rem;
+  opacity: 0;
+  translate: 0 22px;
+  animation: hfBoxIn 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards 0.9s;
+}
+@keyframes hfBoxIn {
+  to { opacity: 1; translate: 0 0; }
+}
+.hf-eyebrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 0 22px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+.hf-eyebrow::before,
+.hf-eyebrow::after {
+  content: "";
+  width: 26px;
+  height: 1px;
+  background: rgba(196, 51, 62, 0.4);
+}
+.hf-box h1 {
+  margin: 0 0 18px;
+  font-family: var(--font-hero), "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", Meiryo, system-ui, sans-serif;
+  font-feature-settings: "palt";
+  font-size: clamp(2rem, 4.6vw, 3.35rem);
+  font-weight: 900;
+  line-height: 1.36;
+  letter-spacing: 0.02em;
+}
+.hf-box h1 span { display: block; }
+.hf-box h1 .hf-q { display: inline; color: var(--accent); }
+.hf-lede {
+  margin: 0 0 30px;
+  color: var(--muted);
+  font-size: clamp(0.9rem, 1.8vw, 0.96rem);
+  line-height: 2;
+}
+.hf-lede span { display: inline-block; }
+.hf-ctas {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+.hf-cta {
+  display: inline-grid;
+  place-items: center;
+  min-height: 48px;
+  padding: 0 30px;
+  border-radius: 999px;
+  font-size: 0.9rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-decoration: none;
+  transition:
+    transform 0.25s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s,
+    background 0.25s,
+    border-color 0.25s;
+}
+.hf-cta-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: 0 8px 24px var(--accent-soft);
+}
+.hf-cta-ghost {
+  border: 1px solid rgba(36, 38, 46, 0.12);
+  color: var(--ink);
+  background: #fff;
+}
+.hf-cta:hover { transform: translateY(-2px); }
+.hf-cta-primary:hover {
+  background: var(--accent-strong);
+  color: #fff;
+  box-shadow: 0 12px 32px rgba(196, 51, 62, 0.26);
+}
+.hf-cta-ghost:hover {
+  border-color: rgba(36, 38, 46, 0.3);
+  color: var(--ink);
+}
+
+/* ── 回るスクロール印 ───────────────────────────── */
+.hf-stamp {
+  position: absolute;
+  right: clamp(18px, 4vw, 44px);
+  bottom: 24px;
+  z-index: 3;
+  width: 72px;
+  height: 72px;
+  opacity: 0;
+  animation: hfBoxIn 1.2s ease forwards 2s;
+}
+.hf-stamp svg {
+  width: 100%;
+  height: 100%;
+  animation: hfSpin 14s linear infinite;
+}
+@keyframes hfSpin {
+  to { rotate: 1turn; }
+}
+.hf-stamp text {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.34em;
+  fill: var(--muted);
+  text-transform: uppercase;
+}
+.hf-arrow {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  color: var(--accent);
+}
+
+/* ── モバイル（縮小ではなく組み替え。§3-2） ─────── */
+@media (max-width: 760px) {
+  .hf {
+    padding-top: 88px;
+    padding-bottom: 100px;
+  }
+  .hf-wall {
+    --wg: 18px;
+    inset: -34% -85%;
+    rotate: -8deg;
+  }
+  .hf-site { width: 210px; }
+  .hf-mnav em { font-size: 8.5px; }
+  .hf-box {
+    padding-inline: 24px;
+    margin-inline: 2vw;
+  }
+  .hf-cta {
+    flex: 1 1 auto;
+    text-align: center;
+    padding-inline: 12px;
+  }
+  .hf-stamp {
+    width: 56px;
+    height: 56px;
+    bottom: 16px;
+  }
+}
+
+/* ── reduced-motion: 全静止（性能予算の必須条件） ── */
+@media (prefers-reduced-motion: reduce) {
+  .hf-col,
+  .hf-stamp svg {
+    animation: none;
+  }
+  .hf-site,
+  .hf-box,
+  .hf-stamp {
+    animation: none;
+    opacity: 1;
+    translate: 0 0;
+  }
+  .hf-cta:hover {
+    transform: none;
+  }
+}

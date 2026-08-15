@@ -1,7 +1,7 @@
 import Link from "next/link";
-import Motes from "@/components/Motes";
+import Hero from "@/components/Hero";
 import SectionLabel from "@/components/SectionLabel";
-import { FadeIn, Reveal } from "@/components/motion";
+import { Reveal } from "@/components/motion";
 import { samples } from "./samples";
 
 // 事業内容カードの線アイコン（絵文字を刷新）
@@ -69,71 +69,8 @@ const services: {
 export default function Home() {
   return (
     <>
-      {/* ヒーロー（isolateで内部のz-indexを閉じ込め、モバイルメニューと競合させない） */}
-      <section className="relative isolate grid min-h-svh place-items-center overflow-hidden px-6 pb-16 pt-24 text-center">
-        <Motes />
-        {/* 記憶の欠片が舞う、やわらかな光だまり（暖色×寒色の淡い光で奥行き） */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-0 overflow-hidden"
-        >
-          {/* あたたかな光の下地（ライトで効く／ダークは控えめ） */}
-          <div className="absolute left-1/2 top-[38%] h-[100vmin] w-[135vmin] -translate-x-1/2 -translate-y-1/2 rounded-[50%] bg-[#ffe0d0]/70 blur-[90px] dark:bg-transparent" />
-          <div className="absolute left-1/2 top-[44%] h-[76vmin] w-[76vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-accent/[0.13] blur-[80px] dark:bg-accent/[0.08]" />
-          <div className="absolute left-[12%] top-[20%] h-[46vmin] w-[46vmin] rounded-full bg-[#ffc2a4]/70 blur-[70px] dark:bg-[#ffcdb6]/35" />
-          <div className="absolute right-[8%] bottom-[18%] h-[48vmin] w-[48vmin] rounded-full bg-accent/[0.11] blur-[80px] dark:bg-accent/[0.07]" />
-          <div className="absolute left-[58%] top-[14%] h-[30vmin] w-[30vmin] rounded-full bg-[#e7d2ec]/55 blur-[60px] dark:bg-[#cfd8ef]/45" />
-        </div>
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-bg to-transparent"
-        />
-        <div className="relative z-10 max-w-4xl">
-          <FadeIn delay={0.2}>
-            <p className="mb-6 text-[0.78rem] font-semibold uppercase tracking-[0.22em] text-accent">
-              Santa Works — サンタワークス
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.55}>
-            <h1 className="mb-6 text-[clamp(1.9rem,4.6vw,3.2rem)] font-extrabold leading-[1.45] tracking-[0.02em]">
-              {/* PCは1行、狭い画面では読点の位置でだけ折り返す */}
-              <span className="inline-block">
-                <span className="text-accent">「</span>忘れたくない
-                <span className="text-accent">」</span>を、
-              </span>
-              <span className="inline-block">かたちに。</span>
-            </h1>
-          </FadeIn>
-          <FadeIn delay={1.0}>
-            <p className="mx-auto mb-10 max-w-xl text-[clamp(0.95rem,2vw,1.05rem)] text-muted">
-              {/* フレーズ単位のinline-blockで、狭い画面でも「。」が孤立しない位置で折り返す */}
-              <span className="inline-block">Santa Works は、</span>
-              <span className="inline-block">記憶と思い出を</span>
-              <span className="inline-block">ITでサポートする個人事業です。</span>
-              <br />
-              <span className="inline-block">Web制作・LINE Bot・</span>
-              <span className="inline-block">業務ツール各種・</span>
-              <span className="inline-block">AI活用支援まで</span>
-              <span className="inline-block">親身になって伴走致します。</span>
-            </p>
-          </FadeIn>
-          <FadeIn delay={1.4}>
-            <Link
-              href="/contact/"
-              className="inline-block rounded-sm bg-accent px-10 py-4 text-[0.95rem] font-bold tracking-[0.08em] text-white transition-all hover:-translate-y-0.5 hover:bg-accent-strong"
-            >
-              お問い合わせ
-            </Link>
-          </FadeIn>
-        </div>
-        <div
-          aria-hidden="true"
-          className="absolute bottom-8 left-1/2 -translate-x-1/2 text-[0.7rem] uppercase tracking-[0.3em] text-muted"
-        >
-          Scroll
-          <span className="mx-auto mt-2 block h-10 w-px bg-gradient-to-b from-muted to-transparent" />
-        </div>
-      </section>
+      {/* ヒーローF「つくったものの壁」。設計図: docs/mocks/hero-f-pro-2026-08-16.html */}
+      <Hero />
 
       {/* コンセプト */}
       <section className="px-6 py-20 sm:px-10 md:py-28">
@@ -268,7 +205,7 @@ export default function Home() {
                 {/* ワードマークは LP と同じ —「Pro」だけブランドの藍 */}
                 <h3 className="text-lg font-extrabold">
                   ExifSort
-                  <span className="text-[#4F46E5] dark:text-[#818cf8]">Pro</span>
+                  <span className="text-[#4F46E5]">Pro</span>
                 </h3>
                 <span className="rounded-full bg-line/60 px-2.5 py-0.5 text-[0.66rem] font-bold tracking-[0.1em] text-muted">
                   Mac アプリ・βテスト中
