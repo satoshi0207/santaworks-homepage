@@ -107,6 +107,11 @@ https://claude.ai/code/artifact/b4f3e58a-55d3-4c97-acb1-b45e10dedd3e （右上�
 ⚠️ 参考に見た他の5案は `docs/mocks/hero-directions-cdef-2026-08-15.html`（C/D/E/F切替）と
 `hero-motes-2026-08-15.html`（粒の強化版）に保存済み。経緯ごと残す。
 
+📤 **Claude Design に引き継ぎ済み**（2026-08-16）。claude.ai/design のプロジェクト
+**「Santa Works」**（3def896c-9332-40e5-915e-cbc5ab63da8d）に Hero／Colors／Components の
+3カードをプッシュ。**あちらで磨いた結果は自動では返ってこない**——取り込みは
+DesignSync（get_file）でこちらから読んで、モックと台帳に反映してからコードへ。
+
 ## 3-2. 🔴 スマホの見た目は同格（Satoshiさん・2026-08-15）
 
 **「PCで作ってスマホに縮める」を禁止する。**もともと CLAUDE.md の確定事項に
