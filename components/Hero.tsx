@@ -15,169 +15,109 @@ const notoSansJP = localFont({
 
 /*
  * ヒーローF「つくったものの壁」。設計図: docs/mocks/hero-f-pro-2026-08-16.html
- * 枠＝ブラウザ、中身＝つくったもの。壁はサーバ側で静的に描き、JSはポインタ視差のみ。
+ * 枠＝ブラウザ、中身＝つくったものの実物スクリーンショット。
+ * デモは既存サムネ（public/demo/<x>/thumb.webp・審査済み）、商品2つは public/wall/。
  * URL欄は架空店舗＝.example（RFC 2606 予約）／自社商品＝実物URL。
  * 実在しうる他人のドメインを架空デモに表示しない（対外ガードレール③）。
+ * 壁はサーバ側で静的に描き、JSはポインタ視差のみ。
  */
-type Palette = { l: string; d: string; m: string; s: string; t: string };
-
-const PALETTES: Palette[] = [
-  { l: "KISSA",    d: "kissa.example",    m: "#7a5236", s: "#e8c9a8", t: "#faf3ea" },
-  { l: "SALON",    d: "salon.example",    m: "#d4899e", s: "#f3d3da", t: "#fdf4f6" },
-  { l: "RAMEN",    d: "ramen.example",    m: "#b8433a", s: "#f2c063", t: "#fbf1e6" },
-  { l: "NAIKA",    d: "naika.example",    m: "#4e8f88", s: "#bfe0da", t: "#f0f7f6" },
-  { l: "NAIL",     d: "nail.example",     m: "#9a7fc9", s: "#ddd0f0", t: "#f7f4fb" },
-  { l: "PHOTO",    d: "photo.example",    m: "#3a3f52", s: "#b9c1d9", t: "#eef0f6" },
-  { l: "FARM",     d: "farm.example",     m: "#6f9a4e", s: "#d3e5bd", t: "#f4f8ee" },
-  { l: "ITALIAN",  d: "italian.example",  m: "#2f6e4f", s: "#e8b9ae", t: "#f6f3ec" },
-  { l: "BARBER",   d: "barber.example",   m: "#33518f", s: "#c6d3ec", t: "#f0f3f9" },
-  { l: "PIANO",    d: "piano.example",    m: "#3b3b47", s: "#cfc3e8", t: "#f3f1f8" },
-  { l: "JUKU",     d: "juku.example",     m: "#d97f2f", s: "#f5d9b8", t: "#fcf5ec" },
-  { l: "IZAKAYA",  d: "izakaya.example",  m: "#8f2f3a", s: "#e9c78f", t: "#f9f1e7" },
-  { l: "CLUB",     d: "club.example",     m: "#2b2e3e", s: "#9fd8d2", t: "#eef4f4" },
-  { l: "KOUMUTEN", d: "koumuten.example", m: "#a1622c", s: "#e5c79b", t: "#f9f3ea" },
-  { l: "POKEMEMO", d: "pokememo.santaworks.net", m: "#e0806b", s: "#ffd9c9", t: "#fff6f0" },
-  { l: "EXIFSORT", d: "exifsort.web.app",        m: "#4a6fa5", s: "#cfe0f2", t: "#f0f5fa" },
-];
-
-const TYPES = ["hf-hero-t", "hf-grid-t", "hf-circle-t", "hf-split-t"] as const;
-
-const BODY: Record<(typeof TYPES)[number], React.ReactNode> = {
-  "hf-hero-t": (
-    <>
-      <div className="hf-mhero">
-        <i className="hf-t1" />
-        <i className="hf-t2" />
-        <i className="hf-mbtn" />
-      </div>
-      <div className="hf-mrow">
-        <b />
-        <b className="hf-acc" />
-        <b />
-      </div>
-    </>
-  ),
-  "hf-grid-t": (
-    <>
-      <div className="hf-mgrid">
-        <b />
-        <b />
-        <b />
-        <b />
-      </div>
-      <div className="hf-mcap">
-        <i />
-        <i />
-      </div>
-    </>
-  ),
-  "hf-circle-t": (
-    <>
-      <span className="hf-mlogo" />
-      <span className="hf-mname" />
-      <span className="hf-msub" />
-      <span className="hf-mpills">
-        <i />
-        <i />
-      </span>
-    </>
-  ),
-  "hf-split-t": (
-    <>
-      <div className="hf-mleft">
-        <i />
-      </div>
-      <div className="hf-mright">
-        <s />
-        <s />
-        <s className="hf-btn" />
-      </div>
-    </>
-  ),
+type WallCard = {
+  d: string; // URL欄に出すドメイン
+  img: string; // スクリーンショット
+  t: string; // 読み込み中の地色（サイトの主調色に寄せる）
 };
 
-const COLS = 5;
-const ROWS = 4;
+// 5列×4枚。並びは列＝配列順（中央列 c=2 がいちばん手前に見えるので商品2つをそこへ）
+const WALL: WallCard[][] = [
+  [
+    { d: "barber.example", img: "/demo/barber/thumb.webp", t: "#f0f3f9" },
+    { d: "izakaya.example", img: "/demo/izakaya/thumb.webp", t: "#f9f1e7" },
+    { d: "salon.example", img: "/demo/salon/thumb.webp", t: "#f6faf8" },
+    { d: "juku.example", img: "/demo/juku/thumb.webp", t: "#fcf5ec" },
+  ],
+  [
+    { d: "kissa.example", img: "/demo/kissa/thumb.webp", t: "#faf3ea" },
+    { d: "naika.example", img: "/demo/naika/thumb.webp", t: "#f0f7f6" },
+    { d: "diamantine.example", img: "/demo/cabaret/thumb.webp", t: "#17141c" },
+    { d: "farm.example", img: "/demo/farm/thumb.webp", t: "#f4f8ee" },
+  ],
+  [
+    { d: "pokememo.santaworks.net", img: "/wall/pokememo.webp", t: "#fff6f0" },
+    { d: "photo.example", img: "/demo/photo/thumb.webp", t: "#f4f1ea" },
+    { d: "exifsort.web.app", img: "/wall/exifsort.webp", t: "#f0f5fa" },
+    { d: "ramen.example", img: "/demo/ramen/thumb.webp", t: "#1c1613" },
+  ],
+  [
+    { d: "piano.example", img: "/demo/piano/thumb.webp", t: "#f3f1f8" },
+    { d: "koumuten.example", img: "/demo/koumuten/thumb.webp", t: "#f9f3ea" },
+    { d: "club.example", img: "/demo/club/thumb.webp", t: "#14121a" },
+    { d: "nail.example", img: "/demo/nail/thumb.webp", t: "#fdf4f6" },
+  ],
+  [
+    { d: "yohaku.example", img: "/demo/salon2/thumb.webp", t: "#f4f4f4" },
+    { d: "touka.example", img: "/demo/factory/thumb.webp", t: "#1c2333" },
+    { d: "italian.example", img: "/demo/italian/thumb.webp", t: "#221a14" },
+    { d: "tokinowa.example", img: "/demo/tokinowa/thumb.webp", t: "#f6f1e8" },
+  ],
+];
+
 // 中央の列ほど手前（大きく）、両端は奥（小さく・ぼかし）に置いて奥行きを出す
 const DEPTH = [0.92, 1, 1.08, 1, 0.92];
 
-function SiteCard({ palette, type, delay }: { palette: Palette; type: (typeof TYPES)[number]; delay: number }) {
+function SiteCard({ card, delay }: { card: WallCard; delay: number }) {
   return (
-    <div
-      className="hf-site"
-      style={
-        {
-          "--main": palette.m,
-          "--soft": palette.s,
-          "--tint": palette.t,
-          "--fd": `${delay}s`,
-        } as React.CSSProperties
-      }
-    >
+    <div className="hf-site" style={{ "--fd": `${delay}s` } as React.CSSProperties}>
       <div className="hf-cbar">
         <i />
         <i />
         <i />
-        <u>{palette.d}</u>
+        <u>{card.d}</u>
         <span className="hf-sp" />
       </div>
-      <div className={`hf-mini ${type}`}>
-        <div className="hf-mnav">
-          <span className="hf-brand">
-            <i />
-            <em>{palette.l}</em>
-          </span>
-          <span className="hf-mlinks">
-            <i />
-            <i />
-            <i />
-          </span>
-        </div>
-        <div className="hf-mbody">{BODY[type]}</div>
-      </div>
+      {/* ⚠️ loading="lazy" にしない。壁は全カードがほぼビューポート内で lazy の恩恵がなく、
+          読み込み前の歯抜けが見えてしまう。優先度だけ下げて見出し（LCP）に帯域を譲る */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- 静的書き出しのため最適化ローダーは使わない。元からWebP */}
+      <img
+        className="hf-shot"
+        src={card.img}
+        alt=""
+        width={600}
+        height={450}
+        fetchPriority="low"
+        decoding="async"
+        style={{ backgroundColor: card.t }}
+      />
     </div>
   );
 }
 
 export default function Hero() {
   return (
-    <section className={`hf isolate ${notoSansJP.variable}`}>
+    <section className={`hf ${notoSansJP.variable}`}>
       <div className="hf-wall" id="hf-wall" aria-hidden="true">
-        {Array.from({ length: COLS }, (_, c) => {
-          const cards = Array.from({ length: ROWS }, (_, r) => {
-            const n = c * ROWS + r;
-            return {
-              key: r,
-              palette: PALETTES[n % PALETTES.length],
-              type: TYPES[(c * 2 + r * 3) % TYPES.length],
-              delay: 0.15 + (n % 9) * 0.09,
-            };
-          });
-          return (
-            <div
-              key={c}
-              className={`hf-col${c % 2 ? " hf-col-down" : ""}${c === 0 || c === COLS - 1 ? " hf-col-far" : ""}`}
-              style={
-                {
-                  "--t": `${36 + (c % 4) * 7}s`,
-                  "--s": DEPTH[c],
-                } as React.CSSProperties
-              }
-            >
-              {/* 同じ列を2セット積む。keyframes が「半分＋間隔の半分」戻すことで継ぎ目なく一周する */}
-              {[0, 1].map((set) =>
-                cards.map((card) => (
-                  <SiteCard
-                    key={`${set}-${card.key}`}
-                    palette={card.palette}
-                    type={card.type}
-                    delay={card.delay}
-                  />
-                )),
-              )}
-            </div>
-          );
-        })}
+        {WALL.map((cards, c) => (
+          <div
+            key={c}
+            className={`hf-col${c % 2 ? " hf-col-down" : ""}${c === 0 || c === WALL.length - 1 ? " hf-col-far" : ""}`}
+            style={
+              {
+                "--t": `${36 + (c % 4) * 7}s`,
+                "--s": DEPTH[c],
+              } as React.CSSProperties
+            }
+          >
+            {/* 同じ列を2セット積む。keyframes が「半分＋間隔の半分」戻すことで継ぎ目なく一周する */}
+            {[0, 1].map((set) =>
+              cards.map((card, r) => (
+                <SiteCard
+                  key={`${set}-${r}`}
+                  card={card}
+                  delay={0.15 + ((c * cards.length + r) % 9) * 0.09}
+                />
+              )),
+            )}
+          </div>
+        ))}
       </div>
       <div className="hf-veil" aria-hidden="true" />
       <div className="hf-fade" aria-hidden="true" />
