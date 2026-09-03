@@ -16,7 +16,7 @@
 | 問題数 | 974問 | 🔴 **1,125問**（＋44単元・小3配当漢字200字・スタンプ60種） |
 | 状態 | ほぼ完成・ストア未申請 | 🔴 **App Store に申請済み** |
 | LPの置き場所 | `web/homepage` の `/works/manamori` | 🔴 **別サブドメイン** `https://manaleaf-grade3.santaworks.net/` |
-| LPのソース | このリポジトリ | ⚠️ **不明。このリポジトリには無い**（Cloudflare配信） |
+| LPのソース | このリポジトリ | 🔴 **study3 リポジトリの `lp/`**（Mac `~/dev/study/rika/lp/`） |
 
 ### 検査結果（2026-09-04 実測）
 
@@ -34,7 +34,10 @@
 ⚠️ **santaworks.net の `/works` への掲載がまだ。**
 `hq/ORG.md` §7 で柵の例外を作った目的そのものが未達（→ §3 のURL構成は再検討が必要）。
 
-⚠️ **LPのソースの置き場所が不明。**santaworks の git のどこにも無い。
+✅ **LPのソースの置き場所は判明**（2026-09-04）。**アプリ本体と同じ study3 リポジトリの `lp/`**。
+`index.html` ＋ `privacy.html` ＋ `assets/`。git に追跡済み・origin と同期。
+配信は **Cloudflare Pages のプロジェクト `manaleaf-grade3`**（`wrangler pages deploy lp`）。
+santaworks の git に無いのは**正しい状態**——開発は柵の外のまま、という §7 の決めごとどおり。
 **真実源が追跡されていない資産**になっている。
 
 ---
