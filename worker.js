@@ -1,6 +1,11 @@
 /**
  * Cloudflare Workers（静的アセット配信）の前段。
  *
+ * 目的0: 平文HTTPでのアクセスを HTTPS へ 301 で寄せる。サブドメイン
+ *        （pokememo・manaleaf-grade3）は Pages 側が自動で301しているが、
+ *        本体ドメインはこの Worker が前段にいるため素通しになっていた
+ *        （2026-09-07 実測。http://santaworks.net/ が 200 を返していた）。
+ *
  * 目的1: 既定の workers.dev サブドメインへのアクセスを、正規ドメイン
  *        https://santaworks.net へ 301（恒久リダイレクト）で寄せる。
  *        正規URLと同じ内容が2箇所に存在する重複を解消し、SEOの評価を
@@ -31,6 +36,19 @@ const SHORTLINKS_TO = {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+
+    // 平文HTTPは HTTPS へ 301（パスとクエリは保つ）。
+    // ⚠️ 他のどの分岐よりも先に置く。以降の転送先は全て https 固定なので、
+    //    ここを通しておけば「http → 302 → https」の二段転送にならない。
+    // ⚠️ localhost は除外する。`wrangler dev` は http://localhost:8787 で
+    //    待ち受けるので、除外しないとローカル確認が全部 https へ飛んで死ぬ。
+    const isLocal =
+      url.hostname === "localhost" || url.hostname === "127.0.0.1";
+    if (url.protocol === "http:" && !isLocal) {
+      url.protocol = "https:";
+      url.port = "";
+      return Response.redirect(url.toString(), 301);
+    }
 
     // 既定の *.workers.dev アクセスは正規ドメインへ 301
     if (url.hostname.endsWith(".workers.dev")) {
