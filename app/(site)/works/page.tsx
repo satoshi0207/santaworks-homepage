@@ -329,20 +329,29 @@ export default function Works() {
                 </dl>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
                   <a
-                    href={MANALEAF_APPSTORE_URL}
+                    href={MANALEAF_SITE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
                   >
-                    App Store で見る →
+                    公式サイトを見る →
                   </a>
+                  {/* Apple 公式バッジ。LP と同じ素材を使う（assets/badge_appstore.svg）。
+                      ⚠️ ガイドラインの最小表示高は 40px。h-10 より小さくしない */}
                   <a
-                    href={MANALEAF_SITE_URL}
+                    href={MANALEAF_APPSTORE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
+                    className="inline-block transition-transform hover:-translate-y-0.5"
                   >
-                    まなリーフの公式サイト →
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img
+                      src="/manaleaf/badge-appstore.svg"
+                      alt="App Store でダウンロード"
+                      width={109}
+                      height={40}
+                      className="h-10 w-auto"
+                    />
                   </a>
                 </div>
                 <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
