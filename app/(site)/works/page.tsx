@@ -6,7 +6,7 @@ import ExifSortProArt from "@/components/ExifSortProArt";
 import { samples } from "../samples";
 
 const WORKS_DESCRIPTION =
-  "Santa Works の実績・プロダクト。LINEで使える記憶サポート「ポケメモ」と、写真・動画をメタデータで整理する Mac アプリ「ExifSortPro」。";
+  "Santa Works の実績・プロダクト。LINEで使える記憶サポート「ポケメモ」、写真・動画をメタデータで整理する Mac アプリ「ExifSortPro」、小学3年生向けの学習クイズアプリ「まなリーフ 小3」。";
 
 export const metadata: Metadata = {
   title: "Works",
@@ -25,6 +25,31 @@ const POKEMEMO_URL = "https://pokememo.santaworks.net";
    （配布は5〜10名にURLを個別送付しているため、ここから直接落とせると前提が崩れる）。 */
 const EXIFSORT_URL = "https://exifsort.web.app/";
 const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
+
+/* まなリーフは Santa Works の商品ではない。Satoshiさん個人の制作物を Works に「掲載だけ」する
+   （hq/ORG.md §7 の例外）。完全無料・広告なし・課金なしが設計条件なので、全社KPI の対象にもしない。
+   位置づけは ExifSortPro と同じ「技術力を示す名刺」。 */
+const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
+const MANALEAF_SITE_URL = "https://manaleaf-grade3.santaworks.net";
+
+/* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
+const manaleafPoints: { title: string; body: string; note: string }[] = [
+  {
+    title: "ぜんぶ無料",
+    body: "アプリ内課金も広告もありません。金額や課金の心配をせずに、そのまま子どもにわたせます。",
+    note: "課金なし・広告なし",
+  },
+  {
+    title: "集めない",
+    body: "アカウント登録がなく、学習の記録は端末の中だけに保存されます。外部への送信も、アクセス解析もありません。",
+    note: "データ収集なし",
+  },
+  {
+    title: "つながらなくても動く",
+    body: "一度ダウンロードすれば、あとは通信なしで学習できます。機内モードでも、通信制限中でも止まりません。",
+    note: "完全オフライン",
+  },
+];
 
 const features: { img: string; title: string; body: string }[] = [
   {
@@ -242,6 +267,123 @@ export default function Works() {
                   </p>
                   <p className="mt-auto pt-3 text-[0.7rem] tracking-tight text-muted/70">
                     {p.note}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* まなリーフ 小3。商品ではなく制作物（§7）。バッジに「看板プロダクト」は使わない */}
+          <div
+            id="manaleaf"
+            className="mt-20 scroll-mt-24 border-t border-line pt-16"
+          >
+            {/* 右が2x2で背が高いので、items-center だとテキストが真ん中に沈む。ここだけ上揃え */}
+            <div className="grid items-start gap-10 md:grid-cols-2">
+              <div>
+                <div className="mb-4 flex flex-wrap items-center gap-2">
+                  <span className="inline-block rounded-full bg-accent-soft px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-accent">
+                    iPhone / iPad アプリ
+                  </span>
+                  <span className="inline-block rounded-full bg-line/60 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-muted">
+                    完全無料
+                  </span>
+                </div>
+                <div className="mb-3 flex items-center gap-3">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img
+                    src="/manaleaf/icon.webp"
+                    alt=""
+                    width={256}
+                    height={256}
+                    aria-hidden="true"
+                    className="h-11 w-11 rounded-[22%] shadow-card"
+                  />
+                  <h2 className="text-2xl font-extrabold">まなリーフ 小3</h2>
+                </div>
+                <p className="mb-5 text-[1.05rem] font-bold leading-snug text-[#2f8f4e]">
+                  まなびのもりで、どうぶつたちと
+                  <br />
+                  たのしくまなぼう！
+                </p>
+                <p className="jp-flow mb-6 text-[0.95rem] text-muted">
+                  小学3年生専用の学習クイズアプリ。さんすう・こくご・りか・しゃかいの4教科を、まなびのもりに住むどうぶつたちと一緒に進めます。まちがえた問題には解説が出るので、答え合わせで終わらずにそこから学べます。
+                </p>
+                <dl className="mb-7 space-y-1.5 text-[0.85rem]">
+                  <div className="flex gap-3">
+                    <dt className="w-20 shrink-0 font-bold">収録</dt>
+                    <dd className="text-muted">
+                      4教科・44単元・1,125問／小3配当漢字200字（学習指導要領にもとづく小3の範囲）
+                    </dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-20 shrink-0 font-bold">動作環境</dt>
+                    <dd className="text-muted">
+                      iOS 17.0 以降（iPhone・iPad）／Apple Silicon の Mac
+                    </dd>
+                  </div>
+                  <div className="flex gap-3">
+                    <dt className="w-20 shrink-0 font-bold">価格</dt>
+                    <dd className="text-muted">無料（アプリ内課金・広告なし）</dd>
+                  </div>
+                </dl>
+                <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
+                  <a
+                    href={MANALEAF_APPSTORE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 rounded-full bg-accent px-6 py-3 text-[0.9rem] font-bold text-white shadow-card transition-transform hover:-translate-y-0.5"
+                  >
+                    App Store で見る →
+                  </a>
+                  <a
+                    href={MANALEAF_SITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[0.88rem] font-bold text-accent transition-colors hover:text-accent-strong"
+                  >
+                    まなリーフの公式サイト →
+                  </a>
+                </div>
+                <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
+                  Santa Works
+                  の代表が個人で制作し、2026年9月に公開したアプリです。アイコン・背景・どうぶつのイラストは生成AIで作成しています。
+                </p>
+              </div>
+              <div className="grid grid-cols-2 gap-3 rounded-md bg-gradient-to-br from-[#e6f4e2] to-[#f7fbf3] p-5 shadow-card">
+                {[
+                  { src: "/manaleaf/home.webp", alt: "まなリーフのホーム画面。もりの中でどうぶつたちが並んでいる。" },
+                  { src: "/manaleaf/quiz.webp", alt: "時計の図がついたさんすうの問題画面。" },
+                  { src: "/manaleaf/kaisetsu.webp", alt: "まちがえたときの画面。「おしい！」と解説が出ている。" },
+                  { src: "/manaleaf/stamp.webp", alt: "スタンプ帳。集めたどうぶつのスタンプが並んでいる。" },
+                ].map((sc) => (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    key={sc.src}
+                    src={sc.src}
+                    alt={sc.alt}
+                    width={640}
+                    height={1390}
+                    loading="lazy"
+                    className="h-auto w-full rounded-[10px] shadow-card"
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 保護者のかた向けの3点 */}
+            <div className="mt-12 grid gap-5 sm:grid-cols-3">
+              {manaleafPoints.map((m) => (
+                <div
+                  key={m.title}
+                  className="flex flex-col rounded-md border border-line bg-surface p-6 shadow-card"
+                >
+                  <h3 className="mb-2 text-[1.02rem] font-bold">{m.title}</h3>
+                  <p className="jp-flow text-[0.86rem] leading-relaxed text-muted">
+                    {m.body}
+                  </p>
+                  <p className="mt-auto pt-3 text-[0.7rem] tracking-tight text-muted/70">
+                    {m.note}
                   </p>
                 </div>
               ))}
