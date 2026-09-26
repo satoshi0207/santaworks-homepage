@@ -23,7 +23,12 @@
    ⚠️ ここは <div> なので globals.css の `.site-content p` が当たらず、
    既定のCJK折り返しのままだった。狭い画面で「47都道府／県）」のように
    語の途中で割れる。**見出しは全部この行に足す**、が覚え方。 */
-.journal .fh, .journal .note .nh, .journal .fs {
+.journal .fh, .journal .note .nh, .journal .fs,
+/* dash 層（2026-07-30〜）の部品が漏れていた（2026-09-26 に manaleaf で発覚）。
+   ポイント欄「作ってみ／る？」、図の見出し「まちが／えたとき」、
+   図の注記「インターネッ／トを利用」と、どれも語の途中で割れていた。
+   ⚠️ dash 層で見出し・注記の部品を足したら、ここにも足すこと。 */
+.journal .points .tx, .journal .fig .ttl, .journal .fig figcaption {
   word-break: auto-phrase;
 }
 

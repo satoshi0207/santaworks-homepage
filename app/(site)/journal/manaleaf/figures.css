@@ -58,3 +58,9 @@
 .journal.dash .mlfig circle.dot.b { fill: #8b91a0; }
 .journal.dash .mlfig text.a { fill: #00747a; }
 .journal.dash .mlfig text.b { fill: #6b7280; }
+
+/* ⚠️ PC/SP の切り替えは journal.css の 820px。**521〜820px（タブレット）でもスマホ用が出る。**
+   スマホ用は viewBox 358 の設計なので、そのまま横いっぱいにすると文字が倍になる（768px 実測）。
+   ここで幅を抑える。スマホ（〜390px）では本文幅のほうが狭いので効かない。
+   🔴 境目の 820px は全記事共通なので、ここでは動かさない。 */
+.journal.dash .mlfig .sponly { max-width: 460px; margin: 0 auto; }
