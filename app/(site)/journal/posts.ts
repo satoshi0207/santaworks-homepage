@@ -49,6 +49,19 @@ export type Post = {
 
 export const posts: Post[] = [
   {
+    // 🔴 theme は kids（子どもを主語にした記事）。まなリーフは Santa Works の商品ではないので
+    //    product にしない（hq/ORG.md §7）。
+    slug: "manaleaf",
+    title: "「一緒にゲーム作ってみる？」から、はじまりました",
+    lede: "小3の娘と、学習クイズのアプリをつくった話です",
+    excerpt:
+      "小学3年生の娘に「パパと一緒にゲーム作ってみる？」と聞いたところから、学習クイズアプリをつくりました。どうぶつは娘が馴染んでいたものにし、文字だけでは伝わりにくい問題は絵にしました。こども家庭庁の調査では、スマートフォンを親と一緒に使うほうが多いのは9歳までです。",
+    date: "2026-09-26",
+    theme: "kids",
+    kind: "make",
+    hero: "/blog/manaleaf/thumb.webp",
+  },
+  {
     slug: "rikon",
     title: "離婚の理由は不倫だと思っていたら、5番目でした",
     lede: "申立ての動機を、順位で並べました",

@@ -230,6 +230,22 @@
 .journal .closing { margin-top: 40px; padding: 28px 26px; border-radius: 18px; background: var(--surface-2); border: 1px solid var(--line); }
 .journal .closing .q { font-family: var(--font-serif); font-size: 1.15rem; line-height: 1.8; margin: 0 0 12px; }
 .journal .closing p { margin: 0; font-size: .9rem; color: var(--muted); line-height: 1.85; }
+/* closing の導線（2026-09-26・manaleaf の記事から）。App Store の公式バッジ＋公式サイトへのリンク。
+   🔴 **バナーやカードにしない。**記事の最後で「いいアプリですとは書きません」と言った直後に
+      大きな箱が来ると、その一文が嘘になる（判断の経緯は pr/drafts/manaleaf.md）。 */
+.journal .closing .act { margin-top: 18px; display: flex; align-items: center; gap: 10px 18px; flex-wrap: wrap; }
+/* 🔴 Apple のガイドラインでバッジの最小表示高は 40px。ここを下回らせない。
+   だから縮めるのではなく、入らなければ折り返す（flex-wrap）。 */
+.journal .closing .act .badge { height: 40px; width: auto; display: block; }
+.journal .closing .act .site { font-size: .86rem; font-weight: 700; text-decoration: none; }
+/* 🔴 ここで囲んだ塊は、途中で改行しない。
+   冒頭の `word-break: auto-phrase` だけでは「一緒に見られる時期に／は、」と
+   **助詞が行頭に落ちる**（390px 実測・2026-09-09）。text-wrap の balance / pretty / auto
+   をどれに変えても直らなかった。⚠️ **短い見出しにだけ使う。**長い本文に使うと行末に隙間ができる。 */
+.journal .closing .q .nb { display: inline-block; max-width: 100%; }
+@media (max-width: 520px) {
+  .journal .closing .act { flex-direction: column; align-items: flex-start; gap: 14px; }
+}
 
 /* opinion — 「ここから先は私の考えです」の節（2026-08-04〜）
    🔴 data の節と見分けがつくことが役目。**読者が片方だけ受け取れるようにする。**

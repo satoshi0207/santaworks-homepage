@@ -1,0 +1,60 @@
+/* 娘と学習アプリをつくった記事の図（3点）の見た目。**この記事だけ**に効くよう `.mlfig` に閉じてある。
+ *
+ * ⚠️ サイトは**ライト固定**（2026-08-16）。**ダーク用の値を書かない。**
+ * ⚠️ `.a` `.b` のような短い名前を使えるのは `.mlfig` の中だけだから。
+ *    このファイルのセレクタから `.mlfig` を外さないこと。
+ *
+ * FIG 01・02 はアプリの画面（画像）。FIG 03 は SVG の折れ線（PC/SP の2枚組）。
+ */
+
+/* ── FIG 01：画面2枚を並べる ───────────────────────────────
+   🔴 スマホでも2列のまま。1列に積むと縦に長くなりすぎて、本文から離れる。
+   ⚠️ 画像の中の文字は小さくなるが、この図で見せたいのは**どうぶつがどこに出るか**で、
+      文字を読ませる図ではない。 */
+.journal.dash .mlfig .shots {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 220px));
+  justify-content: center;
+  gap: 18px;
+}
+.journal.dash .mlfig .shots img,
+.journal.dash .mlfig .crop img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 18px;
+  border: 1px solid var(--hair);
+}
+
+/* ── FIG 02：問題のカードを1枚 ── */
+.journal.dash .mlfig .crop { max-width: 460px; margin: 0 auto; }
+
+@media (max-width: 520px) {
+  .journal.dash .mlfig .shots { gap: 10px; }
+  .journal.dash .mlfig .shots img { border-radius: 12px; }
+}
+
+/* ── FIG 03：親と共用 / 子ども専用 ───────────────────────────
+   🔴 主役は「親と共用」（.a・ティール）。記事が見ているのはこちらが減っていくこと。
+      「子ども専用」（.b）は灰色で控える。**赤は逆転の破線1本だけ。** */
+.journal.dash .mlfig svg { display: block; width: 100%; height: auto; }
+.journal.dash .mlfig text { fill: currentColor; font-family: inherit; }
+.journal.dash .mlfig text.tick { font-size: 11.5px; fill: var(--muted); font-variant-numeric: tabular-nums; }
+.journal.dash .mlfig text.lgd { font-size: 12.5px; font-weight: 700; }
+.journal.dash .mlfig text.bandlab { font-size: 11.5px; font-weight: 700; fill: #00747a; }
+.journal.dash .mlfig text.dl { font-size: 12.5px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.journal.dash .mlfig line.grid { stroke: var(--hair); stroke-width: 1; }
+.journal.dash .mlfig rect.band { fill: #00968f; opacity: 0.08; }
+.journal.dash .mlfig line.flip {
+  stroke: var(--accent);
+  stroke-width: 1.2;
+  stroke-dasharray: 4 4;
+  opacity: 0.7;
+}
+.journal.dash .mlfig .ln { fill: none; stroke-width: 2.4; stroke-linecap: round; stroke-linejoin: round; }
+.journal.dash .mlfig .ln.a { stroke: #00968f; }
+.journal.dash .mlfig .ln.b { stroke: #8b91a0; }
+.journal.dash .mlfig circle.dot.a { fill: #00968f; }
+.journal.dash .mlfig circle.dot.b { fill: #8b91a0; }
+.journal.dash .mlfig text.a { fill: #00747a; }
+.journal.dash .mlfig text.b { fill: #6b7280; }
