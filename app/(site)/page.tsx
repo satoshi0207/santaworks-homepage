@@ -43,7 +43,7 @@ const services: {
   {
     icon: "product",
     title: "プロダクト運営",
-    body: "記憶と思い出をテーマにしたサービスを開発・運営。LINEで使える記憶サポート「ポケメモ」と、Mac用の写真整理アプリ「ExifSortPro」。",
+    body: "記憶と思い出をテーマにしたサービスを開発・運営。LINEで使える記憶サポート「ポケメモ」、Mac用の写真整理アプリ「ExifSortPro」、小学3年生向けの学習クイズアプリ「まなリーフ 小3」。",
     href: "/works/",
     cta: "プロダクトを見る",
   },
@@ -220,6 +220,43 @@ export default function Home() {
               </span>
             </div>
           </Link>
+
+          {/* 商品3: まなリーフ 小3。ExifSortPro と同じ要約カード。
+              リンク先は /works/#manaleaf ではなく公式サイト（別サブドメイン）に直接つなぐ。
+              サブドメインは Google に別サイトとして扱われ、本体からのリンクが少ないと
+              クロールされない（2026-10-01 時点、/works/ からの1本だけでは1か月未クロール）。
+              トップからの直リンクは、その経路を1本足すためのもの。文言は LP と同じ数字・同じ言い方 */}
+          <a
+            href="https://manaleaf-grade3.santaworks.net/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="group mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/70 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-accent/45 md:p-7"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/manaleaf/icon.webp"
+              alt=""
+              aria-hidden="true"
+              width={256}
+              height={256}
+              loading="lazy"
+              className="hidden h-20 w-20 shrink-0 rounded-[22%] sm:block"
+            />
+            <div className="min-w-0">
+              <div className="mb-1.5 flex flex-wrap items-center gap-2">
+                <h3 className="text-lg font-extrabold">まなリーフ 小3</h3>
+                <span className="rounded-full bg-line/60 px-2.5 py-0.5 text-[0.66rem] font-bold tracking-[0.1em] text-muted">
+                  iPhone / iPad アプリ・無料
+                </span>
+              </div>
+              <p className="text-[0.92rem] text-muted [word-break:keep-all]">
+                小学3年生の4教科を、どうぶつたちと1回10問のクイズで。課金なし・広告なし・オフラインで動きます。
+              </p>
+              <span className="mt-3 inline-block text-[0.85rem] font-bold text-accent">
+                公式サイトを見る →
+              </span>
+            </div>
+          </a>
 
           {/* デザインサンプル ショーケース */}
           <div className="mt-16">

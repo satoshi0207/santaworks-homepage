@@ -31,6 +31,7 @@ const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
    位置づけは ExifSortPro と同じ「技術力を示す名刺」。 */
 const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
 const MANALEAF_SITE_URL = "https://manaleaf-grade3.santaworks.net";
+const MANALEAF_G4_SITE_URL = "https://manaleaf-grade4.santaworks.net/";
 
 /* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
 const manaleafPoints: { title: string; body: string; note: string }[] = [
@@ -354,6 +355,19 @@ export default function Works() {
                     />
                   </a>
                 </div>
+                {/* 小4版。公開前なので「準備中」と紹介ページの案内だけにし、価格・時期はここに書かない
+                    （正は小4 LP）。このリンクは Google が小4 LP を見つける経路にもなる */}
+                <p className="jp-flow mt-5 text-[0.88rem] text-muted">
+                  小学4年生版も準備中です。
+                  <a
+                    href={MANALEAF_G4_SITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-1 font-bold text-accent underline-offset-4 hover:underline"
+                  >
+                    まなリーフ 小4 の紹介ページ →
+                  </a>
+                </p>
                 <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
                   Santa Works
                   の代表が個人で制作し、2026年9月に公開したアプリです。アイコン・背景・どうぶつのイラストは生成AIで作成しています。
