@@ -507,6 +507,53 @@ export default function Works() {
               ),
             )}
           </div>
+
+          {/* 動きの見本帳（/motion/）への導線。サンプルを見た人が「動きも選べる」と気づけるように、一覧の直後に置く。
+              絵は見本帳の一覧カードと同じ録画（public/motion/media/clips/）。動きを減らす設定の人には止まった1コマを出す */}
+          <a
+            href="/motion/"
+            className="group mt-12 grid overflow-hidden rounded border border-line bg-surface shadow-card transition-all hover:-translate-y-1 hover:border-accent/45 md:grid-cols-[1.15fr_1fr]"
+          >
+            <div className="relative aspect-[16/10] overflow-hidden bg-line/40 md:aspect-auto md:min-h-full">
+              <video
+                src="/motion/media/clips/marquee.mp4"
+                poster="/motion/media/clips/marquee.webp"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-hidden="true"
+                className="absolute inset-0 h-full w-full object-cover motion-reduce:hidden"
+              />
+              <img
+                src="/motion/media/clips/marquee.webp"
+                alt=""
+                aria-hidden="true"
+                loading="lazy"
+                decoding="async"
+                width={960}
+                height={600}
+                className="absolute inset-0 hidden h-full w-full object-cover motion-reduce:block"
+              />
+            </div>
+            <div className="flex flex-col justify-center p-7 md:p-9">
+              <span className="mb-3 inline-block w-fit rounded-full bg-accent/10 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-accent">
+                動きの見本帳
+              </span>
+              <h3 className="mb-3 text-[1.25rem] font-extrabold leading-snug">
+                サイトに入れる「動き」も、
+                <br />
+                見本で選べます
+              </h3>
+              <p className="jp-flow mb-5 text-[0.92rem] leading-relaxed text-muted">
+                パララックス、スライダー、マーキー、ローディング画面など41種類。実際に動く見本と短い説明で、「この動きがいい」を打ち合わせの前に選んでおけます。
+              </p>
+              <span className="mt-auto block text-[0.85rem] font-bold text-accent md:mt-0">
+                動きの見本帳を見る →
+              </span>
+            </div>
+          </a>
         </Reveal>
       </section>
     </div>
