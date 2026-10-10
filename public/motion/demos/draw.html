@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>線画アニメーション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 2.2s; /* 1本の線を描き切る時間 */
+}
+
+/* pathLength="1" にしておくと、どの線も長さ1として扱える。長さを測らなくてよい */
+.line {
+  fill: none;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 0;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .line {
+    stroke-dashoffset: 1; /* 線を「長さ1だけずらして」隠す */
+    animation: draw var(--dur) ease-in-out forwards;
+    animation-delay: calc(var(--d) * var(--dur)); /* --d は描き始めの順番（0〜1） */
+  }
+  .fill {
+    opacity: 0;
+    animation: show 0.8s ease forwards;
+    animation-delay: calc(var(--dur) * 1.5);
+  }
+}
+
+@keyframes draw { to { stroke-dashoffset: 0; } }
+@keyframes show { to { opacity: 1; } }
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; padding: 24px; text-align: center; }
+svg { width: min(56vw, 260px); height: auto; overflow: visible; }
+.line { stroke: var(--rika); stroke-width: 3.2; stroke-linecap: round; stroke-linejoin: round; }
+.fill { fill: #D5F0C4; }
+h1 { margin: 6px 0 0; font-size: clamp(24px, 5vw, 34px); letter-spacing: 0.08em; color: var(--rika); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 「↻ 最初から」で見直せます</span>
+<svg viewBox="0 0 200 240" role="img" aria-label="葉っぱのマーク">
+  <path class="fill" d="M100 210 C 30 170, 20 70, 100 20 C 180 70, 170 170, 100 210 Z"/>
+  <path class="line" pathLength="1" style="--d: 0" d="M100 210 C 30 170, 20 70, 100 20 C 180 70, 170 170, 100 210 Z"/>
+  <path class="line" pathLength="1" style="--d: 0.1" d="M100 210 C 102 222, 98 232, 90 238"/>
+  <path class="line" pathLength="1" style="--d: 0.45" d="M100 205 L100 45"/>
+  <path class="line" pathLength="1" style="--d: 0.75" d="M100 160 C 86 150, 72 140, 62 128"/>
+  <path class="line" pathLength="1" style="--d: 0.75" d="M100 160 C 114 150, 128 140, 138 128"/>
+  <path class="line" pathLength="1" style="--d: 0.9" d="M100 120 C 88 110, 78 100, 70 88"/>
+  <path class="line" pathLength="1" style="--d: 0.9" d="M100 120 C 112 110, 122 100, 130 88"/>
+</svg>
+<h1 data-lab>まなリーフ</h1>
+</body>
+</html>

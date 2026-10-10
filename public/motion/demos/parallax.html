@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>パララックス｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+}
+.layer {
+  position: absolute;
+  inset: -15% 0 0; /* ずれた分の隙間が出ないよう、上に大きめにとる */
+  will-change: transform;
+}
+.hero-text { position: relative; }
+
+@media (prefers-reduced-motion: reduce) {
+  .layer { transform: none !important; }
+}
+</style>
+<style data-lab>
+.far img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
+.mid { display: flex; align-items: flex-end; justify-content: center; gap: clamp(0px, 2vw, 24px); padding-bottom: 2%; }
+.mid img { height: clamp(150px, 38vh, 260px); width: auto; filter: drop-shadow(0 8px 14px rgba(0, 0, 0, 0.25)); }
+.hero-text { padding: clamp(48px, 14vh, 104px) clamp(24px, 6vw, 72px) 0; color: #fff; text-shadow: 0 2px 16px rgba(10, 16, 40, 0.6); }
+.hero-text .lab-hint { color: rgba(255, 255, 255, 0.8); }
+.hero-text h1 { margin: 10px 0 0; font-size: clamp(30px, 6vw, 52px); letter-spacing: 0.06em; }
+.hero-text p { margin: 12px 0 0; font-size: clamp(14px, 2vw, 18px); }
+.menu { background: #1c2547; color: #fff; padding: 56px clamp(24px, 6vw, 72px) 120px; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 16px 48px; }
+.menu h2 { margin: 0; font-size: 22px; }
+.menu ul { list-style: none; margin: 0; padding: 0; }
+.menu li { display: flex; justify-content: space-between; padding: 16px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.2); }
+.menu .n { font-family: var(--mono); }
+</style>
+</head>
+<body>
+<section class="hero" data-ease="0.15">
+  <!-- 係数が大きい層ほどゆっくり流れる -->
+  <div class="layer far" data-speed="0.6">
+    <img src="../media/hero-grade4.webp" width="1536" height="1024" alt="">
+  </div>
+  <div class="layer mid" data-speed="0.3">
+    <img src="../media/chara-aqua-cheering.webp" width="323" height="480" alt="アクア">
+    <img src="../media/chara-rifa-cheering.webp" width="290" height="480" alt="リファ" data-lab-more>
+    <img src="../media/chara-minju-cheering.webp" width="290" height="480" alt="ミンジュ" data-lab-more>
+    <img src="../media/chara-kiyu-cheering.webp" width="267" height="480" alt="キユ" data-lab-more>
+  </div>
+  <div class="hero-text">
+    <span class="lab-hint" data-lab>DEMO · 枠の中をスクロールしてください</span>
+    <h1>まなリーフ 小4</h1>
+    <p>4人と、4教科をめぐる。</p>
+  </div>
+</section>
+
+<section class="menu" data-lab>
+  <h2>4教科</h2>
+  <div>
+    <ul>
+      <li><span>さんすう</span><span class="n">14単元・545問</span></li>
+      <li><span>こくご</span><span class="n">13単元・555問</span></li>
+      <li><span>りか</span><span class="n">9単元・311問</span></li>
+      <li><span>しゃかい</span><span class="n">8単元・286問</span></li>
+    </ul>
+  </div>
+</section>
+
+<script>
+const hero = document.querySelector('.hero');
+const layers = [...document.querySelectorAll('.layer')];
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+let target = 0;
+let current = 0;
+
+addEventListener('scroll', () => {
+  target = scrollY;
+}, { passive: true });
+
+function tick() {
+  const ease = Number(hero.dataset.ease); // 0で即座に追従、大きいほどなめらか
+  current += (target - current) * (1 - ease);
+  for (const el of layers) {
+    const speed = reduce.matches ? 0 : Number(el.dataset.speed);
+    el.style.transform = `translate3d(0, ${current * speed}px, 0)`;
+  }
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+</body>
+</html>

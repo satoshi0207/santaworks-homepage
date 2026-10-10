@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マイクロインタラクション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.5s;   /* 返事の動きの時間 */
+  --bounce: 2; /* はね返りの強さ。1 で、はね返らない */
+  --spring: cubic-bezier(0.34, var(--bounce), 0.64, 1); /* 2つ目の数が 1 を超えると、行き過ぎて戻る */
+}
+
+/* 1. ハート：押すと、はずんで粒が散る */
+.like-icon { position: relative; display: inline-block; }
+.like[aria-pressed="true"] .like-icon {
+  color: var(--kokugo);
+  animation: pop var(--dur) var(--spring);
+}
+@keyframes pop {
+  from { transform: scale(0.5); }
+  to   { transform: scale(1); }
+}
+.spark {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 6px;
+  height: 6px;
+  margin: -3px;
+  border-radius: 50%;
+  background: var(--kokugo);
+  animation: burst var(--dur) ease-out forwards;
+}
+@keyframes burst {
+  to { transform: translate(var(--x), var(--y)) scale(0); } /* --x / --y は JS が粒ごとに入れる */
+}
+
+/* 2. 送信ボタン：丸く縮んで回り、✓ で広がる */
+.send {
+  width: 10em;
+  height: 3em;
+  border-radius: 1.5em;
+  transition: width var(--dur) ease, background-color var(--dur);
+}
+.send[data-state="sending"] { width: 3em; }
+.send[data-state="sending"] .send-text { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); } /* 目では見せず、読み上げには残す */
+.send[data-state="sending"]::before {
+  content: "";
+  width: 1.2em;
+  height: 1.2em;
+  border: 2px solid currentColor;
+  border-right-color: transparent;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+.send[data-state="done"] { background-color: var(--rika); }
+.send[data-state="done"]::before { content: "✓"; margin-right: 0.3em; }
+@keyframes spin {
+  to { transform: rotate(1turn); }
+}
+
+/* 3. スイッチ：つまみが、ばねのように行き過ぎて戻る */
+.switch {
+  position: relative;
+  width: 56px;
+  height: 32px;
+  border-radius: 16px;
+  background: var(--mid);
+  transition: background-color var(--dur);
+}
+.switch[aria-checked="true"] { background: var(--rika); }
+.knob {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  background: #fff;
+  transition: transform var(--dur) var(--spring);
+}
+.switch[aria-checked="true"] .knob { transform: translateX(24px); }
+
+/* 動きを減らす設定：状態は替わるが、動きは付けない */
+@media (prefers-reduced-motion: reduce) {
+  .like-icon, .send, .switch, .knob { animation: none !important; transition: none; }
+  .send[data-state="sending"]::before { content: "…"; animation: none; border: 0; width: auto; height: auto; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 14px; padding: 16px clamp(16px, 5vw, 40px); }
+.row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; max-width: 760px; width: 100%; margin: 0 auto; }
+@media (max-width: 600px) { .row { grid-template-columns: minmax(0, 1fr); gap: 10px; } }
+.cell { background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 16px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 150px; }
+@media (max-width: 600px) { .cell { min-height: 0; flex-direction: row; justify-content: space-between; padding: 14px 16px; } }
+.cell h2 { margin: 0; font-size: 12px; font-weight: 700; color: var(--muted); letter-spacing: 0.04em; }
+button { font: inherit; cursor: pointer; }
+button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.like { display: inline-flex; align-items: center; gap: 8px; padding: 8px 16px 8px 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--bg); color: var(--ink); font-size: 15px; }
+.like-icon { width: 26px; height: 26px; color: var(--muted); }
+.like-icon svg { display: block; width: 100%; height: 100%; fill: currentColor; }
+.like-count { font-variant-numeric: tabular-nums; font-weight: 700; min-width: 1ch; }
+.send { display: inline-flex; align-items: center; justify-content: center; overflow: hidden; white-space: nowrap; border: 0; background-color: var(--sansu); color: #fff; font-weight: 700; font-size: 15px; position: relative; }
+.toggle { display: flex; align-items: center; gap: 10px; }
+.switch { border: 0; padding: 0; flex: none; }
+.knob { box-shadow: 0 2px 4px rgba(0, 0, 0, 0.25); }
+.toggle span { font-size: 14px; font-weight: 700; white-space: nowrap; }
+@media (max-width: 600px) { .kira { display: none; } }
+.kira { width: 54px; height: auto; filter: grayscale(1) brightness(0.7); opacity: 0.6; transition: filter 0.4s, opacity 0.4s; }
+.cell:has([aria-checked="true"]) .kira { filter: drop-shadow(0 0 10px #ffd85a); opacity: 1; }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 3つのボタンを押してみてください</span>
+<div class="row">
+  <div class="cell">
+    <h2 data-lab>はじけて、数が増える</h2>
+    <button class="like" type="button" aria-pressed="false">
+      <span class="like-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M12 21s-7.5-4.6-9.6-9.2C1 8.6 3 5 6.6 5c2.1 0 3.6 1.2 4.4 2.6h2C13.8 6.2 15.3 5 17.4 5 21 5 23 8.6 21.6 11.8 19.5 16.4 12 21 12 21z"/></svg></span>
+      おうえん <span class="like-count">0</span>
+    </button>
+  </div>
+  <div class="cell">
+    <h2 data-lab>くるくる回って、✓ になる</h2>
+    <button class="send" type="button" data-state="idle"><span class="send-text" aria-live="polite">送信する</span></button>
+  </div>
+  <div class="cell">
+    <h2 data-lab>ばねのように切り替わる</h2>
+    <div class="toggle">
+      <img class="kira" src="../media/fairy-kira-happy.webp" width="290" height="292" alt="" data-lab>
+      <button class="switch" type="button" role="switch" aria-checked="false" aria-labelledby="sw-label"><span class="knob"></span></button>
+      <span id="sw-label">あかりをつける</span>
+    </div>
+  </div>
+</div>
+
+<script>
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+// 1. ハート：押すたびに オン／オフ。オンになるときだけ粒を散らす
+const like = document.querySelector('.like');
+like.addEventListener('click', () => {
+  const on = like.getAttribute('aria-pressed') !== 'true';
+  like.setAttribute('aria-pressed', String(on));
+  const count = like.querySelector('.like-count');
+  count.textContent = Number(count.textContent) + (on ? 1 : -1);
+  if (on && !reduce.matches) burst(like.querySelector('.like-icon'));
+});
+function burst(icon) {
+  for (let i = 0; i < 8; i++) {
+    const s = document.createElement('span');
+    s.className = 'spark';
+    const a = (i / 8) * Math.PI * 2; // 8方向に等しく散らす
+    s.style.setProperty('--x', `${Math.cos(a) * 28}px`);
+    s.style.setProperty('--y', `${Math.sin(a) * 28}px`);
+    s.addEventListener('animationend', () => s.remove()); // 散り終わった粒は消す
+    icon.append(s);
+  }
+}
+
+// 2. 送信ボタン：送っているあいだは、もう一度押しても何もしない（二重送信を防ぐ）
+const send = document.querySelector('.send');
+const text = send.querySelector('.send-text');
+const words = { idle: '送信する', sending: '送信中', done: '送信しました' };
+function setState(s) {
+  send.dataset.state = s;
+  text.textContent = words[s];
+}
+send.addEventListener('click', () => {
+  if (send.dataset.state !== 'idle') return;
+  setState('sending');
+  setTimeout(() => setState('done'), 1200); // 本物では、送信（fetch）が終わったときに替える
+  setTimeout(() => setState('idle'), 3400);
+});
+
+// 3. スイッチ：role="switch" と aria-checked で、読み上げにも オン／オフ を伝える
+const sw = document.querySelector('.switch');
+sw.addEventListener('click', () => {
+  sw.setAttribute('aria-checked', String(sw.getAttribute('aria-checked') !== 'true'));
+});
+</script>
+</body>
+</html>

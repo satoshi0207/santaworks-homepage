@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マーキー｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --speed: 24s; /* 1周にかかる秒数。短いほど速い */
+  --gap: 32px;  /* 並びのすきま */
+}
+.marquee {
+  display: flex;
+  gap: var(--gap);
+  overflow: hidden; /* 枠からはみ出した部分を隠す */
+}
+/* 同じ並びを2組置き、2組とも「自分の幅＋すきま」だけ左へ動かす。動ききった瞬間に最初へ戻っても、見た目は同じ */
+.marquee-group {
+  flex: none;
+  min-width: 100%; /* 1組が枠より短くても、端にすきまが見えないように広げる */
+  display: flex;
+  justify-content: space-around;
+  gap: var(--gap);
+  margin: 0; padding: 0; list-style: none;
+  animation: marquee var(--speed) linear infinite;
+}
+.marquee.reverse .marquee-group { animation-direction: reverse; } /* 下の帯は逆向き */
+.marquee:hover .marquee-group { animation-play-state: paused; }   /* マウスを乗せると止まる */
+/* 5秒より長く動くものには、止める手段を置く。チェックボックスなら CSS だけで、指でもキーボードでも止められる */
+:root:has(.marquee-pause input:checked) .marquee-group { animation-play-state: paused; }
+
+@keyframes marquee {
+  to { transform: translateX(calc(-100% - var(--gap))); }
+}
+
+/* 止めたときは流さず、1組だけを折り返して並べる */
+@media (prefers-reduced-motion: reduce) {
+  .marquee-group { animation: none; flex: 1; min-width: 0; flex-wrap: wrap; justify-content: center; }
+  .marquee-group[aria-hidden="true"] { display: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: clamp(20px, 5vh, 40px); padding: 24px 0; overflow-x: hidden; }
+.head { padding: 0 clamp(20px, 6vw, 72px); }
+.head h1 { margin: 10px 0 0; font-size: clamp(24px, 5vw, 38px); }
+.words { padding: 14px 0; background: var(--surface); border-block: 1px solid var(--line); }
+.words li { display: flex; align-items: center; gap: var(--gap); font-size: clamp(26px, 6vw, 40px); font-weight: 800; letter-spacing: 0.04em; white-space: nowrap; }
+.words li::after { content: "✦"; font-size: 0.5em; color: var(--muted); }
+.words li:nth-child(4n+1) { color: var(--sansu); }
+.words li:nth-child(4n+2) { color: var(--kokugo); }
+.words li:nth-child(4n+3) { color: var(--rika); }
+.words li:nth-child(4n+4) { color: var(--shakai); }
+.charas li { flex: none; }
+.charas img { display: block; height: clamp(96px, 22vh, 140px); width: auto; }
+.marquee-pause { align-self: center; display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); font-size: 14px; cursor: pointer; }
+.marquee-pause input { width: 16px; height: 16px; accent-color: var(--accent); margin: 0; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee-pause { display: none; }
+  body { gap: 16px; padding: 12px 0; }
+  .words li { font-size: clamp(18px, 4vw, 26px); }
+  .charas img { height: clamp(56px, 12vh, 88px); }
+  .marquee-group { row-gap: 10px; padding-inline: 16px; }
+}
+</style>
+</head>
+<body>
+<header class="head" data-lab>
+  <span class="lab-hint">DEMO · 流れ続けます。マウスを帯に乗せるか、下のチェックで止まります</span>
+  <h1>まなリーフ 小4 の中身</h1>
+</header>
+
+<div class="marquee words">
+  <ul class="marquee-group">
+    <li>さんすう</li>
+    <li>こくご</li>
+    <li data-lab-more>りか</li>
+    <li data-lab-more>しゃかい</li>
+    <li data-lab-more>おはなし</li>
+    <li data-lab-more>かべがみ</li>
+    <li data-lab-more>スタンプ</li>
+    <li data-lab-more>漢字</li>
+  </ul>
+  <!-- 2組目は継ぎ目を隠すための写し。読み上げソフトには読ませない -->
+  <ul class="marquee-group" aria-hidden="true">
+    <li>さんすう</li>
+    <li>こくご</li>
+    <li data-lab-more>りか</li>
+    <li data-lab-more>しゃかい</li>
+    <li data-lab-more>おはなし</li>
+    <li data-lab-more>かべがみ</li>
+    <li data-lab-more>スタンプ</li>
+    <li data-lab-more>漢字</li>
+  </ul>
+</div>
+
+<div class="marquee reverse charas">
+  <ul class="marquee-group">
+    <li><img src="../media/chara-aqua-normal.webp" alt="アクア"></li>
+    <li><img src="../media/chara-rifa-normal.webp" alt="リファ"></li>
+    <li data-lab-more><img src="../media/chara-minju-normal.webp" alt="ミンジュ"></li>
+    <li data-lab-more><img src="../media/chara-kiyu-normal.webp" alt="キユ"></li>
+    <li data-lab-more><img src="../media/fairy-kira-happy.webp" alt="妖精のキラ"></li>
+    <li data-lab-more><img src="../media/chara-aqua-cheering.webp" alt="アクア"></li>
+    <li data-lab-more><img src="../media/chara-rifa-cheering.webp" alt="リファ"></li>
+    <li data-lab-more><img src="../media/chara-minju-cheering.webp" alt="ミンジュ"></li>
+    <li data-lab-more><img src="../media/chara-kiyu-cheering.webp" alt="キユ"></li>
+  </ul>
+  <ul class="marquee-group" aria-hidden="true">
+    <li><img src="../media/chara-aqua-normal.webp" alt=""></li>
+    <li><img src="../media/chara-rifa-normal.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-minju-normal.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-kiyu-normal.webp" alt=""></li>
+    <li data-lab-more><img src="../media/fairy-kira-happy.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-aqua-cheering.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-rifa-cheering.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-minju-cheering.webp" alt=""></li>
+    <li data-lab-more><img src="../media/chara-kiyu-cheering.webp" alt=""></li>
+  </ul>
+</div>
+
+<label class="marquee-pause"><input type="checkbox"> 流れを止める</label>
+</body>
+</html>

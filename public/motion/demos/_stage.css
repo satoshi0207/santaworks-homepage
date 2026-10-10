@@ -1,0 +1,45 @@
+/*
+ * デモ共通の舞台（方眼の背景・配色・文字）。見本帳専用で、「最小のコード」には出さない。
+ * light-dark() は color-scheme に従って色を切り替える。既定は OS の設定、
+ * 見本帳の「ダーク表示」からは _lab.js が color-scheme を上書きする。
+ */
+:root {
+  color-scheme: light dark;
+  --ink: light-dark(#24262e, #ecebe6);
+  --muted: light-dark(#474d5b, #a9adb8);
+  --bg: light-dark(#fbfbf8, #16171b);
+  --surface: light-dark(#ffffff, #1e1f25);
+  --line: light-dark(#e4e6e2, #30323b);
+  --accent: light-dark(#c4333e, #e25660);
+  --stage: light-dark(#f1f0ea, #24262e);
+  --grid: light-dark(rgba(36, 38, 46, 0.06), rgba(236, 235, 230, 0.06));
+  --far: light-dark(#dcd8cc, #363943);
+  --mid: light-dark(#bdb7a8, #4c505d);
+  --mono: SFMono-Regular, Menlo, Consolas, monospace;
+  /* まなリーフ（アプリ本体の色。教科ごとの見出しの色） */
+  --sansu: #2F6FD6;  /* さんすう・アクア */
+  --kokugo: #E0457B; /* こくご・リファ */
+  --rika: #3F9E4A;   /* りか・ミンジュ */
+  --shakai: #7B4FBF; /* しゃかい・キユ */
+  --ml-cream: #FFFBEC;
+  --ml-wood: #8E6A43;
+}
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  font-family: 'Hiragino Kaku Gothic ProN', 'Hiragino Sans', 'Yu Gothic', 'YuGothic', sans-serif;
+  color: var(--ink);
+  background-color: var(--stage);
+  background-image:
+    linear-gradient(var(--grid) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+  background-size: 24px 24px;
+  -webkit-font-smoothing: antialiased;
+}
+.lab-hint {
+  font-family: var(--mono);
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--muted);
+}

@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホバーエフェクト｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.35s; /* 変化にかける時間 */
+}
+
+/* ① ボタンの塗りが、左から満ちる（背景の幅を 0% → 100% にする） */
+.fx-fill {
+  color: var(--sansu);
+  background: linear-gradient(var(--sansu), var(--sansu)) no-repeat left / 0% 100%;
+  transition: background-size var(--dur) ease, color var(--dur) ease;
+}
+.fx-fill:is(:hover, :focus-visible) {
+  color: #fff;
+  background-size: 100% 100%;
+}
+
+/* ② 下線が、左から伸びる */
+.fx-line {
+  text-decoration: none;
+  background: linear-gradient(currentColor, currentColor) no-repeat left bottom / 0% 2px;
+  transition: background-size var(--dur) ease;
+}
+.fx-line:is(:hover, :focus-visible) {
+  background-size: 100% 2px;
+}
+
+/* ③ 矢印が、右へずれる */
+.fx-arrow .arr {
+  display: inline-block; /* インライン要素は transform が効かないので */
+  transition: transform var(--dur) ease;
+}
+.fx-arrow:is(:hover, :focus-visible) .arr {
+  transform: translateX(8px);
+}
+
+/* ④ 画像が、枠の中で少し寄る（はみ出た分は枠で切る） */
+.fx-zoom {
+  display: block;
+  overflow: hidden;
+}
+.fx-zoom img {
+  transition: transform var(--dur) ease;
+}
+.fx-zoom:is(:hover, :focus-visible) img {
+  transform: scale(1.12);
+}
+
+/* ⑤ カードが浮く（影を深くして、持ち上がったように見せる） */
+.fx-lift {
+  display: block; /* a のままだと transform が効かない */
+  transition: transform var(--dur) ease, box-shadow var(--dur) ease, border-color var(--dur) ease;
+}
+.fx-lift:is(:hover, :focus-visible) {
+  transform: translateY(-8px);
+  box-shadow: 0 18px 32px rgba(36, 38, 46, 0.22);
+  border-color: var(--kokugo);
+}
+
+/* 動きを減らす設定では、色だけ変えて、位置と大きさは動かさない */
+@media (prefers-reduced-motion: reduce) {
+  .fx-fill, .fx-line, .fx-arrow .arr, .fx-zoom img, .fx-lift { transition: none; }
+  .fx-arrow:is(:hover, :focus-visible) .arr,
+  .fx-zoom:is(:hover, :focus-visible) img,
+  .fx-lift:is(:hover, :focus-visible) { transform: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 20px 16px; }
+.board { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 14px; width: min(100%, 460px); }
+.cap { font-size: 12px; font-weight: 700; color: var(--muted); white-space: nowrap; }
+a { color: var(--ink); outline-offset: 4px; }
+.fx-fill { justify-self: start; padding: 10px 26px; border: 2px solid var(--sansu); border-radius: 999px; font-weight: 800; letter-spacing: 0.08em; text-decoration: none; }
+.fx-line { justify-self: start; padding-bottom: 3px; font-weight: 700; color: var(--rika); }
+.fx-arrow { justify-self: start; font-weight: 700; text-decoration: none; color: var(--shakai); }
+.fx-zoom { display: block; width: min(100%, 220px); aspect-ratio: 3 / 2; border-radius: 12px; border: 1px solid var(--line); }
+.fx-zoom img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.fx-lift { display: flex; align-items: center; gap: 10px; width: min(100%, 220px); padding: 8px 14px 0 8px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; box-shadow: 0 4px 10px rgba(36, 38, 46, 0.08); text-decoration: none; overflow: hidden; }
+.fx-lift img { width: 54px; height: 72px; object-fit: cover; object-position: top; }
+.fx-lift b { display: block; font-size: 14px; }
+.fx-lift small { font-family: var(--mono); font-size: 12px; color: var(--muted); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · マウスを乗せるか、Tab キーで順に選んでください（スマホではタップで変わります）</span>
+<main class="board">
+  <span class="cap" data-lab>① 塗りが満ちる</span>
+  <a class="fx-fill" href="#">はじめる</a>
+  <span class="cap" data-lab>② 下線が伸びる</span>
+  <a class="fx-line" href="#">4つの教科を見る</a>
+  <span class="cap" data-lab>③ 矢印がずれる</span>
+  <a class="fx-arrow" href="#">おはなしを読む <span class="arr">→</span></a>
+  <span class="cap" data-lab>④ 画像が寄る</span>
+  <a class="fx-zoom" href="#"><img src="../media/hero-grade4.webp" width="1536" height="1024" alt="夜の大樹"></a>
+  <span class="cap" data-lab>⑤ カードが浮く</span>
+  <a class="fx-lift" href="#"><img src="../media/chara-rifa-smile.webp" width="254" height="474" alt=""><span><b>リファと、こくご</b><small>13単元・555問</small></span></a>
+</main>
+
+<script data-lab>
+  // 見本帳の中では、リンクを押してもページを移らない
+  document.addEventListener('click', (e) => { if (e.target.closest('a')) e.preventDefault(); });
+</script>
+</body>
+</html>

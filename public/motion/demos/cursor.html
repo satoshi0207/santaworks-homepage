@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>カスタムカーソル｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --size: 36px; /* 輪の大きさ */
+}
+.cursor-dot,
+.cursor-ring {
+  position: fixed;
+  left: 0;
+  top: 0;
+  z-index: 100;
+  pointer-events: none; /* カーソルの絵が、クリックを横取りしないように */
+  opacity: 0;           /* マウスが動くまでは出さない */
+}
+.cursor-dot {
+  width: 8px;
+  height: 8px;
+  margin: -4px 0 0 -4px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+.cursor-ring::before {
+  content: "";
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  margin: calc(var(--size) / -2) 0 0 calc(var(--size) / -2);
+  border: 2px solid var(--accent);
+  border-radius: 50%;
+  transition: scale 0.25s ease, background-color 0.25s ease;
+}
+/* ボタンや画像の上では、輪を大きくする */
+.cursor-ring.is-hover::before {
+  scale: 1.8;
+  background-color: color-mix(in srgb, var(--accent) 14%, transparent);
+}
+/* キーボードで操作する人のために、フォーカスの枠は消さない */
+a:focus-visible {
+  outline: 3px solid var(--accent);
+  outline-offset: 4px;
+}
+
+/* マウスで、動きを止めていないときだけ、ふつうのカーソルを絵に替える */
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .has-cursor,
+  .has-cursor * { cursor: none; }
+  .has-cursor .cursor-dot,
+  .has-cursor .cursor-ring { opacity: 1; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px 16px; text-align: center; overflow: hidden; }
+h1 { margin: 0; font-size: clamp(26px, 6vw, 40px); letter-spacing: 0.06em; }
+.lead { margin: 0; color: var(--muted); font-size: 14px; }
+.start { position: relative; display: block; width: min(64vw, 260px); border-radius: 999px; }
+.start img { display: block; width: 100%; height: auto; }
+.start span { position: absolute; left: 0; right: 22%; top: 50%; transform: translateY(-54%); color: #fff; font-weight: 800; font-size: clamp(15px, 3.6vw, 19px); letter-spacing: 0.08em; text-shadow: 0 1px 2px rgba(150, 30, 70, 0.5); }
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 120px)); gap: clamp(8px, 2vw, 18px); margin-top: 6px; }
+.card { display: block; padding: 8px 6px 10px; border-radius: 14px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; }
+.card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; object-fit: contain; }
+.card b { display: block; margin-top: 6px; font-size: clamp(11px, 2.6vw, 14px); }
+.card small { display: block; font-size: 11px; font-weight: 700; }
+.card.sansu small { color: var(--sansu); } .card.kokugo small { color: var(--kokugo); } .card.rika small { color: var(--rika); } .card.shakai small { color: var(--shakai); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · マウスを動かして、ボタンや絵の上に乗せてください（スマホでは動きません）</span>
+<h1 data-lab>まなリーフ 小4</h1>
+<p class="lead" data-lab>4年生の4教科を、1回10問で。</p>
+<a class="start" href="#"><img src="../media/btn-start.webp" width="450" height="150" alt=""><span>はじめる</span></a>
+<div class="cards">
+  <a class="card sansu" href="#"><img src="../media/chara-aqua-normal.webp" alt=""><b>アクア</b><small>さんすう</small></a>
+  <a class="card kokugo" href="#"><img src="../media/chara-rifa-normal.webp" alt=""><b>リファ</b><small>こくご</small></a>
+  <a class="card rika" href="#" data-lab-more><img src="../media/chara-minju-normal.webp" alt=""><b>ミンジュ</b><small>りか</small></a>
+  <a class="card shakai" href="#" data-lab-more><img src="../media/chara-kiyu-normal.webp" alt=""><b>キユ</b><small>しゃかい</small></a>
+</div>
+
+<!-- カーソルの絵。点はぴったり、輪は少し遅れて付いてくる -->
+<div class="cursor-ring" data-ease="0.15" aria-hidden="true"></div>
+<div class="cursor-dot" aria-hidden="true"></div>
+
+<script>
+const root = document.documentElement;
+const ring = document.querySelector('.cursor-ring');
+const dot = document.querySelector('.cursor-dot');
+const mouse = { x: 0, y: 0 }; // カーソルの位置
+const pos = { x: 0, y: 0 };   // 輪のいまの位置
+
+addEventListener('pointermove', (e) => {
+  if (e.pointerType !== 'mouse') return; // 指やペンでは出さない
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  if (!root.classList.contains('has-cursor')) {
+    pos.x = mouse.x; // 最初の1回は、輪も同じ場所から始める
+    pos.y = mouse.y;
+    root.classList.add('has-cursor'); // マウスが動いてから、ふつうのカーソルを消す
+  }
+  dot.style.transform = `translate(${mouse.x}px, ${mouse.y}px)`;
+});
+
+// 枠の外へ出たら、絵を隠して、ふつうのカーソルに戻す
+addEventListener('pointerout', (e) => {
+  if (!e.relatedTarget) root.classList.remove('has-cursor');
+});
+
+// ボタンや画像の上にいるかどうか
+addEventListener('pointerover', (e) => {
+  ring.classList.toggle('is-hover', !!e.target.closest('a, button, img'));
+});
+
+function tick() {
+  const ease = Number(ring.dataset.ease); // 1でぴったり。小さいほど遅れて付いてくる
+  pos.x += (mouse.x - pos.x) * ease;      // 毎フレーム、残りの差の何割かだけ近づく
+  pos.y += (mouse.y - pos.y) * ease;
+  ring.style.transform = `translate(${pos.x}px, ${pos.y}px)`;
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+<script data-lab>
+  document.querySelectorAll('a').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+</script>
+</body>
+</html>

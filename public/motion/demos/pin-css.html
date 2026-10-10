@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スクロール固定（CSSだけ）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --peek: 16px; /* 下に重なったカードが見える幅 */
+}
+
+/* 1枚ずつ画面の上に貼りつき、次のカードが上に重なっていく */
+.panel {
+  position: sticky;
+  top: calc(var(--i) * var(--peek));
+  height: calc(100vh - 3 * var(--peek));
+}
+</style>
+<style data-lab>
+.intro, .outro { min-height: 55vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(24px, 6vw, 72px); }
+.intro h1 { margin: 10px 0 0; font-size: clamp(26px, 5vw, 40px); }
+.outro { color: var(--muted); }
+.panel { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 0 clamp(24px, 7vw, 80px); border-radius: 22px 22px 0 0; box-shadow: 0 -8px 24px rgba(36, 38, 46, 0.12); color: #2b2b33; }
+.panel img { height: min(62vh, 300px); width: auto; }
+.panel .k { font-size: 14px; font-weight: 700; letter-spacing: 0.08em; }
+.panel h2 { margin: 6px 0 0; font-size: clamp(34px, 8vw, 64px); }
+.panel p { margin: 10px 0 0; font-family: var(--mono); font-size: clamp(14px, 2.4vw, 18px); }
+.sansu { background: #CDE9F7; } .sansu .k { color: var(--sansu); }
+.kokugo { background: #FFC2D1; } .kokugo .k { color: var(--kokugo); }
+.rika { background: #D5F0C4; } .rika .k { color: var(--rika); }
+.shakai { background: #D6C7F5; } .shakai .k { color: var(--shakai); }
+</style>
+</head>
+<body>
+<header class="intro" data-lab>
+  <span class="lab-hint">DEMO · 下へスクロールしてください</span>
+  <h1>4人と、4教科</h1>
+</header>
+
+<section class="stack">
+  <article class="panel sansu" style="--i: 0">
+    <div><span class="k">アクアと学ぶ</span><h2>さんすう</h2><p>14単元・545問</p></div>
+    <img src="../media/chara-aqua-cheering.webp" alt="">
+  </article>
+  <article class="panel kokugo" style="--i: 1">
+    <div><span class="k">リファと学ぶ</span><h2>こくご</h2><p>13単元・555問</p></div>
+    <img src="../media/chara-rifa-cheering.webp" alt="">
+  </article>
+  <article class="panel rika" style="--i: 2" data-lab-more>
+    <div><span class="k">ミンジュと学ぶ</span><h2>りか</h2><p>9単元・311問</p></div>
+    <img src="../media/chara-minju-cheering.webp" alt="">
+  </article>
+  <article class="panel shakai" style="--i: 3" data-lab-more>
+    <div><span class="k">キユと学ぶ</span><h2>しゃかい</h2><p>8単元・286問</p></div>
+    <img src="../media/chara-kiyu-cheering.webp" alt="">
+  </article>
+</section>
+
+<p class="outro" data-lab>ここで重なりが終わります。</p>
+</body>
+</html>

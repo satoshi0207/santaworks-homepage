@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マスクアニメーション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 1.2s; /* 開ききるまでの時間 */
+}
+
+/* JS が動いたときだけ閉じておく。JS が止まっても、絵はふつうに見える */
+.js .mask > img {
+  clip-path: inset(0 50% 0 50%); /* 上 右 下 左 を削る。左右から半分ずつ＝真ん中の線だけ */
+  transition: clip-path var(--dur) cubic-bezier(0.7, 0, 0.2, 1);
+}
+.js .from-left > img   { clip-path: inset(0 100% 0 0); } /* 右を全部削る＝左端から開く */
+.js .from-bottom > img { clip-path: inset(100% 0 0 0); } /* 上を全部削る＝下から開く */
+.js .from-right > img  { clip-path: inset(0 0 0 100%); } /* 左を全部削る＝右端から開く */
+
+/* 画面に入ったら、どこも削らない状態へ */
+.js .mask.is-in > img {
+  clip-path: inset(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .mask > img { clip-path: none; transition: none; }
+}
+</style>
+<style data-lab>
+.top { min-height: 82vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(24px, 6vw, 72px); }
+.top h1 { margin: 10px 0 0; font-size: clamp(28px, 5.5vw, 44px); letter-spacing: 0.04em; }
+.top p { margin: 12px 0 0; color: var(--muted); }
+.gallery { display: grid; gap: clamp(48px, 10vh, 96px); padding: 0 clamp(20px, 6vw, 72px) 40vh; }
+.mask { margin: 0; display: grid; grid-template-columns: minmax(0, 260px) minmax(0, 1fr); gap: clamp(14px, 4vw, 32px); align-items: end; }
+.mask:nth-child(even) { grid-template-columns: minmax(0, 1fr) minmax(0, 260px); }
+.mask:nth-child(even) > img { order: 2; }
+.mask > img { display: block; width: 100%; height: auto; border-radius: 14px; }
+.mask figcaption { padding-bottom: 6px; }
+.mask figcaption b { display: block; font-size: clamp(17px, 4vw, 22px); }
+.mask figcaption code { display: block; margin-top: 8px; font-family: var(--mono); font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.k { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.sansu .k { color: var(--sansu); } .kokugo .k { color: var(--kokugo); } .rika .k { color: var(--rika); } .shakai .k { color: var(--shakai); }
+@media (max-width: 420px) {
+  .mask, .mask:nth-child(even) { grid-template-columns: 1fr; }
+  .mask > img { width: min(100%, 250px); }
+  .mask:nth-child(even) > img { order: 0; justify-self: end; }
+}
+</style>
+</head>
+<body>
+<header class="top" data-lab>
+  <span class="lab-hint">DEMO · 下へスクロールしてください。絵が画面に入ると、幕が開くように現れます</span>
+  <h1>4人のおはなし</h1>
+  <p>それぞれの第1章のさし絵。開く向きを、1枚ずつ変えています。</p>
+</header>
+
+<main class="gallery">
+  <figure class="mask sansu">
+    <img src="../media/story-aqua-1.webp" width="720" height="1080" alt="アクアの章のさし絵">
+    <figcaption data-lab><span class="k">さんすう・アクア</span><b>真ん中から左右へ</b><code>inset(0 50% 0 50%) → inset(0)</code></figcaption>
+  </figure>
+  <figure class="mask from-left kokugo">
+    <img src="../media/story-rifa-1.webp" width="720" height="1080" alt="リファの章のさし絵">
+    <figcaption data-lab><span class="k">こくご・リファ</span><b>左から右へ</b><code>inset(0 100% 0 0) → inset(0)</code></figcaption>
+  </figure>
+  <figure class="mask from-bottom rika" data-lab-more>
+    <img src="../media/story-minju-1.webp" width="720" height="1080" alt="ミンジュの章のさし絵">
+    <figcaption data-lab><span class="k">りか・ミンジュ</span><b>下から上へ</b><code>inset(100% 0 0 0) → inset(0)</code></figcaption>
+  </figure>
+  <figure class="mask from-right shakai" data-lab-more>
+    <img src="../media/story-kiyu-1.webp" width="720" height="1080" alt="キユの章のさし絵">
+    <figcaption data-lab><span class="k">しゃかい・キユ</span><b>右から左へ</b><code>inset(0 0 0 100%) → inset(0)</code></figcaption>
+  </figure>
+</main>
+
+<script>
+document.documentElement.classList.add('js');
+
+// 削っていない枠（figure）を見張る。削った絵そのものは、見えている量を正しく測れないため
+const io = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (entry.intersectionRatio >= 0.3) entry.target.classList.add('is-in'); // 3割見えたら開く
+    else if (!entry.isIntersecting) entry.target.classList.remove('is-in');  // 出きったら閉じ直す（戻ってくると、もう一度開く）
+  }
+}, { threshold: [0, 0.3] });
+
+document.querySelectorAll('.mask').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>背景動画｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --shade: 0.35; /* 文字を読みやすくする幕の濃さ（0〜1） */
+}
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: grid;
+  place-content: center;
+  isolation: isolate; /* 動画と幕を、この箱の中だけで重ねる */
+}
+.hero-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* 箱の形が変わっても、すき間なく敷きつめる（はみ出た分は切る） */
+  z-index: -2;
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgb(0 0 0 / var(--shade));
+  z-index: -1;
+}
+</style>
+<style data-lab>
+body { margin: 0; }
+.hero { padding: 24px; text-align: center; color: #fff; background: #1b1d33; }
+.hero h1 { margin: 0; font-size: clamp(34px, 8vw, 64px); letter-spacing: 0.06em; text-shadow: 0 2px 14px rgba(0, 0, 0, 0.45); }
+.hero p { margin: 12px 0 0; font-size: clamp(15px, 2.8vw, 20px); font-weight: 700; text-shadow: 0 1px 10px rgba(0, 0, 0, 0.55); }
+.hero .lab-hint { position: absolute; top: 14px; left: 16px; right: 16px; color: rgba(255, 255, 255, 0.85); text-align: left; }
+.hero-toggle { position: absolute; right: 16px; bottom: 16px; font: inherit; font-size: 13px; font-weight: 700; color: #fff; background: rgba(0, 0, 0, 0.45); border: 1px solid rgba(255, 255, 255, 0.6); border-radius: 999px; padding: 8px 16px; cursor: pointer; }
+.hero-toggle:focus-visible { outline: 2px solid #fff; outline-offset: 2px; }
+</style>
+</head>
+<body>
+<header class="hero">
+  <span class="lab-hint" data-lab>DEMO · 8秒の動画がくり返し流れます。右下のボタンで止められます</span>
+  <video class="hero-video" src="../media/bg-hero.mp4" poster="../media/bg-hero-poster.webp" autoplay muted loop playsinline aria-hidden="true"></video>
+  <h1>まなリーフ 小4</h1>
+  <p>4年生の4教科を、1回10問で。</p>
+  <button class="hero-toggle" type="button">止める</button>
+</header>
+
+<script>
+const video = document.querySelector('.hero-video');
+const toggle = document.querySelector('.hero-toggle');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+// 動きを減らす設定なら、自動再生をやめて poster の1枚を見せる
+if (reduce.matches) video.pause();
+
+// 5秒以上動き続けるものには、止める手段を付ける
+toggle.addEventListener('click', () => {
+  if (video.paused) video.play(); else video.pause();
+});
+
+// ボタンの文字は、実際の再生状態に合わせる（省電力モードなどで自動再生が止められた場合も含む）
+function label() {
+  toggle.textContent = video.paused ? '再生する' : '止める';
+}
+video.addEventListener('play', label);
+video.addEventListener('pause', label);
+label();
+</script>
+</body>
+</html>

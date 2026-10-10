@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>背景色の切り替え｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.8s;  /* 色が替わりきるまでの時間 */
+  --tint: 22%;  /* 教科の色を、地の色にどれだけ混ぜるか */
+}
+
+body {
+  background-color: var(--bg);
+  transition: background-color var(--dur) ease;
+}
+/* 教科の色を、ページの地の色に混ぜる。地が暗い（ダーク表示）なら、暗いまま色味だけが付く */
+body[data-bg="sansu"]  { background-color: color-mix(in srgb, var(--sansu) var(--tint), var(--bg)); }
+body[data-bg="kokugo"] { background-color: color-mix(in srgb, var(--kokugo) var(--tint), var(--bg)); }
+body[data-bg="rika"]   { background-color: color-mix(in srgb, var(--rika) var(--tint), var(--bg)); }
+body[data-bg="shakai"] { background-color: color-mix(in srgb, var(--shakai) var(--tint), var(--bg)); }
+
+@media (prefers-reduced-motion: reduce) {
+  body { transition: none; } /* 色は替わるが、パッと替わる */
+}
+</style>
+<style data-lab>
+.band { min-height: 86vh; display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: center; gap: 12px; padding: 0 clamp(20px, 7vw, 80px); }
+.band img { height: min(56vh, 300px); width: auto; }
+.band .k { font-size: 13px; font-weight: 800; letter-spacing: 0.08em; }
+.band h2 { margin: 6px 0 0; font-size: clamp(34px, 9vw, 64px); letter-spacing: 0.04em; }
+.band p { margin: 10px 0 0; font-family: var(--mono); font-size: clamp(14px, 2.6vw, 18px); color: var(--muted); }
+.band[data-bg="sansu"] { --c: var(--sansu); } .band[data-bg="kokugo"] { --c: var(--kokugo); }
+.band[data-bg="rika"] { --c: var(--rika); } .band[data-bg="shakai"] { --c: var(--shakai); }
+.band .k { color: color-mix(in srgb, var(--c) 70%, var(--ink)); }
+.top { min-height: 80vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(20px, 7vw, 80px); }
+.top h1 { margin: 10px 0 0; font-size: clamp(28px, 5.5vw, 44px); }
+.top p, .outro { color: var(--muted); }
+.outro { min-height: 60vh; padding: 40px clamp(20px, 7vw, 80px); }
+@media (max-width: 420px) { .band img { height: min(40vh, 200px); } }
+</style>
+</head>
+<body>
+<header class="top" data-bg="">
+  <span class="lab-hint" data-lab>DEMO · 下へスクロールしてください。教科の区間が画面の真ん中に来ると、背景の色が替わります</span>
+  <h1>4人と、4教科</h1>
+  <p>4年生の4教科を、1回10問で。</p>
+</header>
+
+<section class="band" data-bg="sansu">
+  <div><span class="k">アクアと学ぶ</span><h2>さんすう</h2><p>14単元・545問</p></div>
+  <img src="../media/chara-aqua-cheering.webp" alt="">
+</section>
+<section class="band" data-bg="kokugo">
+  <div><span class="k">リファと学ぶ</span><h2>こくご</h2><p>13単元・555問</p></div>
+  <img src="../media/chara-rifa-cheering.webp" alt="">
+</section>
+<section class="band" data-bg="rika" data-lab-more>
+  <div><span class="k">ミンジュと学ぶ</span><h2>りか</h2><p>9単元・311問</p></div>
+  <img src="../media/chara-minju-cheering.webp" alt="">
+</section>
+<section class="band" data-bg="shakai" data-lab-more>
+  <div><span class="k">キユと学ぶ</span><h2>しゃかい</h2><p>8単元・286問</p></div>
+  <img src="../media/chara-kiyu-cheering.webp" alt="">
+</section>
+
+<footer class="outro" data-bg="">
+  <p>ぜんぶで44単元・1,697問。</p>
+</footer>
+
+<script>
+// 画面の真ん中の細い帯（上下45%ずつを外した残り）に入った区間を、いまの区間にする
+const io = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (entry.isIntersecting) document.body.dataset.bg = entry.target.dataset.bg;
+  }
+}, { rootMargin: '-45% 0px -45% 0px' });
+
+document.querySelectorAll('[data-bg]').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

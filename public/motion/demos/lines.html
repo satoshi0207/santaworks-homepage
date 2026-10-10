@@ -1,0 +1,60 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>行のスライドイン｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --stagger: 140ms; /* 1行ごとの遅れ */
+  --dur: 0.9s;      /* 1行がせり上がるまでの時間 */
+}
+
+.line {
+  display: block;
+  overflow: hidden; /* 見えない枠。枠の下にいるあいだは隠れている */
+}
+.line > span {
+  display: block; /* transform は inline 要素には効かない */
+}
+
+/* 動きは「減らす設定ではない人」にだけ付ける。何もしなければ、最初から見えている */
+@media (prefers-reduced-motion: no-preference) {
+  .line > span {
+    animation: rise var(--dur) cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i) * var(--stagger));
+  }
+}
+
+@keyframes rise {
+  from { transform: translateY(110%); } /* 枠の真下。少し余分に下げて、文字の端ものぞかせない */
+  to   { transform: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 24px clamp(20px, 7vw, 80px); overflow-x: hidden; }
+.eyebrow { margin: 14px 0 0; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; color: var(--rika); }
+.title { margin: 10px 0 0; font-size: clamp(40px, 10.5vw, 88px); font-weight: 800; line-height: 1.25; letter-spacing: 0.02em; }
+.title .line:nth-child(3) span { color: var(--accent); }
+.row { display: flex; gap: 8px; margin-top: 24px; }
+.row img { height: clamp(80px, 18vh, 130px); width: auto; }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 「↻ 最初から」で見直せます</span>
+<p class="eyebrow" data-lab>まなリーフ 小4</p>
+<h1 class="title">
+  <span class="line"><span style="--i: 0">4年生の</span></span>
+  <span class="line"><span style="--i: 1">4教科を、</span></span>
+  <span class="line" data-lab-more><span style="--i: 2">1回10問で。</span></span>
+</h1>
+<div class="row" data-lab>
+  <img src="../media/chara-aqua-smile.webp" alt="">
+  <img src="../media/chara-rifa-smile.webp" alt="">
+  <img src="../media/chara-minju-smile.webp" alt="">
+  <img src="../media/chara-kiyu-smile.webp" alt="">
+</div>
+</body>
+</html>

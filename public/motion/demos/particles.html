@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>パーティクル｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+html, body { height: 100%; }
+#stage {
+  width: 100%;
+  height: 100%;
+}
+</style>
+<style data-lab>
+body { overflow: hidden; }
+.caption { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; pointer-events: none; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="stage" data-step="3" data-speed="0.8"></div>
+<p class="caption lab-hint" data-lab>DEMO · 粒が集まってロゴになり、またほどけます</p>
+
+<script type="module">
+import * as THREE from 'three';
+
+const stage = document.getElementById('stage');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+// 1. ロゴ画像を小さく描き、不透明な点の位置と色を拾う
+const logo = new Image();
+logo.src = '../media/logo-text.webp';
+await logo.decode();
+const W = 300;
+const H = Math.round(logo.height * W / logo.width);
+const ctx = Object.assign(document.createElement('canvas'), { width: W, height: H }).getContext('2d');
+ctx.drawImage(logo, 0, 0, W, H);
+const px = ctx.getImageData(0, 0, W, H).data;
+
+const step = Number(stage.dataset.step); // 何ピクセルおきに粒を置くか（小さいほど粒が多い）
+const home = [];   // ロゴの形のときの位置
+const colors = [];
+const color = new THREE.Color();
+for (let y = 0; y < H; y += step) {
+  for (let x = 0; x < W; x += step) {
+    const i = (y * W + x) * 4;
+    if (px[i + 3] < 128) continue;
+    home.push(x - W / 2, H / 2 - y, 0);
+    color.setRGB(px[i] / 255, px[i + 1] / 255, px[i + 2] / 255, THREE.SRGBColorSpace);
+    colors.push(color.r, color.g, color.b);
+  }
+}
+const away = home.map(() => (Math.random() - 0.5) * W * 1.6); // ほどけたときの位置
+
+// 2. 粒を1つの「点の集まり」として描く
+const geometry = new THREE.BufferGeometry();
+const position = new THREE.BufferAttribute(new Float32Array(away), 3);
+geometry.setAttribute('position', position);
+geometry.setAttribute('color', new THREE.Float32BufferAttribute(colors, 3));
+// 点はそのままだと四角。白い丸の絵を貼って、丸い粒にする
+const dot = Object.assign(document.createElement('canvas'), { width: 32, height: 32 });
+const dotCtx = dot.getContext('2d');
+dotCtx.fillStyle = '#fff';
+dotCtx.beginPath();
+dotCtx.arc(16, 16, 15, 0, Math.PI * 2);
+dotCtx.fill();
+const material = new THREE.PointsMaterial({ vertexColors: true, map: new THREE.CanvasTexture(dot), alphaTest: 0.5 });
+const points = new THREE.Points(geometry, material);
+
+const scene = new THREE.Scene();
+scene.add(points);
+const camera = new THREE.OrthographicCamera();
+camera.position.z = 10;
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+stage.append(renderer.domElement);
+
+// ロゴの幅が枠の8割になるよう、カメラの見える範囲を合わせる
+new ResizeObserver(() => {
+  const aspect = stage.clientWidth / stage.clientHeight;
+  const viewW = Math.max(W / 0.8, (H / 0.6) * aspect);
+  camera.left = -viewW / 2;
+  camera.right = viewW / 2;
+  camera.top = viewW / aspect / 2;
+  camera.bottom = -viewW / aspect / 2;
+  camera.updateProjectionMatrix();
+  renderer.setSize(stage.clientWidth, stage.clientHeight);
+  // 平行投影では、点の大きさは画面のピクセルで決まる。粒の間隔に合わせて計算し直す
+  material.size = step * (stage.clientWidth / viewW) * 1.05;
+}).observe(stage);
+
+// 3. 時間に合わせて、ほどけた位置とロゴの位置のあいだを行き来する
+renderer.setAnimationLoop((time) => {
+  const t = (time / 1000) * Number(stage.dataset.speed); // time は読み込んでからのミリ秒
+  const k = reduce.matches ? 1 : Math.min(1, Math.max(0, 0.5 - Math.cos(t) * 0.8)); // 0=ほどけた 1=ロゴ
+  const e = k * k * (3 - 2 * k); // なめらかに出入りさせる
+  const arr = position.array;
+  for (let i = 0; i < arr.length; i++) arr[i] = away[i] + (home[i] - away[i]) * e;
+  position.needsUpdate = true;
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

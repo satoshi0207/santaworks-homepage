@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ローディング画面｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<script>
+document.documentElement.classList.add('js'); // JS が動くときだけ幕を出す。最初の描画より前に付けるため <head> に置く
+</script>
+<style>
+:root {
+  --dur: 0.8s; /* 幕が上へ引く時間 */
+}
+
+/* 幕。JS が動かないときは出さない（出したまま消せなくなるため） */
+.loader { display: none; }
+.js .loader {
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  background: var(--ml-cream);
+  transition: transform var(--dur) cubic-bezier(0.7, 0, 0.2, 1);
+}
+.js.is-loaded .loader { transform: translateY(-100%); }
+
+/* 読み込み中の目印：妖精が跳ねる */
+.loader-kira { animation: hop 0.5s ease-in-out infinite alternate; }
+@keyframes hop {
+  to { transform: translateY(-16px); }
+}
+
+/* 幕が引いたあと、見出しが少し遅れて浮かぶ */
+.js .hero-title {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease 0.3s, transform 0.6s ease 0.3s;
+}
+.js.is-loaded .hero-title { opacity: 1; transform: none; }
+
+/* 動きを減らす設定では、幕を出さない */
+@media (prefers-reduced-motion: reduce) {
+  .js .loader { display: none; }
+  .js .hero-title { opacity: 1; transform: none; transition: none; }
+}
+</style>
+<style data-lab>
+body { margin: 0; }
+.loader img:first-child { width: min(70vw, 340px); height: auto; }
+.loader-kira { width: 64px; height: auto; margin-top: 18px; }
+.hero { position: relative; min-height: 100vh; display: flex; flex-direction: column; justify-content: flex-end; padding: clamp(20px, 6vw, 56px); background: #1b1d33 url(../media/hero-grade4.webp) center / cover no-repeat; color: #fff; }
+.hero::before { content: ""; position: absolute; inset: 0; background: linear-gradient(to top, rgba(10, 12, 30, 0.75), rgba(10, 12, 30, 0) 65%); }
+.hero > * { position: relative; }
+.hero-title { margin: 0; font-size: clamp(32px, 7vw, 56px); letter-spacing: 0.06em; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.5); }
+.hero p { margin: 10px 0 0; font-size: clamp(15px, 2.6vw, 18px); text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+.hero .lab-hint { position: absolute; top: 16px; left: clamp(20px, 6vw, 56px); right: 16px; color: rgba(255, 255, 255, 0.85); }
+</style>
+</head>
+<body>
+<div class="loader" data-min="1500" aria-hidden="true">
+  <img src="../media/logo-text.webp" width="900" height="325" alt="">
+  <img class="loader-kira" src="../media/fairy-kira-happy.webp" width="290" height="292" alt="">
+</div>
+
+<header class="hero">
+  <span class="lab-hint" data-lab>DEMO · 「↻ 最初から」を押すと、幕からもう一度見られます</span>
+  <h1 class="hero-title">まなリーフ 小4</h1>
+  <p>4年生の4教科を、1回10問で。</p>
+</header>
+
+<script>
+const root = document.documentElement;
+const loader = document.querySelector('.loader');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+function reveal() {
+  if (root.classList.contains('is-loaded')) return; // 2回目は何もしない
+  root.classList.add('is-loaded'); // 幕を上へ引く（動きは CSS の transition）
+  loader.addEventListener('transitionend', () => loader.remove(), { once: true });
+}
+
+// 画像まで読み込み終わり、かつ最低の表示時間が過ぎたら開ける
+addEventListener('load', () => {
+  const min = Number(loader.dataset.min); // 最低でも見せる時間（ミリ秒）
+  const rest = Math.max(0, min - performance.now()); // ページを開いてからの時間を差し引く
+  setTimeout(reveal, reduce.matches ? 0 : rest);
+});
+setTimeout(reveal, 5000); // 保険：読み込みが終わらない画像があっても、5秒で必ず開ける
+</script>
+</body>
+</html>

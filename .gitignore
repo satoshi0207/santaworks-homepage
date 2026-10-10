@@ -58,3 +58,8 @@ next-env.d.ts
 # Python の生成物（scripts/ の画像生成スクリプト由来）
 __pycache__/
 *.pyc
+
+# 動きの見本帳を Claude Design に渡した素材（動画・スクショ・v2 の原本。各数十MB。capture/ のスクリプトで撮り直せる）
+# 中身の説明（README.md）だけは残す
+/docs/motion/design/materials/*
+!/docs/motion/design/materials/README.md

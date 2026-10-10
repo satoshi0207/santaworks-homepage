@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ホバーで画像が出る｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --img-w: 220px; /* 浮かぶ画像の幅 */
+}
+.row-text {
+  position: relative;
+  z-index: 1; /* 文字は、浮かぶ画像より手前 */
+}
+
+/* スマホ：画像は行の中に小さく出しておく（「乗る」操作が無くても成り立つ） */
+.row-img {
+  width: 48px;
+  height: auto;
+}
+
+/* マウスのとき：乗った行の画像だけを、カーソルの近くに浮かべる */
+@media (hover: hover) and (pointer: fine) {
+  .row-img {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: var(--img-w);
+    pointer-events: none; /* 画像に乗って、行から外れたことにならないように */
+    opacity: 0;
+    scale: 0.8;
+    /* --x --y --r は JS が入れる（少し遅れて追う位置と、傾き）。カーソルの右横に出して、乗っている文字を隠さない */
+    transform: translate(var(--x), var(--y)) translate(32px, -50%) rotate(var(--r));
+    transition: opacity 0.3s ease, scale 0.3s ease;
+  }
+  .row:hover .row-img {
+    opacity: 1;
+    scale: 1;
+  }
+
+  /* 動きを止めたとき：浮かぶが、追わない（決まった場所に出す） */
+  @media (prefers-reduced-motion: reduce) {
+    .row-img {
+      left: 72%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+    }
+  }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 10px; padding: 20px clamp(16px, 6vw, 64px); overflow: hidden; }
+.list { display: flex; flex-direction: column; border-top: 1px solid var(--line); }
+.row { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: clamp(10px, 2.4vh, 18px) 4px; border-bottom: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: color 0.25s; }
+.row-text { display: flex; align-items: baseline; flex-wrap: wrap; gap: 4px 16px; }
+.row-text b { font-size: clamp(32px, 8vw, 64px); line-height: 1.1; letter-spacing: 0.04em; }
+.row-text small { font-size: 13px; font-weight: 700; letter-spacing: 0.06em; }
+.row.sansu small { color: var(--sansu); } .row.kokugo small { color: var(--kokugo); } .row.rika small { color: var(--rika); } .row.shakai small { color: var(--shakai); }
+.row-img { border-radius: 8px; box-shadow: 0 14px 30px rgba(20, 22, 30, 0.28); }
+.list:hover .row:not(:hover) { color: var(--muted); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 名前の上にマウスを乗せてください（スマホでは、絵は行の中に小さく出ます）</span>
+<nav class="list" data-ease="0.12">
+  <a class="row sansu" href="#">
+    <span class="row-text"><b>アクア</b><small>さんすう・14単元</small></span>
+    <img class="row-img" src="../media/story-aqua-1.webp" width="720" height="1080" alt="">
+  </a>
+  <a class="row kokugo" href="#">
+    <span class="row-text"><b>リファ</b><small>こくご・13単元</small></span>
+    <img class="row-img" src="../media/story-rifa-1.webp" width="720" height="1080" alt="">
+  </a>
+  <a class="row rika" href="#" data-lab-more>
+    <span class="row-text"><b>ミンジュ</b><small>りか・9単元</small></span>
+    <img class="row-img" src="../media/story-minju-1.webp" width="720" height="1080" alt="">
+  </a>
+  <a class="row shakai" href="#" data-lab-more>
+    <span class="row-text"><b>キユ</b><small>しゃかい・8単元</small></span>
+    <img class="row-img" src="../media/story-kiyu-1.webp" width="720" height="1080" alt="">
+  </a>
+</nav>
+
+<script>
+const list = document.querySelector('.list');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const mouse = { x: 0, y: 0 }; // カーソルの位置
+const pos = { x: 0, y: 0 };   // 画像のいまの位置
+let started = false;
+
+list.addEventListener('pointermove', (e) => {
+  mouse.x = e.clientX;
+  mouse.y = e.clientY;
+  if (!started) {
+    pos.x = mouse.x; // 最初の1回は、画像も同じ場所から始める（左上から飛んでこないように）
+    pos.y = mouse.y;
+    started = true;
+  }
+});
+
+function tick() {
+  const ease = Number(list.dataset.ease); // 1でぴったり。小さいほど遅れて付いてくる
+  const dx = (mouse.x - pos.x) * ease;    // このフレームで横に動く量
+  pos.x += dx;
+  pos.y += (mouse.y - pos.y) * ease;
+  const tilt = reduce.matches ? 0 : Math.max(-12, Math.min(12, dx * 0.6)); // 横に速く動くほど傾ける
+  list.style.setProperty('--x', `${pos.x}px`);
+  list.style.setProperty('--y', `${pos.y}px`);
+  list.style.setProperty('--r', `${tilt}deg`);
+  requestAnimationFrame(tick);
+}
+tick();
+</script>
+<script data-lab>
+  document.querySelectorAll('a').forEach((a) => a.addEventListener('click', (e) => e.preventDefault()));
+</script>
+</body>
+</html>

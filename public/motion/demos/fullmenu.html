@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>全画面メニュー｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.6s;      /* 円が広がりきるまでの時間 */
+  --stagger: 0.08s; /* 項目が1つずつ遅れて出る間隔 */
+}
+
+/* 円の中心は、右上のボタンの位置 */
+.menu {
+  position: fixed;
+  inset: 0;
+  clip-path: circle(0 at calc(100% - 44px) 32px);
+  z-index: 1;
+  background: var(--ink);
+  visibility: hidden; /* 閉じている間は、Tab でも選べないようにする */
+  transition: clip-path var(--dur) ease-in, visibility 0s var(--dur);
+}
+.menu.is-open {
+  clip-path: circle(150vmax at calc(100% - 44px) 32px); /* 画面の対角より大きい円 */
+  visibility: visible;
+  transition: clip-path var(--dur) ease-out;
+}
+
+/* 項目は、円が半分ほど広がったころから、--i 番目ごとに少しずつ遅れて出る */
+.menu li {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.menu.is-open li {
+  opacity: 1;
+  transform: none;
+  transition-delay: calc(var(--dur) * 0.4 + var(--i) * var(--stagger));
+}
+
+/* 開いている間は、うしろのページをスクロールさせない。
+   スクロールバーが消えてページが横にずれないよう、その幅を先に確保しておく */
+html {
+  scrollbar-gutter: stable;
+}
+html.is-locked {
+  overflow: hidden;
+}
+
+/* ボタンは円より手前に置き、三本線を × に変える */
+.menu-btn {
+  position: fixed;
+  top: 8px;
+  right: 16px;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 6px; /* 線の中心どうしは 3px + 6px = 9px 離れる */
+}
+.menu-btn .bar {
+  display: block;
+  width: 28px;
+  height: 3px;
+  background: currentColor;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+.menu-btn[aria-expanded="true"] .bar:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+.menu-btn[aria-expanded="true"] .bar:nth-child(2) { opacity: 0; }
+.menu-btn[aria-expanded="true"] .bar:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+/* 動きを減らす設定では、アニメーションなしで開け閉めする */
+@media (prefers-reduced-motion: reduce) {
+  .menu, .menu li, .menu-btn .bar { transition: none !important; }
+}
+</style>
+<style data-lab>
+.site-head { position: sticky; top: 0; height: 64px; display: flex; align-items: center; padding: 0 16px; background: var(--bg); border-bottom: 1px solid var(--line); }
+.site-head img { height: 30px; width: auto; }
+.menu-btn { width: 56px; height: 48px; align-items: center; justify-content: center; padding: 0; border: 0; border-radius: 12px; background: transparent; color: var(--ink); cursor: pointer; }
+.menu-btn[aria-expanded="true"] { color: var(--bg); }
+.menu-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+.menu { display: flex; align-items: center; padding: 72px clamp(28px, 8vw, 72px) 40px; color: var(--bg); overflow: hidden; }
+.menu ul { list-style: none; margin: 0; padding: 0; display: grid; gap: clamp(10px, 2.6vh, 20px); }
+.menu a { display: inline-flex; flex-wrap: wrap; align-items: baseline; gap: 2px 12px; color: inherit; text-decoration: none; font-size: clamp(24px, 6.4vw, 38px); font-weight: 800; letter-spacing: 0.04em; }
+.menu a small { flex-basis: 100%; padding-left: 22px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; opacity: 0.7; }
+.menu a:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: 4px; }
+.menu a::before { content: ""; width: 10px; height: 10px; border-radius: 50%; flex: none; align-self: center; }
+.menu li:nth-child(1) a::before { background: var(--sansu); } .menu li:nth-child(2) a::before { background: var(--kokugo); } .menu li:nth-child(3) a::before { background: var(--rika); } .menu li:nth-child(4) a::before { background: var(--shakai); }
+.menu .kira { position: absolute; right: 18px; bottom: 18px; width: clamp(80px, 22vw, 130px); height: auto; }
+.page section { padding: 28px clamp(20px, 6vw, 64px); }
+.hero { position: relative; }
+.hero img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 2; object-fit: cover; border-radius: 16px; }
+.page h1 { margin: 18px 0 0; font-size: clamp(26px, 6vw, 40px); }
+.page h2 { margin: 0; font-size: 20px; }
+.page p { margin: 8px 0 0; color: var(--muted); line-height: 1.8; }
+.subjects { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; margin-top: 14px; }
+.subjects div { background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px; font-weight: 700; }
+.subjects span { display: block; margin-top: 4px; font-family: var(--mono); font-size: 13px; font-weight: 400; color: var(--muted); }
+.subjects div:nth-child(1) { color: var(--sansu); } .subjects div:nth-child(2) { color: var(--kokugo); } .subjects div:nth-child(3) { color: var(--rika); } .subjects div:nth-child(4) { color: var(--shakai); }
+.lab-hint { display: block; margin-bottom: 12px; }
+</style>
+</head>
+<body>
+<header class="site-head" data-lab>
+  <img src="../media/logo-text.webp" width="900" height="325" alt="まなリーフ">
+</header>
+
+<button class="menu-btn" type="button" aria-label="メニュー" aria-expanded="false" aria-controls="site-menu">
+  <span class="bar"></span>
+  <span class="bar"></span>
+  <span class="bar"></span>
+</button>
+
+<nav class="menu" id="site-menu" aria-label="サイト内">
+  <ul>
+    <li style="--i: 0"><a href="#intro">はじめに</a></li>
+    <li style="--i: 1"><a href="#subjects">4つの教科 <small>さんすう・こくご・りか・しゃかい</small></a></li>
+    <li style="--i: 2" data-lab-more><a href="#story">おはなし <small>全24章</small></a></li>
+    <li style="--i: 3" data-lab-more><a href="#faq">よくある質問</a></li>
+  </ul>
+  <img class="kira" src="../media/fairy-kira-happy.webp" width="290" height="292" alt="" data-lab>
+</nav>
+
+<main class="page" data-lab>
+  <section class="hero" id="intro">
+    <span class="lab-hint">DEMO · 右上の三本線を押してください。Esc かボタンで閉じます。開いている間は、うしろがスクロールしません</span>
+    <img src="../media/hero-grade4.webp" width="1536" height="1024" alt="">
+    <h1>まなリーフ 小4</h1>
+    <p>4年生の4教科を、1回10問で。</p>
+  </section>
+  <section id="subjects">
+    <h2>4つの教科</h2>
+    <div class="subjects">
+      <div>さんすう<span>14単元・545問</span></div>
+      <div>こくご<span>13単元・555問</span></div>
+      <div>りか<span>9単元・311問</span></div>
+      <div>しゃかい<span>8単元・286問</span></div>
+    </div>
+  </section>
+  <section id="story">
+    <h2>おはなし</h2>
+    <p>アクア・リファ・ミンジュ・キユ、4人のおはなしが全24章。</p>
+  </section>
+  <section id="faq">
+    <h2>よくある質問</h2>
+    <p>3年生向けは、別のアプリになっています。</p>
+  </section>
+</main>
+
+<script>
+const btn = document.querySelector('.menu-btn');
+const menu = document.querySelector('.menu');
+
+function setOpen(open) {
+  btn.setAttribute('aria-expanded', String(open));
+  menu.classList.toggle('is-open', open);
+  document.documentElement.classList.toggle('is-locked', open); // 背景のスクロールを止める
+  if (open) menu.querySelector('a').focus({ preventScroll: true }); // 最初の項目へ
+}
+
+btn.addEventListener('click', () => setOpen(btn.getAttribute('aria-expanded') !== 'true'));
+
+// Esc で閉じて、ボタンに戻る
+addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && menu.classList.contains('is-open')) {
+    setOpen(false);
+    btn.focus();
+  }
+});
+
+// 項目を選んだら閉じる
+menu.addEventListener('click', (e) => {
+  if (e.target.closest('a')) setOpen(false);
+});
+</script>
+<script data-lab>
+  // 見本帳の中では、ページ内リンクで外側の見本帳まで動かないよう、自分でスクロールする
+  document.addEventListener('click', (e) => {
+    const a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    e.preventDefault();
+    const to = document.querySelector(a.getAttribute('href'));
+    if (to) scrollTo({ top: to.offsetTop - 64, behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  });
+</script>
+</body>
+</html>

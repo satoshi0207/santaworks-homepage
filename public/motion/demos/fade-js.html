@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>フェードイン（JavaScript）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --rise: 32px; /* 浮き上がる距離 */
+  --dur: 0.7s;  /* 動きの時間 */
+}
+
+/* JS が動いたときだけ隠す。JS が止まっても、中身はふつうに見える */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(var(--rise));
+  transition: opacity var(--dur) ease, transform var(--dur) ease;
+}
+.js .reveal.is-in {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+}
+</style>
+<style data-lab>
+.top { min-height: 88vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(24px, 6vw, 72px); }
+.top h1 { margin: 10px 0 0; font-size: clamp(30px, 6vw, 48px); letter-spacing: 0.06em; }
+.top p { margin: 12px 0 0; color: var(--muted); }
+.list { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 20px; padding: 0 clamp(24px, 6vw, 72px) 160px; }
+.item { position: relative; min-height: 132px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 22px 22px 20px; overflow: hidden; }
+.item img { position: absolute; right: 8px; bottom: -36px; width: 84px; height: auto; }
+.item h2 { margin: 6px 0 0; font-size: 17px; max-width: 66%; word-break: keep-all; overflow-wrap: anywhere; }
+.item p { margin: 8px 0 0; font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.tag { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.tag.sansu { color: var(--sansu); } .tag.kokugo { color: var(--kokugo); } .tag.rika { color: var(--rika); } .tag.shakai { color: var(--shakai); }
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="lab-hint" data-lab>DEMO · 下へスクロールしてください</span>
+  <h1>まなリーフ 小4</h1>
+  <p>4年生の4教科を、1回10問で。</p>
+</header>
+
+<main class="list">
+  <article class="item reveal">
+    <img src="../media/chara-aqua-smile.webp" width="339" height="476" alt="">
+    <span class="tag sansu">さんすう</span>
+    <h2>アクアと、さんすう</h2>
+    <p>14単元・545問</p>
+  </article>
+  <article class="item reveal">
+    <img src="../media/chara-rifa-smile.webp" width="254" height="474" alt="">
+    <span class="tag kokugo">こくご</span>
+    <h2>リファと、こくご</h2>
+    <p>13単元・555問</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <img src="../media/chara-minju-smile.webp" width="259" height="480" alt="">
+    <span class="tag rika">りか</span>
+    <h2>ミンジュと、りか</h2>
+    <p>9単元・311問</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <img src="../media/chara-kiyu-smile.webp" width="309" height="480" alt="">
+    <span class="tag shakai">しゃかい</span>
+    <h2>キユと、しゃかい</h2>
+    <p>8単元・286問</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <span class="tag sansu">おはなし</span>
+    <h2>4人のおはなし</h2>
+    <p>全24章</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <span class="tag kokugo">かべがみ</span>
+    <h2>集めるかべがみ</h2>
+    <p>全23枚</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <span class="tag rika">スタンプ</span>
+    <h2>がんばりのスタンプ</h2>
+    <p>全39こ</p>
+  </article>
+  <article class="item reveal" data-lab-more>
+    <span class="tag shakai">漢字</span>
+    <h2>4年生で習う漢字</h2>
+    <p>202字</p>
+  </article>
+</main>
+
+<script>
+document.documentElement.classList.add('js');
+
+const io = new IntersectionObserver((entries) => {
+  for (const entry of entries) {
+    if (!entry.isIntersecting) continue;
+    entry.target.classList.add('is-in');
+    io.unobserve(entry.target); // 一度出たら見張りをやめる
+  }
+}, { rootMargin: '0px 0px -10% 0px' }); // 下端から10%入ったところで出す
+
+document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+</script>
+</body>
+</html>

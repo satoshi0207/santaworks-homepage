@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アコーディオン（CSSだけ）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  interpolate-size: allow-keywords; /* height: 0 → auto を、なめらかにつなげる */
+  --dur: 0.4s; /* 開け閉めにかける時間 */
+}
+
+/* details の中身（summary 以外）を包む箱。閉じているときは高さ 0 */
+details::details-content {
+  height: 0;
+  overflow: clip;
+  transition: height var(--dur) ease, content-visibility var(--dur) allow-discrete;
+}
+details[open]::details-content {
+  height: auto;
+}
+
+/* 右端の「＋」を回して「×」にする */
+summary::after {
+  content: "+";
+  transition: rotate var(--dur) ease;
+}
+details[open] summary::after {
+  rotate: 45deg;
+}
+
+/* 動きを減らす設定では、パッと開け閉めする。
+   ::details-content を知らないブラウザで隣の行まで捨てられないよう、ルールを分けて書く */
+@media (prefers-reduced-motion: reduce) {
+  details::details-content { transition: none; }
+  summary::after { transition: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px 16px; }
+.head { display: flex; align-items: center; gap: 10px; width: min(100%, 520px); }
+.head img { width: 52px; height: auto; }
+.head h1 { margin: 0; font-size: 20px; }
+.faq { width: min(100%, 520px); background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+details + details { border-top: 1px solid var(--line); }
+summary { display: flex; align-items: center; gap: 12px; padding: 16px 18px; font-weight: 700; cursor: pointer; list-style: none; }
+summary::-webkit-details-marker { display: none; }
+summary::before { content: "Q"; flex: none; font-family: var(--mono); color: var(--sansu); }
+summary::after { margin-left: auto; flex: none; font-size: 22px; line-height: 1; color: var(--muted); }
+summary:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+details p { margin: 0; padding: 0 18px 18px 42px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+.lab-unsupported { display: none; width: min(100%, 520px); margin: 0; font-size: 12px; color: var(--kokugo); font-weight: 700; }
+@supports not ((interpolate-size: allow-keywords) and selector(::details-content)) { .lab-unsupported { display: block; } }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 質問を押すと、答えがなめらかに開きます。1つ開くと、ほかは閉じます</span>
+<div class="head" data-lab>
+  <img src="../media/fairy-kira-normal.webp" width="290" height="292" alt="">
+  <h1>よくある質問</h1>
+</div>
+
+<!-- name を同じにすると、1つ開くとほかが閉じる -->
+<div class="faq">
+  <details name="faq" open>
+    <summary>何年生向けですか？</summary>
+    <p>4年生向けです。3年生向けは、別のアプリになっています。</p>
+  </details>
+  <details name="faq">
+    <summary>どの教科がありますか？</summary>
+    <p>さんすう・こくご・りか・しゃかいの4教科です。</p>
+  </details>
+  <details name="faq" data-lab-more>
+    <summary>問題はいくつありますか？</summary>
+    <p>4教科あわせて、44単元・1,697問です。いちばん多いのは、こくごの555問です。</p>
+  </details>
+  <details name="faq" data-lab-more>
+    <summary>1回に何問ですか？</summary>
+    <p>1回10問です。</p>
+  </details>
+  <details name="faq" data-lab-more>
+    <summary>問題のほかに、何がありますか？</summary>
+    <p>4人のおはなし（全24章）、集めるかべがみ（全23枚）、がんばりのスタンプ（全39こ）があります。</p>
+  </details>
+</div>
+<p class="lab-unsupported" data-lab>このブラウザは interpolate-size か ::details-content に未対応のため、なめらかさが無いまま開け閉めしています（開け閉めそのものはできます）</p>
+</body>
+</html>

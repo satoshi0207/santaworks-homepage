@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>チルト｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+.card {
+  position: relative;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: transform;
+}
+/* 持ち上げたぶん、影を深くする */
+.card:hover {
+  box-shadow: 0 26px 50px rgba(36, 38, 46, 0.26);
+}
+/* 光の反射。--gx / --gy は JS がカーソルの位置を入れる。反対側は少し暗くして、白いカードでも光が見えるようにする */
+.card::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(circle at var(--gx, 50%) var(--gy, 0%), rgba(255, 255, 255, 0.6), rgba(255, 255, 255, 0) 45%, rgba(0, 0, 0, 0.12) 100%);
+  opacity: var(--glare, 0);
+  transition: opacity 0.2s;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card { transform: none !important; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px; padding: 24px; }
+.cards { display: grid; grid-template-columns: repeat(4, minmax(0, 170px)); gap: clamp(10px, 2vw, 22px); }
+@media (max-width: 640px) { .cards { grid-template-columns: repeat(2, minmax(0, 150px)); } }
+.card { border-radius: 16px; padding: 12px 12px 14px; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 10px 30px rgba(36, 38, 46, 0.12); text-align: center; }
+.card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; object-fit: contain; border-radius: 10px; background: var(--bg); }
+.card b { display: block; margin-top: 10px; font-size: 15px; }
+.card span { font-size: 12px; font-weight: 700; }
+.card.sansu span { color: var(--sansu); } .card.kokugo span { color: var(--kokugo); } .card.rika span { color: var(--rika); } .card.shakai span { color: var(--shakai); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · カードの上でマウスを動かしてください（スマホでは動きません）</span>
+<div class="cards" data-tilt="18" data-depth="700">
+  <div class="card sansu"><img src="../media/chara-aqua-normal.webp" alt=""><b>アクア</b><span>さんすう</span></div>
+  <div class="card kokugo"><img src="../media/chara-rifa-normal.webp" alt=""><b>リファ</b><span>こくご</span></div>
+  <div class="card rika" data-lab-more><img src="../media/chara-minju-normal.webp" alt=""><b>ミンジュ</b><span>りか</span></div>
+  <div class="card shakai" data-lab-more><img src="../media/chara-kiyu-normal.webp" alt=""><b>キユ</b><span>しゃかい</span></div>
+</div>
+
+<script>
+const cards = document.querySelector('.cards');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+for (const card of document.querySelectorAll('.card')) {
+  card.addEventListener('pointermove', (e) => {
+    if (e.pointerType !== 'mouse' || reduce.matches) return;
+    const r = card.getBoundingClientRect();
+    const x = (e.clientX - r.left) / r.width - 0.5; // 左端 -0.5 〜 右端 0.5
+    const y = (e.clientY - r.top) / r.height - 0.5;
+    const max = Number(cards.dataset.tilt);    // いちばん傾いたときの角度
+    const depth = Number(cards.dataset.depth); // 小さいほど遠近が強い
+    card.style.transform = `perspective(${depth}px) rotateX(${-y * max}deg) rotateY(${x * max}deg) scale(1.05)`;
+    card.style.setProperty('--gx', `${(x + 0.5) * 100}%`);
+    card.style.setProperty('--gy', `${(y + 0.5) * 100}%`);
+    card.style.setProperty('--glare', '1');
+  });
+  card.addEventListener('pointerleave', () => {
+    card.style.transform = '';
+    card.style.setProperty('--glare', '0');
+  });
+}
+</script>
+</body>
+</html>

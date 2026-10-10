@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>タイピング｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+/* 打つ演出は JS が is-typing を付けたときだけ。付かなければ、全文の一覧がそのまま見える */
+.typing { display: none; min-height: 2.8em; } /* 2行ぶんの高さをとっておき、打つあいだに下が揺れないようにする */
+.is-typing .typing { display: block; }
+.is-typing .lines { /* 目には見せず、読み上げソフトには全文を渡す */
+  position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+
+.caret {
+  display: inline-block;
+  width: 0.08em;
+  height: 1em;
+  margin-left: 0.06em;
+  vertical-align: -0.1em;
+  background: currentColor;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .caret { animation: blink 1s steps(1) infinite; }
+}
+@keyframes blink {
+  50% { opacity: 0; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 24px clamp(20px, 7vw, 80px); }
+.typewriter { position: relative; max-width: 760px; }
+.eyebrow { margin: 14px 0 0; font-size: 14px; font-weight: 700; letter-spacing: 0.1em; color: var(--sansu); }
+.typing, .lines li { font-size: clamp(26px, 6.4vw, 48px); font-weight: 800; line-height: 1.4; letter-spacing: 0.02em; word-break: auto-phrase; }
+.typing { margin: 10px 0 0; }
+.lines { margin: 10px 0 0; padding: 0; list-style: none; display: grid; gap: 6px; }
+.lines li { font-size: clamp(20px, 5vw, 36px); }
+.kira { width: clamp(84px, 20vw, 130px); height: auto; margin-top: 24px; }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 1文字ずつ打たれて、消えて、次の文へ進みます</span>
+<p class="eyebrow" data-lab>まなリーフ 小4</p>
+
+<div class="typewriter" data-speed="90" data-hold="1600">
+  <!-- 全文は HTML に書いておく。JS が動かないときや、動きを止めたときは、これがそのまま見える -->
+  <ul class="lines">
+    <li>4年生の4教科を、1回10問で。</li>
+    <li>4人のおはなし、全24章。</li>
+    <li data-lab-more>集めるかべがみは、全23枚。</li>
+    <li data-lab-more>4年生で習う漢字、202字。</li>
+  </ul>
+  <p class="typing" aria-hidden="true"><span class="typed"></span><span class="caret"></span></p>
+</div>
+<img class="kira" src="../media/fairy-kira-happy.webp" width="290" height="292" alt="" data-lab>
+
+<script>
+const box = document.querySelector('.typewriter');
+const typed = box.querySelector('.typed');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+// [...文字列] で1文字ずつに分ける（絵文字のような2つで1文字のものも割らない）
+const lines = [...box.querySelectorAll('.lines li')].map((li) => [...li.textContent]);
+let n = 0;          // 何本目の文か
+let len = 0;        // いま見えている文字数
+let erasing = false;
+
+function tick() {
+  const on = !reduce.matches; // 毎回読む。途中で「動きを止める」に切り替わっても追いつく
+  box.classList.toggle('is-typing', on);
+  if (!on) return setTimeout(tick, 300);
+
+  const chars = lines[n];
+  const speed = Number(box.dataset.speed); // 1文字の間隔（ミリ秒）
+  len += erasing ? -1 : 1;
+  typed.textContent = chars.slice(0, len).join('');
+
+  let wait = erasing ? speed / 2 : speed; // 消すほうは速く
+  if (!erasing && len === chars.length) {
+    erasing = true;
+    wait = Number(box.dataset.hold); // 打ち終わったら、読める時間だけ待つ
+  } else if (erasing && len === 0) {
+    erasing = false;
+    n = (n + 1) % lines.length;
+    wait = 400;
+  }
+  setTimeout(tick, wait);
+}
+tick();
+</script>
+</body>
+</html>

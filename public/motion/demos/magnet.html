@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>マグネティックボタン｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+.magnet {
+  display: inline-block; /* 押せる範囲はここ。動かすのは中身だけにする */
+}
+.magnet-inner {
+  display: block;
+  transition: transform 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .magnet-inner { transform: none !important; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 20px; padding: 24px; text-align: center; overflow: hidden; }
+.wrap { position: relative; display: grid; place-items: center; }
+.range { position: absolute; border: 1.5px dashed var(--line); border-radius: 50%; pointer-events: none; }
+.magnet { text-decoration: none; }
+.magnet-inner { position: relative; width: min(72vw, 300px); }
+.magnet-inner img { display: block; width: 100%; height: auto; }
+.label { position: absolute; left: 0; right: 22%; top: 50%; transform: translateY(-54%); color: #fff; font-weight: 800; font-size: clamp(16px, 3.6vw, 21px); letter-spacing: 0.06em; text-shadow: 0 1px 2px rgba(150, 30, 70, 0.5); }
+.chara { position: absolute; left: 6%; bottom: 0; height: clamp(120px, 34vh, 240px); width: auto; opacity: 0.95; }
+.note { font-size: 13px; color: var(--muted); }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · マウスをボタンに近づけてください（スマホでは動きません）</span>
+<div class="wrap">
+  <span class="range" data-lab></span>
+  <a class="magnet" href="#" data-range="160" data-pull="0.3">
+    <span class="magnet-inner">
+      <img src="../media/btn-start.webp" width="450" height="150" alt="">
+      <span class="label">クイズをはじめる</span>
+    </span>
+  </a>
+</div>
+<img class="chara" src="../media/chara-aqua-cheering.webp" alt="" data-lab>
+
+<script>
+const btn = document.querySelector('.magnet');
+const inner = btn.querySelector('.magnet-inner');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+addEventListener('pointermove', (e) => {
+  if (e.pointerType !== 'mouse' || reduce.matches) return; // 指では反応させない
+  const r = btn.getBoundingClientRect();
+  const dx = e.clientX - (r.left + r.width / 2);
+  const dy = e.clientY - (r.top + r.height / 2);
+  const range = Number(btn.dataset.range); // 反応し始める距離（px）
+  const pull = Number(btn.dataset.pull);   // 引き寄せの強さ（0〜1）
+  inner.style.transform = Math.hypot(dx, dy) < range ? `translate(${dx * pull}px, ${dy * pull}px)` : '';
+});
+btn.addEventListener('click', (e) => e.preventDefault());
+</script>
+<script data-lab>
+  // 反応する範囲を点線の円で見せる（見本帳専用）
+  const ring = document.querySelector('.range');
+  (function loop() {
+    const d = Number(btn.dataset.range) * 2;
+    ring.style.width = ring.style.height = d + 'px';
+    requestAnimationFrame(loop);
+  })();
+</script>
+</body>
+</html>

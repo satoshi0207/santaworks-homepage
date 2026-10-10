@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>横スクロール（GSAP）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+.h-section {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+.h-track { display: flex; width: max-content; }
+
+/* 動きを減らす設定では、指で横にスクロールする */
+@media (prefers-reduced-motion: reduce) {
+  .h-section { overflow-x: auto; }
+}
+</style>
+<style data-lab>
+.intro, .outro { min-height: 55vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(24px, 6vw, 72px); }
+.intro h1 { margin: 10px 0 0; font-size: clamp(26px, 5vw, 40px); }
+.outro { color: var(--muted); }
+.h-sticky { align-items: center; }
+.h-track { gap: clamp(14px, 3vw, 28px); padding: 0 clamp(24px, 6vw, 72px); align-items: center; }
+.h-track img { height: min(70vh, 420px); width: auto; border-radius: 16px; box-shadow: 0 14px 34px rgba(20, 22, 40, 0.25); }
+.h-track .title { flex: none; width: min(60vw, 280px); }
+.h-track .title b { display: block; font-size: clamp(24px, 5vw, 34px); }
+.h-track .title span { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="intro" data-lab>
+  <span class="lab-hint">DEMO · 下へスクロールしてください</span>
+  <h1>縦に進むと、横に流れる</h1>
+</header>
+
+<section class="h-section" data-scrub="0.5">
+  <div class="h-track">
+    <div class="title"><b>4人のおはなし</b><span>それぞれの第1章</span></div>
+    <img src="../media/story-aqua-1.webp" width="720" height="1080" alt="アクアの章のさし絵">
+    <img src="../media/story-rifa-1.webp" width="720" height="1080" alt="リファの章のさし絵">
+    <img src="../media/story-minju-1.webp" width="720" height="1080" alt="ミンジュの章のさし絵" data-lab-more>
+    <img src="../media/story-kiyu-1.webp" width="720" height="1080" alt="キユの章のさし絵" data-lab-more>
+  </div>
+</section>
+
+<p class="outro" data-lab>ここで横の区間が終わります。</p>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15.0/dist/ScrollTrigger.min.js"></script>
+<script>
+gsap.registerPlugin(ScrollTrigger);
+const section = document.querySelector('.h-section');
+const track = document.querySelector('.h-track');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+if (!reduce.matches) {
+  const distance = () => track.scrollWidth - innerWidth; // 横に動かす距離
+  gsap.to(track, {
+    x: () => -distance(),
+    ease: 'none',
+    scrollTrigger: {
+      trigger: section,
+      start: 'top top',
+      end: () => '+=' + distance(), // 横に動く分だけ、縦に固定する
+      pin: true,
+      scrub: Number(section.dataset.scrub),
+      invalidateOnRefresh: true, // 画面の大きさが変わったら計算し直す
+    },
+  });
+}
+</script>
+</body>
+</html>

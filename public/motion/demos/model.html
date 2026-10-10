@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3Dモデルを回す｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+html, body { height: 100%; }
+#stage {
+  width: 100%;
+  height: 100%;
+}
+</style>
+<style data-lab>
+body { overflow: hidden; }
+.caption { position: absolute; left: 0; right: 0; bottom: 18px; text-align: center; pointer-events: none; }
+.caption strong { display: block; font-size: 15px; letter-spacing: 0.04em; }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.186.1/examples/jsm/"
+} }
+</script>
+</head>
+<body>
+<div id="stage" data-spin="1.5" data-damping="0.08"></div>
+<p class="caption" data-lab><strong>ほしなみのマグ</strong><span class="lab-hint">DEMO · ドラッグで回せます</span></p>
+
+<script type="module">
+import * as THREE from 'three';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+
+const stage = document.getElementById('stage');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+// 場面・カメラ・描画係
+const scene = new THREE.Scene();
+const camera = new THREE.PerspectiveCamera(35, 1, 0.1, 100);
+camera.position.set(4.2, 2.8, 5.2);
+const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2)); // 高解像度の画面でも2倍まで
+stage.append(renderer.domElement);
+
+// 光
+scene.add(new THREE.HemisphereLight(0xffffff, 0x8a8478, 1.6));
+const sun = new THREE.DirectionalLight(0xffffff, 2.4);
+sun.position.set(3, 5, 2);
+scene.add(sun);
+
+// モデル（架空のマグカップを、回転体と輪で組み立てる）
+const glaze = new THREE.MeshStandardMaterial({ color: 0xf1ece0, roughness: 0.35, side: THREE.DoubleSide });
+const red = new THREE.MeshStandardMaterial({ color: 0xc4333e, roughness: 0.4 });
+const profile = [[0, 0], [0.9, 0], [1, 1.6], [0.92, 1.6], [0.84, 0.12], [0, 0.12]]
+  .map(([x, y]) => new THREE.Vector2(x, y));
+const body = new THREE.Mesh(new THREE.LatheGeometry(profile, 64), glaze);
+const rim = new THREE.Mesh(new THREE.TorusGeometry(0.96, 0.035, 12, 64), red);
+rim.rotation.x = Math.PI / 2;
+rim.position.y = 1.6;
+const handle = new THREE.Mesh(new THREE.TorusGeometry(0.42, 0.09, 16, 48, Math.PI), glaze);
+handle.rotation.z = -Math.PI / 2;
+handle.position.set(0.98, 0.8, 0);
+const mug = new THREE.Group();
+mug.add(body, rim, handle);
+mug.position.y = -0.8;
+scene.add(mug);
+
+// ドラッグで回す
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true;
+controls.enablePan = false;
+controls.minDistance = 4;
+controls.maxDistance = 10;
+
+// 枠の大きさが変わったら、縦横比と描画の大きさを両方直す
+new ResizeObserver(() => {
+  const w = stage.clientWidth;
+  const h = stage.clientHeight;
+  camera.aspect = w / h;
+  camera.updateProjectionMatrix();
+  renderer.setSize(w, h);
+}).observe(stage);
+
+renderer.setAnimationLoop(() => {
+  controls.autoRotate = !reduce.matches;
+  controls.autoRotateSpeed = Number(stage.dataset.spin);
+  controls.dampingFactor = Number(stage.dataset.damping);
+  controls.update();
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

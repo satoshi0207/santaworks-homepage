@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>追従ヘッダー｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.3s; /* 出入りの時間 */
+}
+
+.site-header {
+  position: fixed; /* 本文の上に重ねて、画面の上端に留める */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  padding: 16px 20px;
+  background: var(--surface);
+  transition: transform var(--dur) ease, padding var(--dur) ease, box-shadow var(--dur) ease;
+}
+.site-header .logo {
+  height: 44px;
+  width: auto;
+  transition: height var(--dur) ease;
+}
+main {
+  padding-top: 76px; /* 重なる分だけ、本文を下げておく */
+}
+
+/* 下へ進んでいる間：自分の高さぶん上へ引っ込む */
+.site-header.is-hidden {
+  transform: translateY(-100%);
+}
+/* 一番上から離れたら：低くして、影を付ける */
+.site-header.is-scrolled {
+  padding-block: 6px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.18);
+}
+.site-header.is-scrolled .logo {
+  height: 34px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-header, .site-header .logo { transition: none; }
+  .site-header.is-hidden { transform: none; } /* 隠さず、常に見せておく */
+}
+</style>
+<style data-lab>
+.site-header { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); }
+.site-header .logo { display: block; flex: none; }
+.menu { display: flex; gap: clamp(10px, 3vw, 22px); font-size: clamp(12px, 3.3vw, 14px); font-weight: 700; white-space: nowrap; }
+.menu a { color: var(--ink); text-decoration: none; }
+.menu a:hover { color: var(--accent); }
+.intro { padding: 28px clamp(20px, 6vw, 72px) 8px; }
+.intro h1 { margin: 10px 0 0; font-size: clamp(26px, 5.5vw, 40px); letter-spacing: 0.04em; }
+.intro p { margin: 10px 0 0; color: var(--muted); }
+.list { display: grid; gap: 16px; max-width: 640px; padding: 20px clamp(20px, 6vw, 72px) 60vh; box-sizing: content-box; }
+.item { position: relative; min-height: 120px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; padding: 20px 22px; overflow: hidden; }
+.item img { position: absolute; right: 10px; bottom: -40px; width: 84px; height: auto; }
+.item h2 { margin: 6px 0 0; font-size: 18px; max-width: 70%; }
+.item p { margin: 8px 0 0; font-family: var(--mono); font-size: 14px; color: var(--muted); }
+.tag { font-size: 12px; font-weight: 700; letter-spacing: 0.06em; }
+.tag.sansu { color: var(--sansu); } .tag.kokugo { color: var(--kokugo); } .tag.rika { color: var(--rika); } .tag.shakai { color: var(--shakai); }
+</style>
+</head>
+<body>
+<header class="site-header" data-tolerance="8">
+  <img class="logo" src="../media/logo-text.webp" width="900" height="325" alt="まなリーフ">
+  <nav class="menu">
+    <a href="#">はじめに</a>
+    <a href="#">4つの教科</a>
+    <a href="#">おはなし</a>
+  </nav>
+</header>
+
+<main>
+  <section class="intro" data-lab>
+    <span class="lab-hint">DEMO · 下へスクロールすると上の帯が隠れ、少し上へ戻すと出てきます</span>
+    <h1>まなリーフ 小4</h1>
+    <p>4年生の4教科を、1回10問で。</p>
+  </section>
+  <div class="list">
+    <article class="item">
+      <img src="../media/chara-aqua-smile.webp" width="339" height="476" alt="">
+      <span class="tag sansu">さんすう</span>
+      <h2>アクアと、さんすう</h2>
+      <p>14単元・545問</p>
+    </article>
+    <article class="item">
+      <img src="../media/chara-rifa-smile.webp" width="254" height="474" alt="">
+      <span class="tag kokugo">こくご</span>
+      <h2>リファと、こくご</h2>
+      <p>13単元・555問</p>
+    </article>
+    <article class="item" data-lab-more>
+      <img src="../media/chara-minju-smile.webp" width="259" height="480" alt="">
+      <span class="tag rika">りか</span>
+      <h2>ミンジュと、りか</h2>
+      <p>9単元・311問</p>
+    </article>
+    <article class="item" data-lab-more>
+      <img src="../media/chara-kiyu-smile.webp" width="309" height="480" alt="">
+      <span class="tag shakai">しゃかい</span>
+      <h2>キユと、しゃかい</h2>
+      <p>8単元・286問</p>
+    </article>
+    <article class="item" data-lab-more>
+      <span class="tag sansu">ぜんぶで</span>
+      <h2>4教科の単元と問題</h2>
+      <p>44単元・1,697問</p>
+    </article>
+    <article class="item" data-lab-more>
+      <img src="../media/fairy-kira-happy.webp" width="290" height="292" alt="">
+      <span class="tag kokugo">おはなし</span>
+      <h2>4人のおはなし</h2>
+      <p>全24章</p>
+    </article>
+    <article class="item" data-lab-more>
+      <span class="tag rika">かべがみ</span>
+      <h2>集めるかべがみ</h2>
+      <p>全23枚</p>
+    </article>
+    <article class="item" data-lab-more>
+      <span class="tag shakai">スタンプ</span>
+      <h2>がんばりのスタンプ</h2>
+      <p>全39こ</p>
+    </article>
+    <article class="item" data-lab-more>
+      <span class="tag kokugo">漢字</span>
+      <h2>4年生で習う漢字</h2>
+      <p>202字</p>
+    </article>
+  </div>
+</main>
+
+<script>
+const header = document.querySelector('.site-header');
+let lastY = scrollY; // 最後に反応したときの位置
+
+addEventListener('scroll', () => {
+  const y = scrollY;
+  header.classList.toggle('is-scrolled', y > 10);
+
+  const tolerance = Number(header.dataset.tolerance); // これだけ動くまでは反応しない（px）
+  if (Math.abs(y - lastY) < tolerance) return;
+
+  // 下へ進んだら隠す。上へ戻したら出す。ページの頭では隠さない
+  header.classList.toggle('is-hidden', y > lastY && y > header.offsetHeight);
+  lastY = y;
+}, { passive: true });
+</script>
+</body>
+</html>

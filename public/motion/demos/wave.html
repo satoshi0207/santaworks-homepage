@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ディストーション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+html, body { height: 100%; }
+#stage {
+  width: 100%;
+  height: 100%;
+}
+</style>
+<style data-lab>
+body { overflow: hidden; }
+.caption { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; pointer-events: none; color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+.caption .lab-hint { color: rgba(255, 255, 255, 0.85); }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="stage" data-amp="0.012" data-freq="10"></div>
+<p class="caption" data-lab><span class="lab-hint">DEMO · マウスを絵の上で動かすと、波紋が広がります</span></p>
+
+<script type="module">
+import * as THREE from 'three';
+
+const stage = document.getElementById('stage');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+
+const texture = await new THREE.TextureLoader().loadAsync('../media/story-aqua-1.webp');
+
+// 画面いっぱいの板を1枚置き、色を決める処理（フラグメントシェーダー）で絵をゆがめる
+const uniforms = {
+  uImage: { value: texture },
+  uTime: { value: 0 },
+  uAmp: { value: 0 },    // 揺れの強さ
+  uFreq: { value: 0 },   // 波の細かさ
+  uMouse: { value: new THREE.Vector2(0.5, 0.5) },
+  uHover: { value: 0 },  // マウスが乗っているほど 1 に近づく
+  uRatio: { value: 1 },  // 枠の縦横比 ÷ 絵の縦横比
+};
+const material = new THREE.ShaderMaterial({
+  uniforms,
+  vertexShader: `
+    varying vec2 vUv;
+    void main() { vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }
+  `,
+  fragmentShader: `
+    uniform sampler2D uImage;
+    uniform float uTime, uAmp, uFreq, uHover, uRatio;
+    uniform vec2 uMouse;
+    varying vec2 vUv;
+    void main() {
+      vec2 uv = vUv;
+      // 絵を枠いっぱいに、はみ出す分を切って合わせる（CSS の object-fit: cover と同じ）
+      if (uRatio > 1.0) uv.y = (uv.y - 0.5) / uRatio + 0.5;
+      else uv.x = (uv.x - 0.5) * uRatio + 0.5;
+      // ゆるい横揺れ
+      uv.x += sin(uv.y * uFreq + uTime) * uAmp;
+      // マウスの周りの波紋
+      float d = distance(vUv, uMouse);
+      uv += normalize(vUv - uMouse + 0.0001) * sin(d * 60.0 - uTime * 5.0) * exp(-d * 9.0) * 0.012 * uHover;
+      gl_FragColor = texture2D(uImage, uv);
+    }
+  `,
+});
+
+const scene = new THREE.Scene();
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+const camera = new THREE.Camera(); // 板が画面いっぱいなので、カメラは向きだけあればよい
+const renderer = new THREE.WebGLRenderer();
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+stage.append(renderer.domElement);
+
+new ResizeObserver(() => {
+  renderer.setSize(stage.clientWidth, stage.clientHeight);
+  const img = texture.image;
+  uniforms.uRatio.value = (stage.clientWidth / stage.clientHeight) / (img.width / img.height);
+}).observe(stage);
+
+let hoverTarget = 0;
+stage.addEventListener('pointermove', (e) => {
+  const r = stage.getBoundingClientRect();
+  uniforms.uMouse.value.set((e.clientX - r.left) / r.width, 1 - (e.clientY - r.top) / r.height);
+  hoverTarget = 1;
+});
+stage.addEventListener('pointerleave', () => { hoverTarget = 0; });
+
+renderer.setAnimationLoop((time) => {
+  const still = reduce.matches;
+  uniforms.uTime.value = still ? 0 : time / 1000;
+  uniforms.uAmp.value = still ? 0 : Number(stage.dataset.amp);
+  uniforms.uFreq.value = Number(stage.dataset.freq);
+  uniforms.uHover.value += ((still ? 0 : hoverTarget) - uniforms.uHover.value) * 0.08;
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

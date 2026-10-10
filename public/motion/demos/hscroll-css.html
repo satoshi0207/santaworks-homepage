@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>横スクロール（CSSだけ）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --len: 300vh; /* 縦の区間の長さ。長いほどゆっくり横に流れる */
+}
+.h-sticky { display: flex; overflow-x: auto; } /* 動きが付かないときは、指で横にスクロールする */
+.h-track { display: flex; width: max-content; }
+
+/* 縦スクロールの量で横に流す。新しい書き方に対応していて、動きを減らす設定でないときだけ */
+@supports (animation-timeline: view()) {
+  @media (prefers-reduced-motion: no-preference) {
+    .h-section { height: var(--len); view-timeline-name: --h; }
+    .h-sticky { position: sticky; top: 0; height: 100vh; overflow: hidden; }
+    .h-track {
+      animation: slide linear both;
+      animation-timeline: --h;
+      animation-range: contain 0% contain 100%; /* 区間が画面をおおっている間だけ進む */
+    }
+  }
+}
+
+@keyframes slide {
+  to { transform: translateX(calc(-100% + 100vw)); } /* 右端が画面の右端に来るまで */
+}
+</style>
+<style data-lab>
+.intro, .outro { min-height: 55vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(24px, 6vw, 72px); }
+.intro h1 { margin: 10px 0 0; font-size: clamp(26px, 5vw, 40px); }
+.outro { color: var(--muted); }
+.h-sticky { align-items: center; }
+.h-track { gap: clamp(14px, 3vw, 28px); padding: 0 clamp(24px, 6vw, 72px); align-items: center; }
+.h-track img { height: min(70vh, 420px); width: auto; border-radius: 16px; box-shadow: 0 14px 34px rgba(20, 22, 40, 0.25); }
+.h-track .title { flex: none; width: min(60vw, 280px); }
+.h-track .title b { display: block; font-size: clamp(24px, 5vw, 34px); }
+.h-track .title span { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<header class="intro" data-lab>
+  <span class="lab-hint">DEMO · 下へスクロールしてください</span>
+  <h1>縦に進むと、横に流れる</h1>
+</header>
+
+<section class="h-section">
+  <div class="h-sticky">
+    <div class="h-track">
+      <div class="title"><b>4人のおはなし</b><span>それぞれの第1章</span></div>
+      <img src="../media/story-aqua-1.webp" width="720" height="1080" alt="アクアの章のさし絵">
+      <img src="../media/story-rifa-1.webp" width="720" height="1080" alt="リファの章のさし絵">
+      <img src="../media/story-minju-1.webp" width="720" height="1080" alt="ミンジュの章のさし絵" data-lab-more>
+      <img src="../media/story-kiyu-1.webp" width="720" height="1080" alt="キユの章のさし絵" data-lab-more>
+    </div>
+  </div>
+</section>
+
+<p class="outro" data-lab>ここで横の区間が終わります。</p>
+</body>
+</html>

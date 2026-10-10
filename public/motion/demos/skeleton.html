@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スケルトンスクリーン｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --speed: 1.4s; /* 光の帯が1回流れる時間 */
+}
+
+/* 灰色の形。本物と同じ大きさにしておくと、差し替えたときにガタつかない */
+.sk {
+  position: relative;
+  overflow: hidden;
+  background: var(--far);
+  border-radius: 6px;
+}
+/* 光の帯。左の外から右の外へ、くり返し流す（transform だけを動かすので軽い）。ダーク表示では光を弱める */
+.sk::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent 15%, light-dark(rgba(255, 255, 255, 0.85), rgba(255, 255, 255, 0.22)) 50%, transparent 85%);
+  transform: translateX(-100%);
+  animation: shimmer var(--speed) ease-in-out infinite;
+}
+@keyframes shimmer {
+  to { transform: translateX(100%); }
+}
+
+/* 本物の中身は、ふわっと出す */
+.card.is-loaded {
+  animation: appear 0.4s ease;
+}
+@keyframes appear {
+  from { opacity: 0; }
+}
+
+/* 動きを減らす設定では、光の帯を流さず、灰色のまま待つ */
+@media (prefers-reduced-motion: reduce) {
+  .sk::after { display: none; }
+  .card.is-loaded { animation: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 20px 16px; }
+h1 { margin: 0; font-size: 18px; }
+.cards { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 150px)); gap: 14px; }
+@media (max-width: 640px) { .cards { grid-template-columns: repeat(2, minmax(0, 150px)); gap: 12px; } }
+.card { display: flex; flex-direction: column; gap: 8px; padding: 10px 10px 12px; background: var(--surface); border: 1px solid var(--line); border-radius: 14px; box-shadow: 0 6px 18px rgba(36, 38, 46, 0.08); }
+.card img, .sk-img { display: block; width: 100%; height: 110px; border-radius: 10px; }
+.card img { object-fit: contain; object-position: bottom; background: var(--bg); }
+.card b { display: block; height: 20px; font-size: 14px; line-height: 20px; white-space: nowrap; }
+.card span { display: block; height: 16px; font-family: var(--mono); font-size: 12px; line-height: 16px; color: var(--muted); }
+.sk-title { height: 20px; width: 85%; }
+.sk-text { height: 16px; width: 60%; }
+.card em { font-style: normal; }
+.card .sansu { color: var(--sansu); } .card .kokugo { color: var(--kokugo); } .card .rika { color: var(--rika); } .card .shakai { color: var(--shakai); }
+.again { font: inherit; font-size: 13px; padding: 8px 18px; border-radius: 999px; border: 1.5px solid var(--line); background: var(--surface); color: var(--ink); cursor: pointer; }
+.again:disabled { opacity: 0.5; cursor: default; }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 読み込み中の灰色の形が、しばらくすると本物のカードに替わります</span>
+<h1 data-lab>4人と、4教科</h1>
+
+<!-- 最初は灰色の形だけを並べておく -->
+<ul class="cards" data-wait="2500" aria-busy="true">
+  <li class="card"><div class="sk sk-img"></div><div class="sk sk-title"></div><div class="sk sk-text"></div></li>
+  <li class="card"><div class="sk sk-img"></div><div class="sk sk-title"></div><div class="sk sk-text"></div></li>
+  <li class="card" data-lab-more><div class="sk sk-img"></div><div class="sk sk-title"></div><div class="sk sk-text"></div></li>
+  <li class="card" data-lab-more><div class="sk sk-img"></div><div class="sk sk-title"></div><div class="sk sk-text"></div></li>
+</ul>
+<button class="again" type="button" data-lab>もう一度読み込む</button>
+
+<script>
+const list = document.querySelector('.cards');
+const skeleton = list.innerHTML; // 灰色の形（もう一度読み込むときに使う）
+
+// 本当はサーバーから受け取る中身。ここでは待ち時間をまねる
+const data = [
+  { chara: 'aqua', name: 'アクア', subject: 'さんすう', key: 'sansu', count: '14単元・545問' },
+  { chara: 'rifa', name: 'リファ', subject: 'こくご', key: 'kokugo', count: '13単元・555問' },
+  { chara: 'minju', name: 'ミンジュ', subject: 'りか', key: 'rika', count: '9単元・311問' },
+  { chara: 'kiyu', name: 'キユ', subject: 'しゃかい', key: 'shakai', count: '8単元・286問' },
+];
+
+function load() {
+  list.innerHTML = skeleton;
+  list.setAttribute('aria-busy', 'true'); // 読み上げソフトに「読み込み中」と伝える
+  setTimeout(() => {
+    list.innerHTML = data.map((d) => `
+      <li class="card is-loaded">
+        <img src="../media/chara-${d.chara}-smile.webp" alt="">
+        <b>${d.name}と、<em class="${d.key}">${d.subject}</em></b>
+        <span>${d.count}</span>
+      </li>`).join('');
+    list.setAttribute('aria-busy', 'false');
+  }, Number(list.dataset.wait)); // 待ち時間（ミリ秒）
+}
+load();
+</script>
+<script data-lab>
+  // 見本帳専用：「もう一度読み込む」。待っている間は押せないようにする
+  const again = document.querySelector('.again');
+  again.addEventListener('click', () => {
+    load();
+    again.disabled = true;
+    setTimeout(() => { again.disabled = false; }, Number(list.dataset.wait));
+  });
+</script>
+</body>
+</html>

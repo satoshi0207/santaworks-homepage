@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スクロール進捗バー｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --bar: 6px; /* 線の太さ */
+}
+
+.progress {
+  position: fixed; /* 画面の上端に貼りつける */
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  height: var(--bar);
+  background: var(--rika);
+  transform-origin: 0 50%; /* 左端を軸にして伸ばす */
+}
+
+/* ページ全体のスクロール量（0%〜100%）を、そのままアニメーションの進み具合に使う */
+@supports (animation-timeline: scroll()) {
+  .progress {
+    animation: grow linear both;
+    animation-timeline: scroll(root);
+  }
+}
+/* 対応していないブラウザでは、線そのものを出さない（止まった線は、うそになるため） */
+@supports not (animation-timeline: scroll()) {
+  .progress { display: none; }
+}
+
+@keyframes grow {
+  from { transform: scaleX(0); }
+  to   { transform: scaleX(1); }
+}
+
+/* 動きを減らす設定でも残す。読む人のスクロールに答えるだけで、勝手には動かないため */
+</style>
+<style data-lab>
+.lab-unsupported { display: none; margin: 14px 0 0; color: var(--kokugo); font-weight: 700; }
+@supports not (animation-timeline: scroll()) { .lab-unsupported { display: block; } }
+.article { max-width: 620px; margin: 0 auto; padding: 44px clamp(20px, 6vw, 48px) 80px; box-sizing: content-box; }
+.article h1 { margin: 10px 0 0; font-size: clamp(26px, 5.5vw, 38px); line-height: 1.3; letter-spacing: 0.03em; }
+.article .lead { margin: 14px 0 0; color: var(--muted); }
+.article h2 { margin: 44px 0 0; font-size: clamp(19px, 4vw, 24px); }
+.article p { margin: 14px 0 0; line-height: 1.9; }
+.article h2 .k { display: block; font-size: 12px; letter-spacing: 0.08em; margin-bottom: 4px; }
+.sansu .k { color: var(--sansu); } .kokugo .k { color: var(--kokugo); } .rika .k { color: var(--rika); } .shakai .k { color: var(--shakai); }
+.lines { display: grid; gap: 12px; margin: 18px 0 0; }
+.lines i { display: block; height: 10px; border-radius: 5px; background: var(--far); }
+.lines i:nth-child(3n) { width: 72%; } .lines i:nth-child(4n+1) { width: 94%; }
+.end { margin-top: 48px; padding-top: 18px; border-top: 1px solid var(--line); color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<div class="progress"></div>
+
+<article class="article">
+  <span class="lab-hint" data-lab>DEMO · 下へスクロールしてください。読んだ分だけ、上の緑の線が右へ伸びます</span>
+  <p class="lab-unsupported" data-lab>このブラウザは animation-timeline に未対応のため、線を出していません（Chrome・Edge・Safari 26 以降で動きます）</p>
+  <h1>まなリーフ 小4 の中身</h1>
+  <p class="lead">4年生の4教科を、1回10問で。</p>
+  <section data-lab>
+    <h2 class="sansu"><span class="k">さんすう</span>アクアと、14単元</h2>
+    <p>さんすうは14単元・545問です。</p>
+    <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2 class="kokugo"><span class="k">こくご</span>リファと、13単元</h2>
+    <p>こくごは13単元・555問です。4年生で習う漢字は202字です。</p>
+    <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2 class="rika"><span class="k">りか</span>ミンジュと、9単元</h2>
+    <p>りかは9単元・311問です。</p>
+    <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2 class="shakai"><span class="k">しゃかい</span>キユと、8単元</h2>
+    <p>しゃかいは8単元・286問です。4教科を合わせると、44単元・1,697問になります。</p>
+    <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <h2><span class="k">おはなし</span>4人のおはなし</h2>
+    <p>4人のおはなしは全24章。集めるかべがみは全23枚、がんばりのスタンプは全39こです。</p>
+    <div class="lines"><i></i><i></i><i></i><i></i><i></i><i></i></div>
+    <p class="end">ここで終わりです。線が右端まで届いています。3年生向けは、別のアプリです。</p>
+  </section>
+</article>
+</body>
+</html>

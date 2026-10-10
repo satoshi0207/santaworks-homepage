@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>動きの見本帳｜Santa Works</title>
+<meta name="description" content="Webサイトで使える動きを、実際に動く見本と短い説明で集めた見本帳。">
+<meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap">
+<link rel="stylesheet" href="assets/site.css?v=5">
+<script src="assets/site.js?v=4"></script>
+</head>
+<body>
+<header class="site-head">
+  <div class="wrap">
+    <a class="logo" href="https://santaworks.net/"><span class="logo-t">Santa Works<span>.</span></span></a>
+    <nav class="site-nav" aria-label="Santa Works">
+      <a href="https://santaworks.net/about/">ABOUT</a>
+      <a href="https://santaworks.net/works/">WORKS</a>
+      <a href="https://santaworks.net/journal/">JOURNAL</a>
+      <a href="https://santaworks.net/contact/">CONTACT</a>
+    </nav>
+    <div class="tools">
+      <button class="pill rm" type="button" data-act="rm" aria-pressed="false" aria-label="動きを止める"><span class="switch" aria-hidden="true"></span><span class="long">動きを止める</span><span class="short" aria-hidden="true">止める</span></button>
+      <button class="pill" type="button" data-act="theme">ダーク</button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap index-main">
+  <section class="top">
+    <div>
+      <div class="eyebrow">MOTION</div>
+      <h1>動きの見本帳</h1>
+      <p>Webサイトで使える「動き」を、実際に動く見本と短い説明で集めました。打ち合わせで「どの動きが好みか」を選ぶための道具です。カードは画面に入ると動きます。</p>
+    </div>
+    <nav class="cats" id="cats" aria-label="分類で絞り込む"></nav>
+  </section>
+
+  <section class="feat" id="feat">
+    <div class="sec-h"><h2>打ち合わせでよく出る8つ</h2><span>まずはここから</span></div>
+    <div class="feat-grid" id="feat-grid"></div>
+  </section>
+
+  <div id="cats-body"></div>
+
+  <section class="cta">
+    <h2>気になった動きがあれば、お気軽にどうぞ</h2>
+    <p>「この動きを、うちのサイトで」の段階から相談できます。</p>
+    <a class="btn-red" href="https://santaworks.net/contact/">お問い合わせ</a>
+  </section>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <span>© 2026 Santa Works ／ 山田 悟司</span>
+    <span>見本の素材は、学習アプリ「まなリーフ」のものです（3Dのマグは架空）。</span>
+  </div>
+</footer>
+<script src="assets/index.js?v=5"></script>
+</body>
+</html>

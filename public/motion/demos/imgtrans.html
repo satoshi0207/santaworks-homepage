@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>画像トランジション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+html, body { height: 100%; }
+#stage {
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+</style>
+<style data-lab>
+body { overflow: hidden; }
+.caption { position: absolute; left: 0; right: 0; bottom: 14px; text-align: center; pointer-events: none; color: #fff; text-shadow: 0 1px 8px rgba(0, 0, 0, 0.6); }
+.caption .lab-hint { color: rgba(255, 255, 255, 0.85); }
+</style>
+<script type="importmap">
+{ "imports": {
+  "three": "https://cdn.jsdelivr.net/npm/three@0.186.1/build/three.module.js"
+} }
+</script>
+</head>
+<body>
+<div id="stage" data-dur="1.4" data-strength="0.25"></div>
+<p class="caption" data-lab><span class="lab-hint">DEMO · 数秒ごとに次の絵へ。クリックでも替わります</span></p>
+
+<script type="module">
+import * as THREE from 'three';
+
+const stage = document.getElementById('stage');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)');
+const WAIT = 3000; // 次の絵へ替わるまでの待ち時間（ミリ秒）
+
+// 4枚を全部読み込んでから始める（途中で読むと、切り替えの瞬間に黒くなる）
+const files = ['aqua', 'rifa', 'minju', 'kiyu'].map((n) => `../media/story-${n}-1.webp`);
+const loader = new THREE.TextureLoader();
+const textures = await Promise.all(files.map((f) => loader.loadAsync(f)));
+
+const uniforms = {
+  uFrom: { value: textures[0] }, // いまの絵
+  uTo: { value: textures[1] },   // 次の絵
+  uProgress: { value: 0 },       // 0＝いまの絵 → 1＝次の絵
+  uStrength: { value: 0 },       // ゆがみの強さ
+  uRatio: { value: 1 },          // 枠の縦横比 ÷ 絵の縦横比
+};
+const material = new THREE.ShaderMaterial({
+  uniforms,
+  vertexShader: `
+    varying vec2 vUv;
+    void main() { vUv = uv; gl_Position = vec4(position.xy, 0.0, 1.0); }
+  `,
+  fragmentShader: `
+    uniform sampler2D uFrom, uTo;
+    uniform float uProgress, uStrength, uRatio;
+    varying vec2 vUv;
+
+    // なめらかな乱数（ノイズ）。場所ごとに 0〜1 の、まだらな値を返す
+    float hash(vec2 p) { return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+    float noise(vec2 p) {
+      vec2 i = floor(p), f = fract(p);
+      vec2 u = f * f * (3.0 - 2.0 * f);
+      return mix(mix(hash(i), hash(i + vec2(1.0, 0.0)), u.x),
+                 mix(hash(i + vec2(0.0, 1.0)), hash(i + 1.0), u.x), u.y);
+    }
+
+    void main() {
+      vec2 uv = vUv;
+      // 絵を枠いっぱいに、はみ出す分を切って合わせる（CSS の object-fit: cover と同じ）
+      if (uRatio > 1.0) uv.y = (uv.y - 0.5) / uRatio + 0.5;
+      else uv.x = (uv.x - 0.5) * uRatio + 0.5;
+
+      float n = noise(vUv * 4.0) * 0.7 + noise(vUv * 12.0) * 0.3;
+      // ノイズの値が小さい場所から順に、次の絵へ替わっていく
+      float mixed = smoothstep(n - 0.15, n + 0.15, uProgress * 1.3 - 0.15);
+      // いまの絵は進むほど、次の絵は始めほど、ノイズに沿ってずらす
+      vec2 shift = (vec2(n, noise(vUv * 4.0 + 7.3)) - 0.5) * uStrength;
+      vec4 a = texture2D(uFrom, uv + shift * uProgress);
+      vec4 b = texture2D(uTo, uv - shift * (1.0 - uProgress));
+      gl_FragColor = mix(a, b, mixed);
+    }
+  `,
+});
+
+const scene = new THREE.Scene();
+scene.add(new THREE.Mesh(new THREE.PlaneGeometry(2, 2), material));
+const camera = new THREE.Camera(); // 板が画面いっぱいなので、カメラは向きだけあればよい
+const renderer = new THREE.WebGLRenderer();
+renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+stage.append(renderer.domElement);
+
+new ResizeObserver(() => {
+  renderer.setSize(stage.clientWidth, stage.clientHeight);
+  const img = textures[0].image; // 4枚とも同じ大きさ
+  uniforms.uRatio.value = (stage.clientWidth / stage.clientHeight) / (img.width / img.height);
+}).observe(stage);
+
+let current = 0;      // いま見えている絵の番号
+let start = null;     // 切り替えを始めた時刻（null＝切り替え中ではない）
+let shownAt = performance.now(); // いまの絵になった時刻
+let clicked = false;
+stage.addEventListener('click', () => { clicked = true; });
+
+renderer.setAnimationLoop((time) => {
+  const next = (current + 1) % textures.length;
+  if (reduce.matches) {
+    // 動きを止めたとき：自動では替えず、クリックでパッと替える
+    if (clicked || start !== null) { current = next; start = null; }
+    shownAt = time;
+  } else if (start === null && (clicked || time - shownAt > WAIT)) {
+    start = time; // 切り替え中のクリックは受け付けない
+  }
+  clicked = false;
+
+  let progress = 0;
+  if (start !== null) {
+    const dur = Number(stage.dataset.dur) * 1000; // 切り替えにかける時間
+    progress = Math.min((time - start) / dur, 1);
+    if (progress === 1) { current = next; start = null; shownAt = time; progress = 0; }
+  }
+  uniforms.uFrom.value = textures[current];
+  uniforms.uTo.value = textures[(current + 1) % textures.length];
+  uniforms.uProgress.value = progress * progress * (3 - 2 * progress); // 出入りをなめらかに
+  uniforms.uStrength.value = Number(stage.dataset.strength);
+  renderer.render(scene, camera);
+});
+</script>
+</body>
+</html>

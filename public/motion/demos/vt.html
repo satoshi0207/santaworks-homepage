@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ページトランジション｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.5s; /* つながる動きの時間 */
+}
+
+/* ブラウザが作る「切り替え中の絵」の動きを決める */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--dur);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; padding: clamp(20px, 5vw, 48px); }
+[hidden] { display: none !important; }
+h1 { margin: 8px 0 22px; font-size: clamp(20px, 4vw, 28px); }
+.list { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; max-width: 760px; }
+@media (max-width: 560px) { .list { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+.card { font: inherit; color: inherit; border: 1px solid var(--line); background: var(--surface); border-radius: 14px; padding: 10px; cursor: pointer; text-align: center; }
+.card img { display: block; width: 100%; height: auto; aspect-ratio: 3 / 5; object-fit: contain; }
+.card b { display: block; margin-top: 6px; font-size: 14px; }
+.detail { display: grid; grid-template-columns: minmax(0, 220px) minmax(0, 1fr); gap: clamp(16px, 4vw, 40px); align-items: center; max-width: 760px; }
+@media (max-width: 560px) { .detail { grid-template-columns: minmax(0, 1fr); justify-items: center; text-align: center; } }
+.detail img { width: 100%; max-height: 62vh; height: auto; aspect-ratio: 3 / 5; object-fit: contain; }
+.detail h2 { margin: 0; font-size: clamp(28px, 6vw, 40px); }
+.detail p { margin: 10px 0 20px; color: var(--muted); }
+.detail button { font: inherit; font-size: 14px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 10px 18px; cursor: pointer; }
+</style>
+</head>
+<body>
+<h1 data-lab>だれと学ぶ？</h1>
+<main class="list">
+  <button class="card" data-name="アクア" data-info="さんすう・14単元・545問"><img src="../media/chara-aqua-normal.webp" alt=""><b>アクア</b></button>
+  <button class="card" data-name="リファ" data-info="こくご・13単元・555問"><img src="../media/chara-rifa-normal.webp" alt=""><b>リファ</b></button>
+  <button class="card" data-name="ミンジュ" data-info="りか・9単元・311問" data-lab-more><img src="../media/chara-minju-normal.webp" alt=""><b>ミンジュ</b></button>
+  <button class="card" data-name="キユ" data-info="しゃかい・8単元・286問" data-lab-more><img src="../media/chara-kiyu-normal.webp" alt=""><b>キユ</b></button>
+</main>
+
+<section class="detail" hidden>
+  <img alt="">
+  <div>
+    <h2></h2>
+    <p></p>
+    <button type="button">← 一覧へもどる</button>
+  </div>
+</section>
+
+<script>
+const list = document.querySelector('.list');
+const detail = document.querySelector('.detail');
+const big = detail.querySelector('img');
+let picked = null;
+
+// 対応していないブラウザでは、切り替えだけ行う
+function go(update) {
+  if (!document.startViewTransition) { update(); return Promise.resolve(); }
+  return document.startViewTransition(update).finished;
+}
+
+for (const card of list.querySelectorAll('.card')) {
+  card.addEventListener('click', () => {
+    picked = card.querySelector('img');
+    picked.style.viewTransitionName = 'chara'; // 移る前の絵に名前を付ける
+    go(() => {
+      picked.style.viewTransitionName = '';
+      big.src = picked.src;
+      big.style.viewTransitionName = 'chara'; // 移った先の絵に、同じ名前を付ける
+      detail.querySelector('h2').textContent = card.dataset.name;
+      detail.querySelector('p').textContent = card.dataset.info;
+      list.hidden = true;
+      detail.hidden = false;
+    });
+  });
+}
+
+detail.querySelector('button').addEventListener('click', () => {
+  go(() => {
+    big.style.viewTransitionName = '';
+    picked.style.viewTransitionName = 'chara';
+    detail.hidden = true;
+    list.hidden = false;
+  }).then(() => {
+    picked.style.viewTransitionName = ''; // 同じ名前は、同時に1つしか置けない
+  });
+});
+</script>
+</body>
+</html>

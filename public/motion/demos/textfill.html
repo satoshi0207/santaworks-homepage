@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>テキストの塗り｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --end: 50%; /* 画面の下端から入って、どこまで進んだら塗り終わるか（50%≒画面の真ん中） */
+}
+
+.fill {
+  display: block; /* 1行ずつ別の要素にする。折り返すと、全部の行が同時に塗られるため */
+  /* 左半分が塗りの色、右半分が下地の色。幅を2倍にして、見せる半分をずらす */
+  background-image: linear-gradient(90deg, var(--c) 50%, var(--mid) 50%);
+  background-size: 200% 100%;
+  background-position-x: 0%; /* 0%＝塗り終わり。未対応や動きを止めたときは、この状態で見える */
+  -webkit-background-clip: text;
+  background-clip: text; /* 背景を、文字の形で切り抜く */
+  color: transparent;
+}
+
+/* 対応しているブラウザでだけ、スクロールに合わせて塗る */
+@supports (animation-timeline: view()) {
+  .fill {
+    animation: paint linear both;
+    animation-timeline: view();
+    animation-range: entry 100% cover var(--end); /* 行が下から入りきってから、塗り始める */
+  }
+}
+
+@keyframes paint {
+  from { background-position-x: 100%; } /* 右半分（下地）だけが見える＝塗る前 */
+  to   { background-position-x: 0%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fill { animation: none; }
+}
+</style>
+<style data-lab>
+.lab-unsupported { display: none; margin: 14px 0 0; color: var(--kokugo); font-weight: 700; }
+@supports not (animation-timeline: view()) { .lab-unsupported { display: block; } }
+.top { min-height: 78vh; display: flex; flex-direction: column; justify-content: center; padding: 0 clamp(20px, 6vw, 72px); }
+.top h1 { margin: 10px 0 0; font-size: clamp(26px, 5vw, 40px); letter-spacing: 0.04em; }
+.top p { margin: 12px 0 0; color: var(--muted); }
+.lead { margin: 0; padding: 0 clamp(20px, 6vw, 72px) 70vh; font-size: clamp(24px, 7vw, 60px); font-weight: 900; line-height: 1.35; letter-spacing: 0.02em; }
+.lead .fill { margin-bottom: clamp(18px, 5vh, 40px); }
+</style>
+</head>
+<body>
+<header class="top" data-lab>
+  <span class="lab-hint">DEMO · 下へゆっくりスクロールしてください。行が画面の真ん中に来るまでに、左から塗られていきます</span>
+  <h1>まなリーフ 小4</h1>
+  <p>読み進めると、文字が色で塗られていきます。</p>
+  <p class="lab-unsupported">このブラウザは animation-timeline に未対応のため、塗られた状態で表示しています（Chrome・Edge・Safari 26 以降で動きます）</p>
+</header>
+
+<h2 class="lead">
+  <span class="fill" style="--c: var(--sansu)">4年生の4教科を、</span>
+  <span class="fill" style="--c: var(--kokugo)">1回10問で。</span>
+  <span class="fill" style="--c: var(--rika)" data-lab-more>44単元・1,697問。</span>
+  <span class="fill" style="--c: var(--shakai)" data-lab-more>4人のおはなし、全24章。</span>
+</h2>
+</body>
+</html>

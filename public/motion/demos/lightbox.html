@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ライトボックス｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.6s; /* 開く・閉じる動きの時間 */
+}
+
+/* 開いたときは、画面いっぱいの箱の真ん中に絵を置く */
+.lightbox {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+.lightbox[open] {
+  display: grid;
+  place-items: center;
+}
+.lightbox::backdrop {
+  background: rgb(10 12 20 / 0.8);
+}
+.big {
+  max-width: 92vw;
+  max-height: 86vh;
+  width: auto;
+  height: auto;
+}
+
+/* ブラウザが作る「切り替え中の絵」の動きの時間 */
+::view-transition-group(*),
+::view-transition-old(*),
+::view-transition-new(*) {
+  animation-duration: var(--dur);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*),
+  ::view-transition-old(*),
+  ::view-transition-new(*) {
+    animation: none;
+  }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: clamp(16px, 5vw, 40px); }
+.wrap { width: 100%; max-width: 600px; margin: 0 auto; }
+h1 { margin: 6px 0 16px; font-size: clamp(20px, 4vw, 26px); }
+.thumbs { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: clamp(8px, 2vw, 14px); }
+.thumb { display: block; width: 100%; padding: 0; border: 0; background: none; cursor: zoom-in; border-radius: 10px; }
+.thumb:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.thumb img { display: block; width: 100%; height: auto; border-radius: 10px; box-shadow: 0 6px 18px rgba(20, 22, 40, 0.18); }
+.big { border-radius: 12px; box-shadow: 0 20px 60px rgba(0, 0, 0, 0.45); }
+.close { position: fixed; top: 12px; right: 12px; width: 44px; height: 44px; border-radius: 50%; border: 0; background: rgba(255, 255, 255, 0.92); color: #24262e; font-size: 24px; line-height: 1; cursor: pointer; }
+.close:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+</style>
+</head>
+<body>
+<div class="wrap">
+  <span class="lab-hint" data-lab>DEMO · 絵を押すと、その位置から大きく開きます。×・背景・Esc で閉じます</span>
+  <h1 data-lab>4人のおはなし（第1章）</h1>
+  <ul class="thumbs">
+    <li><button class="thumb" type="button"><img src="../media/story-aqua-1.webp" width="720" height="1080" alt="アクアのおはなしのさし絵"></button></li>
+    <li><button class="thumb" type="button"><img src="../media/story-rifa-1.webp" width="720" height="1080" alt="リファのおはなしのさし絵"></button></li>
+    <li data-lab-more><button class="thumb" type="button"><img src="../media/story-minju-1.webp" width="720" height="1080" alt="ミンジュのおはなしのさし絵"></button></li>
+    <li data-lab-more><button class="thumb" type="button"><img src="../media/story-kiyu-1.webp" width="720" height="1080" alt="キユのおはなしのさし絵"></button></li>
+  </ul>
+</div>
+
+<dialog class="lightbox" aria-label="大きな絵">
+  <img class="big" alt="">
+  <button class="close" type="button" aria-label="閉じる" autofocus>×</button>
+</dialog>
+
+<script>
+const box = document.querySelector('.lightbox');
+const big = box.querySelector('.big');
+let thumb = null; // いま開いている絵の、一覧の側
+
+// 対応していないブラウザでは、動きなしで切り替えだけ行う
+function go(update) {
+  if (!document.startViewTransition) { update(); return Promise.resolve(); }
+  return document.startViewTransition(update).finished;
+}
+
+async function open(img) {
+  thumb = img;
+  // 先に大きな絵を読み込んでおく。切り替えの途中で読むと、開いた後の写しが空になり、拡大して見えない
+  big.src = img.src;
+  big.alt = img.alt;
+  await big.decode().catch(() => {});
+  thumb.style.viewTransitionName = 'photo'; // 開く前：一覧の絵に名前を付ける
+  go(() => {
+    thumb.style.viewTransitionName = '';
+    big.style.viewTransitionName = 'photo'; // 開いた後：大きな絵に同じ名前を付ける
+    box.showModal();
+  });
+}
+
+function close() {
+  go(() => {
+    big.style.viewTransitionName = '';
+    thumb.style.viewTransitionName = 'photo'; // 名前を一覧の絵に戻すと、元の位置へ縮む
+    box.close();
+  }).then(() => {
+    thumb.style.viewTransitionName = ''; // 同じ名前は、同時に1つしか置けない
+  });
+}
+
+for (const btn of document.querySelectorAll('.thumb')) {
+  btn.addEventListener('click', () => open(btn.querySelector('img')));
+}
+box.querySelector('.close').addEventListener('click', close);
+box.addEventListener('click', (e) => { if (e.target === box) close(); }); // 絵の外（背景）を押したとき
+box.addEventListener('cancel', (e) => { e.preventDefault(); close(); });  // Esc を押したとき
+</script>
+</body>
+</html>

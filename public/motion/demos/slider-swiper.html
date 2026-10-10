@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>スライダー（Swiper）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@14.3.0/swiper-bundle.min.css">
+<style>
+.swiper-slide {
+  width: 240px; /* slidesPerView: 'auto' のときは、1枚の幅を CSS で決める */
+}
+.swiper {
+  --swiper-theme-color: var(--accent); /* 点と矢印の色 */
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 16px 0; overflow-x: hidden; }
+.head { padding: 0 24px; display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 8px 16px; }
+.head h1 { margin: 6px 0 0; font-size: clamp(20px, 4vw, 26px); }
+.swiper { width: 100%; max-width: 760px; padding-bottom: 36px; }
+.swiper-slide { margin: 0; }
+.swiper-slide img { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 14px; }
+.swiper-slide.chara img { object-fit: contain; object-position: center bottom; padding-top: 12px; }
+.swiper-slide figcaption { margin-top: 8px; font-size: 13px; font-weight: 700; text-align: center; }
+.swiper-slide figcaption small { display: block; font-family: var(--mono); font-size: 12px; font-weight: 400; color: var(--muted); }
+.swiper-slide:not(.swiper-slide-active) { opacity: 0.55; transition: opacity 0.3s; }
+.swiper { --swiper-navigation-size: 40px; --swiper-navigation-top-offset: 42%; --swiper-navigation-sides-offset: 10px; }
+.swiper-button-prev, .swiper-button-next { box-sizing: border-box; padding: 11px 14px; border-radius: 50%; background: var(--surface); border: 1px solid var(--line); box-shadow: 0 4px 12px rgba(20, 22, 40, 0.15); }
+.swiper-pagination-bullet { background: var(--muted); }
+.pause { align-self: center; font: inherit; font-size: 13px; color: var(--ink); background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 6px 14px; cursor: pointer; }
+.sansu img { background: #CDE9F7; } .kokugo img { background: #FFC2D1; } .rika img { background: #D5F0C4; } .shakai img { background: #D6C7F5; }
+</style>
+</head>
+<body>
+<div class="head" data-lab>
+  <div>
+    <span class="lab-hint">DEMO · 3秒ごとに自動で送ります。矢印・点・指でも送れます</span>
+    <h1>4人のおはなしと、4つの教科</h1>
+  </div>
+</div>
+
+<div class="swiper" data-delay="3000" data-speed="600">
+  <div class="swiper-wrapper">
+    <figure class="swiper-slide"><img src="../media/story-aqua-1.webp" width="720" height="1080" alt="アクアのおはなしのさし絵"><figcaption>アクアのおはなし<small>第1章</small></figcaption></figure>
+    <figure class="swiper-slide"><img src="../media/story-rifa-1.webp" width="720" height="1080" alt="リファのおはなしのさし絵"><figcaption>リファのおはなし<small>第1章</small></figcaption></figure>
+    <figure class="swiper-slide" data-lab-more><img src="../media/story-minju-1.webp" width="720" height="1080" alt="ミンジュのおはなしのさし絵"><figcaption>ミンジュのおはなし<small>第1章</small></figcaption></figure>
+    <figure class="swiper-slide" data-lab-more><img src="../media/story-kiyu-1.webp" width="720" height="1080" alt="キユのおはなしのさし絵"><figcaption>キユのおはなし<small>第1章</small></figcaption></figure>
+    <figure class="swiper-slide chara sansu" data-lab-more><img src="../media/chara-aqua-smile.webp" width="339" height="476" alt="アクア"><figcaption>アクアと、さんすう<small>14単元・545問</small></figcaption></figure>
+    <figure class="swiper-slide chara kokugo" data-lab-more><img src="../media/chara-rifa-smile.webp" width="254" height="474" alt="リファ"><figcaption>リファと、こくご<small>13単元・555問</small></figcaption></figure>
+    <figure class="swiper-slide chara rika" data-lab-more><img src="../media/chara-minju-smile.webp" width="259" height="480" alt="ミンジュ"><figcaption>ミンジュと、りか<small>9単元・311問</small></figcaption></figure>
+    <figure class="swiper-slide chara shakai" data-lab-more><img src="../media/chara-kiyu-smile.webp" width="309" height="480" alt="キユ"><figcaption>キユと、しゃかい<small>8単元・286問</small></figcaption></figure>
+  </div>
+  <div class="swiper-pagination"></div>
+  <div class="swiper-button-prev"></div>
+  <div class="swiper-button-next"></div>
+</div>
+<button class="pause" type="button">自動送りを止める</button>
+
+<script src="https://cdn.jsdelivr.net/npm/swiper@14.3.0/swiper-bundle.min.js"></script>
+<script>
+const el = document.querySelector('.swiper');
+const pause = document.querySelector('.pause');
+const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+const swiper = new Swiper(el, {
+  slidesPerView: 'auto',
+  centeredSlides: true,
+  spaceBetween: 16,
+  loop: true, // 最後の次は最初へ。枚数が少ないと効かないので、見える枚数の2倍以上を用意する
+  speed: reduce ? 0 : Number(el.dataset.speed), // 切り替えにかける時間（ミリ秒）
+  autoplay: reduce ? false : { delay: Number(el.dataset.delay) }, // 自動送りの間隔（ミリ秒）
+  pagination: { el: '.swiper-pagination', clickable: true },
+  navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+  a11y: { prevSlideMessage: '前の写真', nextSlideMessage: '次の写真', paginationBulletMessage: '{{index}}枚目へ' }, // 読み上げを日本語に
+});
+
+// 自動で動き続けるものには、止める手段を付ける
+pause.hidden = reduce;
+pause.addEventListener('click', () => {
+  const running = swiper.autoplay.running;
+  if (running) swiper.autoplay.stop(); else swiper.autoplay.start();
+  pause.textContent = running ? '自動送りを再開する' : '自動送りを止める';
+});
+</script>
+</body>
+</html>

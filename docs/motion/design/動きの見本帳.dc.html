@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<meta name="design_doc_mode" content="canvas">
+<style>
+:root,[data-theme="light"]{--bg:#fbfbf8;--surface:#ffffff;--ink:#24262e;--muted:#474d5b;--line:#e4e6e2;--accent:#c4333e;--accent-strong:#a2242f;--accent-soft:rgba(196,51,62,0.08);--card-shadow:0 12px 40px rgba(36,38,46,0.07);--stage:#f1f0ea;--grid:rgba(36,38,46,0.06);--demo-far:#dcd8cc;--demo-mid:#bdb7a8;--code-bg:#f6f5f0;--code-ink:#24262e;--canvas:#e7e6e0}
+[data-theme="dark"]{--bg:#16171b;--surface:#1e1f25;--ink:#ecebe6;--muted:#a9adb8;--line:#30323b;--accent:#e25660;--accent-strong:#ef7b84;--accent-soft:rgba(226,86,96,0.14);--card-shadow:0 12px 40px rgba(0,0,0,0.35);--stage:#24262e;--grid:rgba(236,235,230,0.06);--demo-far:#363943;--demo-mid:#4c505d;--code-bg:#121317;--code-ink:#e6e5e0;--canvas:#0e0f12}
+body{margin:0;-webkit-font-smoothing:antialiased}
+a{color:var(--accent)}a:hover{color:var(--accent-strong)}
+button:focus-visible,input:focus-visible,a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+@keyframes mFade{0%,10%{opacity:0;transform:translateY(14px)}35%,85%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes mParB{from{transform:translateY(6px)}to{transform:translateY(-6px)}}
+@keyframes mParF{from{transform:translateY(20px)}to{transform:translateY(-20px)}}
+@keyframes mSwap{0%{opacity:0}4%,30%{opacity:1}34%,100%{opacity:0}}
+@keyframes mSlide{to{transform:translateX(-296px)}}
+@keyframes mTurn{to{transform:rotate(360deg)}}
+@keyframes mFill{from{width:0}to{width:100%}}
+@keyframes mPull{0%,20%,100%{transform:none}50%,70%{transform:translate(7px,4px)}}
+@keyframes mCursor{0%,20%,100%{transform:translate(-80px,34px)}50%,70%{transform:translate(20px,10px)}}
+@keyframes mTilt{0%,100%{transform:perspective(500px) rotateY(-20deg) rotateX(8deg)}50%{transform:perspective(500px) rotateY(20deg) rotateX(-8deg)}}
+@keyframes mChar{0%,5%{opacity:0;transform:translateY(8px)}22%,85%{opacity:1;transform:none}100%{opacity:0;transform:none}}
+@keyframes mDigit{from{transform:translateY(0)}to{transform:translateY(-324px)}}
+@keyframes mDraw{0%{stroke-dashoffset:160}55%,100%{stroke-dashoffset:0}}
+@keyframes mBounce{0%,100%{transform:translateY(-34px)}45%{transform:translateY(0) scale(1,1)}52%{transform:translateY(0) scale(1.25,0.75)}60%{transform:translateY(0) scale(1,1)}}
+@keyframes mMorph{0%,20%,100%{width:26%;height:44%}50%,75%{width:100%;height:70%}}
+@keyframes mDrift{to{transform:translate(7px,-9px)}}
+@keyframes mDrift2{to{transform:translate(-8px,6px)}}
+@keyframes mWave{0%,100%{transform:translateX(-5px)}50%{transform:translateX(5px)}}
+@keyframes mSpin{from{transform:rotateX(-24deg) rotateY(0deg)}to{transform:rotateX(-24deg) rotateY(360deg)}}
+@keyframes mBlob{to{transform:translate(30%,-18%) scale(1.25)}}
+</style>
+</helmet>
+<div data-theme="{{ theme }}" style="min-height:100vh;width:max-content;background:var(--canvas);padding:72px;display:flex;gap:72px;align-items:flex-start;font-family:'Hiragino Kaku Gothic ProN','Hiragino Sans','Yu Gothic','YuGothic',sans-serif;color:var(--ink)">
+
+<div id="A" data-screen-label="A 一覧ページ" style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--muted)">A · 一覧ページ · 1280px</div>
+<div style="width:1280px;background:var(--bg);color:var(--ink);box-shadow:var(--card-shadow)">
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--line)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:0.02em"><span style="width:10px;height:10px;background:var(--accent);border-radius:2px"></span>Santa Works</div>
+      <span style="color:var(--line)">/</span>
+      <span style="font-size:14px;color:var(--muted)">動きの見本帳</span>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button onClick="{{ toggleRm }}" aria-pressed="{{ rmOn }}" style="display:flex;align-items:center;gap:10px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;cursor:pointer"><span style="width:30px;height:18px;border-radius:999px;background:{{ swBg }};position:relative;transition:background .2s"><span style="position:absolute;top:2px;left:{{ swX }};width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s"></span></span>動きを止める</button>
+      <button onClick="{{ toggleTheme }}" style="font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer">{{ themeLabel }}</button>
+    </div>
+  </header>
+
+  <section style="padding:72px 40px 48px;display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:56px;align-items:end">
+    <div>
+      <div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;letter-spacing:0.14em;color:var(--accent);margin-bottom:18px">MOTION FIELD NOTES · 16</div>
+      <h1 style="margin:0;font-size:46px;line-height:1.3;font-weight:700;letter-spacing:0.03em">動きの見本帳</h1>
+      <p style="margin:22px 0 0;font-size:16px;line-height:2;color:var(--muted);text-wrap:pretty">Webサイトで使える動きを、実際に動く見本と短い説明で集めました。<br>打ち合わせでは好みの動きを選ぶために、制作では仕組みを確かめるために使います。</p>
+    </div>
+    <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:10px;font-size:13px;line-height:1.7">
+      <div style="font-weight:700">カードの見かた</div>
+      <div style="display:grid;grid-template-columns:96px minmax(0,1fr);gap:6px 12px;color:var(--muted)">
+        <span style="color:var(--ink)">スマホでの重さ</span><span>軽い・中・重いの3段階</span>
+        <span style="color:var(--ink)">作る手間</span><span>軽い・中・重いの3段階</span>
+        <span style="color:var(--ink)">作り方</span><span>CSSだけ → JavaScript → ライブラリの順に複雑</span>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:22px 40px;display:flex;flex-direction:column;gap:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);background:var(--surface)">
+    <div style="display:flex;align-items:center;gap:16px">
+      <span style="width:104px;flex:none;font-size:13px;font-weight:700">分類</span>
+      <div style="display:flex;flex-wrap:wrap;gap:8px">
+        <sc-for list="{{ catChips }}" as="c" hint-placeholder-count="7">
+          <button onClick="{{ c.onClick }}" aria-pressed="{{ c.on }}" style="font-family:inherit;font-size:13px;padding:6px 14px;border-radius:999px;cursor:pointer;border-width:1px;border-style:solid;border-color:{{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}<span style="margin-left:6px;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;opacity:0.7">{{ c.count }}</span></button>
+        </sc-for>
+      </div>
+    </div>
+    <div style="display:flex;align-items:center;gap:16px;flex-wrap:wrap">
+      <span style="width:104px;flex:none;font-size:13px;font-weight:700">スマホでの重さ</span>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ wChips }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" aria-pressed="{{ c.on }}" style="font-family:inherit;font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;border-width:1px;border-style:solid;border-color:{{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <span style="width:1px;height:20px;background:var(--line);margin:0 8px"></span>
+      <span style="font-size:13px;font-weight:700">作る手間</span>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ eChips }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" aria-pressed="{{ c.on }}" style="font-family:inherit;font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;border-width:1px;border-style:solid;border-color:{{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <span style="width:1px;height:20px;background:var(--line);margin:0 8px"></span>
+      <span style="font-size:13px;font-weight:700">作り方</span>
+      <div style="display:flex;gap:6px">
+        <sc-for list="{{ tChips }}" as="c" hint-placeholder-count="4">
+          <button onClick="{{ c.onClick }}" aria-pressed="{{ c.on }}" style="font-family:inherit;font-size:13px;padding:6px 12px;border-radius:999px;cursor:pointer;border-width:1px;border-style:solid;border-color:{{ c.bd }};background:{{ c.bg }};color:{{ c.fg }}">{{ c.label }}</button>
+        </sc-for>
+      </div>
+      <div style="margin-left:auto;display:flex;align-items:center;gap:12px">
+        <span style="font-size:13px;color:var(--muted)">{{ resultText }}</span>
+        <sc-if value="{{ hasFilter }}" hint-placeholder-val="{{ false }}">
+          <button onClick="{{ resetFilters }}" style="font-family:inherit;font-size:13px;color:var(--accent);background:none;border:0;cursor:pointer;padding:4px;text-decoration:underline;text-underline-offset:3px">条件を外す</button>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <div style="padding:8px 40px 88px;display:flex;flex-direction:column;gap:24px">
+    <sc-for list="{{ groups }}" as="g" hint-placeholder-count="2">
+      <section style="display:flex;flex-direction:column;gap:22px;padding-top:48px">
+        <div style="display:flex;align-items:baseline;gap:16px;border-bottom:2px solid var(--ink);padding-bottom:12px">
+          <span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--accent)">{{ g.no }}</span>
+          <h2 style="margin:0;font-size:22px;letter-spacing:0.02em">{{ g.name }}</h2>
+          <span style="font-size:13px;color:var(--muted)">{{ g.lead }}</span>
+          <span style="margin-left:auto;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--muted)">{{ g.count }}</span>
+        </div>
+        <div style="display:grid;grid-template-columns:{{ gridCols }};gap:20px">
+          <sc-for list="{{ g.items }}" as="it" hint-placeholder-count="4">
+            <article style="background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;display:flex;flex-direction:column;cursor:pointer;transition:transform .2s, box-shadow .2s" style-hover="transform:translateY(-2px);box-shadow:var(--card-shadow)">
+              <div style="position:relative;aspect-ratio:16/10;background-color:var(--stage);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:16px 16px;border-bottom:1px solid var(--line);overflow:hidden">{{ it.preview }}</div>
+              <div style="padding:16px 18px 18px;display:flex;flex-direction:column;gap:8px;flex:1">
+                <div style="display:flex;justify-content:space-between;align-items:center;gap:8px">
+                  <span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;color:var(--muted)">{{ it.code }}</span>
+                  <span style="font-size:11px;padding:2px 8px;border:1px solid var(--line);border-radius:4px;color:var(--muted)">{{ it.tier }}</span>
+                </div>
+                <h3 style="margin:0;font-size:16px;line-height:1.5">{{ it.name }}</h3>
+                <p style="margin:0;font-size:13px;line-height:1.8;color:var(--muted);flex:1;text-wrap:pretty">{{ it.desc }}</p>
+                <div style="display:flex;flex-direction:column;gap:6px;padding-top:12px;margin-top:4px;border-top:1px dashed var(--line);font-size:12px">
+                  <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--muted);flex:1">スマホでの重さ</span><span style="display:flex;gap:2px"><sc-for list="{{ it.wDots }}" as="d" hint-placeholder-count="3"><span style="width:12px;height:5px;border-radius:1px;background:{{ d.c }}"></span></sc-for></span><span style="width:28px;text-align:right">{{ it.wl }}</span></div>
+                  <div style="display:flex;align-items:center;gap:8px"><span style="color:var(--muted);flex:1">作る手間</span><span style="display:flex;gap:2px"><sc-for list="{{ it.eDots }}" as="d" hint-placeholder-count="3"><span style="width:12px;height:5px;border-radius:1px;background:{{ d.c }}"></span></sc-for></span><span style="width:28px;text-align:right">{{ it.el }}</span></div>
+                </div>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </section>
+    </sc-for>
+    <sc-if value="{{ empty }}" hint-placeholder-val="{{ false }}">
+      <div style="padding:80px 0;display:flex;flex-direction:column;align-items:center;gap:14px;color:var(--muted);font-size:15px">条件に合う効果がありません。<button onClick="{{ resetFilters }}" style="font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:8px 16px;cursor:pointer">条件を外す</button></div>
+    </sc-if>
+  </div>
+  <footer style="padding:24px 40px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between"><span>Santa Works · 動きの見本帳</span><span>見本の店名・製品名はすべて架空のものです</span></footer>
+</div>
+</div>
+
+<div id="B" data-screen-label="B 詳細ページ" style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--muted)">B · 詳細ページ（例：パララックス） · 1280px</div>
+<div style="width:1280px;background:var(--bg);color:var(--ink);box-shadow:var(--card-shadow)">
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:20px 40px;border-bottom:1px solid var(--line)">
+    <div style="display:flex;align-items:center;gap:14px">
+      <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:15px;letter-spacing:0.02em"><span style="width:10px;height:10px;background:var(--accent);border-radius:2px"></span>Santa Works</div>
+      <span style="color:var(--line)">/</span>
+      <a href="#A" style="font-size:14px;color:var(--muted);text-decoration:none">動きの見本帳</a>
+    </div>
+    <div style="display:flex;gap:10px;align-items:center">
+      <button onClick="{{ toggleRm }}" aria-pressed="{{ rmOn }}" style="display:flex;align-items:center;gap:10px;font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px 7px 8px;cursor:pointer"><span style="width:30px;height:18px;border-radius:999px;background:{{ swBg }};position:relative;transition:background .2s"><span style="position:absolute;top:2px;left:{{ swX }};width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s"></span></span>動きを止める</button>
+      <button onClick="{{ toggleTheme }}" style="font-family:inherit;font-size:13px;color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:7px 14px;cursor:pointer">{{ themeLabel }}</button>
+    </div>
+  </header>
+
+  <div style="padding:40px 40px 28px;display:flex;flex-direction:column;gap:16px">
+    <nav style="font-size:13px;color:var(--muted);display:flex;gap:8px;align-items:center"><a href="#A" style="color:var(--muted)">一覧</a><span>/</span><span>01 スクロール</span><span>/</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">01-02</span></nav>
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:32px">
+      <div>
+        <h1 style="margin:0;font-size:44px;line-height:1.3;letter-spacing:0.03em">パララックス</h1>
+        <p style="margin:10px 0 0;font-size:17px;line-height:1.8;color:var(--muted)">奥と手前が違う速さで動き、画面に奥行きが生まれる。</p>
+      </div>
+      <div style="display:flex;gap:8px;font-size:12px;flex:none">
+        <span style="padding:5px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">スマホでの重さ　中</span>
+        <span style="padding:5px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">作る手間　中</span>
+        <span style="padding:5px 10px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">JavaScript</span>
+      </div>
+    </div>
+  </div>
+
+  <div style="padding:0 40px">
+    <div style="position:relative;border-radius:12px;overflow:hidden;border:1px solid var(--line);box-shadow:var(--card-shadow)">
+      <div ref="{{ refB }}" onScroll="{{ scrollB }}" style="height:580px;overflow-y:auto;background-color:var(--stage);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:24px 24px">
+        <div style="position:relative;height:580px;overflow:hidden">
+          <div data-layer="1" style="position:absolute;left:0;right:0;top:-10%;bottom:0;will-change:transform">
+            <div style="position:absolute;right:18%;top:24%;width:104px;height:104px;border-radius:50%;background:var(--accent)"></div>
+            <div style="position:absolute;left:-10%;right:34%;bottom:16%;height:46%;border-radius:50% 50% 0 0;background:var(--demo-far)"></div>
+            <div style="position:absolute;left:42%;right:-20%;bottom:20%;height:36%;border-radius:50% 50% 0 0;background:var(--demo-far)"></div>
+          </div>
+          <div data-layer="2" style="position:absolute;inset:0;will-change:transform">
+            <div style="position:absolute;left:-20%;right:24%;bottom:-6%;height:40%;border-radius:50% 50% 0 0;background:var(--demo-mid)"></div>
+            <div style="position:absolute;left:46%;right:-26%;bottom:-12%;height:46%;border-radius:50% 50% 0 0;background:var(--demo-mid)"></div>
+          </div>
+          <div style="position:absolute;left:0;right:0;bottom:0;height:14%;background:var(--ink)"></div>
+          <div style="position:absolute;left:72px;top:112px">
+            <div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;letter-spacing:0.2em;color:var(--muted)">KISSA HOSHINAMI</div>
+            <div style="font-size:52px;font-weight:700;letter-spacing:0.06em;margin-top:10px">喫茶 ほしなみ</div>
+            <p style="margin:12px 0 0;font-size:17px;color:var(--muted)">秋の焙煎、はじめました。</p>
+          </div>
+        </div>
+        <div style="background:var(--ink);color:var(--bg);padding:64px 72px 120px;display:grid;grid-template-columns:240px minmax(0,1fr);gap:48px">
+          <div style="font-size:24px;font-weight:700">本日の豆</div>
+          <div style="display:flex;flex-direction:column">
+            <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:16px"><span>深煎り　夜凪</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥620</span></div>
+            <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:16px"><span>中煎り　朝凪</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥580</span></div>
+            <div style="display:flex;justify-content:space-between;padding:18px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:16px"><span>浅煎り　小春</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥600</span></div>
+            <p style="margin:28px 0 0;font-size:14px;opacity:0.75">8:00–18:00 ／ 水曜定休</p>
+          </div>
+        </div>
+      </div>
+      <div style="position:absolute;left:16px;top:16px;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:11px;padding:5px 9px;background:var(--surface);border:1px solid var(--line);border-radius:4px;pointer-events:none;color:var(--ink)">DEMO · 枠の中をスクロール</div>
+      <sc-if value="{{ rmOn }}" hint-placeholder-val="{{ false }}">
+        <div style="position:absolute;right:16px;top:16px;font-size:12px;padding:6px 10px;background:var(--surface);border:1px solid var(--accent);color:var(--ink);border-radius:4px;pointer-events:none">動きを止めた状態：層は通常のスクロールと同じに流れます</div>
+      </sc-if>
+    </div>
+  </div>
+
+  <section style="padding:80px 40px 0;display:flex;flex-direction:column;gap:28px">
+    <div style="font-size:13px;color:var(--muted);letter-spacing:0.04em">この動きについて</div>
+    <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));column-gap:40px;row-gap:48px">
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">01</span><h3 style="margin:0;font-size:15px">ひとことで</h3></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">背景と前景をずらして動かし、平らな画面に奥行きを足す効果です。</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">02</span><h3 style="margin:0;font-size:15px">向いている場面</h3></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">お店や製品の第一印象を見せるページの冒頭。風景や絵柄に、奥と手前の層があるとき。</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">03</span><h3 style="margin:0;font-size:15px">向かない場面</h3></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">文章をじっくり読ませる区間や、料金表など正確に読み取ってほしい情報の背景。</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">04</span><h3 style="margin:0;font-size:15px">スマホでの重さ</h3></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="display:flex;gap:3px"><span style="width:22px;height:6px;border-radius:1px;background:var(--ink)"></span><span style="width:22px;height:6px;border-radius:1px;background:var(--ink)"></span><span style="width:22px;height:6px;border-radius:1px;background:var(--line)"></span></span><span style="font-size:20px;font-weight:700">中</span></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">層が3枚程度なら滑らかに動きます。大きな画像を何枚も重ねると、古い端末ではカクつきます。</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">05</span><h3 style="margin:0;font-size:15px">作る手間</h3></div>
+        <div style="display:flex;align-items:center;gap:12px"><span style="display:flex;gap:3px"><span style="width:22px;height:6px;border-radius:1px;background:var(--ink)"></span><span style="width:22px;height:6px;border-radius:1px;background:var(--ink)"></span><span style="width:22px;height:6px;border-radius:1px;background:var(--line)"></span></span><span style="font-size:20px;font-weight:700">中</span></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">コードは短く済みます。手間がかかるのは、絵や写真を層に分けて用意する作業です。</p>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:16px;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">06</span><h3 style="margin:0;font-size:15px">「視差効果を減らす」設定の人には</h3></div>
+        <p style="margin:0;font-size:15px;line-height:1.95;text-wrap:pretty">層は動かず、ふつうのスクロールと同じように流れます。絵柄と文字はすべて見えたままです。右上の「動きを止める」で確かめられます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section style="padding:80px 40px 0">
+    <div style="border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden">
+      <button onClick="{{ b.toggle }}" aria-expanded="{{ b.open }}" style="width:100%;display:flex;align-items:center;gap:16px;padding:22px 28px;background:none;border:0;font-family:inherit;color:var(--ink);cursor:pointer;text-align:left">
+        <span style="width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:16px;color:var(--accent);flex:none">{{ b.sign }}</span>
+        <span style="font-size:17px;font-weight:700">{{ b.toggleLabel }}</span>
+        <span style="font-size:13px;color:var(--muted)">制作者向け：原理・つまみ・最小のコード・ハマりどころ</span>
+      </button>
+      <sc-if value="{{ b.open }}" hint-placeholder-val="{{ false }}">
+        <div style="border-top:1px solid var(--line);padding:36px 28px 32px;display:flex;flex-direction:column;gap:44px">
+          <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:56px">
+            <div style="display:flex;flex-direction:column;gap:12px">
+              <div style="font-size:13px;color:var(--muted)">仕組みの要点</div>
+              <p style="margin:0;font-size:17px;line-height:2;text-wrap:pretty">スクロール量に層ごとの係数を掛け、その分だけ層を押し戻します。係数が大きい層ほどゆっくり流れ、遠くにあるように見えます。</p>
+            </div>
+            <div style="display:flex;flex-direction:column;gap:20px">
+              <div style="font-size:13px;color:var(--muted)">つまみ（上のデモとコードに反映されます）</div>
+              <sc-for list="{{ b.sliders }}" as="s" hint-placeholder-count="3">
+                <label style="display:grid;grid-template-columns:minmax(0,1fr) 64px;gap:4px 16px;align-items:center">
+                  <span style="font-size:14px">{{ s.label }}</span>
+                  <span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:15px;text-align:right;color:var(--accent)">{{ s.text }}</span>
+                  <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.val }}" onChange="{{ s.onChange }}" style="grid-column:1 / -1;width:100%;margin:4px 0;accent-color:var(--accent)">
+                  <span style="grid-column:1 / -1;font-size:12px;color:var(--muted)">{{ s.hint }}</span>
+                </label>
+              </sc-for>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:13px;color:var(--muted)">最小のコード</div>
+            <div style="border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--code-bg)">
+              <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);padding-right:10px;background:var(--surface)">
+                <div role="tablist" style="display:flex">
+                  <sc-for list="{{ b.tabs }}" as="t" hint-placeholder-count="3">
+                    <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.onClick }}" style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;padding:13px 20px 11px;background:none;border:0;border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:{{ t.bd }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+                  </sc-for>
+                </div>
+                <span style="font-size:12px;color:var(--muted);margin-left:16px">{{ b.lineInfo }}</span>
+                <button onClick="{{ b.copy }}" style="margin-left:auto;font-family:inherit;font-size:12px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:6px 12px;cursor:pointer">{{ b.copyLabel }}</button>
+              </div>
+              <div style="overflow-x:auto;padding:18px 0">
+                <div style="min-width:max-content;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;line-height:1.8;color:var(--code-ink)">
+                  <sc-for list="{{ b.lines }}" as="l" hint-placeholder-count="14">
+                    <div style="display:flex"><span style="width:48px;flex:none;text-align:right;padding-right:18px;color:var(--muted);opacity:0.6;user-select:none">{{ l.n }}</span><span style="white-space:pre;padding-right:28px">{{ l.t }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:13px;color:var(--muted)">ハマりどころ</div>
+            <div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:24px">
+              <div style="display:flex;gap:12px;font-size:14px;line-height:1.9"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">1</span><span>scroll の中で top を直接書き換えると重くなります。動かすのは transform だけにし、描画は requestAnimationFrame にまとめます。</span></div>
+              <div style="display:flex;gap:12px;font-size:14px;line-height:1.9"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">2</span><span>層がずれた分だけ端に隙間が出ます。素材は枠より上下に大きめに作っておきます。</span></div>
+              <div style="display:flex;gap:12px;font-size:14px;line-height:1.9"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">3</span><span>prefers-reduced-motion が reduce のときは係数を0にします。CSS と JS の両方で確認します。</span></div>
+            </div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <nav style="padding:72px 40px 64px;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px">
+    <a href="#A" style="display:flex;flex-direction:column;gap:6px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink)" style-hover="border-color:var(--ink);color:var(--ink)"><span style="font-size:12px;color:var(--muted)">← 前の効果 · 01-01</span><span style="font-size:18px;font-weight:700">ふわっと出る</span></a>
+    <a href="#A" style="display:flex;flex-direction:column;align-items:flex-end;gap:6px;padding:22px 24px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink)" style-hover="border-color:var(--ink);color:var(--ink)"><span style="font-size:12px;color:var(--muted)">次の効果 · 01-03 →</span><span style="font-size:18px;font-weight:700">画面に固定して中身が替わる</span></a>
+  </nav>
+  <footer style="padding:24px 40px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);display:flex;justify-content:space-between"><span>Santa Works · 動きの見本帳</span><span>見本の店名・製品名はすべて架空のものです</span></footer>
+</div>
+</div>
+
+<div id="C" data-screen-label="C 詳細ページ スマホ" style="display:flex;flex-direction:column;gap:14px">
+<div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:13px;color:var(--muted)">C · 詳細ページ スマホ · 390px（仕組みを開いた状態）</div>
+<div style="width:390px;background:var(--bg);color:var(--ink);box-shadow:var(--card-shadow)">
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:14px 20px;border-bottom:1px solid var(--line)">
+    <div style="display:flex;align-items:center;gap:8px;font-weight:700;font-size:14px"><span style="width:9px;height:9px;background:var(--accent);border-radius:2px"></span>Santa Works</div>
+    <div style="display:flex;gap:6px">
+      <button onClick="{{ toggleRm }}" aria-pressed="{{ rmOn }}" aria-label="動きを止める" style="display:flex;align-items:center;gap:6px;min-height:44px;font-family:inherit;font-size:12px;color:var(--ink);background:none;border:0;padding:0 6px;cursor:pointer"><span style="width:30px;height:18px;border-radius:999px;background:{{ swBg }};position:relative;transition:background .2s"><span style="position:absolute;top:2px;left:{{ swX }};width:14px;height:14px;border-radius:50%;background:#fff;transition:left .2s"></span></span>動き停止</button>
+      <button onClick="{{ toggleTheme }}" style="min-height:44px;font-family:inherit;font-size:12px;color:var(--ink);background:none;border:0;padding:0 6px;cursor:pointer">{{ themeLabelShort }}</button>
+    </div>
+  </header>
+  <div style="padding:24px 20px 20px;display:flex;flex-direction:column;gap:10px">
+    <nav style="font-size:12px;color:var(--muted);display:flex;gap:6px"><a href="#A" style="color:var(--muted)">一覧</a><span>/</span><span>スクロール</span><span>/</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">01-02</span></nav>
+    <h1 style="margin:0;font-size:30px;line-height:1.35;letter-spacing:0.03em">パララックス</h1>
+    <p style="margin:0;font-size:15px;line-height:1.8;color:var(--muted)">奥と手前が違う速さで動き、画面に奥行きが生まれる。</p>
+    <div style="display:flex;flex-wrap:wrap;gap:6px;font-size:11px;margin-top:4px">
+      <span style="padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">スマホでの重さ　中</span>
+      <span style="padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">作る手間　中</span>
+      <span style="padding:4px 8px;border:1px solid var(--line);border-radius:4px;background:var(--surface)">JavaScript</span>
+    </div>
+  </div>
+  <div style="position:relative;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+    <div ref="{{ refC }}" onScroll="{{ scrollC }}" style="height:440px;overflow-y:auto;background-color:var(--stage);background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:20px 20px">
+      <div style="position:relative;height:440px;overflow:hidden">
+        <div data-layer="1" style="position:absolute;left:0;right:0;top:-10%;bottom:0;will-change:transform">
+          <div style="position:absolute;right:14%;top:30%;width:64px;height:64px;border-radius:50%;background:var(--accent)"></div>
+          <div style="position:absolute;left:-30%;right:20%;bottom:16%;height:40%;border-radius:50% 50% 0 0;background:var(--demo-far)"></div>
+          <div style="position:absolute;left:40%;right:-40%;bottom:20%;height:32%;border-radius:50% 50% 0 0;background:var(--demo-far)"></div>
+        </div>
+        <div data-layer="2" style="position:absolute;inset:0;will-change:transform">
+          <div style="position:absolute;left:-40%;right:10%;bottom:-6%;height:36%;border-radius:50% 50% 0 0;background:var(--demo-mid)"></div>
+          <div style="position:absolute;left:40%;right:-50%;bottom:-12%;height:42%;border-radius:50% 50% 0 0;background:var(--demo-mid)"></div>
+        </div>
+        <div style="position:absolute;left:0;right:0;bottom:0;height:13%;background:var(--ink)"></div>
+        <div style="position:absolute;left:24px;top:64px">
+          <div style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;letter-spacing:0.2em;color:var(--muted)">KISSA HOSHINAMI</div>
+          <div style="font-size:32px;font-weight:700;letter-spacing:0.06em;margin-top:8px">喫茶 ほしなみ</div>
+          <p style="margin:8px 0 0;font-size:14px;color:var(--muted)">秋の焙煎、はじめました。</p>
+        </div>
+      </div>
+      <div style="background:var(--ink);color:var(--bg);padding:40px 24px 96px;display:flex;flex-direction:column;gap:16px">
+        <div style="font-size:20px;font-weight:700">本日の豆</div>
+        <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:15px"><span>深煎り　夜凪</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥620</span></div>
+        <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:15px"><span>中煎り　朝凪</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥580</span></div>
+        <div style="display:flex;justify-content:space-between;padding:14px 0;border-bottom:1px solid rgba(128,128,128,0.35);font-size:15px"><span>浅煎り　小春</span><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace">¥600</span></div>
+      </div>
+    </div>
+    <div style="position:absolute;left:12px;top:12px;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:10px;padding:4px 8px;background:var(--surface);border:1px solid var(--line);border-radius:4px;pointer-events:none;color:var(--ink)">DEMO · 枠の中をスクロール</div>
+    <sc-if value="{{ rmOn }}" hint-placeholder-val="{{ false }}">
+      <div style="position:absolute;left:12px;right:12px;bottom:12px;font-size:11px;line-height:1.6;padding:6px 10px;background:var(--surface);border:1px solid var(--accent);color:var(--ink);border-radius:4px;pointer-events:none">動きを止めた状態：層は通常のスクロールと同じに流れます</div>
+    </sc-if>
+  </div>
+
+  <section style="padding:40px 20px 0;display:flex;flex-direction:column;gap:32px">
+    <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">01</span><h3 style="margin:0;font-size:15px">ひとことで</h3></div>
+      <p style="margin:0;font-size:15px;line-height:1.9">背景と前景をずらして動かし、平らな画面に奥行きを足す効果です。</p>
+    </div>
+    <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">02</span><h3 style="margin:0;font-size:15px">向いている場面</h3></div>
+      <p style="margin:0;font-size:15px;line-height:1.9">お店や製品の第一印象を見せるページの冒頭。風景や絵柄に、奥と手前の層があるとき。</p>
+    </div>
+    <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">03</span><h3 style="margin:0;font-size:15px">向かない場面</h3></div>
+      <p style="margin:0;font-size:15px;line-height:1.9">文章をじっくり読ませる区間や、料金表など正確に読み取ってほしい情報の背景。</p>
+    </div>
+    <div style="display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:20px">
+      <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:8px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">04</span><h3 style="margin:0;font-size:14px">スマホでの重さ</h3></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="display:flex;gap:3px"><span style="width:16px;height:5px;border-radius:1px;background:var(--ink)"></span><span style="width:16px;height:5px;border-radius:1px;background:var(--ink)"></span><span style="width:16px;height:5px;border-radius:1px;background:var(--line)"></span></span><span style="font-size:18px;font-weight:700">中</span></div>
+      </div>
+      <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+        <div style="display:flex;gap:8px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">05</span><h3 style="margin:0;font-size:14px">作る手間</h3></div>
+        <div style="display:flex;align-items:center;gap:10px"><span style="display:flex;gap:3px"><span style="width:16px;height:5px;border-radius:1px;background:var(--ink)"></span><span style="width:16px;height:5px;border-radius:1px;background:var(--ink)"></span><span style="width:16px;height:5px;border-radius:1px;background:var(--line)"></span></span><span style="font-size:18px;font-weight:700">中</span></div>
+      </div>
+      <p style="grid-column:1 / -1;margin:-8px 0 0;font-size:14px;line-height:1.9;color:var(--muted)">層が3枚程度なら滑らかに動きます。手間がかかるのはコードより、絵や写真を層に分けて用意する作業です。</p>
+    </div>
+    <div style="border-top:2px solid var(--ink);padding-top:14px;display:flex;flex-direction:column;gap:8px">
+      <div style="display:flex;gap:10px;align-items:baseline"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;color:var(--accent)">06</span><h3 style="margin:0;font-size:15px">「視差効果を減らす」設定の人には</h3></div>
+      <p style="margin:0;font-size:15px;line-height:1.9">層は動かず、ふつうのスクロールと同じように流れます。絵柄と文字はすべて見えたままです。</p>
+    </div>
+  </section>
+
+  <section style="padding:40px 20px 0">
+    <div style="border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden">
+      <button onClick="{{ c.toggle }}" aria-expanded="{{ c.open }}" style="width:100%;min-height:56px;display:flex;align-items:center;gap:12px;padding:14px 16px;background:none;border:0;font-family:inherit;color:var(--ink);cursor:pointer;text-align:left">
+        <span style="width:28px;height:28px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">{{ c.sign }}</span>
+        <span style="display:flex;flex-direction:column;gap:2px"><span style="font-size:16px;font-weight:700">{{ c.toggleLabel }}</span><span style="font-size:11px;color:var(--muted)">制作者向け：原理・つまみ・コード</span></span>
+      </button>
+      <sc-if value="{{ c.open }}" hint-placeholder-val="{{ true }}">
+        <div style="border-top:1px solid var(--line);padding:24px 16px;display:flex;flex-direction:column;gap:32px">
+          <div style="display:flex;flex-direction:column;gap:8px">
+            <div style="font-size:12px;color:var(--muted)">仕組みの要点</div>
+            <p style="margin:0;font-size:15px;line-height:1.9">スクロール量に層ごとの係数を掛け、その分だけ層を押し戻します。係数が大きい層ほどゆっくり流れ、遠くにあるように見えます。</p>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:18px">
+            <div style="font-size:12px;color:var(--muted)">つまみ</div>
+            <sc-for list="{{ c.sliders }}" as="s" hint-placeholder-count="3">
+              <label style="display:grid;grid-template-columns:minmax(0,1fr) 56px;gap:2px 12px;align-items:center">
+                <span style="font-size:14px">{{ s.label }}</span>
+                <span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:14px;text-align:right;color:var(--accent)">{{ s.text }}</span>
+                <input type="range" min="{{ s.min }}" max="{{ s.max }}" step="{{ s.step }}" value="{{ s.val }}" onChange="{{ s.onChange }}" style="grid-column:1 / -1;width:100%;height:32px;margin:0;accent-color:var(--accent)">
+                <span style="grid-column:1 / -1;font-size:11px;color:var(--muted)">{{ s.hint }}</span>
+              </label>
+            </sc-for>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:8px;min-width:0">
+            <div style="font-size:12px;color:var(--muted)">最小のコード</div>
+            <div style="border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--code-bg);min-width:0">
+              <div style="display:flex;align-items:center;border-bottom:1px solid var(--line);padding-right:8px;background:var(--surface)">
+                <div role="tablist" style="display:flex">
+                  <sc-for list="{{ c.tabs }}" as="t" hint-placeholder-count="3">
+                    <button role="tab" aria-selected="{{ t.on }}" onClick="{{ t.onClick }}" style="min-height:44px;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;padding:0 14px;background:none;border:0;border-bottom-width:2px;border-bottom-style:solid;border-bottom-color:{{ t.bd }};color:{{ t.fg }};cursor:pointer">{{ t.label }}</button>
+                  </sc-for>
+                </div>
+                <button onClick="{{ c.copy }}" style="margin-left:auto;min-height:32px;font-family:inherit;font-size:12px;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:6px;padding:0 10px;cursor:pointer">{{ c.copyLabel }}</button>
+              </div>
+              <div style="overflow-x:auto;padding:14px 0">
+                <div style="min-width:max-content;font-family:SFMono-Regular,Menlo,Consolas,monospace;font-size:12px;line-height:1.8;color:var(--code-ink)">
+                  <sc-for list="{{ c.lines }}" as="l" hint-placeholder-count="14">
+                    <div style="display:flex"><span style="width:34px;flex:none;text-align:right;padding-right:12px;color:var(--muted);opacity:0.6;user-select:none">{{ l.n }}</span><span style="white-space:pre;padding-right:20px">{{ l.t }}</span></div>
+                  </sc-for>
+                </div>
+              </div>
+            </div>
+            <div style="font-size:11px;color:var(--muted)">{{ c.lineInfo }} ／ 横にスクロールできます</div>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:12px">
+            <div style="font-size:12px;color:var(--muted)">ハマりどころ</div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.85"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">1</span><span>scroll の中で top を直接書き換えると重くなります。動かすのは transform だけにします。</span></div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.85"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">2</span><span>層がずれた分だけ端に隙間が出ます。素材は上下に大きめに作ります。</span></div>
+            <div style="display:flex;gap:10px;font-size:14px;line-height:1.85"><span style="font-family:SFMono-Regular,Menlo,Consolas,monospace;color:var(--accent);flex:none">3</span><span>prefers-reduced-motion が reduce のときは係数を0にします。</span></div>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </section>
+
+  <nav style="padding:40px 20px 40px;display:flex;flex-direction:column;gap:12px">
+    <a href="#A" style="display:flex;flex-direction:column;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink)"><span style="font-size:11px;color:var(--muted)">← 前の効果 · 01-01</span><span style="font-size:16px;font-weight:700">ふわっと出る</span></a>
+    <a href="#A" style="display:flex;flex-direction:column;align-items:flex-end;gap:4px;padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--surface);text-decoration:none;color:var(--ink)"><span style="font-size:11px;color:var(--muted)">次の効果 · 01-03 →</span><span style="font-size:16px;font-weight:700">画面に固定して中身が替わる</span></a>
+  </nav>
+  <footer style="padding:20px;border-top:1px solid var(--line);font-size:11px;color:var(--muted)">Santa Works · 動きの見本帳</footer>
+</div>
+</div>
+
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;light&quot;,&quot;dark&quot;],&quot;default&quot;:&quot;light&quot;,&quot;tsType&quot;:&quot;'light'|'dark'&quot;},&quot;reduceMotion&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:false,&quot;tsType&quot;:&quot;boolean&quot;},&quot;listColumns&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;3&quot;,&quot;4&quot;],&quot;default&quot;:&quot;4&quot;,&quot;tsType&quot;:&quot;'3'|'4'&quot;}}">
+const h = React.createElement;
+const MONO = 'SFMono-Regular,Menlo,Consolas,monospace';
+const LV = ['軽い', '中', '重い'];
+const TIERS = ['CSSだけ', 'JavaScript', 'ライブラリ'];
+const CATS = [
+  { k: 'scroll', n: 'スクロール', lead: '読み進める動きに合わせて変化する' },
+  { k: 'mouse', n: 'マウス操作', lead: 'カーソルの位置に反応する。スマホでは止まった表示になる' },
+  { k: 'text', n: '文字・数字', lead: '見出しや実績の数字を印象づける' },
+  { k: 'shape', n: '図形', lead: '線画やアニメーション素材を動かす' },
+  { k: 'page', n: 'ページ遷移', lead: 'ページの移り変わりをつなげる' },
+  { k: 'webgl', n: 'WebGL', lead: '描画を細かく制御する。見栄えは大きく、重くなりやすい' }
+];
+const FX = [
+  ['fade', 'scroll', 'ふわっと出る', '画面に入った要素が、下から静かに浮かび上がる。', 0, 0, 1],
+  ['parallax', 'scroll', 'パララックス', '奥と手前が違う速さで動き、画面に奥行きが生まれる。', 1, 1, 1],
+  ['pin', 'scroll', '画面に固定して中身が替わる', 'ある区間だけ画面が止まり、スクロールに合わせて中身が入れ替わる。', 1, 2, 2],
+  ['hscroll', 'scroll', '横スクロール区間', '縦にスクロールすると、ある区間だけ横に流れる。', 1, 1, 2],
+  ['video', 'scroll', 'スクロールで動画が進む', 'スクロール量に合わせて、動画のコマが進む。', 2, 2, 1],
+  ['magnet', 'mouse', '磁石のように寄るボタン', 'カーソルが近づくと、ボタンが少し引き寄せられる。', 0, 0, 1],
+  ['tilt', 'mouse', 'カードが3Dに傾く', 'カーソルの位置に合わせて、カードが立体的に傾く。', 0, 0, 1],
+  ['chars', 'text', '1文字ずつ現れる', '見出しが1文字ずつ、順に現れる。', 0, 0, 0],
+  ['count', 'text', '数字のカウントアップ', '数字が0から目標の値まで数え上がる。', 0, 0, 1],
+  ['draw', 'shape', '線が描かれていく', '線画が、ペンでなぞるように描かれていく。', 0, 1, 0],
+  ['lottie', 'shape', 'Lottie', 'デザインツールで作った動きを、そのまま再生する。', 1, 1, 2],
+  ['vt', 'page', '画面が滑らかにつながる', 'ページを移っても、写真や見出しが途切れずにつながる。', 0, 1, 0],
+  ['particles', 'webgl', '粒子', '無数の小さな点が集まり、形を作ったりほどけたりする。', 2, 2, 2],
+  ['wave', 'webgl', '画像が波打つ', '写真が水面のように揺らぐ。', 2, 1, 2],
+  ['model', 'webgl', '3Dモデルを回す', '製品の立体モデルを、指やマウスで回して見られる。', 2, 2, 2],
+  ['gradient', 'webgl', 'うねるグラデーション背景', '色がゆっくり混ざり合い、背景がうねる。', 1, 1, 1]
+].map(([id, cat, name, desc, w, e, t]) => ({ id, cat, name, desc, w, e, t }));
+
+function preview(id, rm) {
+  const A = v => (rm ? 'none' : v);
+  const abs = s => Object.assign({ position: 'absolute' }, s);
+  const C = (ch, st) => h('div', { style: Object.assign({ position: 'absolute', inset: 0, display: 'flex', alignItems: 'center', justifyContent: 'center' }, st || {}) }, ch);
+  switch (id) {
+    case 'fade': return C(h('div', { style: { display: 'flex', flexDirection: 'column', gap: 8, width: '56%' } },
+      [64, 100, 82].map((w, i) => h('div', { key: i, style: { height: i ? 7 : 10, width: w + '%', borderRadius: 2, background: i ? 'var(--ink)' : 'var(--accent)', animation: A(`mFade 3.2s ease ${i * 0.2}s infinite both`) } }))));
+    case 'parallax': return h('div', { style: { position: 'absolute', inset: 0, overflow: 'hidden' } }, [
+      h('div', { key: 1, style: abs({ width: 26, height: 26, borderRadius: '50%', background: 'var(--accent)', right: '24%', top: '18%', animation: A('mParB 2.6s ease-in-out infinite alternate') }) }),
+      h('div', { key: 2, style: abs({ left: '-20%', right: '10%', bottom: '22%', height: '42%', borderRadius: '50% 50% 0 0', background: 'var(--demo-far)', animation: A('mParB 2.6s ease-in-out infinite alternate') }) }),
+      h('div', { key: 3, style: abs({ left: '25%', right: '-30%', bottom: '-8%', height: '46%', borderRadius: '50% 50% 0 0', background: 'var(--demo-mid)', animation: A('mParF 2.6s ease-in-out infinite alternate') }) }),
+      h('div', { key: 4, style: abs({ left: 0, right: 0, bottom: 0, height: '14%', background: 'var(--ink)' }) })]);
+    case 'pin': return C(h('div', { style: { width: '34%', aspectRatio: '1', border: '1.5px solid var(--ink)', borderRadius: 4, position: 'relative' } },
+      ['50%', '2px', '2px'].map((r, i) => h('div', { key: i, style: { position: 'absolute', inset: '28%', borderRadius: r, background: i === 0 ? 'var(--accent)' : 'var(--ink)', transform: i === 2 ? 'rotate(45deg) scale(0.8)' : 'none', opacity: rm ? (i === 0 ? 1 : 0) : undefined, animation: A(`mSwap 3.6s linear ${i * 1.2}s infinite both`) } }))));
+    case 'hscroll': return h('div', { style: { position: 'absolute', inset: 0, overflow: 'hidden' } },
+      h('div', { style: { position: 'absolute', top: '26%', bottom: '26%', left: '8%', display: 'flex', gap: 10, animation: A('mSlide 7s linear infinite') } },
+        Array.from({ length: 12 }, (_, i) => h('div', { key: i, style: { width: 64, flex: 'none', borderRadius: 3, background: i % 4 === 1 ? 'var(--accent)' : (i % 2 ? 'var(--demo-mid)' : 'var(--ink)') } }))));
+    case 'video': return C(h('div', { style: { width: '54%', display: 'flex', flexDirection: 'column', gap: 8 } }, [
+      h('div', { key: 1, style: { aspectRatio: '16/9', border: '1.5px solid var(--ink)', borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'center' } },
+        h('div', { style: { width: 24, height: 24, borderRadius: '50%', border: '2px solid var(--ink)', borderTopColor: 'var(--accent)', animation: A('mTurn 3s steps(12) infinite') } })),
+      h('div', { key: 2, style: { height: 3, background: 'var(--line)', borderRadius: 2, overflow: 'hidden' } },
+        h('div', { style: { height: '100%', width: '60%', background: 'var(--accent)', animation: A('mFill 3s linear infinite') } }))]));
+    case 'magnet': return C([
+      h('div', { key: 1, style: { padding: '8px 18px', borderRadius: 999, background: 'var(--ink)', color: 'var(--bg)', fontSize: 12, fontWeight: 700, animation: A('mPull 2.8s ease-in-out infinite') } }, '予約する'),
+      h('div', { key: 2, style: { position: 'absolute', left: '50%', top: '50%', width: 9, height: 9, marginLeft: -5, marginTop: -5, borderRadius: '50%', border: '1.5px solid var(--accent)', transform: 'translate(46px,24px)', animation: A('mCursor 2.8s ease-in-out infinite') } })]);
+    case 'tilt': return C(h('div', { style: { height: '72%', aspectRatio: '3/4', background: 'var(--surface)', border: '1px solid var(--line)', borderRadius: 6, boxShadow: 'var(--card-shadow)', padding: 8, boxSizing: 'border-box', display: 'flex', flexDirection: 'column', gap: 5, animation: A('mTilt 3.4s ease-in-out infinite') } }, [
+      h('div', { key: 1, style: { flex: 1, borderRadius: 3, background: 'var(--demo-far)' } }),
+      h('div', { key: 2, style: { height: 4, width: '70%', background: 'var(--ink)', borderRadius: 2 } }),
+      h('div', { key: 3, style: { height: 4, width: '40%', background: 'var(--accent)', borderRadius: 2 } })]));
+    case 'chars': return C(h('div', { style: { display: 'flex', fontSize: 21, fontWeight: 700, letterSpacing: '0.04em', color: 'var(--ink)' } },
+      [...'ほしなみ珈琲'].map((ch, i) => h('span', { key: i, style: { display: 'inline-block', color: i >= 4 ? 'var(--accent)' : undefined, animation: A(`mChar 3.6s ease ${i * 0.12}s infinite both`) } }, ch))));
+    case 'count': return C(h('div', { style: { display: 'flex', alignItems: 'baseline', gap: 4 } }, [
+      h('div', { key: 'd', style: { display: 'flex', fontFamily: MONO, fontSize: 30, fontWeight: 700, lineHeight: '36px', height: 36, overflow: 'hidden', color: 'var(--ink)' } },
+        [[1, '9s'], [2, '3s'], [8, '1s'], [0, '.33s']].map(([fin, d], i) => h('div', { key: i, style: { display: 'flex', flexDirection: 'column', transform: rm ? `translateY(${-fin * 36}px)` : undefined, animation: A(`mDigit ${d} steps(10,jump-none) infinite`) } },
+          Array.from({ length: 10 }, (_, n) => h('span', { key: n, style: { height: 36, flex: 'none' } }, n))))),
+      h('span', { key: 'u', style: { fontSize: 12, color: 'var(--muted)' } }, '杯')]));
+    case 'draw': return C(h('svg', { viewBox: '0 0 120 60', style: { width: '62%', overflow: 'visible' } }, [
+      h('path', { key: 1, d: 'M8 46 C 28 8, 48 8, 60 30 S 94 54, 112 14', fill: 'none', stroke: 'var(--ink)', strokeWidth: 2, strokeLinecap: 'round', strokeDasharray: 160, style: { animation: A('mDraw 3.2s ease-in-out infinite') } }),
+      h('circle', { key: 2, cx: 112, cy: 14, r: 3.5, fill: 'var(--accent)' })]));
+    case 'lottie': return C([
+      h('div', { key: 1, style: { position: 'absolute', top: '64%', width: 30, height: 5, borderRadius: '50%', background: 'var(--demo-mid)' } }),
+      h('div', { key: 2, style: { position: 'absolute', top: 'calc(64% - 20px)', width: 22, height: 22, borderRadius: '50%', background: 'var(--accent)', transformOrigin: '50% 100%', animation: A('mBounce 1.3s ease-in-out infinite') } })]);
+    case 'vt': return h('div', { style: { position: 'absolute', inset: '14%' } }, [
+      h('div', { key: 1, style: { position: 'absolute', left: '34%', top: '12%', right: 0, display: 'flex', flexDirection: 'column', gap: 6 } },
+        [70, 50].map((w, i) => h('div', { key: i, style: { height: 5, width: w + '%', background: 'var(--ink)', opacity: 0.7, borderRadius: 2 } }))),
+      h('div', { key: 2, style: { position: 'absolute', left: 0, top: 0, width: '26%', height: '44%', background: 'var(--accent)', borderRadius: 3, animation: A('mMorph 3.6s ease-in-out infinite') } })]);
+    case 'particles': return h('div', { style: { position: 'absolute', inset: 0 } }, Array.from({ length: 24 }, (_, i) => {
+      const a = i * 2.399, r = 8 + (i * 7) % 30, s = 3 + (i % 3);
+      return h('div', { key: i, style: { position: 'absolute', left: (50 + Math.cos(a) * r * 1.2) + '%', top: (50 + Math.sin(a) * r) + '%', width: s, height: s, borderRadius: '50%', background: i % 6 === 0 ? 'var(--accent)' : 'var(--ink)', animation: A(`${i % 2 ? 'mDrift' : 'mDrift2'} ${2 + (i % 5) * 0.5}s ease-in-out ${-i * 0.3}s infinite alternate`) } });
+    }));
+    case 'wave': return C(h('div', { style: { width: '54%', height: '60%', display: 'flex', flexDirection: 'column' } },
+      Array.from({ length: 9 }, (_, i) => h('div', { key: i, style: { flex: 1, background: i < 4 ? 'var(--demo-far)' : (i < 7 ? 'var(--demo-mid)' : 'var(--ink)'), animation: A(`mWave 2.4s ease-in-out ${-i * 0.18}s infinite`) } }))));
+    case 'model': {
+      const s = 40;
+      return C(h('div', { style: { perspective: 300 } }, h('div', { style: { width: s, height: s, position: 'relative', transformStyle: 'preserve-3d', transform: 'rotateX(-24deg) rotateY(35deg)', animation: A('mSpin 7s linear infinite') } },
+        ['rotateY(0deg)', 'rotateY(90deg)', 'rotateY(180deg)', 'rotateY(-90deg)', 'rotateX(90deg)', 'rotateX(-90deg)'].map((r, i) => h('div', { key: i, style: { position: 'absolute', inset: 0, border: '1.5px solid var(--ink)', background: 'var(--accent-soft)', transform: `${r} translateZ(${s / 2}px)` } })))));
+    }
+    case 'gradient': return h('div', { style: { position: 'absolute', inset: 0, overflow: 'hidden' } },
+      [['var(--accent)', '8%', '18%', '8s'], ['var(--demo-mid)', '42%', '30%', '10s'], ['var(--demo-far)', '18%', '50%', '7s']].map(([c, l, t, d], i) =>
+        h('div', { key: i, style: { position: 'absolute', left: l, top: t, width: '55%', height: '70%', borderRadius: '50%', background: c, filter: 'blur(18px)', opacity: i ? 0.9 : 0.55, animation: A(`mBlob ${d} ease-in-out ${-i * 2}s infinite alternate`) } })));
+  }
+  return null;
+}
+
+function codeFor(s) {
+  const f1 = s.s1.toFixed(2), f2 = s.s2.toFixed(2), e = s.ease.toFixed(2);
+  return {
+    html: ['<section class="hero">', '  <!-- 係数が大きい層ほどゆっくり流れる -->', `  <div class="layer" data-speed="${f1}">`, '    <img src="sky.png" alt="">', '  </div>', `  <div class="layer" data-speed="${f2}">`, '    <img src="hills.png" alt="">', '  </div>', '  <div class="hero-text">', '    <h1>喫茶 ほしなみ</h1>', '    <p>秋の焙煎、はじめました。</p>', '  </div>', '</section>'],
+    css: ['.hero {', '  position: relative;', '  height: 100vh;', '  overflow: hidden;', '}', '.layer {', '  position: absolute;', '  inset: -15% 0;', '  will-change: transform;', '}', '.layer img {', '  width: 100%;', '  height: 100%;', '  object-fit: cover;', '}', '.hero-text { position: relative; }', '', '@media (prefers-reduced-motion: reduce) {', '  .layer { transform: none !important; }', '}'],
+    js: ["const layers = [...document.querySelectorAll('.layer')];", "const reduce = matchMedia('(prefers-reduced-motion: reduce)');", `const ease = ${e}; // 0で即座に追従、大きいほどなめらか`, 'let target = 0;', 'let current = 0;', '', "addEventListener('scroll', () => {", '  target = scrollY;', '}, { passive: true });', '', 'function tick() {', '  current += (target - current) * (1 - ease);', '  for (const el of layers) {', '    const speed = reduce.matches ? 0 : Number(el.dataset.speed);', '    el.style.transform = `translate3d(0, ${current * speed}px, 0)`;', '  }', '  requestAnimationFrame(tick);', '}', 'tick();']
+  };
+}
+
+class Component extends DCLogic {
+  state = {
+    theme: null, rm: null, cat: 'all', w: 'all', e: 'all', t: 'all', copied: null,
+    b: { open: false, s1: 0.6, s2: 0.3, ease: 0.15, tab: 'js' },
+    c: { open: true, s1: 0.6, s2: 0.3, ease: 0.15, tab: 'js' }
+  };
+  demo = { b: { el: null, t: 0, c: 0 }, c: { el: null, t: 0, c: 0 } };
+  refB = el => { this.demo.b.el = el; };
+  refC = el => { this.demo.c.el = el; };
+  scrollB = e => { this.demo.b.t = e.currentTarget.scrollTop; };
+  scrollC = e => { this.demo.c.t = e.currentTarget.scrollTop; };
+
+  componentDidMount() {
+    try {
+      if (this.state.rm === null && this.props.reduceMotion === undefined && matchMedia('(prefers-reduced-motion: reduce)').matches) this.setState({ rm: true });
+    } catch (err) {}
+    const loop = () => { this.tick(); this.raf = requestAnimationFrame(loop); };
+    loop();
+  }
+  componentWillUnmount() { cancelAnimationFrame(this.raf); clearTimeout(this.copyT); }
+  rmOn() { return this.state.rm ?? !!this.props.reduceMotion; }
+  tick() {
+    const rm = this.rmOn();
+    for (const k of ['b', 'c']) {
+      const d = this.demo[k];
+      if (!d.el) continue;
+      const s = this.state[k];
+      d.c += (d.t - d.c) * (1 - s.ease);
+      if (Math.abs(d.t - d.c) < 0.05) d.c = d.t;
+      const l1 = d.el.querySelector('[data-layer="1"]'), l2 = d.el.querySelector('[data-layer="2"]');
+      if (l1) l1.style.transform = `translate3d(0,${rm ? 0 : d.c * s.s1}px,0)`;
+      if (l2) l2.style.transform = `translate3d(0,${rm ? 0 : d.c * s.s2}px,0)`;
+    }
+  }
+
+  inst(k) {
+    const s = this.state[k];
+    const set = p => this.setState(st => ({ [k]: Object.assign({}, st[k], p) }));
+    const code = codeFor(s);
+    const sliders = [
+      { key: 's1', label: '奥の層の係数', hint: '大きいほどゆっくり流れ、遠くに見える', min: 0, max: 1, step: 0.01 },
+      { key: 's2', label: '中の層の係数', hint: '奥の層より小さくすると、層の差がはっきりする', min: 0, max: 1, step: 0.01 },
+      { key: 'ease', label: '追従のなめらかさ', hint: '0で即座に追従。大きいほど遅れて、なめらかに止まる', min: 0, max: 0.9, step: 0.01 }
+    ].map(o => Object.assign({}, o, { val: s[o.key], text: s[o.key].toFixed(2), onChange: ev => set({ [o.key]: parseFloat(ev.target.value) }) }));
+    const tabs = ['html', 'css', 'js'].map(t => ({ label: t.toUpperCase(), on: s.tab === t, onClick: () => set({ tab: t }), bd: s.tab === t ? 'var(--accent)' : 'transparent', fg: s.tab === t ? 'var(--ink)' : 'var(--muted)' }));
+    const lines = code[s.tab].map((t, i) => ({ n: i + 1, t: t || ' ' }));
+    const total = code.html.length + code.css.length + code.js.length;
+    return Object.assign({}, s, {
+      sign: s.open ? '−' : '+',
+      toggleLabel: s.open ? '仕組みを閉じる' : '仕組みを見る',
+      toggle: () => set({ open: !s.open }),
+      sliders, tabs, lines,
+      lineInfo: `${s.tab.toUpperCase()} ${lines.length}行 ／ 3つ合わせて${total}行`,
+      copyLabel: this.state.copied === k ? 'コピーしました' : 'コピー',
+      copy: () => {
+        try { navigator.clipboard.writeText(code[s.tab].join('\n')).catch(() => {}); } catch (err) {}
+        this.setState({ copied: k });
+        clearTimeout(this.copyT);
+        this.copyT = setTimeout(() => this.setState({ copied: null }), 1600);
+      }
+    });
+  }
+
+  renderVals() {
+    const st = this.state;
+    const theme = st.theme ?? this.props.theme ?? 'light';
+    const rm = this.rmOn();
+    const match = (x, skip) => (skip === 'cat' || st.cat === 'all' || x.cat === st.cat)
+      && (st.w === 'all' || x.w === st.w) && (st.e === 'all' || x.e === st.e) && (st.t === 'all' || x.t === st.t);
+    const chip = (label, on, onClick, count) => ({ label, on, onClick, count, bg: on ? 'var(--ink)' : 'transparent', fg: on ? 'var(--bg)' : 'var(--ink)', bd: on ? 'var(--ink)' : 'var(--line)' });
+    const catChips = [chip('すべて', st.cat === 'all', () => this.setState({ cat: 'all' }), FX.filter(x => match(x, 'cat')).length)]
+      .concat(CATS.map(c => chip(c.n, st.cat === c.k, () => this.setState({ cat: c.k }), FX.filter(x => x.cat === c.k && match(x, 'cat')).length)));
+    const lvChips = (key, names) => [chip('すべて', st[key] === 'all', () => this.setState({ [key]: 'all' }))]
+      .concat(names.map((n, i) => chip(n, st[key] === i, () => this.setState({ [key]: i }))));
+    const dots = v => [0, 1, 2].map(i => ({ c: i <= v ? 'var(--ink)' : 'var(--line)' }));
+    const filtered = FX.filter(x => match(x));
+    const groups = CATS.map((c, ci) => {
+      const all = FX.filter(x => x.cat === c.k);
+      const items = filtered.filter(x => x.cat === c.k).map(x => ({
+        name: x.name, desc: x.desc, tier: TIERS[x.t], wl: LV[x.w], el: LV[x.e], wDots: dots(x.w), eDots: dots(x.e),
+        code: `0${ci + 1}-0${all.indexOf(x) + 1}`, preview: preview(x.id, rm)
+      }));
+      return { no: `0${ci + 1}`, name: c.n, lead: c.lead, count: `${items.length}件`, items };
+    }).filter(g => g.items.length);
+    const hasFilter = st.cat !== 'all' || st.w !== 'all' || st.e !== 'all' || st.t !== 'all';
+    const cols = this.props.listColumns === '3' ? 3 : 4;
+    return {
+      theme, rmOn: rm,
+      themeLabel: theme === 'dark' ? 'ライト表示' : 'ダーク表示',
+      themeLabelShort: theme === 'dark' ? 'ライト' : 'ダーク',
+      toggleTheme: () => this.setState({ theme: theme === 'dark' ? 'light' : 'dark' }),
+      toggleRm: () => this.setState({ rm: !rm }),
+      swBg: rm ? 'var(--accent)' : 'var(--line)',
+      swX: rm ? '14px' : '2px',
+      catChips, wChips: lvChips('w', LV), eChips: lvChips('e', LV), tChips: lvChips('t', TIERS),
+      groups, empty: groups.length === 0, hasFilter,
+      resultText: `${FX.length}件中 ${filtered.length}件を表示`,
+      resetFilters: () => this.setState({ cat: 'all', w: 'all', e: 'all', t: 'all' }),
+      gridCols: `repeat(${cols}, minmax(0, 1fr))`,
+      refB: this.refB, refC: this.refC, scrollB: this.scrollB, scrollC: this.scrollC,
+      b: this.inst('b'), c: this.inst('c')
+    };
+  }
+}
+</script>
+</body>
+</html>

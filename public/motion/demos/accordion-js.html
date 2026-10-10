@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>アコーディオン（JavaScript）｜動きの見本帳</title>
+<script src="_lab.js?v=3" data-lab></script>
+<link rel="stylesheet" href="_stage.css?v=2" data-lab>
+<style>
+:root {
+  --dur: 0.4s; /* 開け閉めにかける時間 */
+}
+
+/* 行の高さを 0fr（中身の0倍）→ 1fr（中身の高さちょうど）にする。auto を使わずに済む */
+.acc-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  visibility: hidden; /* 閉じている答えは、Tab でも読み上げでも拾わせない */
+  transition: grid-template-rows var(--dur) ease, visibility var(--dur);
+}
+.acc-panel > div {
+  overflow: hidden; /* 0fr のとき、はみ出た中身を隠す */
+}
+.acc-item:has([aria-expanded="true"]) .acc-panel {
+  grid-template-rows: 1fr;
+  visibility: visible;
+}
+
+/* 右端の「＋」を回して「×」にする */
+.acc-btn::after {
+  content: "+";
+  transition: rotate var(--dur) ease;
+}
+.acc-btn[aria-expanded="true"]::after {
+  rotate: 45deg;
+}
+
+/* 動きを減らす設定では、パッと開け閉めする */
+@media (prefers-reduced-motion: reduce) {
+  .acc-panel, .acc-btn::after { transition: none; }
+}
+</style>
+<style data-lab>
+body { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 14px; padding: 24px 16px; }
+.head { display: flex; align-items: center; gap: 10px; width: min(100%, 520px); }
+.head img { width: 52px; height: auto; }
+.head h1 { margin: 0; font-size: 20px; }
+.faq { width: min(100%, 520px); background: var(--surface); border: 1px solid var(--line); border-radius: 16px; overflow: hidden; }
+.acc-item + .acc-item { border-top: 1px solid var(--line); }
+.acc-item h3 { margin: 0; font-size: inherit; }
+.acc-btn { display: flex; align-items: center; gap: 12px; width: 100%; padding: 16px 18px; border: 0; background: none; color: var(--ink); font: inherit; font-weight: 700; text-align: left; cursor: pointer; }
+.acc-btn::before { content: "Q"; flex: none; font-family: var(--mono); color: var(--rika); }
+.acc-btn::after { margin-left: auto; flex: none; font-size: 22px; line-height: 1; color: var(--muted); }
+.acc-btn:focus-visible { outline: 3px solid var(--accent); outline-offset: -3px; }
+.acc-panel p { margin: 0; padding: 0 18px 18px 42px; color: var(--muted); line-height: 1.8; font-size: 14px; }
+</style>
+</head>
+<body>
+<span class="lab-hint" data-lab>DEMO · 質問を押すと、答えがなめらかに開きます</span>
+<div class="head" data-lab>
+  <img src="../media/fairy-kira-happy.webp" width="290" height="292" alt="">
+  <h1>よくある質問</h1>
+</div>
+
+<div class="faq">
+  <div class="acc-item">
+    <h3><button class="acc-btn" type="button" aria-expanded="true" aria-controls="a1">何年生向けですか？</button></h3>
+    <div class="acc-panel" id="a1"><div><p>4年生向けです。3年生向けは、別のアプリになっています。</p></div></div>
+  </div>
+  <div class="acc-item">
+    <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="a2">どの教科がありますか？</button></h3>
+    <div class="acc-panel" id="a2"><div><p>さんすう・こくご・りか・しゃかいの4教科です。</p></div></div>
+  </div>
+  <div class="acc-item" data-lab-more>
+    <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="a3">問題はいくつありますか？</button></h3>
+    <div class="acc-panel" id="a3"><div><p>4教科あわせて、44単元・1,697問です。いちばん多いのは、こくごの555問です。</p></div></div>
+  </div>
+  <div class="acc-item" data-lab-more>
+    <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="a4">1回に何問ですか？</button></h3>
+    <div class="acc-panel" id="a4"><div><p>1回10問です。</p></div></div>
+  </div>
+  <div class="acc-item" data-lab-more>
+    <h3><button class="acc-btn" type="button" aria-expanded="false" aria-controls="a5">問題のほかに、何がありますか？</button></h3>
+    <div class="acc-panel" id="a5"><div><p>4人のおはなし（全24章）、集めるかべがみ（全23枚）、がんばりのスタンプ（全39こ）があります。</p></div></div>
+  </div>
+</div>
+
+<script>
+// 開いているかどうかは aria-expanded に持たせる。高さの変化は CSS が受け持つ
+for (const btn of document.querySelectorAll('.acc-btn')) {
+  btn.addEventListener('click', () => {
+    const open = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!open));
+  });
+}
+</script>
+</body>
+</html>
