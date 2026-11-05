@@ -30,8 +30,8 @@ const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
    （hq/ORG.md §7 の例外）。完全無料・広告なし・課金なしが設計条件なので、全社KPI の対象にもしない。
    位置づけは ExifSortPro と同じ「技術力を示す名刺」。 */
 const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
-const MANALEAF_SITE_URL = "https://manaleaf-grade3.santaworks.net";
-const MANALEAF_G4_SITE_URL = "https://manaleaf-grade4.santaworks.net/";
+const MANALEAF_SITE_URL = "https://manaleaf.santaworks.net/grade3/";
+const MANALEAF_G4_SITE_URL = "https://manaleaf.santaworks.net/grade4/";
 
 /* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
 const manaleafPoints: { title: string; body: string; note: string }[] = [
@@ -355,10 +355,10 @@ export default function Works() {
                     />
                   </a>
                 </div>
-                {/* 小4版。公開前なので「準備中」と紹介ページの案内だけにし、価格・時期はここに書かない
+                {/* 小4版（2026-10-30 公開）。紹介ページの案内だけにし、価格はここに書かない
                     （正は小4 LP）。このリンクは Google が小4 LP を見つける経路にもなる */}
                 <p className="jp-flow mt-5 text-[0.88rem] text-muted">
-                  小学4年生版も準備中です。
+                  小学4年生版もあります。
                   <a
                     href={MANALEAF_G4_SITE_URL}
                     target="_blank"

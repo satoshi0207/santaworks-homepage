@@ -222,12 +222,13 @@ export default function Home() {
           </Link>
 
           {/* 商品3: まなリーフ 小3。ExifSortPro と同じ要約カード。
-              リンク先は /works/#manaleaf ではなく公式サイト（別サブドメイン）に直接つなぐ。
+              リンク先は /works/#manaleaf ではなく公式サイト（総合サイトの小3ページ）に直接つなぐ。
+              2026-11-05 に旧 LP（manaleaf-grade3.santaworks.net）から総合サイト manaleaf.santaworks.net へ移った（旧は301転送）。
               サブドメインは Google に別サイトとして扱われ、本体からのリンクが少ないと
               クロールされない（2026-10-01 時点、/works/ からの1本だけでは1か月未クロール）。
               トップからの直リンクは、その経路を1本足すためのもの。文言は LP と同じ数字・同じ言い方 */}
           <a
-            href="https://manaleaf-grade3.santaworks.net/"
+            href="https://manaleaf.santaworks.net/grade3/"
             target="_blank"
             rel="noopener noreferrer"
             className="group mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/70 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-accent/45 md:p-7"

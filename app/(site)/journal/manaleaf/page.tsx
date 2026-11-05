@@ -305,7 +305,7 @@ export default function Page() {
                 </a>
                 <a
                   className="site"
-                  href="https://manaleaf-grade3.santaworks.net/"
+                  href="https://manaleaf.santaworks.net/grade3/"
                   target="_blank"
                   rel="noopener noreferrer"
                 >
