@@ -30,9 +30,11 @@ const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
    （hq/ORG.md §7 の例外）。完全無料・広告なし・課金なしが設計条件なので、全社KPI の対象にもしない。
    位置づけは ExifSortPro と同じ「技術力を示す名刺」。 */
 const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
-const MANALEAF_SITE_URL = "https://manaleaf.santaworks.net/grade3/";
+/* 公式サイトは総合サイト（2026-11-05 公開）。学年ごとの紹介ページと無料プリントはその下 */
+const MANALEAF_SITE_URL = "https://manaleaf.santaworks.net/";
+const MANALEAF_G3_SITE_URL = "https://manaleaf.santaworks.net/grade3/";
 const MANALEAF_G4_SITE_URL = "https://manaleaf.santaworks.net/grade4/";
-const MANALEAF_SERIES_URL = "https://manaleaf.santaworks.net/";
+const MANALEAF_PRINT_URL = "https://manaleaf.santaworks.net/print/";
 
 /* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
 const manaleafPoints: { title: string; body: string; note: string }[] = [
@@ -356,35 +358,34 @@ export default function Works() {
                     />
                   </a>
                 </div>
-                {/* 小4版（2026-10-30 公開）。紹介ページの案内だけにし、価格はここに書かない
-                    （正は小4 LP）。このリンクは Google が小4 LP を見つける経路にもなる */}
+                {/* 学年ごとの紹介ページと無料プリント（どれも総合サイトの中）。小4版（2026-10-30 公開）の
+                    価格はここに書かない（正は小4 LP）。このリンクは Google が総合サイトを見つける経路にもなる */}
                 <p className="jp-flow mt-5 text-[0.88rem] text-muted">
-                  小学4年生版もあります。
+                  小学4年生版もあります。学年ごとの紹介ページ：
+                  <a
+                    href={MANALEAF_G3_SITE_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-1 inline-block whitespace-nowrap font-bold text-accent underline-offset-4 hover:underline"
+                  >
+                    小3 →
+                  </a>
                   <a
                     href={MANALEAF_G4_SITE_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-1 font-bold text-accent underline-offset-4 hover:underline"
+                    className="ml-3 inline-block whitespace-nowrap font-bold text-accent underline-offset-4 hover:underline"
                   >
-                    まなリーフ 小4 の紹介ページ →
+                    小4 →
                   </a>
                 </p>
-                {/* 総合サイト（2026-11-05 公開）のトップと無料プリントへ。Google が総合サイトを見つける経路にもなる */}
                 <p className="jp-flow mt-2 text-[0.88rem] text-muted">
-                  学年ごとのアプリと、単元ごとの無料プリントは総合サイトにまとめています。
+                  単元ごとの無料プリント（A4・答えつき）もあります。
                   <a
-                    href={MANALEAF_SERIES_URL}
+                    href={MANALEAF_PRINT_URL}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="ml-1 font-bold text-accent underline-offset-4 hover:underline"
-                  >
-                    まなリーフ 総合サイト →
-                  </a>
-                  <a
-                    href={`${MANALEAF_SERIES_URL}print/`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="ml-3 font-bold text-accent underline-offset-4 hover:underline"
+                    className="ml-1 inline-block whitespace-nowrap font-bold text-accent underline-offset-4 hover:underline"
                   >
                     無料プリント →
                   </a>

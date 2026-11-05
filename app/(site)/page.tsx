@@ -221,21 +221,21 @@ export default function Home() {
             </div>
           </Link>
 
-          {/* 商品3: まなリーフ 小3。ExifSortPro と同じ要約カード。
-              リンク先は /works/#manaleaf ではなく公式サイト（総合サイトの小3ページ）に直接つなぐ。
+          {/* 商品3: まなリーフ（シリーズ）。ExifSortPro と同じ要約カード。2026-11-05 に小3だけの案内から総合サイトの案内へ。
+              リンク先は /works/#manaleaf ではなく公式サイト（総合サイトのトップ）に直接つなぐ。小4は有料なので「無料」とは書かない。
               2026-11-05 に旧 LP（manaleaf-grade3.santaworks.net）から総合サイト manaleaf.santaworks.net へ移った（旧は301転送）。
               サブドメインは Google に別サイトとして扱われ、本体からのリンクが少ないと
               クロールされない（2026-10-01 時点、/works/ からの1本だけでは1か月未クロール）。
               トップからの直リンクは、その経路を1本足すためのもの。文言は LP と同じ数字・同じ言い方 */}
           <a
-            href="https://manaleaf.santaworks.net/grade3/"
+            href="https://manaleaf.santaworks.net/"
             target="_blank"
             rel="noopener noreferrer"
             className="group mt-5 flex items-center gap-5 rounded-2xl border border-line bg-surface/70 p-6 shadow-card transition-all hover:-translate-y-0.5 hover:border-accent/45 md:p-7"
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/manaleaf/icon.webp"
+              src="/manaleaf/series-icon.webp"
               alt=""
               aria-hidden="true"
               width={256}
@@ -245,13 +245,13 @@ export default function Home() {
             />
             <div className="min-w-0">
               <div className="mb-1.5 flex flex-wrap items-center gap-2">
-                <h3 className="text-lg font-extrabold">まなリーフ 小3</h3>
+                <h3 className="text-lg font-extrabold">まなリーフ</h3>
                 <span className="rounded-full bg-line/60 px-2.5 py-0.5 text-[0.66rem] font-bold tracking-[0.1em] text-muted">
-                  iPhone / iPad アプリ・無料
+                  iPhone / iPad アプリ
                 </span>
               </div>
               <p className="text-[0.92rem] text-muted [word-break:keep-all]">
-                小学3年生の4教科を、どうぶつたちと1回10問のクイズで。課金なし・広告なし・オフラインで動きます。
+                学年ごとに作った、小学生の学習クイズアプリ（小3・小4）。4教科を1回10問のクイズで。広告なし・オフラインで動きます。単元ごとの無料プリントもあります。
               </p>
               <span className="mt-3 inline-block text-[0.85rem] font-bold text-accent">
                 公式サイトを見る →
