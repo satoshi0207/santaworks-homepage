@@ -32,6 +32,7 @@ const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
 const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
 const MANALEAF_SITE_URL = "https://manaleaf.santaworks.net/grade3/";
 const MANALEAF_G4_SITE_URL = "https://manaleaf.santaworks.net/grade4/";
+const MANALEAF_SERIES_URL = "https://manaleaf.santaworks.net/";
 
 /* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
 const manaleafPoints: { title: string; body: string; note: string }[] = [
@@ -366,6 +367,26 @@ export default function Works() {
                     className="ml-1 font-bold text-accent underline-offset-4 hover:underline"
                   >
                     まなリーフ 小4 の紹介ページ →
+                  </a>
+                </p>
+                {/* 総合サイト（2026-11-05 公開）のトップと無料プリントへ。Google が総合サイトを見つける経路にもなる */}
+                <p className="jp-flow mt-2 text-[0.88rem] text-muted">
+                  学年ごとのアプリと、単元ごとの無料プリントは総合サイトにまとめています。
+                  <a
+                    href={MANALEAF_SERIES_URL}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-1 font-bold text-accent underline-offset-4 hover:underline"
+                  >
+                    まなリーフ 総合サイト →
+                  </a>
+                  <a
+                    href={`${MANALEAF_SERIES_URL}print/`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="ml-3 font-bold text-accent underline-offset-4 hover:underline"
+                  >
+                    無料プリント →
                   </a>
                 </p>
                 <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
