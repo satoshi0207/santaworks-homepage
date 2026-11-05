@@ -6,7 +6,7 @@
   --surface-2: #f5f4ef;
   --track: #e9e7e0;
   --ghost: #c3c0b8;
-  --font-serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  --font-serif: "Hiragino Mincho ProN", "Noto Serif JP", "Yu Mincho", "YuMincho", serif;
   color: var(--ink);
   line-height: 1.9;
 }

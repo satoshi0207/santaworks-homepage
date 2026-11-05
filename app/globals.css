@@ -44,10 +44,11 @@ html {
   --color-accent-strong: var(--accent-strong);
   --color-accent-soft: var(--accent-soft);
   --shadow-card: var(--card-shadow);
-  /* 日本語はシステムフォント（iOS/mac: ヒラギノ、Win: Yu Gothic/Meiryo、
-     Android: システム標準）。Webフォント非依存で即描画・DL負荷ゼロ */
-  --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic",
-    "YuGothic", Meiryo, system-ui, -apple-system, sans-serif;
+  /* 日本語は mac/iOS ならヒラギノ（端末のフォント・DLなし）。ヒラギノの無い
+     Windows/Android は Noto Sans JP（Webフォント・(site)/layout.tsx で読み込み）で
+     mac に近い見た目にする。読み込み中は Yu Gothic/Meiryo で先に描く */
+  --font-sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Noto Sans JP",
+    "Yu Gothic", "YuGothic", Meiryo, system-ui, -apple-system, sans-serif;
 }
 
 body {
