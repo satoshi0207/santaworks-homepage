@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Shippori_Mincho_B1 } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./ramen.css";
-
-const shippori = Shippori_Mincho_B1({
-  variable: "--font-shippori",
-  weight: ["400", "600", "800"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "ramen",
@@ -37,7 +29,8 @@ export default function RamenLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`yugeya ${shippori.variable}`}>
+    <div className="yugeya" style={{ "--font-shippori": "'Shippori Mincho B1'" } as React.CSSProperties}>
+      <GoogleFonts families={["Shippori+Mincho+B1:wght@400;600;800"]} />
       <DemoJsonLd biz={BIZ} />
       {children}
     </div>

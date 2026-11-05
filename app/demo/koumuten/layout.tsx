@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BIZ_UDPGothic, Oswald } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./koumuten.css";
-
-const biz = BIZ_UDPGothic({
-  variable: "--font-biz",
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const oswald = Oswald({
-  variable: "--font-oswald",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "koumuten",
@@ -56,7 +40,8 @@ export default function KoumutenLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`hidamari ${biz.variable} ${oswald.variable}`}>
+    <div className="hidamari" style={{ "--font-biz": "'BIZ UDPGothic'", "--font-oswald": "'Oswald'" } as React.CSSProperties}>
+      <GoogleFonts families={["BIZ+UDPGothic:wght@400;700", "Oswald:wght@500;600;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="hd-header">
         <Link href="/demo/koumuten/" className="hd-logo">

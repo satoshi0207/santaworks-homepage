@@ -1,25 +1,8 @@
 import type { Metadata } from "next";
-import { Klee_One, Playfair_Display } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./piano.css";
-
-const klee = Klee_One({
-  variable: "--font-klee",
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  weight: ["400", "500", "600"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "piano",
@@ -45,7 +28,8 @@ export default function PianoLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`otonoha ${klee.variable} ${playfair.variable}`}>
+    <div className="otonoha" style={{ "--font-klee": "'Klee One'", "--font-playfair": "'Playfair Display'" } as React.CSSProperties}>
+      <GoogleFonts families={["Klee+One:wght@400;600", "Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600"]} />
       <DemoJsonLd biz={BIZ} />
       {children}
     </div>

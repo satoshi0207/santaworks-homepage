@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { BIZ_UDPGothic, Barlow } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
 import { LeafMark, IconPhone } from "./icons";
@@ -10,22 +10,8 @@ import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./soyogi.css";
 
 /* UD書体＝判読性のために設計された書体。「高齢の患者が読む」前提に理屈が通る */
-const biz = BIZ_UDPGothic({
-  variable: "--font-biz",
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 /* 数字（診療時間・電話番号）を締めるための欧文 */
-const barlow = Barlow({
-  variable: "--font-barlow",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "naika",
@@ -52,7 +38,8 @@ export default function NaikaLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`soyogi ${biz.variable} ${barlow.variable}`}>
+    <div className="soyogi" style={{ "--font-biz": "'BIZ UDPGothic'", "--font-barlow": "'Barlow'" } as React.CSSProperties}>
+      <GoogleFonts families={["BIZ+UDPGothic:wght@400;700", "Barlow:wght@500;600;700"]} />
       <DemoJsonLd biz={BIZ} />
       <a className="sy-skip" href="#main">
         本文へスキップ

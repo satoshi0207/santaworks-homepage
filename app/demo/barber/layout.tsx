@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Anton, Zen_Kaku_Gothic_New } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./barber.css";
-
-const anton = Anton({
-  variable: "--font-anton",
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const zkg = Zen_Kaku_Gothic_New({
-  variable: "--font-zkg",
-  weight: ["500", "700", "900"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "barber",
@@ -52,7 +36,8 @@ export default function BarberLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`minato ${anton.variable} ${zkg.variable}`}>
+    <div className="minato" style={{ "--font-anton": "'Anton'", "--font-zkg": "'Zen Kaku Gothic New'" } as React.CSSProperties}>
+      <GoogleFonts families={["Anton:wght@400", "Zen+Kaku+Gothic+New:wght@500;700;900"]} />
       <DemoJsonLd biz={BIZ} />
       <div className="bm-stripe" aria-hidden="true" />
       <header className="bm-header">

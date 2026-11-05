@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Shippori_Mincho, Cinzel } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./club.css";
-
-const mincho = Shippori_Mincho({
-  variable: "--font-mincho",
-  weight: ["400", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const cinzel = Cinzel({
-  variable: "--font-cinzel",
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "club",
@@ -44,7 +28,8 @@ export default function ClubLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`tsukuyomi ${mincho.variable} ${cinzel.variable}`}>
+    <div className="tsukuyomi" style={{ "--font-mincho": "'Shippori Mincho'", "--font-cinzel": "'Cinzel'" } as React.CSSProperties}>
+      <GoogleFonts families={["Shippori+Mincho:wght@400;600;700", "Cinzel:wght@400;600"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="gz-header">
         <Link href="/demo/club/" className="gz-brand">

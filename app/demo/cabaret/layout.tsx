@@ -1,27 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bodoni_Moda, Zen_Kaku_Gothic_New } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./cabaret.css";
 
 // 描画重視: ウェイトを最小限に絞り、preloadもしない（日本語グリフは遅延取得）
-const bodoni = Bodoni_Moda({
-  variable: "--font-bodoni",
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const zkg = Zen_Kaku_Gothic_New({
-  variable: "--font-zkg",
-  weight: ["300", "400"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "cabaret",
@@ -52,7 +37,8 @@ export default function CabaretLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`diamantine ${bodoni.variable} ${zkg.variable}`}>
+    <div className="diamantine" style={{ "--font-bodoni": "'Bodoni Moda'", "--font-zkg": "'Zen Kaku Gothic New'" } as React.CSSProperties}>
+      <GoogleFonts families={["Bodoni+Moda:wght@400;600", "Zen+Kaku+Gothic+New:wght@300;400"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="dm-header">
         <Link href="/demo/cabaret/" className="dm-brand">

@@ -1,27 +1,11 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Zen_Kaku_Gothic_New, Zen_Old_Mincho } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import Nav from "./Nav";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./factory.css";
-
-const zenKaku = Zen_Kaku_Gothic_New({
-  variable: "--font-zenkaku",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const zenOld = Zen_Old_Mincho({
-  variable: "--font-zenold",
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "factory",
@@ -57,7 +41,8 @@ export default function FactoryLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`tomoshibi ${zenKaku.variable} ${zenOld.variable}`}>
+    <div className="tomoshibi" style={{ "--font-zenkaku": "'Zen Kaku Gothic New'", "--font-zenold": "'Zen Old Mincho'" } as React.CSSProperties}>
+      <GoogleFonts families={["Zen+Kaku+Gothic+New:wght@400;500;700", "Zen+Old+Mincho:wght@400;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="t-header">
         <Link href="/demo/factory/" className="t-logo">

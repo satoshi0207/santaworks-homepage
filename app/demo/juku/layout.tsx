@@ -1,28 +1,12 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Zen_Kaku_Gothic_New, Poppins } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import Nav from "./Nav";
 import { NAV, SCHOOL } from "./data";
 import "./juku.css";
-
-const zkg = Zen_Kaku_Gothic_New({
-  variable: "--font-zkg",
-  weight: ["500", "700", "900"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const poppins = Poppins({
-  variable: "--font-poppins",
-  weight: ["500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "juku",
@@ -49,7 +33,8 @@ export default function JukuLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`asunaro ${zkg.variable} ${poppins.variable}`}>
+    <div className="asunaro" style={{ "--font-zkg": "'Zen Kaku Gothic New'", "--font-poppins": "'Poppins'" } as React.CSSProperties}>
+      <GoogleFonts families={["Zen+Kaku+Gothic+New:wght@500;700;900", "Poppins:wght@500;600;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="as-header">
         <Link href="/demo/juku/" className="as-brand">

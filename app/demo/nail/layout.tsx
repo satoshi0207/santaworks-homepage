@@ -1,24 +1,8 @@
 import type { Metadata } from "next";
-import { Quicksand, Zen_Maru_Gothic } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./nail.css";
-
-const zenMaru = Zen_Maru_Gothic({
-  variable: "--font-zenmaru",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const quicksand = Quicksand({
-  variable: "--font-quicksand",
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "nail",
@@ -44,7 +28,8 @@ export default function NailLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`konpeito ${zenMaru.variable} ${quicksand.variable}`}>
+    <div className="konpeito" style={{ "--font-zenmaru": "'Zen Maru Gothic'", "--font-quicksand": "'Quicksand'" } as React.CSSProperties}>
+      <GoogleFonts families={["Zen+Maru+Gothic:wght@400;500;700", "Quicksand:wght@400;600"]} />
       <DemoJsonLd biz={BIZ} />
       {children}
     </div>

@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Kaisei_Decol, Shippori_Mincho } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./kissa.css";
-
-const decol = Kaisei_Decol({
-  variable: "--font-decol",
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const shippori = Shippori_Mincho({
-  variable: "--font-shippori",
-  weight: ["400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "kissa",
@@ -51,7 +35,8 @@ export default function KissaLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`omokage ${decol.variable} ${shippori.variable}`}>
+    <div className="omokage" style={{ "--font-decol": "'Kaisei Decol'", "--font-shippori": "'Shippori Mincho'" } as React.CSSProperties}>
+      <GoogleFonts families={["Kaisei+Decol:wght@400;700", "Shippori+Mincho:wght@400;600"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="ok-header">
         <Link href="/demo/kissa/" className="ok-brand">

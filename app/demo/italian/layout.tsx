@@ -1,27 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Playfair_Display, Shippori_Mincho } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./candelume.css";
-
-const playfair = Playfair_Display({
-  variable: "--font-playfair",
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const shippori = Shippori_Mincho({
-  variable: "--font-shippori",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "italian",
@@ -53,7 +36,8 @@ export default function ItalianLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`candelume ${playfair.variable} ${shippori.variable}`}>
+    <div className="candelume" style={{ "--font-playfair": "'Playfair Display'", "--font-shippori": "'Shippori Mincho'" } as React.CSSProperties}>
+      <GoogleFonts families={["Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700", "Shippori+Mincho:wght@400;500;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="cd-header">
         <Link href="/demo/italian/" className="cd-brand">

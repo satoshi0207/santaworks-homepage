@@ -1,27 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Zen_Maru_Gothic, Fraunces } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./sorairo.css";
-
-const zenmaru = Zen_Maru_Gothic({
-  variable: "--font-zenmaru",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const fraunces = Fraunces({
-  variable: "--font-fraunces",
-  style: ["normal", "italic"],
-  weight: ["400", "500", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "farm",
@@ -52,7 +35,8 @@ export default function FarmLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`sorairo ${zenmaru.variable} ${fraunces.variable}`}>
+    <div className="sorairo" style={{ "--font-zenmaru": "'Zen Maru Gothic'", "--font-fraunces": "'Fraunces'" } as React.CSSProperties}>
+      <GoogleFonts families={["Zen+Maru+Gothic:wght@400;500;700", "Fraunces:ital,wght@0,400;0,500;0,600;1,400;1,500;1,600"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="sr-header">
         <Link href="/demo/farm/" className="sr-brand">

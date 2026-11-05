@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Zen_Antique, Zen_Kaku_Gothic_New } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./photo.css";
-
-const antique = Zen_Antique({
-  variable: "--font-antique",
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const zkg = Zen_Kaku_Gothic_New({
-  variable: "--font-zkg",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "photo",
@@ -51,7 +35,8 @@ export default function PhotoLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`hitotoki ${antique.variable} ${zkg.variable}`}>
+    <div className="hitotoki" style={{ "--font-antique": "'Zen Antique'", "--font-zkg": "'Zen Kaku Gothic New'" } as React.CSSProperties}>
+      <GoogleFonts families={["Zen+Antique:wght@400", "Zen+Kaku+Gothic+New:wght@400;500;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="ht-header">
         <Link href="/demo/photo/" className="ht-brand">

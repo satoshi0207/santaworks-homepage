@@ -1,25 +1,8 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Noto_Serif_JP } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./salon.css";
-
-const cormorant = Cormorant_Garamond({
-  variable: "--font-cormorant",
-  weight: ["300", "400", "500"],
-  style: ["normal", "italic"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const notoSerif = Noto_Serif_JP({
-  variable: "--font-noto-serif",
-  weight: ["300", "400", "600"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "salon",
@@ -45,7 +28,8 @@ export default function SalonLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`suiu ${cormorant.variable} ${notoSerif.variable}`}>
+    <div className="suiu" style={{ "--font-cormorant": "'Cormorant Garamond'", "--font-noto-serif": "'Noto Serif JP'" } as React.CSSProperties}>
+      <GoogleFonts families={["Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500", "Noto+Serif+JP:wght@300;400;600"]} />
       <DemoJsonLd biz={BIZ} />
       {children}
     </div>

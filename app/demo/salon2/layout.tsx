@@ -1,26 +1,10 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Bebas_Neue, Zen_Kaku_Gothic_New } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoSns from "@/components/DemoSns";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./salon2.css";
-
-const bebas = Bebas_Neue({
-  variable: "--font-bebas",
-  weight: ["400"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
-
-const zkg = Zen_Kaku_Gothic_New({
-  variable: "--font-zkg",
-  weight: ["400", "500", "700"],
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "salon2",
@@ -51,7 +35,8 @@ export default function Salon2Layout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <div className={`yohaku ${bebas.variable} ${zkg.variable}`}>
+    <div className="yohaku" style={{ "--font-bebas": "'Bebas Neue'", "--font-zkg": "'Zen Kaku Gothic New'" } as React.CSSProperties}>
+      <GoogleFonts families={["Bebas+Neue:wght@400", "Zen+Kaku+Gothic+New:wght@400;500;700"]} />
       <DemoJsonLd biz={BIZ} />
       <header className="yh-header">
         <Link href="/demo/salon2/" className="yh-brand">

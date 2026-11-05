@@ -1,16 +1,8 @@
 import type { Metadata } from "next";
-import { Yuji_Syuku } from "next/font/google";
+import GoogleFonts from "@/components/GoogleFonts";
 import DemoJsonLd from "@/components/DemoJsonLd";
 import { demoOg, type DemoBiz } from "@/components/demoMeta";
 import "./izakaya.css";
-
-const yuji = Yuji_Syuku({
-  variable: "--font-yuji",
-  weight: "400",
-  subsets: ["latin"],
-  display: "swap",
-  preload: false,
-});
 
 const BIZ: DemoBiz = {
   slug: "izakaya",
@@ -36,7 +28,8 @@ export default function IzakayaLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <div className={`hoozuki ${yuji.variable}`}>
+    <div className="hoozuki" style={{ "--font-yuji": "'Yuji Syuku'" } as React.CSSProperties}>
+      <GoogleFonts families={["Yuji+Syuku:wght@400"]} />
       <DemoJsonLd biz={BIZ} />
       {children}
     </div>
