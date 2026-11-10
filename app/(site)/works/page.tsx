@@ -6,7 +6,7 @@ import ExifSortProArt from "@/components/ExifSortProArt";
 import { samples } from "../samples";
 
 const WORKS_DESCRIPTION =
-  "Santa Works の実績・プロダクト。LINEで使える記憶サポート「ポケメモ」、写真・動画をメタデータで整理する Mac アプリ「ExifSortPro」、小学3年生向けの学習クイズアプリ「まなリーフ 小3」。";
+  "Santa Works の実績・プロダクト。LINEで使える記憶サポート「ポケメモ」、写真・動画をメタデータで整理する Mac アプリ「ExifSortPro」、小学生向けの学習クイズアプリ「まなリーフ」（小3・小4）。";
 
 export const metadata: Metadata = {
   title: "Works",
@@ -26,10 +26,10 @@ const POKEMEMO_URL = "https://pokememo.santaworks.net";
 const EXIFSORT_URL = "https://exifsort.web.app/";
 const EXIFSORT_BETA_URL = "https://exifsort.web.app/details/#beta";
 
-/* まなリーフは Santa Works の商品ではない。Satoshiさん個人の制作物を Works に「掲載だけ」する
-   （hq/ORG.md §7 の例外）。完全無料・広告なし・課金なしが設計条件なので、全社KPI の対象にもしない。
-   位置づけは ExifSortPro と同じ「技術力を示す名刺」。 */
-const MANALEAF_APPSTORE_URL = "https://apps.apple.com/jp/app/id6808348311";
+/* まなリーフは学年ごとに1本のシリーズ（2026-09-27 から Santa Works の商品。小3は無料、小4は買い切り）。
+   2026-11-10 に Works の欄を「小3だけの紹介」からシリーズの紹介へ。App Store は学年ごとに別アプリなので
+   ここからは直接つながず、公式サイト（総合サイト）と学年ページへ送る。
+   🔴 「完全無料」は使わない（小4は課金あり）。小4の価格もここに書かない（正は小4ページ）。 */
 /* 公式サイトは総合サイト（2026-11-05 公開）。学年ごとの紹介ページと無料プリントはその下 */
 const MANALEAF_SITE_URL = "https://manaleaf.santaworks.net/";
 const MANALEAF_G3_SITE_URL = "https://manaleaf.santaworks.net/grade3/";
@@ -39,9 +39,9 @@ const MANALEAF_PRINT_URL = "https://manaleaf.santaworks.net/print/";
 /* LP と同じ文言・同じ数字を使う。言い換えると、アプリ・LP・ここで言うことがズレる。 */
 const manaleafPoints: { title: string; body: string; note: string }[] = [
   {
-    title: "ぜんぶ無料",
-    body: "アプリ内課金も広告もありません。金額や課金の心配をせずに、そのまま子どもにわたせます。",
-    note: "課金なし・広告なし",
+    title: "広告なし",
+    body: "どの学年も広告は出ません。小3はアプリ内課金もなし。小4は各教科の最初の2単元を無料で試してから、続きを買い切りで選べます。",
+    note: "広告なし・小3は課金なし",
   },
   {
     title: "集めない",
@@ -277,7 +277,7 @@ export default function Works() {
             </div>
           </div>
 
-          {/* まなリーフ 小3。商品ではなく制作物（§7）。バッジに「看板プロダクト」は使わない */}
+          {/* まなリーフ（シリーズ）。バッジに「看板プロダクト」は使わない */}
           <div
             id="manaleaf"
             className="mt-20 scroll-mt-24 border-t border-line pt-16"
@@ -290,34 +290,34 @@ export default function Works() {
                     iPhone / iPad アプリ
                   </span>
                   <span className="inline-block rounded-full bg-line/60 px-3 py-1 text-[0.72rem] font-bold tracking-[0.12em] text-muted">
-                    完全無料
+                    小3・小4
                   </span>
                 </div>
                 <div className="mb-3 flex items-center gap-3">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img
-                    src="/manaleaf/icon.webp"
+                    src="/manaleaf/series-icon.webp"
                     alt=""
                     width={256}
                     height={256}
                     aria-hidden="true"
                     className="h-11 w-11 rounded-[22%] shadow-card"
                   />
-                  <h2 className="text-2xl font-extrabold">まなリーフ 小3</h2>
+                  <h2 className="text-2xl font-extrabold">まなリーフ</h2>
                 </div>
                 <p className="mb-5 text-[1.05rem] font-bold leading-snug text-[#2f8f4e]">
-                  まなびのもりで、どうぶつたちと
+                  学年ごとに作った、
                   <br />
-                  たのしくまなぼう！
+                  小学生の学習クイズアプリ
                 </p>
                 <p className="jp-flow mb-6 text-[0.95rem] text-muted">
-                  小学3年生専用の学習クイズアプリ。さんすう・こくご・りか・しゃかいの4教科を、まなびのもりに住むどうぶつたちと一緒に進めます。まちがえた問題には解説が出るので、答え合わせで終わらずにそこから学べます。
+                  さんすう・こくご・りか・しゃかいの4教科を、1回10問のクイズで進めます。まちがえた問題には解説が出るので、答え合わせで終わらずにそこから学べます。広告なし・オフラインで動きます。いまは小3と小4の2本です。
                 </p>
                 <dl className="mb-7 space-y-1.5 text-[0.85rem]">
                   <div className="flex gap-3">
-                    <dt className="w-20 shrink-0 font-bold">収録</dt>
+                    <dt className="w-20 shrink-0 font-bold">学年</dt>
                     <dd className="text-muted">
-                      4教科・44単元・1,125問／小3配当漢字200字（学習指導要領にもとづく小3の範囲）
+                      小3・小4（学年ごとに1本のアプリ）
                     </dd>
                   </div>
                   <div className="flex gap-3">
@@ -328,7 +328,7 @@ export default function Works() {
                   </div>
                   <div className="flex gap-3">
                     <dt className="w-20 shrink-0 font-bold">価格</dt>
-                    <dd className="text-muted">無料（アプリ内課金・広告なし）</dd>
+                    <dd className="text-muted">学年ごとに異なります（各学年のページへ）</dd>
                   </div>
                 </dl>
                 <div className="flex flex-wrap items-center gap-x-6 gap-y-3">
@@ -340,28 +340,11 @@ export default function Works() {
                   >
                     公式サイトを見る →
                   </a>
-                  {/* Apple 公式バッジ。LP と同じ素材を使う（assets/badge_appstore.svg）。
-                      ⚠️ ガイドラインの最小表示高は 40px。h-10 より小さくしない */}
-                  <a
-                    href={MANALEAF_APPSTORE_URL}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-block transition-transform hover:-translate-y-0.5"
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src="/manaleaf/badge-appstore.svg"
-                      alt="App Store でダウンロード"
-                      width={109}
-                      height={40}
-                      className="h-10 w-auto"
-                    />
-                  </a>
                 </div>
                 {/* 学年ごとの紹介ページと無料プリント（どれも総合サイトの中）。小4版（2026-10-30 公開）の
                     価格はここに書かない（正は小4 LP）。このリンクは Google が総合サイトを見つける経路にもなる */}
                 <p className="jp-flow mt-5 text-[0.88rem] text-muted">
-                  小学4年生版もあります。学年ごとの紹介ページ：
+                  学年ごとの紹介ページ（App Store へもここから）：
                   <a
                     href={MANALEAF_G3_SITE_URL}
                     target="_blank"
@@ -392,7 +375,7 @@ export default function Works() {
                 </p>
                 <p className="jp-flow mt-4 text-[0.78rem] leading-relaxed text-muted/80">
                   Santa Works
-                  の代表が個人で制作し、2026年9月に公開したアプリです。アイコン・背景・どうぶつのイラストは生成AIで作成しています。
+                  の代表が制作しているアプリです（小3は2026年9月、小4は10月に公開）。アイコン・背景・キャラクターのイラストは生成AIで作成しています。
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-3 rounded-md bg-gradient-to-br from-[#e6f4e2] to-[#f7fbf3] p-5 shadow-card">
